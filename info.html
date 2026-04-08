@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>EES 3350/5350 — Grading</title>
+  <title>EES 3350/5350 — Info</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Source+Code+Pro:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root { --slate:#2c3a47;--sand:#c9b99a;--stone:#8c7b6b;--cream:#f5f0e8;--deep:#1a2530;--accent:#b85c38;--muted:#6b7a8d;--rule:rgba(140,123,107,0.25);--green:#4a7c59; }
@@ -127,94 +127,75 @@
   </header>
   <nav class="site-nav">
     <a href="index.html" class="nav-tab">Schedule</a>
-    <a href="grading.html" class="nav-tab active">Grading</a>
+    <a href="grading.html" class="nav-tab">Grading</a>
     <a href="policies.html" class="nav-tab">Policies</a>
-    <a href="info.html" class="nav-tab">Info</a>
+    <a href="info.html" class="nav-tab active">Info</a>
     <a href="norms.html" class="nav-tab">2026 Norms</a>
     <a href="https://github.com/Python-in-Earth-Science/course-materials" class="nav-tab" target="_blank">Materials ↗</a>
     <a href="YOUR_TOPHAT_LINK_HERE" class="nav-tab" target="_blank">TopHat ↗</a>
   </nav>
 
   <section>
-    <h2>Grade breakdown</h2>
-    <div class="grade-grid">
-      <div class="grade-card">
-        <div class="grade-card-header">Undergraduate — EES 3350</div>
-        <div class="grade-row"><span>Participation (demo notebooks + warm-ups)</span><span class="grade-pct">15%</span></div>
-        <div class="grade-row"><span>Coding assignments</span><span class="grade-pct">35%</span></div>
-        <div class="grade-row"><span>Labs</span><span class="grade-pct">35%</span></div>
-        <div class="grade-row"><span>Proposal workshop</span><span class="grade-pct">5%</span></div>
-        <div class="grade-row"><span>Final coding project</span><span class="grade-pct">10%</span></div>
-        <div class="grade-row total"><span>Total</span><span class="grade-pct">100%</span></div>
-      </div>
-      <div class="grade-card">
-        <div class="grade-card-header grad">Graduate — EES 5350</div>
-        <div class="grade-row"><span>Participation (demo notebooks + warm-ups)</span><span class="grade-pct">15%</span></div>
-        <div class="grade-row"><span>Coding assignments</span><span class="grade-pct">30%</span></div>
-        <div class="grade-row"><span>Labs</span><span class="grade-pct">30%</span></div>
-        <div class="grade-row"><span>Python package presentation</span><span class="grade-pct">5%</span></div>
-        <div class="grade-row"><span>Git assignment</span><span class="grade-pct">5%</span></div>
-        <div class="grade-row"><span>Proposal workshop</span><span class="grade-pct">5%</span></div>
-        <div class="grade-row"><span>Final coding project</span><span class="grade-pct">10%</span></div>
-        <div class="grade-row total"><span>Total</span><span class="grade-pct">100%</span></div>
-      </div>
+    <h2>Course description</h2>
+    <p><strong>EES 3350 &amp; EES 5350: Introduction to Python in Earth Science</strong> (4 credit hours)</p>
+    <p>Introduction to scientific programming using Python for earth and environmental science applications. Covers programming fundamentals, scientific computing packages, and geospatial analysis. Students apply Python skills to solve real-world problems including climate data analysis, surface process modeling, and geospatial data visualization.</p>
+    <p>All coursework is conducted using Jupyter Notebooks, which allow for interactive coding, documentation, and visualization in a single environment. The course is organized into four units: Python &amp; Scientific Computing Basics, Scientific Python Packages, Geospatial Analysis, and Modeling &amp; Advanced Topics. Starting in Week 6, students use Git and GitHub for version control and assignment submission — a skill that translates directly to scientific research workflows.</p>
+  </section>
+
+  <section>
+    <h2>Learning outcomes</h2>
+    <p>Upon successful completion of EES 3350/5350, students will be able to:</p>
+    <ul>
+      <li><strong>Program effectively in Python</strong> — write well-structured, documented Python programs to solve scientific problems including data input/output, mathematical calculations, and basic modeling</li>
+      <li><strong>Apply core programming concepts</strong> — demonstrate understanding of variables, data types, functions, control structures, and debugging strategies</li>
+      <li><strong>Utilize scientific computing packages</strong> — effectively use NumPy, pandas, Matplotlib, SciPy, seaborn, and GeoPandas for data manipulation, analysis, and visualization</li>
+      <li><strong>Create publication-quality figures</strong> — customize plots with appropriate axes, annotations, colorbars, and styles suitable for scientific communication</li>
+      <li><strong>Solve geoscientific problems</strong> — apply programming skills to earth science challenges including analyzing climate data, modeling erosion and diffusion, processing geospatial and raster datasets, and working with real field measurements</li>
+      <li><strong>Conduct geospatial analysis</strong> — perform vector and raster geospatial data analysis and visualization using GeoPandas, rasterio, and related tools</li>
+      <li><strong>Use version control</strong> — manage code with Git and GitHub, submit work via GitHub Classroom, and understand the basics of collaborative scientific software development</li>
+      <li><strong>Interpret and modify existing code</strong> — read, understand, and modify scientific Python scripts written by others</li>
+      <li><strong>Create professional scientific documentation</strong> — develop well-documented notebooks that combine narrative, code, and results, building a portfolio of programming examples for future reference</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Instructor</h2>
+    <div class="info-block">
+      <div class="info-block-label">Contact &amp; office</div>
+      <p style="margin-bottom:.4rem;"><strong>Dr. Susannah Morey</strong></p>
+      <p style="margin-bottom:.4rem;"><a href="mailto:susannah.morey@vanderbilt.edu">susannah.morey@vanderbilt.edu</a></p>
+      <p style="margin-bottom:.4rem;">Stevenson 5717</p>
+      <p style="margin-bottom:0;"><strong>Office hours:</strong> To be set as a class on the first day — please come! Dr. Morey genuinely wants to see you succeed.</p>
     </div>
-    <div class="note" style="margin-top:1rem;">All grades are posted on Brightspace. Check regularly. Grading irregularities must be reported within one week — see the <a href="policies.html">Policies</a> page for details.</div>
   </section>
 
   <section>
-    <h2>Assignment descriptions</h2>
+    <h2>Student support</h2>
 
-    <h3>Participation — demo notebooks + warm-ups</h3>
-    <p>This grade has two components that are tracked separately and combined.</p>
-    <p><strong>Demo notebooks:</strong> Every week you follow along in a Jupyter notebook, recording all code and exercises for that week. Notebooks are due by end of day Monday and graded for participation: 1 point for submitting, 1 point for having all exercises completed. There are 15 weeks of class — the lowest 2 notebook grades are dropped.</p>
-    <p><strong>Warm-up problems:</strong> A short coding problem is posed at the start of each lecture via TopHat. Warm-ups are worth 1 point each. There are 41 lectures this semester — the lowest 8 warm-up scores are dropped, which means you have roughly one free pass per month without any grade penalty. Completing warm-ups on time rewards showing up ready to work; there is no penalty for an incorrect answer, only for not responding.</p>
+    <h3>Students with disabilities</h3>
+    <p>This class was designed with accessibility in mind. Any student with a documented disability should contact the <a href="https://www.vanderbilt.edu/student-access/how_to/get_accommodations/index.php" target="_blank">Student Access Office</a> (615-343-2315) to make arrangements for appropriate accommodations. Register as early as possible — no retroactive accommodations are possible.</p>
 
-    <h3>Coding assignments</h3>
-    <p>Five take-home assignments throughout the semester designed to build and solidify your Python skills. Graduate students have additional exercises on each assignment. Submitted via Brightspace in weeks 1–5 and via GitHub Classroom from Week 6 onward.</p>
+    <h3>Student success resources</h3>
+    <p>If you are having trouble with this course or its material, contact Dr. Morey to discuss. You can also get help from the <a href="https://www.vanderbilt.edu/healthydores/wellbeing-academic-and-peer-coaching/" target="_blank">Student Care Network</a>, which provides a variety of free services to assist students. Please do not wait to take advantage of these resources.</p>
 
-    <h3>Labs</h3>
-    <p>The Monday afternoon lab period (1:25–4:15pm) is the core of the course. Each week you work through an applied problem using that week's tools and real Earth science data. Labs are due the following <strong>Sunday at 11:59pm</strong>. There are 11 graded labs this semester — Week 1 is an ungraded orientation; Labor Day and Thanksgiving reduce the total from 15.</p>
-
-    <h3>Proposal workshop</h3>
-    <p>In preparation for your final project, you will participate in a peer feedback workshop and submit a project proposal. You'll pitch your Final Coding Project theme and methods to peers and receive written feedback. Your proposal must be submitted before arriving at the Week 13 lab. Attendance and substantive written feedback on your peers' work are required for full credit.</p>
-
-    <h3>Final coding project</h3>
-    <p>Create a Scientific Demo Notebook that explores a real Earth science question through data analysis or numerical modeling. Your notebook should tell a story — walking a reader through your scientific question, showing your analysis step-by-step, and discussing what you learned. It should combine scientific narrative, working code, results, and interpretation. Graduate students: your project should use data relevant to your research. Submitted via GitHub Classroom. Due date announced during Week 13.</p>
-
-    <h3>Python package presentation <span class="pill-grad">Graduate only</span></h3>
-    <p>Each graduate student presents a Python package not covered in class (10–15 minutes) at the start of a lab period in weeks 7–11. The package should be relevant to your research area. Sign up for a slot in Week 6.</p>
-
-    <h3>Git assignment <span class="pill-grad">Graduate only</span></h3>
-    <p>A short practical assignment covering branching, merging, and pull requests — skills that translate directly to collaborative research workflows. Due Week 15. Details distributed in Week 6.</p>
+    <h3>Library resources</h3>
+    <p>The <a href="https://www.library.vanderbilt.edu/" target="_blank">Vanderbilt University Library</a> has resources on how to cite materials in your projects. If you use anything that is not your own writing or media, cite the source using APA format.</p>
   </section>
 
   <section>
-    <h2>Letter grades</h2>
-    <table class="letter-table">
-      <thead><tr><th>Percentage</th><th>Grade</th></tr></thead>
-      <tbody>
-        <tr><td>93.00 – 100.00</td><td>A</td></tr>
-        <tr><td>90.00 – 92.99</td><td>A−</td></tr>
-        <tr><td>87.00 – 89.99</td><td>B+</td></tr>
-        <tr><td>83.00 – 86.99</td><td>B</td></tr>
-        <tr><td>80.00 – 82.99</td><td>B−</td></tr>
-        <tr><td>77.00 – 79.99</td><td>C+</td></tr>
-        <tr><td>73.00 – 76.99</td><td>C</td></tr>
-        <tr><td>70.00 – 72.99</td><td>C−</td></tr>
-        <tr><td>67.00 – 69.99</td><td>D+</td></tr>
-        <tr><td>63.00 – 66.99</td><td>D</td></tr>
-        <tr><td>60.00 – 62.99</td><td>D−</td></tr>
-        <tr><td>0.00 – 59.99</td><td>F</td></tr>
-      </tbody>
-    </table>
-  </section>
+    <h2>Technology</h2>
 
-  <section>
-    <h2>Late work</h2>
-    <div class="note note-warn"><strong>10% deduction per day</strong> for late submissions. It's unfair to your peers if you receive more time than they do.</div>
-    <p>In-class notebooks cannot be submitted later than midnight the Monday after they are due. Coding assignments cannot be submitted later than midnight one week after they are due. The proposal workshop and final project cannot be submitted late.</p>
-    <p>If you need an extension, contact Dr. Morey <strong>before</strong> the deadline — not after.</p>
+    <h3>What you need</h3>
+    <ul>
+      <li>A working computer with a current operating system</li>
+      <li>Reliable internet access and a Vanderbilt email you check regularly</li>
+      <li>A current browser compatible with Brightspace</li>
+      <li>A free GitHub account — set one up at <a href="https://github.com" target="_blank">github.com</a> using your Vanderbilt email before Week 6</li>
+    </ul>
+    <p>All Python work is done in the cloud on the CSDMS ExploreHub — no software installation is required on your personal machine.</p>
+
+    <h3>Technical support</h3>
+    <div class="note"><strong>Dr. Morey is a geologist, not a tech wizard.</strong> For computer problems, Brightspace issues, or IT questions, contact the <a href="https://it.vanderbilt.edu/techhub/" target="_blank">Vanderbilt IT Service Desk</a>. If you have concerns about access to technology (consistent wifi, a working computer), contact Dr. Morey and the University can help find resources.</div>
   </section>
   <footer>
     <span>EES 3350/5350 · Python in Earth Science · Vanderbilt University · Fall 2026</span>

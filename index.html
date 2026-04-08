@@ -1,128 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EES 3350/5350 — Python in Earth Science</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>EES 3350/5350 — Schedule</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Source+Code+Pro:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --slate: #2c3a47; --sand: #c9b99a; --stone: #8c7b6b; --cream: #f5f0e8;
-      --deep: #1a2530; --accent: #b85c38; --muted: #6b7a8d; --rule: rgba(140,123,107,0.25); --green: #4a7c59;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--slate); min-height: 100vh; }
-    body::before { content: ''; position: fixed; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(140,123,107,0.08) 60px); pointer-events: none; z-index: 0; }
-    .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 3rem 2rem 6rem; }
-    header { border-bottom: 1px solid var(--rule); padding-bottom: 1.5rem; margin-bottom: 0; }
-    .course-label { font-family: 'Source Code Pro', monospace; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem; }
-    h1 { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 600; color: var(--deep); line-height: 1.15; margin-bottom: 0.75rem; }
-    .header-meta { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1rem; }
-    .meta-item { font-size: 0.85rem; color: var(--muted); }
-    .meta-item strong { color: var(--slate); font-weight: 500; }
-    /* NAV TABS */
-    .site-nav { display: flex; gap: 0; border-bottom: 1px solid var(--rule); margin-bottom: 3rem; margin-top: 0; }
-    .nav-tab { font-family: 'Source Code Pro', monospace; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0.75rem 1.25rem; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.15s, border-color 0.15s; }
-    .nav-tab:hover { color: var(--slate); }
-    .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-    h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; color: var(--deep); margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--rule); }
-    h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 400; color: var(--deep); margin-bottom: 0.75rem; margin-top: 2rem; }
-    section { margin-bottom: 3.5rem; }
-    .note { background: white; border-left: 3px solid var(--sand); padding: 0.85rem 1rem; border-radius: 0 4px 4px 0; font-size: 0.875rem; color: var(--stone); line-height: 1.6; }
-    .note a { color: var(--accent); }
-    /* SCHEDULE */
-    .rhythm-intro { font-size: 0.925rem; line-height: 1.75; color: var(--slate); margin-bottom: 1.25rem; }
-    .rhythm-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; margin-bottom: 1.25rem; }
-    .rhythm-cell { background: white; padding: 0.85rem 1rem; text-align: center; }
-    .rhythm-day { font-family: 'Source Code Pro', monospace; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.25rem; }
-    .rhythm-label { font-size: 0.82rem; font-weight: 500; color: var(--deep); margin-bottom: 0.2rem; }
-    .rhythm-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
-    .phase-label { font-family: 'Source Code Pro', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); padding: 1.25rem 0 0.5rem; display: flex; align-items: center; gap: 0.75rem; }
-    .phase-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
-    .week-row { display: grid; grid-template-columns: 90px 1fr auto; align-items: start; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--rule); transition: background 0.15s; }
-    .week-row:hover { background: rgba(201,185,154,0.12); margin: 0 -0.75rem; padding-left: 0.75rem; padding-right: 0.75rem; border-radius: 4px; }
-    .week-num { font-family: 'Source Code Pro', monospace; font-size: 0.68rem; font-weight: 600; color: var(--stone); padding-top: 3px; line-height: 1.5; }
-    .week-num .wk-label { font-size: 0.72rem; color: var(--accent); display: block; margin-bottom: 1px; }
-    .week-num .wk-dates { color: var(--stone); }
-    .week-info { min-width: 0; }
-    .week-title { font-size: 0.95rem; font-weight: 500; color: var(--deep); margin-bottom: 0.2rem; }
-    .week-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
-    .week-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 0.35rem; }
-    .tag { font-family: 'Source Code Pro', monospace; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 3px; }
-    .tag-lab { background: rgba(74,124,89,0.12); color: var(--green); }
-    .tag-git { background: rgba(44,58,71,0.1); color: var(--slate); }
-    .tag-grad { background: rgba(184,92,56,0.12); color: var(--accent); }
-    .tag-special { background: rgba(201,185,154,0.4); color: var(--stone); }
-    .tag-break { background: rgba(140,123,107,0.15); color: var(--stone); }
-    .tag-nolab { background: rgba(184,92,56,0.08); color: #a04020; }
-    .week-actions { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; padding-top: 2px; min-width: 145px; }
-    .btn { display: inline-flex; align-items: center; gap: 6px; font-family: 'Source Code Pro', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; text-decoration: none; padding: 5px 12px; border-radius: 3px; white-space: nowrap; transition: opacity 0.15s, transform 0.1s; width: 100%; justify-content: center; }
-    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
-    .btn:active { transform: translateY(0); }
-    .btn-hub { background: var(--slate); color: var(--cream); }
-    .btn-classroom { background: var(--accent); color: white; }
-    .btn-coming { background: transparent; color: var(--stone); border: 1px solid var(--rule); cursor: default; opacity: 0.6; }
-    .btn-coming:hover { opacity: 0.6; transform: none; }
-    .btn-icon { width: 12px; height: 12px; fill: currentColor; flex-shrink: 0; }
-    /* GRADING */
-    .grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
-    .grade-card { background: white; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
-    .grade-card-header { background: var(--slate); color: var(--cream); font-family: 'Source Code Pro', monospace; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1rem; }
-    .grade-card-header.grad { background: var(--accent); }
-    .grade-row { display: flex; justify-content: space-between; align-items: center; padding: 0.55rem 1rem; border-bottom: 1px solid var(--rule); font-size: 0.85rem; }
-    .grade-row:last-child { border-bottom: none; }
-    .grade-row.total { font-weight: 500; background: rgba(201,185,154,0.15); }
-    .grade-pct { font-family: 'Source Code Pro', monospace; font-size: 0.78rem; font-weight: 600; color: var(--accent); }
-    .grade-row.total .grade-pct { color: var(--deep); }
-    /* RESOURCES */
-    .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 1rem; }
-    .resource-card { background: white; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; text-decoration: none; display: block; transition: border-color 0.15s, transform 0.1s; }
-    .resource-card:hover { border-color: var(--sand); transform: translateY(-2px); }
-    .resource-card-label { font-family: 'Source Code Pro', monospace; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.3rem; }
-    .resource-card-title { font-size: 0.9rem; font-weight: 500; color: var(--deep); margin-bottom: 0.25rem; }
-    .resource-card-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
-    .legend { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; padding: 0.75rem 1rem; background: white; border-radius: 4px; border: 1px solid var(--rule); }
-    .legend-item { display: flex; align-items: center; gap: 7px; font-size: 0.78rem; color: var(--muted); }
-    .legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-    .break-divider { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0; font-family: 'Source Code Pro', monospace; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); opacity: 0.7; }
-    .break-divider::before, .break-divider::after { content: ''; flex: 1; height: 1px; background: repeating-linear-gradient(90deg, var(--rule) 0, var(--rule) 4px, transparent 4px, transparent 8px); }
-    footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; font-size: 0.8rem; color: var(--stone); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
-    footer a { color: var(--accent); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    @media (max-width: 640px) {
-      h1 { font-size: 1.9rem; }
-      .week-row { grid-template-columns: 80px 1fr; }
-      .week-actions { grid-column: 2; flex-direction: row; flex-wrap: wrap; min-width: 0; }
-      .grade-grid { grid-template-columns: 1fr; }
-      .rhythm-bar { grid-template-columns: 1fr 1fr; }
+    :root { --slate:#2c3a47;--sand:#c9b99a;--stone:#8c7b6b;--cream:#f5f0e8;--deep:#1a2530;--accent:#b85c38;--muted:#6b7a8d;--rule:rgba(140,123,107,0.25);--green:#4a7c59; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--slate);min-height:100vh;}
+    body::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(140,123,107,0.08) 60px);pointer-events:none;z-index:0;}
+    .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:3rem 2rem 6rem;}
+    header{border-bottom:1px solid var(--rule);padding-bottom:1.5rem;margin-bottom:0;}
+    .course-label{font-family:'Source Code Pro',monospace;font-size:.75rem;font-weight:600;letter-spacing:.15em;color:var(--accent);text-transform:uppercase;margin-bottom:.5rem;}
+    h1{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:600;color:var(--deep);line-height:1.15;margin-bottom:.75rem;}
+    .header-meta{display:flex;gap:2rem;flex-wrap:wrap;margin-top:1rem;}
+    .meta-item{font-size:.85rem;color:var(--muted);}
+    .meta-item strong{color:var(--slate);font-weight:500;}
+    .site-nav{display:flex;gap:0;border-bottom:1px solid var(--rule);margin-bottom:3rem;flex-wrap:wrap;}
+    .nav-tab{font-family:'Source Code Pro',monospace;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:.75rem 1.1rem;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;}
+    .nav-tab:hover{color:var(--slate);}
+    .nav-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+    h2{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:400;color:var(--deep);margin-bottom:1rem;padding-bottom:.4rem;border-bottom:1px solid var(--rule);}
+    h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;color:var(--deep);margin-bottom:.6rem;margin-top:1.75rem;}
+    section{margin-bottom:3.5rem;}
+    p{font-size:.9rem;line-height:1.75;color:var(--slate);margin-bottom:.85rem;}
+    ul,ol{padding-left:1.4rem;margin-bottom:.85rem;}
+    li{font-size:.9rem;line-height:1.7;color:var(--slate);margin-bottom:.25rem;}
+    .note{background:white;border-left:3px solid var(--sand);padding:.85rem 1rem;border-radius:0 4px 4px 0;font-size:.875rem;color:var(--stone);line-height:1.6;margin-bottom:.75rem;}
+    .note a{color:var(--accent);}
+    .note strong{color:var(--slate);}
+    .note-warn{border-left-color:var(--accent);}
+    .rhythm-intro{font-size:.925rem;line-height:1.75;color:var(--slate);margin-bottom:1.25rem;}
+    .rhythm-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden;margin-bottom:1.25rem;}
+    .rhythm-cell{background:white;padding:.85rem 1rem;text-align:center;}
+    .rhythm-day{font-family:'Source Code Pro',monospace;font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.25rem;}
+    .rhythm-label{font-size:.82rem;font-weight:500;color:var(--deep);margin-bottom:.2rem;}
+    .rhythm-desc{font-size:.75rem;color:var(--muted);line-height:1.4;}
+    .phase-label{font-family:'Source Code Pro',monospace;font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);padding:1.25rem 0 .5rem;display:flex;align-items:center;gap:.75rem;}
+    .phase-label::after{content:'';flex:1;height:1px;background:var(--rule);}
+    .week-row{display:grid;grid-template-columns:90px 1fr auto;align-items:start;gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--rule);transition:background .15s;}
+    .week-row:hover{background:rgba(201,185,154,.12);margin:0 -.75rem;padding-left:.75rem;padding-right:.75rem;border-radius:4px;}
+    .week-num{font-family:'Source Code Pro',monospace;font-size:.68rem;font-weight:600;color:var(--stone);padding-top:3px;line-height:1.5;}
+    .week-num .wk-label{font-size:.72rem;color:var(--accent);display:block;margin-bottom:1px;}
+    .week-info{min-width:0;}
+    .week-title{font-size:.95rem;font-weight:500;color:var(--deep);margin-bottom:.2rem;}
+    .week-desc{font-size:.82rem;color:var(--muted);line-height:1.5;}
+    .week-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:.35rem;}
+    .tag{font-family:'Source Code Pro',monospace;font-size:.65rem;font-weight:600;letter-spacing:.04em;padding:2px 7px;border-radius:3px;}
+    .tag-lab{background:rgba(74,124,89,.12);color:var(--green);}
+    .tag-git{background:rgba(44,58,71,.1);color:var(--slate);}
+    .tag-grad{background:rgba(184,92,56,.12);color:var(--accent);}
+    .tag-special{background:rgba(201,185,154,.4);color:var(--stone);}
+    .tag-break{background:rgba(140,123,107,.15);color:var(--stone);}
+    .tag-nolab{background:rgba(184,92,56,.08);color:#a04020;}
+    .week-actions{display:flex;flex-direction:column;gap:6px;align-items:flex-end;padding-top:2px;min-width:145px;}
+    .btn{display:inline-flex;align-items:center;gap:6px;font-family:'Source Code Pro',monospace;font-size:.7rem;font-weight:600;letter-spacing:.04em;text-decoration:none;padding:5px 12px;border-radius:3px;white-space:nowrap;transition:opacity .15s,transform .1s;width:100%;justify-content:center;}
+    .btn:hover{opacity:.85;transform:translateY(-1px);}
+    .btn:active{transform:translateY(0);}
+    .btn-hub{background:var(--slate);color:var(--cream);}
+    .btn-classroom{background:var(--accent);color:white;}
+    .btn-coming{background:transparent;color:var(--stone);border:1px solid var(--rule);cursor:default;opacity:.6;}
+    .btn-coming:hover{opacity:.6;transform:none;}
+    .btn-icon{width:12px;height:12px;fill:currentColor;flex-shrink:0;}
+    .grade-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;}
+    .grade-card{background:white;border:1px solid var(--rule);border-radius:6px;overflow:hidden;}
+    .grade-card-header{background:var(--slate);color:var(--cream);font-family:'Source Code Pro',monospace;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1rem;}
+    .grade-card-header.grad{background:var(--accent);}
+    .grade-row{display:flex;justify-content:space-between;align-items:center;padding:.55rem 1rem;border-bottom:1px solid var(--rule);font-size:.85rem;}
+    .grade-row:last-child{border-bottom:none;}
+    .grade-row.total{font-weight:500;background:rgba(201,185,154,.15);}
+    .grade-pct{font-family:'Source Code Pro',monospace;font-size:.78rem;font-weight:600;color:var(--accent);}
+    .grade-row.total .grade-pct{color:var(--deep);}
+    .letter-table{width:100%;border-collapse:collapse;margin-top:.75rem;font-size:.85rem;}
+    .letter-table th{background:var(--slate);color:var(--cream);font-family:'Source Code Pro',monospace;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .75rem;text-align:left;}
+    .letter-table td{padding:.45rem .75rem;border-bottom:1px solid var(--rule);}
+    .letter-table tr:last-child td{border-bottom:none;}
+    .letter-table tr:nth-child(even) td{background:rgba(201,185,154,.08);}
+    .resource-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:1rem;}
+    .resource-card{background:white;border:1px solid var(--rule);border-radius:6px;padding:1rem 1.1rem;text-decoration:none;display:block;transition:border-color .15s,transform .1s;}
+    .resource-card:hover{border-color:var(--sand);transform:translateY(-2px);}
+    .resource-card-label{font-family:'Source Code Pro',monospace;font-size:.68rem;font-weight:600;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:.3rem;}
+    .resource-card-title{font-size:.9rem;font-weight:500;color:var(--deep);margin-bottom:.25rem;}
+    .resource-card-desc{font-size:.78rem;color:var(--muted);line-height:1.5;}
+    .legend{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;padding:.75rem 1rem;background:white;border-radius:4px;border:1px solid var(--rule);}
+    .legend-item{display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--muted);}
+    .legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+    .break-divider{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;font-family:'Source Code Pro',monospace;font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);opacity:.7;}
+    .break-divider::before,.break-divider::after{content:'';flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--rule) 0,var(--rule) 4px,transparent 4px,transparent 8px);}
+    .info-block{background:white;border:1px solid var(--rule);border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem;}
+    .info-block-label{font-family:'Source Code Pro',monospace;font-size:.68rem;font-weight:600;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:.5rem;}
+    .pill-grad{font-family:'Source Code Pro',monospace;font-size:.65rem;font-weight:600;background:rgba(184,92,56,.12);color:var(--accent);padding:2px 8px;border-radius:3px;margin-left:6px;vertical-align:middle;}
+    /* NORMS */
+    .norm-card{background:white;border:1px solid var(--rule);border-radius:8px;padding:1.25rem 1.5rem;margin-bottom:.75rem;display:flex;gap:1.25rem;align-items:flex-start;}
+    .norm-num{font-family:'Source Code Pro',monospace;font-size:1.1rem;font-weight:600;color:var(--sand);flex-shrink:0;line-height:1.4;min-width:2rem;}
+    .norm-title{font-size:.95rem;font-weight:500;color:var(--deep);margin-bottom:.3rem;}
+    .norm-body{font-size:.85rem;color:var(--muted);line-height:1.65;}
+    .norms-placeholder{background:white;border:2px dashed var(--rule);border-radius:8px;padding:3rem 2rem;text-align:center;color:var(--stone);}
+    .norms-placeholder-label{font-family:'Source Code Pro',monospace;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--sand);margin-bottom:.75rem;}
+    .norms-placeholder-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep);margin-bottom:.75rem;}
+    .norms-placeholder-desc{font-size:.875rem;line-height:1.7;}
+    footer{border-top:1px solid var(--rule);padding-top:1.5rem;font-size:.8rem;color:var(--stone);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;}
+    footer a{color:var(--accent);text-decoration:none;}
+    footer a:hover{text-decoration:underline;}
+    a{color:var(--accent);}
+    @media(max-width:640px){
+      h1{font-size:1.9rem;}
+      .week-row{grid-template-columns:80px 1fr;}
+      .week-actions{grid-column:2;flex-direction:row;flex-wrap:wrap;min-width:0;}
+      .grade-grid{grid-template-columns:1fr;}
+      .rhythm-bar{grid-template-columns:1fr 1fr;}
     }
 </style>
 </head>
 <body>
 <div class="page">
-
   <header>
     <div class="course-label">Vanderbilt University · Fall 2026</div>
     <h1>Python in Earth Science</h1>
     <div class="header-meta">
       <span class="meta-item"><strong>Course</strong> EES 3350/5350</span>
       <span class="meta-item"><strong>Instructor</strong> Dr. Morey</span>
-      <span class="meta-item"><strong>Lectures</strong> Mon / Wed / Fri 9:05–9:55am</span>
-      <span class="meta-item"><strong>Lab</strong> Mon 1:25–4:15pm</span>
-      <span class="meta-item"><strong>Dates</strong> Aug 26 – Dec 10, 2026</span>
+      <span class="meta-item"><strong>Lectures</strong> Mon / Wed / Fri 9:05–9:55am · Wilson 120</span>
+      <span class="meta-item"><strong>Lab</strong> Mon 1:25–4:15pm · Wilson 120</span>
     </div>
   </header>
-
   <nav class="site-nav">
     <a href="index.html" class="nav-tab active">Schedule</a>
     <a href="grading.html" class="nav-tab">Grading</a>
-    <a href="https://github.com/Python-in-Earth-Science/course-materials" class="nav-tab" target="_blank">Materials</a>
-    <a href="YOUR_TOPHAT_LINK_HERE" class="nav-tab" target="_blank">TopHat</a>
+    <a href="policies.html" class="nav-tab">Policies</a>
+    <a href="info.html" class="nav-tab">Info</a>
+    <a href="norms.html" class="nav-tab">2026 Norms</a>
+    <a href="https://github.com/Python-in-Earth-Science/course-materials" class="nav-tab" target="_blank">Materials ↗</a>
+    <a href="https://tophat.com/" class="nav-tab" target="_blank">TopHat ↗</a>
   </nav>
 
   <section>
     <h2>How this course works</h2>
-    <p class="rhythm-intro">Each week follows a loose arc: we introduce new concepts in lecture, build on them with in-class demos and exercises, and then apply them in the Monday afternoon lab. The schedule below shows the general shape of a typical week — but especially in the first few weeks, we'll feel this out together as a class.</p>
+    <p class="rhythm-intro">Each week follows a loose arc: we introduce new concepts in lecture, build on them with in-class demos and exercises, and then apply them in the Monday afternoon lab. Especially in the first few weeks, we'll feel this out together as a class.</p>
     <div class="rhythm-bar">
       <div class="rhythm-cell"><div class="rhythm-day">Wednesday</div><div class="rhythm-label">Introduce</div><div class="rhythm-desc">New concept, demo notebook, active exercises</div></div>
       <div class="rhythm-cell"><div class="rhythm-day">Friday</div><div class="rhythm-label">Build on it</div><div class="rhythm-desc">More examples, dig deeper, questions</div></div>
@@ -131,16 +146,14 @@
     </div>
     <div class="note"><strong>First time here?</strong> Make sure you have a CSDMS ExploreHub account before clicking any buttons. Contact Dr. Morey if you need access. You will also need a free <a href="https://github.com" target="_blank">GitHub account</a> — set one up with your Vanderbilt email before Week 6. <strong>When you open a notebook, rename it immediately</strong> by adding your last name (e.g. <code>00_course_intro_Smith.ipynb</code>) before you start working.</div>
   </section>
-
   <section>
     <h2>Schedule</h2>
     <div class="legend">
-      <div class="legend-item"><div class="legend-dot" style="background:var(--slate);"></div>Opens week's folder in ExploreHub</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--slate);"></div>Opens week folder in ExploreHub</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--accent);"></div>GitHub Classroom assignment</div>
       <div class="legend-item"><div class="legend-dot" style="background:rgba(184,92,56,0.35);"></div>Graduate only</div>
       <div class="legend-item"><div class="legend-dot" style="background:rgba(140,123,107,0.3);"></div>No lab this week</div>
     </div>
-
     <div class="phase-label">Unit 1 — Python &amp; scientific computing basics</div>
 
     <div class="week-row">
@@ -192,7 +205,6 @@
       </div>
       <div class="week-actions"><a class="btn btn-hub" href="https://explore.openearthscape.org/hub/user-redirect/git-pull?repo=https://github.com/Python-in-Earth-Science/course-materials&urlpath=lab/tree/course-materials/week05/&branch=main" target="_blank"><svg class="btn-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 6.5l-1.5 4.5L6.5 9.5 2 11l4.5-1.5L8 5l1.5 4.5L13.5 8 9.5 9.5z"/></svg>Week 5 materials</a></div>
     </div>
-
     <div class="phase-label">Unit 2 — Scientific Python packages</div>
 
     <div class="week-row">
@@ -202,17 +214,17 @@
         <div class="week-desc">Reading error messages, correcting code, commenting practices. What version control is and why scientists use it: clone, add, commit, push.</div>
         <div class="week-tags"><span class="tag tag-lab">Lab 4: Mini synthesis — first GitHub Classroom submission</span><span class="tag tag-git">Git starts here</span></div>
       </div>
-      <div class="week-actions"><a class="btn btn-hub" href="https://explore.openearthscape.org/hub/user-redirect/git-pull?repo=https://github.com/Python-in-Earth-Science/course-materials&urlpath=lab/tree/course-materials/week06/&branch=main" target="_blank"><svg class="btn-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 6.5l-1.5 4.5L6.5 9.5 2 11l4.5-1.5L8 5l1.5 4.5L13.5 8 9.5 9.5z"/></svg>Week 6 lectures</a><a class="btn btn-classroom" href="YOUR_GITHUB_CLASSROOM_LINK_HERE" target="_blank"><svg class="btn-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.34C3.73 14.35 3.26 12.8 3.26 12.8c-.36-.92-.89-1.16-.89-1.16-.73-.5.05-.49.05-.49.8.06 1.23.82 1.23.82.71 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.62 7.62 0 012-.27c.68 0 1.36.09 2 .27 1.52-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Accept Lab 4</a></div>
+      <div class="week-actions"><a class="btn btn-hub" href="https://explore.openearthscape.org/hub/user-redirect/git-pull?repo=https://github.com/Python-in-Earth-Science/course-materials&urlpath=lab/tree/course-materials/week06/&branch=main" target="_blank"><svg class="btn-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 6.5l-1.5 4.5L6.5 9.5 2 11l4.5-1.5L8 5l1.5 4.5L13.5 8 9.5 9.5z"/></svg>Week 6 materials</a><a class="btn btn-classroom" href="YOUR_GITHUB_CLASSROOM_LINK_HERE" target="_blank"><svg class="btn-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.34C3.73 14.35 3.26 12.8 3.26 12.8c-.36-.92-.89-1.16-.89-1.16-.73-.5.05-.49.05-.49.8.06 1.23.82 1.23.82.71 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.62 7.62 0 012-.27c.68 0 1.36.09 2 .27 1.52-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Accept Lab 4</a></div>
     </div>
 
     <div class="week-row">
       <div class="week-num"><span class="wk-label">Week 7</span><span class="wk-dates">Oct 7–12</span></div>
       <div class="week-info">
         <div class="week-title">NumPy</div>
-        <div class="week-desc">Arrays, array math, broadcasting, indexing. Working with numerical data efficiently.</div>
+        <div class="week-desc">Arrays, array math, broadcasting, indexing.</div>
         <div class="week-tags"><span class="tag tag-lab">Lab 5: NumPy workshop</span><span class="tag tag-grad">Grad presentation slot 1</span></div>
       </div>
-      <div class="week-actions"><a class="btn btn-hub" href="https://explore.openearthscape.org/hub/user-redirect/git-pull?repo=https://github.com/Python-in-Earth-Science/course-materials&urlpath=lab/tree/course-materials/week07/&branch=main" target="_blank"><svg class="btn-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 6.5l-1.5 4.5L6.5 9.5 2 11l4.5-1.5L8 5l1.5 4.5L13.5 8 9.5 9.5z"/></svg>Week 7 lectures</a><a class="btn btn-classroom" href="YOUR_GITHUB_CLASSROOM_LINK_HERE" target="_blank"><svg class="btn-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.34C3.73 14.35 3.26 12.8 3.26 12.8c-.36-.92-.89-1.16-.89-1.16-.73-.5.05-.49.05-.49.8.06 1.23.82 1.23.82.71 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.62 7.62 0 012-.27c.68 0 1.36.09 2 .27 1.52-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Accept Lab 5</a></div>
+      <div class="week-actions"><a class="btn btn-hub" href="https://explore.openearthscape.org/hub/user-redirect/git-pull?repo=https://github.com/Python-in-Earth-Science/course-materials&urlpath=lab/tree/course-materials/week07/&branch=main" target="_blank"><svg class="btn-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 6.5l-1.5 4.5L6.5 9.5 2 11l4.5-1.5L8 5l1.5 4.5L13.5 8 9.5 9.5z"/></svg>Week 7 materials</a><a class="btn btn-classroom" href="YOUR_GITHUB_CLASSROOM_LINK_HERE" target="_blank"><svg class="btn-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.34C3.73 14.35 3.26 12.8 3.26 12.8c-.36-.92-.89-1.16-.89-1.16-.73-.5.05-.49.05-.49.8.06 1.23.82 1.23.82.71 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.62 7.62 0 012-.27c.68 0 1.36.09 2 .27 1.52-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Accept Lab 5</a></div>
     </div>
 
     <div class="week-row">
@@ -222,7 +234,7 @@
         <div class="week-desc">Figure anatomy, basic plot types, subplots, axes, labels. Visualizing Earth science data.</div>
         <div class="week-tags"><span class="tag tag-lab">Lab 6: Plotting workshop</span><span class="tag tag-grad">Grad presentation slot 2</span></div>
       </div>
-      <div class="week-actions"><a class="btn btn-hub" href="https://explore.openearthscape.org/hub/user-redirect/git-pull?repo=https://github.com/Python-in-Earth-Science/course-materials&urlpath=lab/tree/course-materials/week08/&branch=main" target="_blank"><svg class="btn-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 6.5l-1.5 4.5L6.5 9.5 2 11l4.5-1.5L8 5l1.5 4.5L13.5 8 9.5 9.5z"/></svg>Week 8 lectures</a><a class="btn btn-classroom" href="YOUR_GITHUB_CLASSROOM_LINK_HERE" target="_blank"><svg class="btn-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.34C3.73 14.35 3.26 12.8 3.26 12.8c-.36-.92-.89-1.16-.89-1.16-.73-.5.05-.49.05-.49.8.06 1.23.82 1.23.82.71 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.62 7.62 0 012-.27c.68 0 1.36.09 2 .27 1.52-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Accept Lab 6</a></div>
+      <div class="week-actions"><a class="btn btn-hub" href="https://explore.openearthscape.org/hub/user-redirect/git-pull?repo=https://github.com/Python-in-Earth-Science/course-materials&urlpath=lab/tree/course-materials/week08/&branch=main" target="_blank"><svg class="btn-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 6.5l-1.5 4.5L6.5 9.5 2 11l4.5-1.5L8 5l1.5 4.5L13.5 8 9.5 9.5z"/></svg>Week 8 materials</a><a class="btn btn-classroom" href="YOUR_GITHUB_CLASSROOM_LINK_HERE" target="_blank"><svg class="btn-icon" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.34C3.73 14.35 3.26 12.8 3.26 12.8c-.36-.92-.89-1.16-.89-1.16-.73-.5.05-.49.05-.49.8.06 1.23.82 1.23.82.71 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.62 7.62 0 012-.27c.68 0 1.36.09 2 .27 1.52-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Accept Lab 6</a></div>
     </div>
 
     <div class="week-row">
@@ -254,7 +266,6 @@
       </div>
       <div class="week-actions"><a class="btn btn-coming">Coming soon</a></div>
     </div>
-
     <div class="phase-label">Unit 3 — Geospatial analysis</div>
 
     <div class="week-row">
@@ -271,14 +282,12 @@
       <div class="week-num"><span class="wk-label">Week 13</span><span class="wk-dates">Nov 18–20</span></div>
       <div class="week-info">
         <div class="week-title">SciPy + seaborn and advanced visualization</div>
-        <div class="week-desc">Statistics, interpolation, curve fitting. Seaborn for statistical plots; multi-panel layouts and publication-ready figure polish. Short week — two lectures only.</div>
+        <div class="week-desc">Statistics, interpolation, curve fitting. Seaborn for statistical plots; advanced figure polish. Short week — two lectures only.</div>
         <div class="week-tags"><span class="tag tag-nolab">No lab — Thanksgiving break begins Nov 21</span><span class="tag tag-break">Wed + Fri only</span><span class="tag tag-special">Final project proposals due</span></div>
       </div>
       <div class="week-actions"><a class="btn btn-coming">Coming soon</a></div>
     </div>
-
     <div class="break-divider">Thanksgiving break — Nov 21–29</div>
-
     <div class="phase-label">Unit 4 — Modeling &amp; advanced topics</div>
 
     <div class="week-row">
@@ -310,26 +319,22 @@
       </div>
       <div class="week-actions"><a class="btn btn-coming">Coming soon</a></div>
     </div>
-
   </section>
-
   <section>
     <h2>Resources</h2>
     <div class="resource-grid">
       <a class="resource-card" href="https://explore.openearthscape.org" target="_blank"><div class="resource-card-label">Platform</div><div class="resource-card-title">CSDMS ExploreHub</div><div class="resource-card-desc">Your cloud Jupyter environment. All packages pre-installed, nothing to download.</div></a>
       <a class="resource-card" href="https://classroom.github.com" target="_blank"><div class="resource-card-label">Assignments</div><div class="resource-card-title">GitHub Classroom</div><div class="resource-card-desc">Where your submitted work lives from Week 6 onward.</div></a>
       <a class="resource-card" href="https://github.com/Python-in-Earth-Science/course-materials" target="_blank"><div class="resource-card-label">Source</div><div class="resource-card-title">Course materials repo</div><div class="resource-card-desc">Browse all notebooks and datasets on GitHub.</div></a>
-      <a class="resource-card" href="YOUR_TOPHAT_LINK_HERE" target="_blank"><div class="resource-card-label">Warm-ups</div><div class="resource-card-title">TopHat</div><div class="resource-card-desc">In-class warm-up problems. Have this open at the start of every lecture.</div></a>
+      <a class="resource-card" href="https://tophat.com/" target="_blank"><div class="resource-card-label">Warm-ups</div><div class="resource-card-title">TopHat</div><div class="resource-card-desc">In-class warm-up problems. Have this open at the start of every lecture.</div></a>
       <a class="resource-card" href="https://numpy.org/doc/" target="_blank"><div class="resource-card-label">Reference</div><div class="resource-card-title">NumPy / pandas / SciPy docs</div><div class="resource-card-desc">Official documentation for the packages we use most.</div></a>
       <a class="resource-card" href="https://nbgitpuller.link" target="_blank"><div class="resource-card-label">Tool</div><div class="resource-card-title">How these buttons work</div><div class="resource-card-desc">Curious what happens when you click a button? This is nbgitpuller.</div></a>
     </div>
   </section>
-
   <footer>
     <span>EES 3350/5350 · Python in Earth Science · Vanderbilt University · Fall 2026</span>
     <span>Questions? <a href="mailto:susannah.morey@vanderbilt.edu">susannah.morey@vanderbilt.edu</a></span>
   </footer>
-
 </div>
 </body>
 </html>

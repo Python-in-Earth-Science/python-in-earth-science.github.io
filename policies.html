@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>EES 3350/5350 — Grading</title>
+  <title>EES 3350/5350 — Policies</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Source+Code+Pro:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root { --slate:#2c3a47;--sand:#c9b99a;--stone:#8c7b6b;--cream:#f5f0e8;--deep:#1a2530;--accent:#b85c38;--muted:#6b7a8d;--rule:rgba(140,123,107,0.25);--green:#4a7c59; }
@@ -127,8 +127,8 @@
   </header>
   <nav class="site-nav">
     <a href="index.html" class="nav-tab">Schedule</a>
-    <a href="grading.html" class="nav-tab active">Grading</a>
-    <a href="policies.html" class="nav-tab">Policies</a>
+    <a href="grading.html" class="nav-tab">Grading</a>
+    <a href="policies.html" class="nav-tab active">Policies</a>
     <a href="info.html" class="nav-tab">Info</a>
     <a href="norms.html" class="nav-tab">2026 Norms</a>
     <a href="https://github.com/Python-in-Earth-Science/course-materials" class="nav-tab" target="_blank">Materials ↗</a>
@@ -136,85 +136,55 @@
   </nav>
 
   <section>
-    <h2>Grade breakdown</h2>
-    <div class="grade-grid">
-      <div class="grade-card">
-        <div class="grade-card-header">Undergraduate — EES 3350</div>
-        <div class="grade-row"><span>Participation (demo notebooks + warm-ups)</span><span class="grade-pct">15%</span></div>
-        <div class="grade-row"><span>Coding assignments</span><span class="grade-pct">35%</span></div>
-        <div class="grade-row"><span>Labs</span><span class="grade-pct">35%</span></div>
-        <div class="grade-row"><span>Proposal workshop</span><span class="grade-pct">5%</span></div>
-        <div class="grade-row"><span>Final coding project</span><span class="grade-pct">10%</span></div>
-        <div class="grade-row total"><span>Total</span><span class="grade-pct">100%</span></div>
-      </div>
-      <div class="grade-card">
-        <div class="grade-card-header grad">Graduate — EES 5350</div>
-        <div class="grade-row"><span>Participation (demo notebooks + warm-ups)</span><span class="grade-pct">15%</span></div>
-        <div class="grade-row"><span>Coding assignments</span><span class="grade-pct">30%</span></div>
-        <div class="grade-row"><span>Labs</span><span class="grade-pct">30%</span></div>
-        <div class="grade-row"><span>Python package presentation</span><span class="grade-pct">5%</span></div>
-        <div class="grade-row"><span>Git assignment</span><span class="grade-pct">5%</span></div>
-        <div class="grade-row"><span>Proposal workshop</span><span class="grade-pct">5%</span></div>
-        <div class="grade-row"><span>Final coding project</span><span class="grade-pct">10%</span></div>
-        <div class="grade-row total"><span>Total</span><span class="grade-pct">100%</span></div>
-      </div>
-    </div>
-    <div class="note" style="margin-top:1rem;">All grades are posted on Brightspace. Check regularly. Grading irregularities must be reported within one week — see the <a href="policies.html">Policies</a> page for details.</div>
+    <h2>Academic integrity</h2>
+    <p>Students at Vanderbilt are expected to adhere to the <a href="https://studentorg.vanderbilt.edu/honorcouncil/faculty-guide-to-the-honor-system/#b" target="_blank">Vanderbilt Honor Code</a>. Academic dishonesty, including all forms of cheating, inappropriate use of generative AI, and plagiarism will not be tolerated. If you are found guilty of academic dishonesty, potential consequences range from failing an assignment to being suspended from the University. All forms of academic dishonesty will be reported to the Undergraduate Honor Code Incident Reporting Form.</p>
+    <p>Discussion with classmates is encouraged. You are not, however, permitted to share notebook files or copy code directly from another student's submission. All code you submit must be written by you, and you must be able to explain every line.</p>
   </section>
 
   <section>
-    <h2>Assignment descriptions</h2>
-
-    <h3>Participation — demo notebooks + warm-ups</h3>
-    <p>This grade has two components that are tracked separately and combined.</p>
-    <p><strong>Demo notebooks:</strong> Every week you follow along in a Jupyter notebook, recording all code and exercises for that week. Notebooks are due by end of day Monday and graded for participation: 1 point for submitting, 1 point for having all exercises completed. There are 15 weeks of class — the lowest 2 notebook grades are dropped.</p>
-    <p><strong>Warm-up problems:</strong> A short coding problem is posed at the start of each lecture via TopHat. Warm-ups are worth 1 point each. There are 41 lectures this semester — the lowest 8 warm-up scores are dropped, which means you have roughly one free pass per month without any grade penalty. Completing warm-ups on time rewards showing up ready to work; there is no penalty for an incorrect answer, only for not responding.</p>
-
-    <h3>Coding assignments</h3>
-    <p>Five take-home assignments throughout the semester designed to build and solidify your Python skills. Graduate students have additional exercises on each assignment. Submitted via Brightspace in weeks 1–5 and via GitHub Classroom from Week 6 onward.</p>
-
-    <h3>Labs</h3>
-    <p>The Monday afternoon lab period (1:25–4:15pm) is the core of the course. Each week you work through an applied problem using that week's tools and real Earth science data. Labs are due the following <strong>Sunday at 11:59pm</strong>. There are 11 graded labs this semester — Week 1 is an ungraded orientation; Labor Day and Thanksgiving reduce the total from 15.</p>
-
-    <h3>Proposal workshop</h3>
-    <p>In preparation for your final project, you will participate in a peer feedback workshop and submit a project proposal. You'll pitch your Final Coding Project theme and methods to peers and receive written feedback. Your proposal must be submitted before arriving at the Week 13 lab. Attendance and substantive written feedback on your peers' work are required for full credit.</p>
-
-    <h3>Final coding project</h3>
-    <p>Create a Scientific Demo Notebook that explores a real Earth science question through data analysis or numerical modeling. Your notebook should tell a story — walking a reader through your scientific question, showing your analysis step-by-step, and discussing what you learned. It should combine scientific narrative, working code, results, and interpretation. Graduate students: your project should use data relevant to your research. Submitted via GitHub Classroom. Due date announced during Week 13.</p>
-
-    <h3>Python package presentation <span class="pill-grad">Graduate only</span></h3>
-    <p>Each graduate student presents a Python package not covered in class (10–15 minutes) at the start of a lab period in weeks 7–11. The package should be relevant to your research area. Sign up for a slot in Week 6.</p>
-
-    <h3>Git assignment <span class="pill-grad">Graduate only</span></h3>
-    <p>A short practical assignment covering branching, merging, and pull requests — skills that translate directly to collaborative research workflows. Due Week 15. Details distributed in Week 6.</p>
+    <h2>Generative AI</h2>
+    <div class="note note-warn"><strong>Generative AI (ChatGPT, Claude, Copilot, etc.) is prohibited in this course unless explicit permission is given on the specific assignment.</strong></div>
+    <p>When generative AI is permitted, you must cite the resource as you would any other source. Failing to acknowledge its use, or using it when not permitted, is academic dishonesty and will be referred to the Honor Council.</p>
+    <p>If you see a creative opportunity to use generative AI in your work, propose it to Dr. Morey — it will be given fair consideration.</p>
   </section>
 
   <section>
-    <h2>Letter grades</h2>
-    <table class="letter-table">
-      <thead><tr><th>Percentage</th><th>Grade</th></tr></thead>
-      <tbody>
-        <tr><td>93.00 – 100.00</td><td>A</td></tr>
-        <tr><td>90.00 – 92.99</td><td>A−</td></tr>
-        <tr><td>87.00 – 89.99</td><td>B+</td></tr>
-        <tr><td>83.00 – 86.99</td><td>B</td></tr>
-        <tr><td>80.00 – 82.99</td><td>B−</td></tr>
-        <tr><td>77.00 – 79.99</td><td>C+</td></tr>
-        <tr><td>73.00 – 76.99</td><td>C</td></tr>
-        <tr><td>70.00 – 72.99</td><td>C−</td></tr>
-        <tr><td>67.00 – 69.99</td><td>D+</td></tr>
-        <tr><td>63.00 – 66.99</td><td>D</td></tr>
-        <tr><td>60.00 – 62.99</td><td>D−</td></tr>
-        <tr><td>0.00 – 59.99</td><td>F</td></tr>
-      </tbody>
-    </table>
+    <h2>Attendance and participation</h2>
+    <p>Missing class means missing material that has been intentionally curated for your learning. Full attendance and participation is expected. Research shows that students who respond thoughtfully to in-class questions earn higher grades — even when they get the initial answer wrong.</p>
+    <p>What happens if you miss class? Talk with classmates to get caught up and go over important concepts. If you still have questions, come to office hours. While full attendance is expected, life happens — if you miss an activity or assignment, contact Dr. Morey as soon as possible (ideally before you miss it) so we can try to make a plan.</p>
+    <div class="note"><strong>If you're sick, please do not come to class.</strong> Rest for the day. It is far more important that you are safe and healthy than that you attend class.</div>
+
+    <h3>Athletes</h3>
+    <p>It is <em>your</em> responsibility to contact Dr. Morey when you will miss class for an athletic event — do not rely on your athletic director to communicate it. Include (1) your name, (2) what you'll be missing and when, and (3) a request to make it up if applicable. Do this <strong>ahead of time</strong>. Note that absences for athletic events are still subject to the regular attendance policy. If you will regularly miss a majority of class sessions due to athletic commitments, you are unfortunately not in the right class.</p>
+
+    <h3>Graduating seniors</h3>
+    <p>Graduating seniors who are not on track to pass but who would otherwise be eligible to graduate may request a senior reexamination from the Dean's office. The format (oral or mixed-question) is at Dr. Morey's discretion. If you're a senior worried about your ability to succeed — or any student! — meet with Dr. Morey early and often.</p>
   </section>
 
   <section>
-    <h2>Late work</h2>
-    <div class="note note-warn"><strong>10% deduction per day</strong> for late submissions. It's unfair to your peers if you receive more time than they do.</div>
-    <p>In-class notebooks cannot be submitted later than midnight the Monday after they are due. Coding assignments cannot be submitted later than midnight one week after they are due. The proposal workshop and final project cannot be submitted late.</p>
-    <p>If you need an extension, contact Dr. Morey <strong>before</strong> the deadline — not after.</p>
+    <h2>Classroom conduct</h2>
+    <p>Everyone in this classroom will be held to the same standard: speak in a way that is not rude, disruptive, intimidating, or demeaning. Disruptive behavior will not be tolerated and may result in being asked to leave or a referral to the <a href="https://studentorg.vanderbilt.edu/honorcouncil/faculty-guide-to-the-honor-system/#b" target="_blank">Student Honor Council</a>.</p>
+    <p>In Dr. Morey's eyes, there is as much to learn from you this semester as you have to learn from her. The classroom cannot be conducive to learning if people speak to one another with condescension.</p>
+
+    <h3>Classroom etiquette</h3>
+    <ol>
+      <li><strong>Ask questions.</strong> The best part of class is working together to understand the material. If you have a question, you are almost certainly not the only one.</li>
+      <li>Please do not arrive late or leave early. If unavoidable, minimize disruption to your classmates.</li>
+      <li>Please use common courtesy when others are speaking. Actively listen with the goal of learning — not just waiting for your turn to talk.</li>
+      <li>Put your phone on silent and use your computer appropriately. Your attention is one of your greatest assets.</li>
+    </ol>
+    <p><em>How you start the semester determines how you finish the semester. Show up prepared and ready to actively participate.</em></p>
+  </section>
+
+  <section>
+    <h2>Grading irregularities</h2>
+    <p>If you believe there is a mistake in the grading of an assignment, provide a brief written justification (email is fine) along with the original assignment <strong>within one week</strong> of the return of the graded work. Include image attachments of the assignment so both parties have a record.</p>
+    <p>To be eligible for an "Incomplete" (I) grade, you must be earning at least a C in the course and must provide written documentation detailing the reason for the grade.</p>
+  </section>
+
+  <section>
+    <h2>Weather and cancellations</h2>
+    <p>If a class session is canceled due to bad weather, instructor absence, or other unforeseen circumstances, students are still responsible for all readings and assignments listed on the schedule.</p>
   </section>
   <footer>
     <span>EES 3350/5350 · Python in Earth Science · Vanderbilt University · Fall 2026</span>
