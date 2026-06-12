@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>EES 3350/5350 — Schedule</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Source+Code+Pro:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--slate:#2c3a47;--sand:#c9b99a;--stone:#8c7b6b;--cream:#f5f0e8;--deep:#1a2530;--accent:#b85c38;--muted:#6b7a8d;--rule:rgba(140,123,107,0.25);--green:#4a7c59;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--slate);min-height:100vh;}
+    .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:3rem 2rem 6rem;}
+    header{border-bottom:1px solid var(--rule);padding-bottom:1.5rem;margin-bottom:0;}
+    .course-label{font-family:'Source Code Pro',monospace;font-size:.75rem;font-weight:600;letter-spacing:.15em;color:var(--accent);text-transform:uppercase;margin-bottom:.5rem;}
+    h1{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:600;color:var(--deep);line-height:1.15;margin-bottom:.75rem;}
+    .header-meta{display:flex;gap:2rem;flex-wrap:wrap;margin-top:1rem;}
+    .meta-item{font-size:.85rem;color:var(--muted);}
+    .meta-item strong{color:var(--slate);font-weight:500;}
+    .site-nav{display:flex;gap:0;border-bottom:1px solid var(--rule);margin-bottom:3rem;flex-wrap:wrap;}
+    .nav-tab{font-family:'Source Code Pro',monospace;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:.75rem 1.1rem;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;}
+    .nav-tab:hover{color:var(--slate);}
+    .nav-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+    h2{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:400;color:var(--deep);margin-bottom:1rem;padding-bottom:.4rem;border-bottom:1px solid var(--rule);}
+    section{margin-bottom:3.5rem;}
+    p{font-size:.9rem;line-height:1.75;color:var(--slate);margin-bottom:.85rem;}
+
+    /* ── CALENDAR ── */
+    .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+    .cal-nav-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:var(--deep);}
+    .cal-nav-btn{background:none;border:1px solid var(--rule);border-radius:4px;padding:4px 14px;cursor:pointer;font-size:.8rem;color:var(--muted);font-family:'Source Code Pro',monospace;letter-spacing:.04em;transition:color .15s,border-color .15s;}
+    .cal-nav-btn:hover{color:var(--accent);border-color:var(--accent);}
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden;}
+    .cal-dow{background:var(--slate);color:var(--cream);font-family:'Source Code Pro',monospace;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.5rem;text-align:center;}
+    .cal-cell{background:white;min-height:82px;padding:.35rem .4rem;}
+    .cal-cell.other-month{background:#faf8f4;}
+    .cal-cell.today{outline:2px solid var(--accent);outline-offset:-2px;}
+    .cal-date{font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:.25rem;font-family:'Source Code Pro',monospace;}
+    .cal-cell.has-event .cal-date{color:var(--deep);}
+    .ev{font-size:.68rem;line-height:1.3;padding:2px 5px;border-radius:3px;margin-bottom:2px;font-weight:500;}
+    .ev-lecture{background:rgba(26,95,168,.12);color:#1a5fa8;}
+    .ev-lab{background:rgba(74,124,89,.15);color:var(--green);}
+    .ev-due{background:rgba(184,92,56,.12);color:var(--accent);}
+    .ev-off{background:rgba(140,123,107,.15);color:var(--stone);}
+    .ev-assign{background:rgba(100,80,160,.12);color:#5040a0;}
+    .legend{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.85rem;padding:.6rem .75rem;background:rgba(201,185,154,.12);border-radius:4px;border:1px solid var(--rule);}
+    .leg-item{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);}
+    .leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+
+    footer{border-top:1px solid var(--rule);padding-top:1.5rem;font-size:.8rem;color:var(--stone);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;}
+    footer a{color:var(--accent);text-decoration:none;}
+    footer a:hover{text-decoration:underline;}
+    @media(max-width:640px){h1{font-size:1.9rem;}.cal-cell{min-height:60px;}.ev{font-size:.6rem;}}
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="course-label">Vanderbilt University · Fall 2026</div>
+    <h1>Python in Earth Science</h1>
+    <div class="header-meta">
+      <span class="meta-item"><strong>Course</strong> EES 3350/5350</span>
+      <span class="meta-item"><strong>Instructor</strong> Dr. Morey</span>
+      <span class="meta-item"><strong>Lectures</strong> Mon / Wed / Fri 9:05–9:55am · Wilson 120</span>
+      <span class="meta-item"><strong>Lab</strong> Mon 1:25–4:15pm · Wilson 120</span>
+    </div>
+  </header>
+  <nav class="site-nav">
+    <a href="index.html" class="nav-tab">Home</a>
+    <a href="schedule.html" class="nav-tab active">Schedule</a>
+    <a href="grading.html" class="nav-tab">Grading</a>
+    <a href="policies.html" class="nav-tab">Policies</a>
+    <a href="info.html" class="nav-tab">Info</a>
+    <a href="norms.html" class="nav-tab">2026 Norms</a>
+    <a href="https://github.com/Python-in-Earth-Science/course-materials" class="nav-tab" target="_blank">Materials ↗</a>
+    <a href="https://tophat.com/" class="nav-tab" target="_blank">TopHat ↗</a>
+  </nav>
+
+  <section>
+    <h2>Course calendar</h2>
+    <p>Lectures meet Monday, Wednesday, and Friday at 9:05am. The Monday afternoon lab meets 1:25–4:15pm. Labs are due the following Sunday at 11:59pm. Our course weeks run Wednesday through Monday — new topics start on Wednesday and the lab applies everything on the following Monday afternoon.</p>
+
+    <div class="cal-nav">
+      <button class="cal-nav-btn" onclick="prevMonth()">← prev</button>
+      <div class="cal-nav-title" id="cal-title"></div>
+      <button class="cal-nav-btn" onclick="nextMonth()">next →</button>
+    </div>
+    <div class="cal-grid" id="cal-grid">
+      <div class="cal-dow">Sun</div>
+      <div class="cal-dow">Mon</div>
+      <div class="cal-dow">Tue</div>
+      <div class="cal-dow">Wed</div>
+      <div class="cal-dow">Thu</div>
+      <div class="cal-dow">Fri</div>
+      <div class="cal-dow">Sat</div>
+    </div>
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:rgba(26,95,168,.2)"></div>Lecture</div>
+      <div class="leg-item"><div class="leg-dot" style="background:rgba(74,124,89,.3)"></div>Lab</div>
+      <div class="leg-item"><div class="leg-dot" style="background:rgba(184,92,56,.2)"></div>Lab due</div>
+      <div class="leg-item"><div class="leg-dot" style="background:rgba(100,80,160,.2)"></div>Assignment due</div>
+      <div class="leg-item"><div class="leg-dot" style="background:rgba(140,123,107,.25)"></div>No class</div>
+    </div>
+  </section>
+
+  <footer>
+    <span>EES 3350/5350 · Python in Earth Science · Vanderbilt University · Fall 2026</span>
+    <span>Questions? <a href="mailto:susannah.morey@vanderbilt.edu">susannah.morey@vanderbilt.edu</a></span>
+  </footer>
+</div>
+
+<script>
+const events = {
+  "2026-08-26":[{t:"lecture",l:"Lecture"}],
+  "2026-08-28":[{t:"lecture",l:"Lecture"}],
+  "2026-08-31":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 1"}],
+  "2026-09-02":[{t:"lecture",l:"Lecture"}],
+  "2026-09-04":[{t:"lecture",l:"Lecture"}],
+  "2026-09-06":[{t:"due",l:"Lab 1 due"}],
+  "2026-09-07":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 2"}],
+  "2026-09-09":[{t:"lecture",l:"Lecture"}],
+  "2026-09-11":[{t:"lecture",l:"Lecture"}],
+  "2026-09-13":[{t:"due",l:"Lab 2 due"}],
+  "2026-09-14":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 3"}],
+  "2026-09-16":[{t:"lecture",l:"Lecture"}],
+  "2026-09-18":[{t:"lecture",l:"Lecture"}],
+  "2026-09-20":[{t:"due",l:"Lab 3 due"}],
+  "2026-09-21":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 4 begins"}],
+  "2026-09-23":[{t:"off",l:"No class"}],
+  "2026-09-25":[{t:"off",l:"No class"}],
+  "2026-09-28":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 4 cont."}],
+  "2026-09-30":[{t:"lecture",l:"Lecture"}],
+  "2026-10-02":[{t:"lecture",l:"Lecture"}],
+  "2026-10-04":[{t:"due",l:"Lab 4 due"}],
+  "2026-10-05":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 5"}],
+  "2026-10-07":[{t:"lecture",l:"Lecture"}],
+  "2026-10-09":[{t:"lecture",l:"Lecture"}],
+  "2026-10-11":[{t:"due",l:"Lab 5 due"}],
+  "2026-10-12":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 6"}],
+  "2026-10-14":[{t:"lecture",l:"Lecture"},{t:"assign",l:"Assignment 1 due"}],
+  "2026-10-16":[{t:"lecture",l:"Lecture"}],
+  "2026-10-18":[{t:"due",l:"Lab 6 due"}],
+  "2026-10-19":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 7"}],
+  "2026-10-21":[{t:"lecture",l:"Lecture"}],
+  "2026-10-22":[{t:"off",l:"Fall Break"}],
+  "2026-10-23":[{t:"off",l:"Fall Break"}],
+  "2026-10-25":[{t:"due",l:"Lab 7 due"}],
+  "2026-10-26":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 8"}],
+  "2026-10-28":[{t:"lecture",l:"Lecture"}],
+  "2026-10-30":[{t:"lecture",l:"Lecture"}],
+  "2026-11-01":[{t:"due",l:"Lab 8 due"}],
+  "2026-11-02":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 9"}],
+  "2026-11-04":[{t:"lecture",l:"Lecture"}],
+  "2026-11-06":[{t:"lecture",l:"Lecture"}],
+  "2026-11-08":[{t:"due",l:"Lab 9 due"}],
+  "2026-11-09":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 10"}],
+  "2026-11-11":[{t:"lecture",l:"Lecture"}],
+  "2026-11-13":[{t:"lecture",l:"Lecture"}],
+  "2026-11-15":[{t:"due",l:"Lab 10 due"},{t:"assign",l:"Assignment 2 due"}],
+  "2026-11-16":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 11"}],
+  "2026-11-18":[{t:"lecture",l:"Lecture"}],
+  "2026-11-20":[{t:"lecture",l:"Lecture"}],
+  "2026-11-22":[{t:"off",l:"Thanksgiving break"}],
+  "2026-11-23":[{t:"off",l:"Thanksgiving break"}],
+  "2026-11-24":[{t:"off",l:"Thanksgiving break"}],
+  "2026-11-25":[{t:"off",l:"Thanksgiving break"}],
+  "2026-11-26":[{t:"off",l:"Thanksgiving break"}],
+  "2026-11-27":[{t:"off",l:"Thanksgiving break"}],
+  "2026-11-28":[{t:"off",l:"Thanksgiving break"}],
+  "2026-11-29":[{t:"due",l:"Lab 11 due"},{t:"off",l:"Thanksgiving break"}],
+  "2026-11-30":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 12"}],
+  "2026-12-02":[{t:"lecture",l:"Lecture"}],
+  "2026-12-04":[{t:"lecture",l:"Lecture"}],
+  "2026-12-06":[{t:"due",l:"Lab 12 due"}],
+  "2026-12-07":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 13"}],
+  "2026-12-09":[{t:"lecture",l:"Lecture"}],
+  "2026-12-13":[{t:"due",l:"Lab 13 due"},{t:"assign",l:"Assignment 3 due"}],
+}
+
+const months=["January","February","March","April","May","June","July","August","September","October","November","December"];
+let cur=new Date(2026,7,1);
+
+function dateKey(y,m,d){return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;}
+
+function render(){
+  const y=cur.getFullYear(),m=cur.getMonth();
+  document.getElementById('cal-title').textContent=`${months[m]} ${y}`;
+  const grid=document.getElementById('cal-grid');
+  grid.querySelectorAll('.cal-cell').forEach(c=>c.remove());
+  const first=new Date(y,m,1).getDay();
+  const days=new Date(y,m+1,0).getDate();
+  const prevDays=new Date(y,m,0).getDate();
+  const today=new Date();
+  const total=Math.ceil((first+days)/7)*7;
+  for(let i=0;i<total;i++){
+    const cell=document.createElement('div');
+    cell.className='cal-cell';
+    let d,mo,yr;
+    if(i<first){d=prevDays-first+i+1;mo=m-1;yr=y;if(mo<0){mo=11;yr=y-1;}cell.classList.add('other-month');}
+    else if(i>=first+days){d=i-first-days+1;mo=m+1;yr=y;if(mo>11){mo=0;yr=y+1;}cell.classList.add('other-month');}
+    else{d=i-first+1;mo=m;yr=y;}
+    if(yr===today.getFullYear()&&mo===today.getMonth()&&d===today.getDate())cell.classList.add('today');
+    const key=dateKey(yr,mo,d);
+    const evs=events[key]||[];
+    const dateDiv=document.createElement('div');
+    dateDiv.className='cal-date';
+    dateDiv.textContent=d;
+    cell.appendChild(dateDiv);
+    if(evs.length)cell.classList.add('has-event');
+    evs.forEach(ev=>{
+      const el=document.createElement('div');
+      el.className=`ev ev-${ev.t}`;
+      el.textContent=ev.l;
+      cell.appendChild(el);
+    });
+    grid.appendChild(cell);
+  }
+}
+
+function prevMonth(){cur.setMonth(cur.getMonth()-1);render();}
+function nextMonth(){cur.setMonth(cur.getMonth()+1);render();}
+render();
+</script>
+</body>
+</html>
