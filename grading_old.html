@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EES 3350/5350 — Grading</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Source+Code+Pro:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --slate: #2c3a47; --sand: #c9b99a; --stone: #8c7b6b; --cream: #f5f0e8;
+      --deep: #1a2530; --accent: #b85c38; --muted: #6b7a8d; --rule: rgba(140,123,107,0.25); --green: #4a7c59;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--slate); min-height: 100vh; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(140,123,107,0.08) 60px); pointer-events: none; z-index: 0; }
+    .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+    header { border-bottom: 1px solid var(--rule); padding-bottom: 1.5rem; margin-bottom: 0; }
+    .course-label { font-family: 'Source Code Pro', monospace; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 600; color: var(--deep); line-height: 1.15; margin-bottom: 0.75rem; }
+    .header-meta { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1rem; }
+    .meta-item { font-size: 0.85rem; color: var(--muted); }
+    .meta-item strong { color: var(--slate); font-weight: 500; }
+    /* NAV TABS */
+    .site-nav { display: flex; gap: 0; border-bottom: 1px solid var(--rule); margin-bottom: 3rem; margin-top: 0; }
+    .nav-tab { font-family: 'Source Code Pro', monospace; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0.75rem 1.25rem; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.15s, border-color 0.15s; }
+    .nav-tab:hover { color: var(--slate); }
+    .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+    h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; color: var(--deep); margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--rule); }
+    h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 400; color: var(--deep); margin-bottom: 0.75rem; margin-top: 2rem; }
+    section { margin-bottom: 3.5rem; }
+    .note { background: white; border-left: 3px solid var(--sand); padding: 0.85rem 1rem; border-radius: 0 4px 4px 0; font-size: 0.875rem; color: var(--stone); line-height: 1.6; }
+    .note a { color: var(--accent); }
+    /* SCHEDULE */
+    .rhythm-intro { font-size: 0.925rem; line-height: 1.75; color: var(--slate); margin-bottom: 1.25rem; }
+    .rhythm-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; margin-bottom: 1.25rem; }
+    .rhythm-cell { background: white; padding: 0.85rem 1rem; text-align: center; }
+    .rhythm-day { font-family: 'Source Code Pro', monospace; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.25rem; }
+    .rhythm-label { font-size: 0.82rem; font-weight: 500; color: var(--deep); margin-bottom: 0.2rem; }
+    .rhythm-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+    .phase-label { font-family: 'Source Code Pro', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); padding: 1.25rem 0 0.5rem; display: flex; align-items: center; gap: 0.75rem; }
+    .phase-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+    .week-row { display: grid; grid-template-columns: 90px 1fr auto; align-items: start; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--rule); transition: background 0.15s; }
+    .week-row:hover { background: rgba(201,185,154,0.12); margin: 0 -0.75rem; padding-left: 0.75rem; padding-right: 0.75rem; border-radius: 4px; }
+    .week-num { font-family: 'Source Code Pro', monospace; font-size: 0.68rem; font-weight: 600; color: var(--stone); padding-top: 3px; line-height: 1.5; }
+    .week-num .wk-label { font-size: 0.72rem; color: var(--accent); display: block; margin-bottom: 1px; }
+    .week-num .wk-dates { color: var(--stone); }
+    .week-info { min-width: 0; }
+    .week-title { font-size: 0.95rem; font-weight: 500; color: var(--deep); margin-bottom: 0.2rem; }
+    .week-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+    .week-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 0.35rem; }
+    .tag { font-family: 'Source Code Pro', monospace; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 3px; }
+    .tag-lab { background: rgba(74,124,89,0.12); color: var(--green); }
+    .tag-git { background: rgba(44,58,71,0.1); color: var(--slate); }
+    .tag-grad { background: rgba(184,92,56,0.12); color: var(--accent); }
+    .tag-special { background: rgba(201,185,154,0.4); color: var(--stone); }
+    .tag-break { background: rgba(140,123,107,0.15); color: var(--stone); }
+    .tag-nolab { background: rgba(184,92,56,0.08); color: #a04020; }
+    .week-actions { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; padding-top: 2px; min-width: 145px; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; font-family: 'Source Code Pro', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; text-decoration: none; padding: 5px 12px; border-radius: 3px; white-space: nowrap; transition: opacity 0.15s, transform 0.1s; width: 100%; justify-content: center; }
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn-hub { background: var(--slate); color: var(--cream); }
+    .btn-classroom { background: var(--accent); color: white; }
+    .btn-coming { background: transparent; color: var(--stone); border: 1px solid var(--rule); cursor: default; opacity: 0.6; }
+    .btn-coming:hover { opacity: 0.6; transform: none; }
+    .btn-icon { width: 12px; height: 12px; fill: currentColor; flex-shrink: 0; }
+    /* GRADING */
+    .grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    .grade-card { background: white; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+    .grade-card-header { background: var(--slate); color: var(--cream); font-family: 'Source Code Pro', monospace; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1rem; }
+    .grade-card-header.grad { background: var(--accent); }
+    .grade-row { display: flex; justify-content: space-between; align-items: center; padding: 0.55rem 1rem; border-bottom: 1px solid var(--rule); font-size: 0.85rem; }
+    .grade-row:last-child { border-bottom: none; }
+    .grade-row.total { font-weight: 500; background: rgba(201,185,154,0.15); }
+    .grade-pct { font-family: 'Source Code Pro', monospace; font-size: 0.78rem; font-weight: 600; color: var(--accent); }
+    .grade-row.total .grade-pct { color: var(--deep); }
+    /* RESOURCES */
+    .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 1rem; }
+    .resource-card { background: white; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; text-decoration: none; display: block; transition: border-color 0.15s, transform 0.1s; }
+    .resource-card:hover { border-color: var(--sand); transform: translateY(-2px); }
+    .resource-card-label { font-family: 'Source Code Pro', monospace; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.3rem; }
+    .resource-card-title { font-size: 0.9rem; font-weight: 500; color: var(--deep); margin-bottom: 0.25rem; }
+    .resource-card-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+    .legend { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; padding: 0.75rem 1rem; background: white; border-radius: 4px; border: 1px solid var(--rule); }
+    .legend-item { display: flex; align-items: center; gap: 7px; font-size: 0.78rem; color: var(--muted); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+    .break-divider { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0; font-family: 'Source Code Pro', monospace; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); opacity: 0.7; }
+    .break-divider::before, .break-divider::after { content: ''; flex: 1; height: 1px; background: repeating-linear-gradient(90deg, var(--rule) 0, var(--rule) 4px, transparent 4px, transparent 8px); }
+    footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; font-size: 0.8rem; color: var(--stone); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    @media (max-width: 640px) {
+      h1 { font-size: 1.9rem; }
+      .week-row { grid-template-columns: 80px 1fr; }
+      .week-actions { grid-column: 2; flex-direction: row; flex-wrap: wrap; min-width: 0; }
+      .grade-grid { grid-template-columns: 1fr; }
+      .rhythm-bar { grid-template-columns: 1fr 1fr; }
+    }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="course-label">Vanderbilt University · Fall 2026</div>
+    <h1>Python in Earth Science</h1>
+    <div class="header-meta">
+      <span class="meta-item"><strong>Course</strong> EES 3350/5350</span>
+      <span class="meta-item"><strong>Instructor</strong> Dr. Morey</span>
+      <span class="meta-item"><strong>Lectures</strong> Mon / Wed / Fri 9:05–9:55am</span>
+      <span class="meta-item"><strong>Lab</strong> Mon 1:25–4:15pm</span>
+      <span class="meta-item"><strong>Dates</strong> Aug 26 – Dec 10, 2026</span>
+    </div>
+  </header>
+
+  <nav class="site-nav">
+    <a href="index.html" class="nav-tab">Schedule</a>
+    <a href="grading.html" class="nav-tab active">Grading</a>
+    <a href="https://github.com/Python-in-Earth-Science/course-materials" class="nav-tab" target="_blank">Materials</a>
+    <a href="YOUR_TOPHAT_LINK_HERE" class="nav-tab" target="_blank">TopHat</a>
+  </nav>
+
+  <section>
+    <h2>Grade breakdown</h2>
+    <div class="grade-grid">
+      <div class="grade-card">
+        <div class="grade-card-header">Undergraduate (EES 3350)</div>
+        <div class="grade-row"><span>Warm-up problems (TopHat)</span><span class="grade-pct">15%</span></div>
+        <div class="grade-row"><span>Coding assignments</span><span class="grade-pct">35%</span></div>
+        <div class="grade-row"><span>Labs</span><span class="grade-pct">35%</span></div>
+        <div class="grade-row"><span>Peer feedback workshop</span><span class="grade-pct">5%</span></div>
+        <div class="grade-row"><span>Final coding project</span><span class="grade-pct">10%</span></div>
+        <div class="grade-row total"><span>Total</span><span class="grade-pct">100%</span></div>
+      </div>
+      <div class="grade-card">
+        <div class="grade-card-header grad">Graduate (EES 5350)</div>
+        <div class="grade-row"><span>Warm-up problems (TopHat)</span><span class="grade-pct">10%</span></div>
+        <div class="grade-row"><span>Coding assignments</span><span class="grade-pct">30%</span></div>
+        <div class="grade-row"><span>Labs</span><span class="grade-pct">30%</span></div>
+        <div class="grade-row"><span>Python package presentation</span><span class="grade-pct">10%</span></div>
+        <div class="grade-row"><span>Git skills assignment</span><span class="grade-pct">5%</span></div>
+        <div class="grade-row"><span>Peer feedback workshop</span><span class="grade-pct">5%</span></div>
+        <div class="grade-row"><span>Final coding project</span><span class="grade-pct">10%</span></div>
+        <div class="grade-row total"><span>Total</span><span class="grade-pct">100%</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Assignment details</h2>
+
+    <h3>Warm-up problems (TopHat)</h3>
+    <p style="font-size:0.9rem;line-height:1.75;color:var(--slate);margin-bottom:0.75rem;">A short coding question is posed at the start of each lecture via TopHat. Completing it within the first few minutes counts — responses are timestamped. This rewards showing up on time and being ready to work. There is no penalty for an incorrect answer, only for not responding. Join TopHat at <a href="YOUR_TOPHAT_LINK_HERE" style="color:var(--accent);">tophat.com</a> using your Vanderbilt email and the course join code provided in class.</p>
+
+    <h3>Coding assignments</h3>
+    <p style="font-size:0.9rem;line-height:1.75;color:var(--slate);margin-bottom:0.75rem;">Longer take-home problems that ask you to apply the week's concepts to a new geoscience problem. Submitted via Brightspace in weeks 1–5 and via GitHub Classroom from week 6 onward.</p>
+
+    <h3>Labs</h3>
+    <p style="font-size:0.9rem;line-height:1.75;color:var(--slate);margin-bottom:0.75rem;">The Monday afternoon lab period (1:25–4:15pm) is the core of the course. Each week you'll work through an applied problem using that week's tools and real Earth science data. Labs are due the following <strong>Sunday at 11:59pm</strong>. Submitted via Brightspace in weeks 1–5 and via GitHub Classroom from week 6 onward. There are 11 graded labs this semester (Week 1 is an ungraded orientation; Labor Day and Thanksgiving reduce the total from 15).</p>
+
+    <h3>Peer feedback workshop (Week 13 lab)</h3>
+    <p style="font-size:0.9rem;line-height:1.75;color:var(--slate);margin-bottom:0.75rem;">A structured in-class review of final project proposals. Your final project proposal must be submitted before arriving. Attendance and substantive written feedback are required for full credit.</p>
+
+    <h3>Final coding project</h3>
+    <p style="font-size:0.9rem;line-height:1.75;color:var(--slate);margin-bottom:0.75rem;">An independent project in which you use Python to investigate a geoscience question of your choosing using real data. Submitted via GitHub Classroom. Due date announced during Week 13. More details distributed mid-semester.</p>
+
+    <h3>Python package presentation <span style="font-family:'Source Code Pro',monospace;font-size:0.7rem;background:rgba(184,92,56,0.12);color:var(--accent);padding:2px 7px;border-radius:3px;margin-left:6px;">Graduate only</span></h3>
+    <p style="font-size:0.9rem;line-height:1.75;color:var(--slate);margin-bottom:0.75rem;">Each graduate student presents a Python package of their choice (15–20 minutes) at the start of a lab period during weeks 7–11. The package should be relevant to your research area. Presentations are scheduled in Week 6 — sign up for your slot then.</p>
+
+    <h3>Git skills assignment <span style="font-family:'Source Code Pro',monospace;font-size:0.7rem;background:rgba(44,58,71,0.1);color:var(--slate);padding:2px 7px;border-radius:3px;margin-left:6px;">Graduate only</span></h3>
+    <p style="font-size:0.9rem;line-height:1.75;color:var(--slate);margin-bottom:0.75rem;">A short practical assignment covering branching, merging, and pull requests. Due Week 15. Details distributed in Week 6 alongside the Git lecture content.</p>
+  </section>
+
+  <section>
+    <h2>Policies</h2>
+    <div class="note" style="margin-bottom:0.75rem;"><strong>Late work:</strong> Labs and assignments lose 10% per day late unless you have contacted Dr. Morey in advance. The peer feedback workshop and final project cannot be submitted late.</div>
+    <div class="note" style="margin-bottom:0.75rem;"><strong>Collaboration:</strong> You are encouraged to discuss problems with classmates, but all code you submit must be written by you. Do not share notebook files or copy code directly from another student's submission.</div>
+    <div class="note"><strong>AI tools:</strong> You may use AI coding assistants (GitHub Copilot, ChatGPT, etc.) as a learning aid, but you must be able to explain every line of code you submit. If you cannot explain it, it does not count as your work.</div>
+  </section>
+
+  <footer>
+    <span>EES 3350/5350 · Python in Earth Science · Vanderbilt University · Fall 2026</span>
+    <span>Questions? <a href="mailto:susannah.morey@vanderbilt.edu">susannah.morey@vanderbilt.edu</a></span>
+  </footer>
+
+</div>
+</body>
+</html>

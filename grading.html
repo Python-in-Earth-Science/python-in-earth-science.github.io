@@ -9,7 +9,6 @@
     :root { --slate:#2c3a47;--sand:#c9b99a;--stone:#8c7b6b;--cream:#f5f0e8;--deep:#1a2530;--accent:#b85c38;--muted:#6b7a8d;--rule:rgba(140,123,107,0.25);--green:#4a7c59; }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--slate);min-height:100vh;}
-    body::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(140,123,107,0.08) 60px);pointer-events:none;z-index:0;}
     .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:3rem 2rem 6rem;}
     header{border-bottom:1px solid var(--rule);padding-bottom:1.5rem;margin-bottom:0;}
     .course-label{font-family:'Source Code Pro',monospace;font-size:.75rem;font-weight:600;letter-spacing:.15em;color:var(--accent);text-transform:uppercase;margin-bottom:.5rem;}
@@ -141,8 +140,8 @@
       <div class="grade-card">
         <div class="grade-card-header">Undergraduate — EES 3350</div>
         <div class="grade-row"><span>Participation (demo notebooks + warm-ups)</span><span class="grade-pct">15%</span></div>
-        <div class="grade-row"><span>Coding assignments</span><span class="grade-pct">35%</span></div>
-        <div class="grade-row"><span>Labs</span><span class="grade-pct">35%</span></div>
+        <div class="grade-row"><span>Assignments (×3)</span><span class="grade-pct">30%</span></div>
+        <div class="grade-row"><span>Labs (×~11)</span><span class="grade-pct">40%</span></div>
         <div class="grade-row"><span>Proposal workshop</span><span class="grade-pct">5%</span></div>
         <div class="grade-row"><span>Final coding project</span><span class="grade-pct">10%</span></div>
         <div class="grade-row total"><span>Total</span><span class="grade-pct">100%</span></div>
@@ -150,8 +149,8 @@
       <div class="grade-card">
         <div class="grade-card-header grad">Graduate — EES 5350</div>
         <div class="grade-row"><span>Participation (demo notebooks + warm-ups)</span><span class="grade-pct">15%</span></div>
-        <div class="grade-row"><span>Coding assignments</span><span class="grade-pct">30%</span></div>
-        <div class="grade-row"><span>Labs</span><span class="grade-pct">30%</span></div>
+        <div class="grade-row"><span>Assignments (×3)</span><span class="grade-pct">25%</span></div>
+        <div class="grade-row"><span>Labs (×~11)</span><span class="grade-pct">35%</span></div>
         <div class="grade-row"><span>Python package presentation</span><span class="grade-pct">5%</span></div>
         <div class="grade-row"><span>Git assignment</span><span class="grade-pct">5%</span></div>
         <div class="grade-row"><span>Proposal workshop</span><span class="grade-pct">5%</span></div>
@@ -170,11 +169,12 @@
     <p><strong>Demo notebooks:</strong> Every week you follow along in a Jupyter notebook, recording all code and exercises for that week. Notebooks are due by end of day Monday and graded for participation: 1 point for submitting, 1 point for having all exercises completed. There are 15 weeks of class — the lowest 2 notebook grades are dropped.</p>
     <p><strong>Warm-up problems:</strong> A short coding problem is posed at the start of each lecture via TopHat. Warm-ups are worth 1 point each. There are 41 lectures this semester — the lowest 8 warm-up scores are dropped, which means you have roughly one free pass per month without any grade penalty. Completing warm-ups on time rewards showing up ready to work; there is no penalty for an incorrect answer, only for not responding.</p>
 
-    <h3>Coding assignments</h3>
-    <p>Five take-home assignments throughout the semester designed to build and solidify your Python skills. Graduate students have additional exercises on each assignment. Submitted via Brightspace in weeks 1–5 and via GitHub Classroom from Week 6 onward.</p>
+    <h3>Assignments</h3>
+    <p>Three take-home assignments spaced across the semester, each designed to synthesize and test your cumulative Python skills independently. You can use any reference material — notes, documentation, the internet — but all code must be written by you and you must be able to explain every line. Graduate students have additional exercises on each assignment.</p>
+    <p>Assignments are released after labs on the following approximate schedule: <strong>Assignment 1</strong> after Week 5 (functions + loops), <strong>Assignment 2</strong> after Week 9–10 (NumPy, pandas, matplotlib), <strong>Assignment 3</strong> after Week 12–13 (geospatial analysis). Exact release dates announced in class. Submitted via Brightspace in weeks 1–5 and via GitHub Classroom from Week 6 onward.</p>
 
     <h3>Labs</h3>
-    <p>The Monday afternoon lab period (1:25–4:15pm) is the core of the course. Each week you work through an applied problem using that week's tools and real Earth science data. Labs are due the following <strong>Sunday at 11:59pm</strong>. There are 11 graded labs this semester — Week 1 is an ungraded orientation; Labor Day and Thanksgiving reduce the total from 15.</p>
+    <p>The Monday afternoon lab period (1:25–4:15pm) is the core of the course. Each week you work through an applied problem using that week's tools and real Earth science data. Labs are due the following <strong>Sunday at 11:59pm</strong>. The first lab begins in Week 3 (our course weeks run Wednesday through Monday, so the first two calendar weeks are lecture-only). Labor Day and Thanksgiving reduce the total, giving approximately 11 graded labs this semester.</p>
 
     <h3>Proposal workshop</h3>
     <p>In preparation for your final project, you will participate in a peer feedback workshop and submit a project proposal. You'll pitch your Final Coding Project theme and methods to peers and receive written feedback. Your proposal must be submitted before arriving at the Week 13 lab. Attendance and substantive written feedback on your peers' work are required for full credit.</p>
