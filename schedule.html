@@ -24,6 +24,30 @@
     section{margin-bottom:3.5rem;}
     p{font-size:.9rem;line-height:1.75;color:var(--slate);margin-bottom:.85rem;}
 
+    .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 1rem;
+  }
+  .resource-card {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 1rem 1.1rem;
+    text-decoration: none;
+    display: block;
+    transition: border-color .15s, transform .1s;
+  }
+  .resource-card:hover { border-color: var(--sand); transform: translateY(-2px); }
+  .resource-card-title {
+    font-size: .9rem;
+    font-weight: 500;
+    color: var(--deep);
+    margin-bottom: .25rem;
+  }
+  .resource-card-desc { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
     /* ── CALENDAR ── */
     .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
     .cal-nav-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:var(--deep);}
