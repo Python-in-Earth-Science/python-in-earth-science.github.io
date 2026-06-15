@@ -89,7 +89,14 @@
     .break-divider::before,.break-divider::after{content:'';flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--rule) 0,var(--rule) 4px,transparent 4px,transparent 8px);}
     .info-block{background:white;border:1px solid var(--rule);border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem;}
     .info-block-label{font-family:'Source Code Pro',monospace;font-size:.68rem;font-weight:600;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:.5rem;}
-    .pill-grad{font-family:'Source Code Pro',monospace;font-size:.65rem;font-weight:600;background:rgba(184,92,56,.12);color:var(--accent);padding:2px 8px;border-radius:3px;margin-left:6px;vertical-align:middle;}
+    .pill-grad{font-family:'Source Code Pro',monospace;font-size:.65rem;font-weight:600;backgrountd:rgba(184,92,56,.12);color:var(--accent);padding:2px 8px;border-radius:3px;margin-left:6px;vertical-align:middle;}
+    .resource-grid {display: grid;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));gap: 12px;margin-top: 1rem;}
+    .resource-card {background: white;border: 1px solid var(--rule);border-radius: 6px;padding: 1rem 1.1rem;text-decoration: none;display: block;transition: border-color .15s, transform .1s;}
+    .resource-card:hover { border-color: var(--sand); transform: translateY(-2px); }
+    .resource-card-title {font-size: .9rem;font-weight: 500;color: var(--deep);margin-bottom: .25rem;}
+    .resource-card-desc { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+    
+    
     /* NORMS */
     .norm-card{background:white;border:1px solid var(--rule);border-radius:8px;padding:1.25rem 1.5rem;margin-bottom:.75rem;display:flex;gap:1.25rem;align-items:flex-start;}
     .norm-num{font-family:'Source Code Pro',monospace;font-size:1.1rem;font-weight:600;color:var(--sand);flex-shrink:0;line-height:1.4;min-width:2rem;}
@@ -186,6 +193,28 @@
     <h2>Weather and cancellations</h2>
     <p>If a class session is canceled due to bad weather, instructor absence, or other unforeseen circumstances, students are still responsible for all readings and assignments listed on the schedule.</p>
   </section>
+
+  <section>
+  <div class="resource-grid" style="grid-template-columns:repeat(4,1fr);gap:10px;">
+    <a class="resource-card" href="https://explore.openearthscape.org" target="_blank" style="padding:0;overflow:hidden;">
+      <div style="background:var(--accent);padding:.35rem .75rem;font-family:'Source Code Pro',monospace;font-size:.65rem;font-weight:600;letter-spacing:.1em;color:white;text-transform:uppercase;">Platform</div>
+      <div style="padding:.6rem .85rem;"><div class="resource-card-title">CSDMS ExploreHub</div></div>
+    </a>
+    <a class="resource-card" href="https://tophat.com/" target="_blank" style="padding:0;overflow:hidden;">
+      <div style="background:var(--accent);padding:.35rem .75rem;font-family:'Source Code Pro',monospace;font-size:.65rem;font-weight:600;letter-spacing:.1em;color:white;text-transform:uppercase;">Warm-ups</div>
+      <div style="padding:.6rem .85rem;"><div class="resource-card-title">TopHat</div></div>
+    </a>
+    <a class="resource-card" href="https://github.com/Python-in-Earth-Science/course-materials" target="_blank" style="padding:0;overflow:hidden;">
+      <div style="background:var(--accent);padding:.35rem .75rem;font-family:'Source Code Pro',monospace;font-size:.65rem;font-weight:600;letter-spacing:.1em;color:white;text-transform:uppercase;">Materials</div>
+      <div style="padding:.6rem .85rem;"><div class="resource-card-title">Course materials repo</div></div>
+    </a>
+    <a class="resource-card" href="https://classroom.github.com" target="_blank" style="padding:0;overflow:hidden;">
+      <div style="background:var(--accent);padding:.35rem .75rem;font-family:'Source Code Pro',monospace;font-size:.65rem;font-weight:600;letter-spacing:.1em;color:white;text-transform:uppercase;">Assignments</div>
+      <div style="padding:.6rem .85rem;"><div class="resource-card-title">GitHub Classroom</div></div>
+    </a>
+  </div>
+</section>
+
   <footer>
     <span>EES 3350/5350 · Python in Earth Science · Vanderbilt University · Fall 2026</span>
     <span>Questions? <a href="mailto:susannah.morey@vanderbilt.edu">susannah.morey@vanderbilt.edu</a></span>
