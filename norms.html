@@ -90,6 +90,12 @@
     .info-block{background:white;border:1px solid var(--rule);border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem;}
     .info-block-label{font-family:'Source Code Pro',monospace;font-size:.68rem;font-weight:600;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:.5rem;}
     .pill-grad{font-family:'Source Code Pro',monospace;font-size:.65rem;font-weight:600;background:rgba(184,92,56,.12);color:var(--accent);padding:2px 8px;border-radius:3px;margin-left:6px;vertical-align:middle;}
+    .resource-grid {display: grid;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));gap: 12px;margin-top: 1rem;}
+    .resource-card {background: white;border: 1px solid var(--rule);border-radius: 6px;padding: 1rem 1.1rem;text-decoration: none;display: block;transition: border-color .15s, transform .1s;}
+    .resource-card:hover { border-color: var(--sand); transform: translateY(-2px); }
+    .resource-card-title {font-size: .9rem;font-weight: 500;color: var(--deep);margin-bottom: .25rem;}
+    .resource-card-desc { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+    
     /* NORMS */
     .norm-card{background:white;border:1px solid var(--rule);border-radius:8px;padding:1.25rem 1.5rem;margin-bottom:.75rem;display:flex;gap:1.25rem;align-items:flex-start;}
     .norm-num{font-family:'Source Code Pro',monospace;font-size:1.1rem;font-weight:600;color:var(--sand);flex-shrink:0;line-height:1.4;min-width:2rem;}
