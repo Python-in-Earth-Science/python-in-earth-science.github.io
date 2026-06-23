@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cheat Sheets — EES 3350/5350 Python in Earth Sciences</title>
+<style>
+  :root {
+    --navy:    #1a3fa0;
+    --blue:    #2952c8;
+    --green:   #6abf2e;
+    --cream:   #f0ede6;
+    --white:   #ffffff;
+    --dark:    #1a1a1a;
+    --mid:     #4a4a4a;
+    --light:   #7a7a7a;
+    --border:  #d4cfc5;
+    --code-bg: #f4f1ec;
+    --out-bg:  #edf4e3;
+    --out-fg:  #3a6b10;
+    --row-alt: #f9f7f4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 48px 40px 40px;
+  }
+
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+
+  header h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    color: var(--white);
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.7);
+    max-width: 560px;
+  }
+
+  /* ── CONTROLS (search + tabs) ── */
+  .controls {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  .search-bar {
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    max-width: 440px;
+  }
+
+  .search-wrap input {
+    width: 100%;
+    padding: 9px 14px 9px 36px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--cream);
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .search-wrap input:focus { border-color: var(--blue); }
+
+  .search-wrap::before {
+    content: '⌕';
+    position: absolute;
+    left: 11px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--light);
+    pointer-events: none;
+  }
+
+  .search-meta {
+    font-size: 13px;
+    color: var(--light);
+    white-space: nowrap;
+  }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    padding: 0 40px;
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  .tab-btn {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 12px 20px;
+    border: none;
+    background: none;
+    color: var(--light);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .tab-btn:hover { color: var(--dark); }
+
+  .tab-btn.active {
+    color: var(--navy);
+    border-bottom-color: var(--green);
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 36px 40px 80px;
+  }
+
+  /* ── SHEET PANEL ── */
+  .sheet { display: none; }
+  .sheet.active { display: block; }
+
+  .sheet-intro {
+    margin-bottom: 28px;
+  }
+
+  .sheet-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .sheet-desc {
+    font-size: 14px;
+    color: var(--mid);
+    max-width: 620px;
+  }
+
+  /* ── SECTION within a sheet ── */
+  .section {
+    margin-bottom: 36px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--navy);
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── TABLE ── */
+  .cheat-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 14px;
+  }
+
+  .cheat-table thead tr {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .cheat-table thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cheat-table thead th:first-child { width: 22%; }
+  .cheat-table thead th:nth-child(2) { width: 30%; }
+  .cheat-table thead th:nth-child(3) { width: 28%; }
+  .cheat-table thead th:last-child  { width: 20%; }
+
+  .cheat-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+  }
+
+  .cheat-table tbody tr:last-child { border-bottom: none; }
+  .cheat-table tbody tr:nth-child(even) { background: var(--row-alt); }
+  .cheat-table tbody tr:hover { background: #eeeae2; }
+
+  .cheat-table tbody tr.hidden { display: none; }
+
+  .cheat-table td {
+    padding: 11px 14px;
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  /* function name column */
+  .fn {
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* description column */
+  .desc {
+    color: var(--mid);
+    font-size: 13.5px;
+  }
+
+  /* example column */
+  .ex {
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: 12px;
+    background: var(--code-bg);
+    border-radius: 4px;
+    padding: 6px 8px !important;
+    color: var(--dark);
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* output column */
+  .out {
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: 12px;
+    background: var(--out-bg);
+    border-radius: 4px;
+    padding: 6px 8px !important;
+    color: var(--out-fg);
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  /* ── NO RESULTS ── */
+  #no-results {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--light);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 24px 40px;
+    font-size: 12px;
+    color: var(--light);
+    border-top: 1px solid var(--border);
+  }
+
+  footer a { color: var(--blue); text-decoration: none; }
+
+  @media (max-width: 700px) {
+    header { padding: 32px 20px 28px; }
+    .search-bar { padding: 12px 20px; }
+    .tabs { padding: 0 20px; }
+    main { padding: 24px 16px 60px; }
+    .cheat-table thead th:nth-child(3),
+    .cheat-table thead th:last-child,
+    .cheat-table td:nth-child(3),
+    .cheat-table td:last-child { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="header-eyebrow">EES 3350 / 5350 · Python in Earth Sciences · Fall 2026</p>
+  <h1>Cheat Sheets</h1>
+  <p class="header-sub">Quick reference for the Python tools and functions we use in this class. Search across all sheets, or click a tab to browse by topic.</p>
+</header>
+
+<div class="controls">
+  <div class="search-bar">
+    <div class="search-wrap">
+      <input type="text" id="search" placeholder="Search all sheets…" oninput="handleSearch()">
+    </div>
+    <span class="search-meta" id="search-meta"></span>
+  </div>
+  <div class="tabs" id="tabs">
+    <button class="tab-btn active" onclick="switchTab('math', this)">Math Module</button>
+    <button class="tab-btn" onclick="switchTab('numpy', this)">NumPy</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- ══════════════════════════════════════
+       SHEET: MATH MODULE
+  ══════════════════════════════════════ -->
+  <div class="sheet active" id="sheet-math">
+    <div class="sheet-intro">
+      <div class="sheet-title">Python Math Module</div>
+      <p class="sheet-desc">Import with <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">import math</code> — gives you access to mathematical functions beyond basic arithmetic operators.</p>
+    </div>
+
+    <!-- Basic Operations -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Basic Operations</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="math.sqrt square root">
+            <td class="fn">math.sqrt(x)</td>
+            <td class="desc">Square root of x</td>
+            <td class="ex">math.sqrt(16)</td>
+            <td class="out">4.0</td>
+          </tr>
+          <tr data-search="math.pow power exponent">
+            <td class="fn">math.pow(x, y)</td>
+            <td class="desc">x raised to the power y</td>
+            <td class="ex">math.pow(2, 3)</td>
+            <td class="out">8.0</td>
+          </tr>
+          <tr data-search="math.exp exponential euler">
+            <td class="fn">math.exp(x)</td>
+            <td class="desc">e raised to the power x</td>
+            <td class="ex">math.exp(1)</td>
+            <td class="out">2.718281828...</td>
+          </tr>
+          <tr data-search="math.fabs absolute value">
+            <td class="fn">math.fabs(x)</td>
+            <td class="desc">Absolute value of x (returns a float)</td>
+            <td class="ex">math.fabs(-4.5)</td>
+            <td class="out">4.5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Rounding -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Rounding</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="math.floor round down integer">
+            <td class="fn">math.floor(x)</td>
+            <td class="desc">Round down to nearest integer</td>
+            <td class="ex">math.floor(4.9)</td>
+            <td class="out">4</td>
+          </tr>
+          <tr data-search="math.ceil ceiling round up integer">
+            <td class="fn">math.ceil(x)</td>
+            <td class="desc">Round up to nearest integer</td>
+            <td class="ex">math.ceil(4.1)</td>
+            <td class="out">5</td>
+          </tr>
+          <tr data-search="math.trunc truncate decimal">
+            <td class="fn">math.trunc(x)</td>
+            <td class="desc">Remove decimal part (toward zero)</td>
+            <td class="ex">math.trunc(4.9)</td>
+            <td class="out">4</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Logarithms -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Logarithms</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="math.log natural logarithm ln">
+            <td class="fn">math.log(x)</td>
+            <td class="desc">Natural logarithm of x (base e)</td>
+            <td class="ex">math.log(math.e)</td>
+            <td class="out">1.0</td>
+          </tr>
+          <tr data-search="math.log10 base 10 logarithm">
+            <td class="fn">math.log10(x)</td>
+            <td class="desc">Base-10 logarithm of x</td>
+            <td class="ex">math.log10(1000)</td>
+            <td class="out">3.0</td>
+          </tr>
+          <tr data-search="math.log2 base 2 logarithm">
+            <td class="fn">math.log2(x)</td>
+            <td class="desc">Base-2 logarithm of x</td>
+            <td class="ex">math.log2(8)</td>
+            <td class="out">3.0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Trigonometry -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Trigonometry</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="math.sin sine trig radians">
+            <td class="fn">math.sin(x)</td>
+            <td class="desc">Sine of x (x in radians)</td>
+            <td class="ex">math.sin(math.pi/2)</td>
+            <td class="out">1.0</td>
+          </tr>
+          <tr data-search="math.cos cosine trig radians">
+            <td class="fn">math.cos(x)</td>
+            <td class="desc">Cosine of x (x in radians)</td>
+            <td class="ex">math.cos(0)</td>
+            <td class="out">1.0</td>
+          </tr>
+          <tr data-search="math.tan tangent trig radians">
+            <td class="fn">math.tan(x)</td>
+            <td class="desc">Tangent of x (x in radians)</td>
+            <td class="ex">math.tan(math.pi/4)</td>
+            <td class="out">1.0</td>
+          </tr>
+          <tr data-search="math.asin arcsine inverse trig">
+            <td class="fn">math.asin(x)</td>
+            <td class="desc">Arcsine of x (returns radians)</td>
+            <td class="ex">math.asin(1)</td>
+            <td class="out">1.5707... (π/2)</td>
+          </tr>
+          <tr data-search="math.acos arccosine inverse trig">
+            <td class="fn">math.acos(x)</td>
+            <td class="desc">Arccosine of x (returns radians)</td>
+            <td class="ex">math.acos(1)</td>
+            <td class="out">0.0</td>
+          </tr>
+          <tr data-search="math.atan arctangent inverse trig">
+            <td class="fn">math.atan(x)</td>
+            <td class="desc">Arctangent of x (returns radians)</td>
+            <td class="ex">math.atan(1)</td>
+            <td class="out">0.7853... (π/4)</td>
+          </tr>
+          <tr data-search="math.atan2 arctangent two arguments">
+            <td class="fn">math.atan2(y, x)</td>
+            <td class="desc">Arctangent of y/x — handles quadrants correctly</td>
+            <td class="ex">math.atan2(1, 1)</td>
+            <td class="out">0.7853... (π/4)</td>
+          </tr>
+          <tr data-search="math.degrees convert radians degrees">
+            <td class="fn">math.degrees(x)</td>
+            <td class="desc">Convert radians to degrees</td>
+            <td class="ex">math.degrees(math.pi)</td>
+            <td class="out">180.0</td>
+          </tr>
+          <tr data-search="math.radians convert degrees radians">
+            <td class="fn">math.radians(x)</td>
+            <td class="desc">Convert degrees to radians</td>
+            <td class="ex">math.radians(180)</td>
+            <td class="out">3.14159... (π)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Constants -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Constants</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Constant</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="math.pi pi constant circle">
+            <td class="fn">math.pi</td>
+            <td class="desc">π — ratio of circumference to diameter</td>
+            <td class="ex">math.pi</td>
+            <td class="out">3.14159265...</td>
+          </tr>
+          <tr data-search="math.e euler number constant">
+            <td class="fn">math.e</td>
+            <td class="desc">Euler's number — base of natural log</td>
+            <td class="ex">math.e</td>
+            <td class="out">2.71828182...</td>
+          </tr>
+          <tr data-search="math.inf infinity">
+            <td class="fn">math.inf</td>
+            <td class="desc">Positive infinity</td>
+            <td class="ex">math.inf > 1e100</td>
+            <td class="out">True</td>
+          </tr>
+          <tr data-search="math.nan not a number">
+            <td class="fn">math.nan</td>
+            <td class="desc">Not a Number — used for undefined results</td>
+            <td class="ex">math.nan == math.nan</td>
+            <td class="out">False</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Testing Values -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Testing Values</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="math.isnan check not a number nan">
+            <td class="fn">math.isnan(x)</td>
+            <td class="desc">Returns True if x is NaN</td>
+            <td class="ex">math.isnan(math.nan)</td>
+            <td class="out">True</td>
+          </tr>
+          <tr data-search="math.isinf check infinity infinite">
+            <td class="fn">math.isinf(x)</td>
+            <td class="desc">Returns True if x is infinite</td>
+            <td class="ex">math.isinf(math.inf)</td>
+            <td class="out">True</td>
+          </tr>
+          <tr data-search="math.isfinite check finite number">
+            <td class="fn">math.isfinite(x)</td>
+            <td class="desc">Returns True if x is a normal finite number</td>
+            <td class="ex">math.isfinite(3.14)</td>
+            <td class="out">True</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!-- /sheet-math -->
+
+
+  <!-- ══════════════════════════════════════
+       SHEET: NUMPY
+  ══════════════════════════════════════ -->
+  <div class="sheet" id="sheet-numpy">
+    <div class="sheet-intro">
+      <div class="sheet-title">NumPy</div>
+      <p class="sheet-desc">Import with <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">import numpy as np</code> — NumPy is the foundation for numerical computing in Python. Arrays are faster and more powerful than lists for scientific data.</p>
+    </div>
+
+    <!-- Array Creation -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Array Creation</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="np.array create array list">
+            <td class="fn">np.array()</td>
+            <td class="desc">Convert a list (or list of lists) to a NumPy array</td>
+            <td class="ex">np.array([1, 2, 3])</td>
+            <td class="out">array([1, 2, 3])</td>
+          </tr>
+          <tr data-search="np.zeros create zeros array">
+            <td class="fn">np.zeros(x)</td>
+            <td class="desc">Create array of zeros with shape x</td>
+            <td class="ex">np.zeros(3)</td>
+            <td class="out">array([0., 0., 0.])</td>
+          </tr>
+          <tr data-search="np.ones create ones array">
+            <td class="fn">np.ones(x)</td>
+            <td class="desc">Create array of ones with shape x</td>
+            <td class="ex">np.ones((2, 3))</td>
+            <td class="out">array([[1., 1., 1.],
+       [1., 1., 1.]])</td>
+          </tr>
+          <tr data-search="np.arange range evenly spaced step">
+            <td class="fn">np.arange(x, y, z)</td>
+            <td class="desc">Array from x to y, stepping by z</td>
+            <td class="ex">np.arange(0, 10, 2)</td>
+            <td class="out">array([0, 2, 4, 6, 8])</td>
+          </tr>
+          <tr data-search="np.linspace evenly spaced samples">
+            <td class="fn">np.linspace(x, y, z)</td>
+            <td class="desc">Array of z evenly spaced values from x to y (inclusive)</td>
+            <td class="ex">np.linspace(0, 1, 5)</td>
+            <td class="out">array([0.  , 0.25, 0.5 ,
+       0.75, 1.  ])</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Array Info -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Array Information</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Attribute / Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="array.shape dimensions shape rows columns">
+            <td class="fn">array.shape</td>
+            <td class="desc">Dimensions of the array (rows, columns)</td>
+            <td class="ex">a = np.array([[1,2],[3,4]])
+a.shape</td>
+            <td class="out">(2, 2)</td>
+          </tr>
+          <tr data-search="array.ndim dimensions number">
+            <td class="fn">array.ndim</td>
+            <td class="desc">Number of dimensions</td>
+            <td class="ex">a.ndim</td>
+            <td class="out">2</td>
+          </tr>
+          <tr data-search="array.size total elements count">
+            <td class="fn">array.size</td>
+            <td class="desc">Total number of elements</td>
+            <td class="ex">a.size</td>
+            <td class="out">4</td>
+          </tr>
+          <tr data-search="len length first dimension">
+            <td class="fn">len(array)</td>
+            <td class="desc">Length of first dimension</td>
+            <td class="ex">len(a)</td>
+            <td class="out">2</td>
+          </tr>
+          <tr data-search="array.dtype data type float int">
+            <td class="fn">array.dtype</td>
+            <td class="desc">Data type of array elements</td>
+            <td class="ex">a.dtype</td>
+            <td class="out">dtype('int64')</td>
+          </tr>
+          <tr data-search="array.astype convert type cast">
+            <td class="fn">array.astype(type)</td>
+            <td class="desc">Convert array to a different data type</td>
+            <td class="ex">a.astype(float)</td>
+            <td class="out">array([[1., 2.],
+       [3., 4.]])</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Math Operations -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Mathematical Operations</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="np.sqrt square root element">
+            <td class="fn">np.sqrt(array)</td>
+            <td class="desc">Square root of each element</td>
+            <td class="ex">np.sqrt(np.array([4, 9, 16]))</td>
+            <td class="out">array([2., 3., 4.])</td>
+          </tr>
+          <tr data-search="np.exp exponential element">
+            <td class="fn">np.exp(array)</td>
+            <td class="desc">e^x for each element</td>
+            <td class="ex">np.exp(np.array([0, 1]))</td>
+            <td class="out">array([1.   , 2.718])</td>
+          </tr>
+          <tr data-search="np.log natural logarithm element">
+            <td class="fn">np.log(array)</td>
+            <td class="desc">Natural logarithm of each element</td>
+            <td class="ex">np.log(np.array([1, np.e]))</td>
+            <td class="out">array([0., 1.])</td>
+          </tr>
+          <tr data-search="np.abs absolute value element">
+            <td class="fn">np.abs(array)</td>
+            <td class="desc">Absolute value of each element</td>
+            <td class="ex">np.abs(np.array([-3, 4, -1]))</td>
+            <td class="out">array([3, 4, 1])</td>
+          </tr>
+          <tr data-search="np.sin sine trig element">
+            <td class="fn">np.sin(array)</td>
+            <td class="desc">Sine of each element (in radians)</td>
+            <td class="ex">np.sin(np.array([0, np.pi/2]))</td>
+            <td class="out">array([0., 1.])</td>
+          </tr>
+          <tr data-search="np.cos cosine trig element">
+            <td class="fn">np.cos(array)</td>
+            <td class="desc">Cosine of each element (in radians)</td>
+            <td class="ex">np.cos(np.array([0, np.pi]))</td>
+            <td class="out">array([ 1., -1.])</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Statistical Functions -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Statistical Functions</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="np.sum sum add total all elements">
+            <td class="fn">np.sum(array)</td>
+            <td class="desc">Sum of all elements</td>
+            <td class="ex">np.sum(np.array([1, 2, 3, 4]))</td>
+            <td class="out">10</td>
+          </tr>
+          <tr data-search="np.mean average mean">
+            <td class="fn">np.mean(array)</td>
+            <td class="desc">Mean (average) of all elements</td>
+            <td class="ex">np.mean(np.array([1, 2, 3, 4]))</td>
+            <td class="out">2.5</td>
+          </tr>
+          <tr data-search="np.median median middle">
+            <td class="fn">np.median(array)</td>
+            <td class="desc">Median value</td>
+            <td class="ex">np.median(np.array([1, 2, 3, 4]))</td>
+            <td class="out">2.5</td>
+          </tr>
+          <tr data-search="np.std standard deviation spread">
+            <td class="fn">np.std(array)</td>
+            <td class="desc">Standard deviation</td>
+            <td class="ex">np.std(np.array([1, 2, 3, 4]))</td>
+            <td class="out">1.118...</td>
+          </tr>
+          <tr data-search="np.max maximum largest biggest">
+            <td class="fn">np.max(array)</td>
+            <td class="desc">Maximum value</td>
+            <td class="ex">np.max(np.array([3, 1, 4, 1, 5]))</td>
+            <td class="out">5</td>
+          </tr>
+          <tr data-search="np.min minimum smallest">
+            <td class="fn">np.min(array)</td>
+            <td class="desc">Minimum value</td>
+            <td class="ex">np.min(np.array([3, 1, 4, 1, 5]))</td>
+            <td class="out">1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Finding Things -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Finding Things</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="np.argmax index maximum location position">
+            <td class="fn">np.argmax(array)</td>
+            <td class="desc">Index of the maximum value</td>
+            <td class="ex">np.argmax(np.array([3, 1, 5, 2]))</td>
+            <td class="out">2</td>
+          </tr>
+          <tr data-search="np.argmin index minimum location position">
+            <td class="fn">np.argmin(array)</td>
+            <td class="desc">Index of the minimum value</td>
+            <td class="ex">np.argmin(np.array([3, 1, 5, 2]))</td>
+            <td class="out">1</td>
+          </tr>
+          <tr data-search="np.where find indices condition boolean">
+            <td class="fn">np.where(condition)</td>
+            <td class="desc">Indices where a condition is True</td>
+            <td class="ex">a = np.array([1, 5, 2, 8, 3])
+np.where(a > 3)</td>
+            <td class="out">(array([1, 3]),)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /sheet-numpy -->
+
+  <div id="no-results">
+    <p style="font-size:2rem;margin-bottom:8px;">🔍</p>
+    <p>No functions match that search.</p>
+  </div>
+
+</main>
+
+<footer>
+  EES 3350/5350 · Python in Earth Sciences · Dr. Susannah Morey · Vanderbilt University ·
+  <a href="https://python-in-earth-science.github.io" target="_blank">python-in-earth-science.github.io</a>
+</footer>
+
+<script>
+  let activeSheet = 'math';
+
+  function switchTab(sheetId, btn) {
+    // hide all sheets
+    document.querySelectorAll('.sheet').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+    document.getElementById('sheet-' + sheetId).classList.add('active');
+    btn.classList.add('active');
+    activeSheet = sheetId;
+
+    // clear search when switching tabs
+    document.getElementById('search').value = '';
+    document.querySelectorAll('tr[data-search]').forEach(r => r.classList.remove('hidden'));
+    document.getElementById('search-meta').textContent = '';
+    document.getElementById('no-results').style.display = 'none';
+    document.querySelectorAll('.section').forEach(s => s.style.display = '');
+  }
+
+  function handleSearch() {
+    const q = document.getElementById('search').value.toLowerCase().trim();
+    const allRows = document.querySelectorAll('tr[data-search]');
+    const allSections = document.querySelectorAll('.section');
+    const allSheets = document.querySelectorAll('.sheet');
+    const tabs = document.querySelectorAll('.tab-btn');
+
+    if (!q) {
+      // restore to current tab view
+      allRows.forEach(r => r.classList.remove('hidden'));
+      allSheets.forEach(s => s.classList.remove('active'));
+      document.getElementById('sheet-' + activeSheet).classList.add('active');
+      allSections.forEach(s => s.style.display = '');
+      document.getElementById('search-meta').textContent = '';
+      document.getElementById('no-results').style.display = 'none';
+      return;
+    }
+
+    // searching — show ALL sheets
+    allSheets.forEach(s => s.classList.add('active'));
+    tabs.forEach(t => t.classList.remove('active'));
+
+    let visible = 0;
+    allRows.forEach(r => {
+      const text = (r.dataset.search + ' ' + r.innerText).toLowerCase();
+      const show = text.includes(q);
+      r.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+
+    // hide sections where all rows are hidden
+    allSections.forEach(sec => {
+      const rows = sec.querySelectorAll('tr[data-search]');
+      const anyVisible = Array.from(rows).some(r => !r.classList.contains('hidden'));
+      sec.style.display = anyVisible ? '' : 'none';
+    });
+
+    const total = allRows.length;
+    document.getElementById('search-meta').textContent =
+      visible === 0 ? 'No results' :
+      visible === total ? `${total} functions` :
+      `${visible} of ${total} functions`;
+
+    document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+  }
+</script>
+
+</body>
+</html>
