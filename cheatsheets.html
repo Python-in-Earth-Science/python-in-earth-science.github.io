@@ -337,7 +337,10 @@
     <span class="search-meta" id="search-meta"></span>
   </div>
   <div class="tabs" id="tabs">
-    <button class="tab-btn active" onclick="switchTab('math', this)">Math Module</button>
+    <button class="tab-btn active" onclick="switchTab('markdown', this)">Markdown</button>
+    <button class="tab-btn" onclick="switchTab('os', this)">os</button>
+    <button class="tab-btn" onclick="switchTab('pathlib', this)">pathlib</button>
+    <button class="tab-btn" onclick="switchTab('math', this)">Math</button>
     <button class="tab-btn" onclick="switchTab('numpy', this)">NumPy</button>
   </div>
 </div>
@@ -347,7 +350,7 @@
   <!-- ══════════════════════════════════════
        SHEET: MATH MODULE
   ══════════════════════════════════════ -->
-  <div class="sheet active" id="sheet-math">
+  <div class="sheet" id="sheet-math">
     <div class="sheet-intro">
       <div class="sheet-title">Python Math Module</div>
       <p class="sheet-desc">Import with <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">import math</code> — gives you access to mathematical functions beyond basic arithmetic operators.</p>
@@ -826,6 +829,672 @@ np.where(a > 3)</td>
 
   </div><!-- /sheet-numpy -->
 
+  <!-- ══════════════════════════════════════
+       SHEET: MARKDOWN
+  ══════════════════════════════════════ -->
+  <div class="sheet active" id="sheet-markdown">
+    <div class="sheet-intro">
+      <div class="sheet-title">Markdown</div>
+      <p class="sheet-desc">Markdown cells let you write formatted text in a Jupyter notebook. Type the syntax below, then press <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">Shift + Enter</code> to render it. Double-click any rendered cell to see the raw Markdown again.</p>
+    </div>
+
+    <!-- Headings -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Headings</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Renders as</th></tr></thead>
+        <tbody>
+          <tr data-search="# heading 1 h1 title header">
+            <td class="fn">#</td>
+            <td class="desc">1st-level heading (largest)</td>
+            <td class="ex"># Week 1</td>
+            <td class="out"><strong style="font-size:1.2em">Week 1</strong></td>
+          </tr>
+          <tr data-search="## heading 2 h2 section header">
+            <td class="fn">##</td>
+            <td class="desc">2nd-level heading</td>
+            <td class="ex">## Friday, 08/28/2026</td>
+            <td class="out"><strong>Friday, 08/28/2026</strong></td>
+          </tr>
+          <tr data-search="### heading 3 h3 subsection header">
+            <td class="fn">###</td>
+            <td class="desc">3rd-level heading</td>
+            <td class="ex">### Exercise 1</td>
+            <td class="out"><strong><small>Exercise 1</small></strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Text Formatting -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Text Formatting</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Renders as</th></tr></thead>
+        <tbody>
+          <tr data-search="**bold** strong emphasis">
+            <td class="fn">**text**</td>
+            <td class="desc">Bold text</td>
+            <td class="ex">**Golden Rule**</td>
+            <td class="out"><strong>Golden Rule</strong></td>
+          </tr>
+          <tr data-search="*italic* emphasis italics">
+            <td class="fn">*text*</td>
+            <td class="desc">Italic text</td>
+            <td class="ex">*relative path*</td>
+            <td class="out"><em>relative path</em></td>
+          </tr>
+          <tr data-search="<u>underline</u> underlined text">
+            <td class="fn">&lt;u&gt;text&lt;/u&gt;</td>
+            <td class="desc">Underlined text</td>
+            <td class="ex">&lt;u&gt;Friday&lt;/u&gt;</td>
+            <td class="out"><u>Friday</u></td>
+          </tr>
+          <tr data-search="***bold italic*** bold and italic combined">
+            <td class="fn">***text***</td>
+            <td class="desc">Bold and italic combined</td>
+            <td class="ex">***important note***</td>
+            <td class="out"><strong><em>important note</em></strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Lists -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Lists</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Renders as</th></tr></thead>
+        <tbody>
+          <tr data-search="- bullet unordered list item">
+            <td class="fn">- item</td>
+            <td class="desc">Bulleted (unordered) list — also works with <code style="font-family:monospace">*</code></td>
+            <td class="ex">- Earth
+- Water
+- Air</td>
+            <td class="out">• Earth
+• Water
+• Air</td>
+          </tr>
+          <tr data-search="1. numbered ordered list item">
+            <td class="fn">1. item</td>
+            <td class="desc">Numbered (ordered) list — numbers increment automatically</td>
+            <td class="ex">1. Collect data
+2. Analyze
+3. Plot</td>
+            <td class="out">1. Collect data
+2. Analyze
+3. Plot</td>
+          </tr>
+          <tr data-search="indent nested sub-item list indented">
+            <td class="fn">··- item</td>
+            <td class="desc">Nested sub-item — indent with 2 spaces or a tab</td>
+            <td class="ex">- Folder
+  - lectures
+  - labs</td>
+            <td class="out">• Folder
+  · lectures
+  · labs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Code -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Code Formatting</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Renders as</th></tr></thead>
+        <tbody>
+          <tr data-search="` backtick inline code monospace literal">
+            <td class="fn">`code`</td>
+            <td class="desc">Inline code — single backticks for short snippets in a sentence</td>
+            <td class="ex">Use `os.getcwd()` to find your location.</td>
+            <td class="out">Use <code>os.getcwd()</code> to find your location.</td>
+          </tr>
+          <tr data-search="``` code block fenced triple backtick multiline">
+            <td class="fn">```
+code
+```</td>
+            <td class="desc">Fenced code block — triple backticks for multi-line code snippets</td>
+            <td class="ex">```python
+import os
+os.getcwd()
+```</td>
+            <td class="out" style="font-family:monospace;font-size:11px">import os
+os.getcwd()</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Links & Images -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Links &amp; Images</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Renders as</th></tr></thead>
+        <tbody>
+          <tr data-search="[link](url) hyperlink anchor href">
+            <td class="fn">[text](url)</td>
+            <td class="desc">Hyperlink — display text in brackets, URL in parentheses</td>
+            <td class="ex">[Python docs](https://docs.python.org/3/)</td>
+            <td class="out"><a href="#" style="color:var(--blue)">Python docs</a></td>
+          </tr>
+          <tr data-search="![image](path) embed picture figure png">
+            <td class="fn">![alt](path)</td>
+            <td class="desc">Embed an image — alt text in brackets, file path in parentheses</td>
+            <td class="ex">![diagram](../figures/folder_structure.png)</td>
+            <td class="out">(image appears here)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Block Formatting -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Block Formatting</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Renders as</th></tr></thead>
+        <tbody>
+          <tr data-search="> blockquote quote callout highlighted">
+            <td class="fn">&gt; text</td>
+            <td class="desc">Blockquote — creates an indented callout box, great for highlighting rules or tips</td>
+            <td class="ex">&gt; Always rename first!</td>
+            <td class="out" style="border-left:3px solid #ccc;padding-left:8px;color:#555">Always rename first!</td>
+          </tr>
+          <tr data-search="--- horizontal rule divider line hr">
+            <td class="fn">---</td>
+            <td class="desc">Horizontal rule — draws a dividing line across the cell</td>
+            <td class="ex">---</td>
+            <td class="out"><hr style="border:none;border-top:1px solid #ccc;margin:4px 0"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- LaTeX Math -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">LaTeX Math</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Renders as</th></tr></thead>
+        <tbody>
+          <tr data-search="$ inline math equation latex dollar sign">
+            <td class="fn">$equation$</td>
+            <td class="desc">Inline math — renders a LaTeX equation within a line of text</td>
+            <td class="ex">The slope is $m = \frac{\Delta y}{\Delta x}$</td>
+            <td class="out">The slope is <em>m = Δy/Δx</em></td>
+          </tr>
+          <tr data-search="$$ display math block equation latex centered">
+            <td class="fn">$$equation$$</td>
+            <td class="desc">Display math — renders a centered, larger equation on its own line</td>
+            <td class="ex">$$Q = \rho A v$$</td>
+            <td class="out"><em style="display:block;text-align:center">Q = ρAv</em></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Colored Alert Boxes -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Colored Alert Boxes</span>
+        <div class="section-rule"></div>
+      </div>
+      <p style="font-size:13px;color:var(--mid);margin-bottom:10px;">Use HTML <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">&lt;div&gt;</code> tags in a Markdown cell to create colored callout boxes. The general pattern is:</p>
+      <div style="background:var(--code-bg);border-radius:6px;padding:10px 14px;font-family:'Courier New',monospace;font-size:12px;color:var(--dark);margin-bottom:16px;white-space:pre;">&lt;div class="alert alert-TYPE"&gt;
+Your text here
+&lt;/div&gt;</div>
+      <table class="cheat-table">
+        <thead><tr><th>Class</th><th>Color</th><th>Typical use</th><th>Preview</th></tr></thead>
+        <tbody>
+          <tr data-search="alert-info blue info box colored cell div">
+            <td class="fn">alert-info</td>
+            <td class="desc">Blue</td>
+            <td class="desc">In-class exercises, instructions, things students should do</td>
+            <td class="out"><div style="background:#d1ecf1;border:1px solid #bee5eb;border-radius:4px;padding:5px 8px;color:#0c5460;font-size:12px;">ℹ️ In Class Exercise</div></td>
+          </tr>
+          <tr data-search="alert-warning yellow orange warning box colored cell div">
+            <td class="fn">alert-warning</td>
+            <td class="desc">Yellow / orange</td>
+            <td class="desc">Questions, things to watch out for, reflection prompts</td>
+            <td class="out"><div style="background:#fff3cd;border:1px solid #ffeeba;border-radius:4px;padding:5px 8px;color:#856404;font-size:12px;">⚠️ Question</div></td>
+          </tr>
+          <tr data-search="alert-success green success box colored cell div">
+            <td class="fn">alert-success</td>
+            <td class="desc">Green</td>
+            <td class="desc">Tips, confirmations, things that worked correctly</td>
+            <td class="out"><div style="background:#d4edda;border:1px solid #c3e6cb;border-radius:4px;padding:5px 8px;color:#155724;font-size:12px;">✅ Tip</div></td>
+          </tr>
+          <tr data-search="alert-danger red error danger box colored cell div">
+            <td class="fn">alert-danger</td>
+            <td class="desc">Red</td>
+            <td class="desc">Warnings, common errors, things to avoid</td>
+            <td class="out"><div style="background:#f8d7da;border:1px solid #f5c6cb;border-radius:4px;padding:5px 8px;color:#721c24;font-size:12px;">🚫 Warning</div></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--mid);margin-top:10px;">You can also add <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">alert-block</code> alongside the color class (e.g. <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">class="alert alert-block alert-warning"</code>) for a slightly thicker left border style.</p>
+    </div>
+
+  </div><!-- /sheet-markdown -->
+
+
+  <!-- ══════════════════════════════════════
+       SHEET: OS MODULE
+  ══════════════════════════════════════ -->
+  <div class="sheet" id="sheet-os">
+    <div class="sheet-intro">
+      <div class="sheet-title">os Module</div>
+      <p class="sheet-desc">Import with <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">import os</code> — gives Python access to operating system features like navigating folders, listing files, and creating or deleting directories.</p>
+    </div>
+
+    <!-- Navigating -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Navigating</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="os.getcwd current working directory where am I location path">
+            <td class="fn">os.getcwd()</td>
+            <td class="desc">Get the current working directory — where Python is looking for files right now</td>
+            <td class="ex">os.getcwd()</td>
+            <td class="out">'/home/jovyan/Smith_EES3350/lectures'</td>
+          </tr>
+          <tr data-search="os.chdir change directory move navigate cd">
+            <td class="fn">os.chdir('path')</td>
+            <td class="desc">Change the current working directory to the given path</td>
+            <td class="ex">os.chdir('/home/jovyan/Smith_EES3350')</td>
+            <td class="out">(no output — just moves you)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Listing Contents -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Listing Contents</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="os.listdir list contents directory folder files ls">
+            <td class="fn">os.listdir()</td>
+            <td class="desc">List all files and folders in the current directory</td>
+            <td class="ex">os.listdir()</td>
+            <td class="out">['lab01.ipynb', 'data', 'figures']</td>
+          </tr>
+          <tr data-search="os.listdir path list contents specific directory folder">
+            <td class="fn">os.listdir('path')</td>
+            <td class="desc">List all files and folders at a specific path</td>
+            <td class="ex">os.listdir('/home/jovyan')</td>
+            <td class="out">['course-materials', 'Smith_EES3350']</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Creating & Deleting -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Creating &amp; Deleting</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="os.mkdir make create new directory folder mkdir">
+            <td class="fn">os.mkdir('name')</td>
+            <td class="desc">Create a new directory with the given name</td>
+            <td class="ex">os.mkdir('figures')</td>
+            <td class="out">(no output — folder is created)</td>
+          </tr>
+          <tr data-search="os.makedirs make create nested directories parents mkdir">
+            <td class="fn">os.makedirs('path')</td>
+            <td class="desc">Create a directory and all missing parent directories</td>
+            <td class="ex">os.makedirs('data/raw/2024')</td>
+            <td class="out">(no output — full path created)</td>
+          </tr>
+          <tr data-search="os.rmdir remove delete empty directory folder rmdir">
+            <td class="fn">os.rmdir('name')</td>
+            <td class="desc">Delete an empty directory — raises an error if it contains files</td>
+            <td class="ex">os.rmdir('figures')</td>
+            <td class="out">(no output — folder deleted)</td>
+          </tr>
+          <tr data-search="os.remove delete file rm unlink">
+            <td class="fn">os.remove('file')</td>
+            <td class="desc">Delete a file — cannot be used on directories</td>
+            <td class="ex">os.remove('old_notes.txt')</td>
+            <td class="out">(no output — file deleted)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Renaming & Moving -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Renaming &amp; Moving</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="os.rename rename move file directory folder mv">
+            <td class="fn">os.rename('old', 'new')</td>
+            <td class="desc">Rename a file or directory — can also move it if the new path is in a different folder</td>
+            <td class="ex">os.rename('draft.ipynb', 'lab01_Smith.ipynb')</td>
+            <td class="out">(no output — file renamed)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Checking Things -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Checking Things</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="os.path.exists check file directory exists">
+            <td class="fn">os.path.exists('path')</td>
+            <td class="desc">Returns True if the file or folder exists, False otherwise</td>
+            <td class="ex">os.path.exists('data/precip.csv')</td>
+            <td class="out">True</td>
+          </tr>
+          <tr data-search="os.path.isfile check is file">
+            <td class="fn">os.path.isfile('path')</td>
+            <td class="desc">Returns True if the path points to a file (not a folder)</td>
+            <td class="ex">os.path.isfile('lab01.ipynb')</td>
+            <td class="out">True</td>
+          </tr>
+          <tr data-search="os.path.isdir check is directory folder">
+            <td class="fn">os.path.isdir('path')</td>
+            <td class="desc">Returns True if the path points to a directory (folder)</td>
+            <td class="ex">os.path.isdir('figures')</td>
+            <td class="out">True</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Path Shortcuts -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Path Navigation Shortcuts</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Shortcut</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search=". current directory dot">
+            <td class="fn">.</td>
+            <td class="desc">Current directory</td>
+            <td class="ex">os.listdir('.')</td>
+            <td class="out">(same as os.listdir())</td>
+          </tr>
+          <tr data-search=".. parent up one level directory dot dot">
+            <td class="fn">..</td>
+            <td class="desc">One level up (parent directory)</td>
+            <td class="ex">os.listdir('..')</td>
+            <td class="out">(contents of parent folder)</td>
+          </tr>
+          <tr data-search="../.. two levels up parent grandparent">
+            <td class="fn">../..</td>
+            <td class="desc">Two levels up</td>
+            <td class="ex">os.chdir('../..')</td>
+            <td class="out">(moves up two folders)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /sheet-os -->
+
+
+  <!-- ══════════════════════════════════════
+       SHEET: PATHLIB
+  ══════════════════════════════════════ -->
+  <div class="sheet" id="sheet-pathlib">
+    <div class="sheet-intro">
+      <div class="sheet-title">pathlib Module</div>
+      <p class="sheet-desc">Import with <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">from pathlib import Path</code> — a modern, cross-platform way to work with file paths. Path objects use <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">/</code> to build paths and work correctly on Windows, Mac, and Linux.</p>
+      <p class="sheet-desc" style="margin-top:10px;"><strong>A note on capitalization:</strong> <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">Path</code> (capital P) is the <em>class</em> — the blueprint you import. <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">path</code> (lowercase p) in the table below is just a placeholder for whatever variable you've stored a Path object in — you could call it <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">p</code>, <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">my_file</code>, or anything else. For example: <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">p = Path('/home/jovyan/data.csv')</code> then <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">p.name</code>. Class names in Python are capitalized by convention; variable names are not.</p>
+    </div>
+
+    <!-- Creating Paths -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Creating Paths</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function / Method</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="Path home directory home folder tilde ~">
+            <td class="fn">Path.home()</td>
+            <td class="desc">Returns the current user's home directory as a Path object</td>
+            <td class="ex">Path.home()</td>
+            <td class="out">PosixPath('/home/jovyan')</td>
+          </tr>
+          <tr data-search="Path cwd current working directory getcwd">
+            <td class="fn">Path.cwd()</td>
+            <td class="desc">Returns the current working directory as a Path object</td>
+            <td class="ex">Path.cwd()</td>
+            <td class="out">PosixPath('/home/jovyan/Smith_EES3350/lectures')</td>
+          </tr>
+          <tr data-search="Path string create path from string">
+            <td class="fn">Path('string')</td>
+            <td class="desc">Create a Path object from a string</td>
+            <td class="ex">Path('/home/jovyan/data/precip.csv')</td>
+            <td class="out">PosixPath('/home/jovyan/data/precip.csv')</td>
+          </tr>
+          <tr data-search="/ join build path combine slash operator">
+            <td class="fn">path / 'subfolder'</td>
+            <td class="desc">Build a new path by joining with <code style="font-family:monospace">/</code> — works on all platforms</td>
+            <td class="ex">Path.home() / 'Smith_EES3350' / 'labs'</td>
+            <td class="out">PosixPath('/home/jovyan/Smith_EES3350/labs')</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Path Attributes -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Path Attributes</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Attribute</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="path.name filename file name basename">
+            <td class="fn">path.name</td>
+            <td class="desc">The filename including extension</td>
+            <td class="ex">p = Path('/home/jovyan/data/precip.csv')
+p.name</td>
+            <td class="out">'precip.csv'</td>
+          </tr>
+          <tr data-search="path.stem filename without extension stem base">
+            <td class="fn">path.stem</td>
+            <td class="desc">The filename without the extension</td>
+            <td class="ex">p.stem</td>
+            <td class="out">'precip'</td>
+          </tr>
+          <tr data-search="path.suffix extension file type .csv .ipynb .png">
+            <td class="fn">path.suffix</td>
+            <td class="desc">The file extension, including the dot</td>
+            <td class="ex">p.suffix</td>
+            <td class="out">'.csv'</td>
+          </tr>
+          <tr data-search="path.parent parent directory folder up one level">
+            <td class="fn">path.parent</td>
+            <td class="desc">The directory containing this file or folder</td>
+            <td class="ex">p.parent</td>
+            <td class="out">PosixPath('/home/jovyan/data')</td>
+          </tr>
+          <tr data-search="path.parts components tuple split path pieces">
+            <td class="fn">path.parts</td>
+            <td class="desc">All components of the path as a tuple</td>
+            <td class="ex">p.parts</td>
+            <td class="out">('/', 'home', 'jovyan', 'data', 'precip.csv')</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Checking Things -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Checking Things</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Method</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="path.exists check exists file directory">
+            <td class="fn">path.exists()</td>
+            <td class="desc">Returns True if the path exists on disk</td>
+            <td class="ex">Path('data/precip.csv').exists()</td>
+            <td class="out">True</td>
+          </tr>
+          <tr data-search="path.is_file check is file">
+            <td class="fn">path.is_file()</td>
+            <td class="desc">Returns True if the path is a file</td>
+            <td class="ex">Path('lab01.ipynb').is_file()</td>
+            <td class="out">True</td>
+          </tr>
+          <tr data-search="path.is_dir check is directory folder">
+            <td class="fn">path.is_dir()</td>
+            <td class="desc">Returns True if the path is a directory</td>
+            <td class="ex">Path('figures').is_dir()</td>
+            <td class="out">True</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Creating & Deleting -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Creating &amp; Deleting</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Method</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="path.mkdir make create directory folder parents exist ok">
+            <td class="fn">path.mkdir()</td>
+            <td class="desc">Create the directory. Use <code style="font-family:monospace">parents=True</code> to create missing parent folders, <code style="font-family:monospace">exist_ok=True</code> to avoid errors if it already exists</td>
+            <td class="ex">Path('data/raw').mkdir(parents=True, exist_ok=True)</td>
+            <td class="out">(no output — folder created)</td>
+          </tr>
+          <tr data-search="path.unlink delete remove file">
+            <td class="fn">path.unlink()</td>
+            <td class="desc">Delete a file</td>
+            <td class="ex">Path('old_draft.ipynb').unlink()</td>
+            <td class="out">(no output — file deleted)</td>
+          </tr>
+          <tr data-search="path.rmdir remove delete empty directory folder">
+            <td class="fn">path.rmdir()</td>
+            <td class="desc">Delete an empty directory</td>
+            <td class="ex">Path('temp').rmdir()</td>
+            <td class="out">(no output — folder deleted)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Finding Files -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Finding Files</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Method</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="path.glob find list files pattern wildcard * match">
+            <td class="fn">path.glob('pattern')</td>
+            <td class="desc">Find all files matching a pattern in this directory. Use <code style="font-family:monospace">*</code> as a wildcard.</td>
+            <td class="ex">list(Path('lectures').glob('*.ipynb'))</td>
+            <td class="out">[PosixPath('lectures/lab01_Smith.ipynb'), ...]</td>
+          </tr>
+          <tr data-search="path.rglob recursive glob find files subdirectories nested">
+            <td class="fn">path.rglob('pattern')</td>
+            <td class="desc">Like glob, but searches all subdirectories recursively</td>
+            <td class="ex">list(Path('.').rglob('*.csv'))</td>
+            <td class="out">[PosixPath('data/raw/precip.csv'), ...]</td>
+          </tr>
+          <tr data-search="path.iterdir list contents directory folder">
+            <td class="fn">path.iterdir()</td>
+            <td class="desc">Iterate over all items in a directory (files and folders)</td>
+            <td class="ex">for f in Path('data').iterdir():
+    print(f.name)</td>
+            <td class="out">precip.csv
+temp.csv
+raw</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Converting -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Converting</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Method</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="str string convert path to string">
+            <td class="fn">str(path)</td>
+            <td class="desc">Convert a Path object to a plain string — needed for some older functions that don't accept Path objects</td>
+            <td class="ex">str(Path.home() / 'data.csv')</td>
+            <td class="out">'/home/jovyan/data.csv'</td>
+          </tr>
+          <tr data-search="path.resolve absolute path resolve">
+            <td class="fn">path.resolve()</td>
+            <td class="desc">Return the absolute path, resolving any <code style="font-family:monospace">..</code> or <code style="font-family:monospace">.</code> components</td>
+            <td class="ex">Path('../figures').resolve()</td>
+            <td class="out">PosixPath('/home/jovyan/course-materials/figures')</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /sheet-pathlib -->
+
+
   <div id="no-results">
     <p style="font-size:2rem;margin-bottom:8px;">🔍</p>
     <p>No functions match that search.</p>
@@ -839,7 +1508,7 @@ np.where(a > 3)</td>
 </footer>
 
 <script>
-  let activeSheet = 'math';
+  let activeSheet = 'markdown';
 
   function switchTab(sheetId, btn) {
     // hide all sheets
