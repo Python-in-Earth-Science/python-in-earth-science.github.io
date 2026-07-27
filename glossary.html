@@ -367,7 +367,22 @@
     </div>
     <p class="term-def">The engine running behind the scenes that reads your code and actually executes it — when you click "run," the kernel is what does the work. <strong>Always select CSDMS</strong> when opening a notebook in this class, unless told otherwise.</p>
   </div>
-
+  
+  <div class="term" data-term="interpreter">
+    <div class="term-header">
+      <span class="term-word">interpreter</span>
+      <span class="term-tag">environment</span>
+    </div>
+    <p class="term-def">A program that reads and runs code one line at a time, rather than translating the whole program before running it. The <strong>kernel</strong> in a Jupyter notebook is an interpreter running behind the scenes.</p>
+  </div>
+  
+  <div class="term" data-term="compiler">
+    <div class="term-header">
+      <span class="term-word">compiler</span>
+      <span class="term-tag">environment</span>
+    </div>
+    <p class="term-def">A program that translates an entire program into machine-readable instructions before it runs, all at once. Python is not compiled this way — it's interpreted — but languages like C++ use compilers.</p>
+  </div>
 
   <!-- ── CATEGORY: Notebooks & Files ── -->
   <div class="category">
@@ -515,6 +530,114 @@
       <span class="term-tag">python basics</span>
     </div>
     <p class="term-def">Jupyter's two states; Esc enters command mode, Enter enters edit mode</p>
+  </div>
+
+  <div class="term" data-term="variable">
+    <div class="term-header">
+      <span class="term-word">variable</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">A named location in memory that stores a value. Created with an assignment statement (e.g. <strong>x = 5</strong>) and can be reused or changed later in your code.</p>
+  </div>
+
+  <div class="term" data-term="assignment operator">
+    <div class="term-header">
+      <span class="term-word">assignment operator</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">The single equals sign (<strong>=</strong>) used to assign a value to a variable. Not the same as the mathematical "equals" — <strong>x = 5</strong> means "store 5 in x," not "x equals 5."</p>
+  </div>
+
+  <div class="term" data-term="data type">
+    <div class="term-header">
+      <span class="term-word">data type</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">The category of value a variable holds — such as a whole number, decimal number, or string of text. Python determines a variable's data type automatically based on the value assigned to it.</p>
+  </div>
+
+  <div class="term" data-term="int float">
+    <div class="term-header">
+      <span class="term-word">int / float</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def"><strong>int</strong> is a whole number (e.g. 7); <strong>float</strong> is a number with a decimal point (e.g. 7.0). Python treats these as different data types even when the value looks the same.</p>
+  </div>
+
+  <div class="term" data-term="type()">
+    <div class="term-header">
+      <span class="term-word">type()</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">A built-in function that returns the data type of whatever you pass it (e.g. <strong>type(3.14)</strong> returns <strong>float</strong>). Useful for checking your assumptions about a variable.</p>
+  </div>
+
+  <div class="term" data-term="reassignment">
+    <div class="term-header">
+      <span class="term-word">reassignment</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">Giving a variable that already exists a new value (e.g. <strong>x = 5</strong> followed later by <strong>x = 10</strong>). The old value is overwritten — Python does not keep a record of it.</p>
+  </div>
+
+  <div class="term" data-term="f-string">
+    <div class="term-header">
+      <span class="term-word">f-string</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">A formatted string literal — written as <strong>f"..."</strong> — that lets you insert variable values directly inside a string using curly braces (e.g. <strong>f"The velocity is {v} cm/yr"</strong>).</p>
+  </div>
+
+<!-- ── CATEGORY: Debugging ── -->
+  <div class="category">
+    <span class="category-label">Errors &amp; Debugging</span>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="term" data-term="nameerror">
+    <div class="term-header">
+      <span class="term-word">NameError</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">An error raised when Python encounters a name (usually a variable) it doesn't recognize — often a typo, or the variable's cell hasn't been run yet.</p>
+  </div>
+
+  <div class="term" data-term="traceback">
+    <div class="term-header">
+      <span class="term-word">traceback</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">The block of red text Python prints when your code hits an error. Read it from the <strong>bottom up</strong> — the last line names the error type and gives a short message; the lines above point to where in your code it happened.</p>
+  </div>
+
+<!-- ── CATEGORY: Math & Notation ── -->
+  <div class="category">
+    <span class="category-label">Math &amp; Notation</span>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="term" data-term="latex">
+    <div class="term-header">
+      <span class="term-word">LaTeX</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">A typesetting language used to write mathematical notation. In a Jupyter markdown cell, LaTeX written between dollar signs renders as a formatted equation — see the Cheat Sheets page for syntax.</p>
+  </div>
+
+  <div class="term" data-term="summation notation">
+    <div class="term-header">
+      <span class="term-word">summation notation</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">Mathematical shorthand (the Greek capital sigma, Σ) for adding up a sequence of terms, e.g. Σxᵢ means "add up all the x values." Written in LaTeX as <strong>\sum</strong>.</p>
+  </div>
+
+  <div class="term" data-term="uncertainty notation">
+    <div class="term-header">
+      <span class="term-word">uncertainty notation</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">The ± symbol used to express a measurement's margin of error, e.g. 4.2 ± 0.3 cm/yr. Written in LaTeX as <strong>\pm</strong>.</p>
   </div>
 
 

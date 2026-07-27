@@ -341,6 +341,7 @@
     <button class="tab-btn" onclick="switchTab('os', this)">os</button>
     <button class="tab-btn" onclick="switchTab('pathlib', this)">pathlib</button>
     <button class="tab-btn" onclick="switchTab('math', this)">Math</button>
+    <button class="tab-btn" onclick="switchTab('pandas', this)">Python Basics</button>
     <button class="tab-btn" onclick="switchTab('numpy', this)">NumPy</button>
   </div>
 </div>
@@ -591,6 +592,126 @@
     </div>
   </div><!-- /sheet-math -->
 
+  <!-- ══════════════════════════════════════
+      SHEET: PYTHON BASICS
+  ══════════════════════════════════════ -->
+  <div class="sheet" id="sheet-basics">
+    <div class="sheet-intro">
+      <div class="sheet-title">Python Basics</div>
+      <p class="sheet-desc">Core syntax for variables, data types, and string formatting.</p>
+    </div>
+
+    <!-- Variables & Assignment -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Variables &amp; Assignment</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="= assignment operator assign variable">
+            <td class="fn">x = value</td>
+            <td class="desc">Assigns a value to a variable name</td>
+            <td class="ex">plate_velocity = 7.2</td>
+            <td class="out">—</td>
+          </tr>
+          <tr data-search="reassignment overwrite variable new value">
+            <td class="fn">x = new_value</td>
+            <td class="desc">Reassigns an existing variable — overwrites the old value</td>
+            <td class="ex">x = 5<br>x = 10</td>
+            <td class="out">x is now 10</td>
+          </tr>
+          <tr data-search="snake_case naming convention lowercase underscore">
+            <td class="fn">snake_case</td>
+            <td class="desc">Python naming convention — lowercase words separated by underscores</td>
+            <td class="ex">plate_velocity, mineral_density</td>
+            <td class="out">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Data Types -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Data Types</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="int integer whole number data type">
+            <td class="fn">int</td>
+            <td class="desc">Whole number, no decimal point</td>
+            <td class="ex">age = 7</td>
+            <td class="out">int</td>
+          </tr>
+          <tr data-search="float decimal number data type">
+            <td class="fn">float</td>
+            <td class="desc">Number with a decimal point</td>
+            <td class="ex">rate = 7.2</td>
+            <td class="out">float</td>
+          </tr>
+          <tr data-search="str string text data type">
+            <td class="fn">str</td>
+            <td class="desc">Text, enclosed in quotes</td>
+            <td class="ex">name = "basalt"</td>
+            <td class="out">str</td>
+          </tr>
+          <tr data-search="type() check data type of variable">
+            <td class="fn">type(x)</td>
+            <td class="desc">Returns the data type of a variable</td>
+            <td class="ex">type(7.2)</td>
+            <td class="out">float</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- f-strings -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">f-strings</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="f-string formatted string insert variable curly braces">
+            <td class="fn">f"{variable}"</td>
+            <td class="desc">Inserts a variable's value directly into a string</td>
+            <td class="ex">f"Velocity: {v} cm/yr"</td>
+            <td class="out">Velocity: 7.2 cm/yr</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Errors -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Errors</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Error</th><th>Description</th><th>Common cause</th></tr></thead>
+        <tbody>
+          <tr data-search="NameError undefined variable typo not defined">
+            <td class="fn">NameError</td>
+            <td class="desc">Python doesn't recognize a name you've used</td>
+            <td class="ex">Typo, or the variable's cell hasn't been run yet</td>
+          </tr>
+          <tr data-search="traceback read error bottom up">
+            <td class="fn">Traceback</td>
+            <td class="desc">The red error message Python prints — read from the bottom up</td>
+            <td class="ex">Last line = error type + message; lines above = where it happened</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /sheet-basics -->
 
   <!-- ══════════════════════════════════════
        SHEET: NUMPY
@@ -1051,6 +1172,18 @@ os.getcwd()</td>
             <td class="ex">$$Q = \rho A v$$</td>
             <td class="out"><em style="display:block;text-align:center">Q = ρAv</em></td>
           </tr>
+          <tr data-search="\sum summation notation add up sigma">
+            <td class="fn">$\sum$</td>
+            <td class="desc">Summation notation — shorthand for "add up all the values"</td>
+            <td class="ex">$\sum_{i=1}^{n} x_i$</td>
+            <td class="out">Σ xᵢ (from i=1 to n)</td>
+          </tr>
+          <tr data-search="\pm uncertainty notation plus minus error margin">
+            <td class="fn">$\pm$</td>
+            <td class="desc">Uncertainty notation — expresses a margin of error</td>
+            <td class="ex">$4.2 \pm 0.3$</td>
+            <td class="out">4.2 ± 0.3</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -1071,8 +1204,14 @@ Your text here
           <tr data-search="alert-info blue info box colored cell div">
             <td class="fn">alert-info</td>
             <td class="desc">Blue</td>
-            <td class="desc">In-class exercises, instructions, things students should do</td>
-            <td class="out"><div style="background:#d1ecf1;border:1px solid #bee5eb;border-radius:4px;padding:5px 8px;color:#0c5460;font-size:12px;">ℹ️ In Class Exercise</div></td>
+            <td class="desc">In-class or lab exercises, instructions, things ALL students should do</td>
+            <td class="out"><div style="background:#d1ecf1; border-left: 5px solid blue; border-radius:4px;padding:5px 8px;color:#0c5460;font-size:12px;">🔍 Exercise for Everyone</div></td>
+          </tr>
+          <tr data-search="alert-danger purple important colored cell div">
+            <td class="fn">alert-custom</td>
+            <td class="desc">Purple</td>
+            <td class="desc">In-class or lab exercises, instructions, things only Grad students should do</td>
+            <td class="out"><div style="background-color:#f3e8fd; border-left: 5px solid purple; padding: 10px 15px; border-radius: 4px;">🔍 Exercise for Only Grad Students</div></td>
           </tr>
           <tr data-search="alert-warning yellow orange warning box colored cell div">
             <td class="fn">alert-warning</td>
