@@ -653,11 +653,195 @@
             <td class="ex">name = "basalt"</td>
             <td class="out">str</td>
           </tr>
+          <tr data-search="bool boolean true false data type">
+            <td class="fn">bool</td>
+            <td class="desc">True or False — usually the result of a comparison</td>
+            <td class="ex">age_check = age_ma >= 61</td>
+            <td class="out">bool</td>
+          </tr>
           <tr data-search="type() check data type of variable">
             <td class="fn">type(x)</td>
             <td class="desc">Returns the data type of a variable</td>
             <td class="ex">type(7.2)</td>
             <td class="out">float</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Type Casting -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Type Casting</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="int() convert to integer type cast">
+            <td class="fn">int(x)</td>
+            <td class="desc">Converts a value to an integer</td>
+            <td class="ex">int(3.14)</td>
+            <td class="out">3</td>
+          </tr>
+          <tr data-search="float() convert to float type cast">
+            <td class="fn">float(x)</td>
+            <td class="desc">Converts a value to a float</td>
+            <td class="ex">float(5)</td>
+            <td class="out">5.0</td>
+          </tr>
+          <tr data-search="str() convert to string type cast">
+            <td class="fn">str(x)</td>
+            <td class="desc">Converts a value to a string</td>
+            <td class="ex">str(6.0)</td>
+            <td class="out">'6.0'</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Operators -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Arithmetic Operators</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Operator</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="+ addition plus arithmetic operator">
+            <td class="fn">+</td>
+            <td class="desc">Addition</td>
+            <td class="ex">4 + 8</td>
+            <td class="out">12</td>
+          </tr>
+          <tr data-search="- subtraction minus arithmetic operator">
+            <td class="fn">-</td>
+            <td class="desc">Subtraction</td>
+            <td class="ex">8 - 4</td>
+            <td class="out">4</td>
+          </tr>
+          <tr data-search="* multiplication times arithmetic operator">
+            <td class="fn">*</td>
+            <td class="desc">Multiplication</td>
+            <td class="ex">4 * 8</td>
+            <td class="out">32</td>
+          </tr>
+          <tr data-search="/ true division arithmetic operator">
+            <td class="fn">/</td>
+            <td class="desc">True division — always returns a float</td>
+            <td class="ex">11 / 2</td>
+            <td class="out">5.5</td>
+          </tr>
+          <tr data-search="// floor division arithmetic operator truncate">
+            <td class="fn">//</td>
+            <td class="desc">Floor division — true division with the fractional part truncated</td>
+            <td class="ex">11 // 2</td>
+            <td class="out">5</td>
+          </tr>
+          <tr data-search="% modulus modulo remainder arithmetic operator">
+            <td class="fn">%</td>
+            <td class="desc">Modulus (modulo) — the remainder after division</td>
+            <td class="ex">11 % 2</td>
+            <td class="out">1</td>
+          </tr>
+          <tr data-search="** exponentiation power arithmetic operator">
+            <td class="fn">**</td>
+            <td class="desc">Exponentiation — raises to a power</td>
+            <td class="ex">11**2</td>
+            <td class="out">121</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Comparison Operators -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Comparison Operators</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Operator</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="== equal to comparison operator">
+            <td class="fn">==</td>
+            <td class="desc">Is the value on the left equal to the value on the right</td>
+            <td class="ex">5 == 5</td>
+            <td class="out">True</td>
+          </tr>
+          <tr data-search="!= not equal to comparison operator">
+            <td class="fn">!=</td>
+            <td class="desc">Is the value on the left unequal to the value on the right</td>
+            <td class="ex">5 != 10</td>
+            <td class="out">True</td>
+          </tr>
+          <tr data-search="> greater than comparison operator">
+            <td class="fn">&gt;</td>
+            <td class="desc">Is the value on the left greater than the value on the right</td>
+            <td class="ex">6 &gt; 3</td>
+            <td class="out">True</td>
+          </tr>
+          <tr data-search="< less than comparison operator">
+            <td class="fn">&lt;</td>
+            <td class="desc">Is the value on the left less than the value on the right</td>
+            <td class="ex">6 &lt; 3</td>
+            <td class="out">False</td>
+          </tr>
+          <tr data-search=">= greater than or equal to comparison operator">
+            <td class="fn">&gt;=</td>
+            <td class="desc">Is the value on the left greater than or equal to the value on the right</td>
+            <td class="ex">6 &gt;= 6</td>
+            <td class="out">True</td>
+          </tr>
+          <tr data-search="<= less than or equal to comparison operator">
+            <td class="fn">&lt;=</td>
+            <td class="desc">Is the value on the left less than or equal to the value on the right</td>
+            <td class="ex">6 &lt;= 3</td>
+            <td class="out">False</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Update Operators -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Update Operators</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Operator</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="+= add and assign update operator compound">
+            <td class="fn">a += b</td>
+            <td class="desc">Adds b to a, equivalent to a = a + b</td>
+            <td class="ex">a = 24<br>a += 2</td>
+            <td class="out">a is now 26</td>
+          </tr>
+          <tr data-search="-= subtract and assign update operator compound">
+            <td class="fn">a -= b</td>
+            <td class="desc">Subtracts b from a</td>
+            <td class="ex">a -= 2</td>
+            <td class="out">—</td>
+          </tr>
+          <tr data-search="*= multiply and assign update operator compound">
+            <td class="fn">a *= b</td>
+            <td class="desc">Multiplies a by b</td>
+            <td class="ex">a *= 2</td>
+            <td class="out">—</td>
+          </tr>
+          <tr data-search="/= divide and assign update operator compound">
+            <td class="fn">a /= b</td>
+            <td class="desc">Divides a by b</td>
+            <td class="ex">a /= 2</td>
+            <td class="out">—</td>
+          </tr>
+          <tr data-search="//= floor divide and assign update operator compound">
+            <td class="fn">a //= b</td>
+            <td class="desc">Floor-divides a by b</td>
+            <td class="ex">a //= 2</td>
+            <td class="out">—</td>
           </tr>
         </tbody>
       </table>
@@ -678,6 +862,12 @@
             <td class="ex">f"Velocity: {v} cm/yr"</td>
             <td class="out">Velocity: 7.2 cm/yr</td>
           </tr>
+          <tr data-search="f-string decimal places round format .2f">
+            <td class="fn">f"{variable:.2f}"</td>
+            <td class="desc">Limits a number to a set number of decimal places (here, 2)</td>
+            <td class="ex">f"{3.14159:.2f}"</td>
+            <td class="out">3.14</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -695,6 +885,11 @@
             <td class="fn">NameError</td>
             <td class="desc">Python doesn't recognize a name you've used</td>
             <td class="ex">Typo, or the variable's cell hasn't been run yet</td>
+          </tr>
+          <tr data-search="ValueError convert string to number wrong value">
+            <td class="fn">ValueError</td>
+            <td class="desc">A function got the right type but a value it can't work with</td>
+            <td class="ex">float("Mercury") — can't convert a non-numeric string</td>
           </tr>
           <tr data-search="traceback read error bottom up">
             <td class="fn">Traceback</td>
@@ -1165,6 +1360,54 @@ os.getcwd()</td>
             <td class="desc">Display math — renders a centered, larger equation on its own line</td>
             <td class="ex">$$Q = \rho A v$$</td>
             <td class="out"><em style="display:block;text-align:center">Q = ρAv</em></td>
+          </tr>
+          <tr data-search="\frac fraction numerator denominator">
+            <td class="fn">\frac{x}{y}</td>
+            <td class="desc">Fraction — first term over second term</td>
+            <td class="ex">$\frac{mass}{volume}$</td>
+            <td class="out">mass/volume, stacked</td>
+          </tr>
+          <tr data-search="^ exponent power superscript">
+            <td class="fn">x^2</td>
+            <td class="desc">Exponent — raises to a power</td>
+            <td class="ex">$x^2$</td>
+            <td class="out">x²</td>
+          </tr>
+          <tr data-search="_ subscript">
+            <td class="fn">x_1</td>
+            <td class="desc">Subscript</td>
+            <td class="ex">$x_1$</td>
+            <td class="out">x₁</td>
+          </tr>
+          <tr data-search="\sqrt square root radical">
+            <td class="fn">\sqrt{x}</td>
+            <td class="desc">Square root</td>
+            <td class="ex">$\sqrt{x}$</td>
+            <td class="out">√x</td>
+          </tr>
+          <tr data-search="\pi \alpha \Delta greek letters">
+            <td class="fn">\pi, \alpha, \Delta</td>
+            <td class="desc">Greek letters</td>
+            <td class="ex">$\pi$, $\alpha$, $\Delta$</td>
+            <td class="out">π, α, Δ</td>
+          </tr>
+          <tr data-search="\int integral">
+            <td class="fn">\int</td>
+            <td class="desc">Integral</td>
+            <td class="ex">$\int$</td>
+            <td class="out">∫</td>
+          </tr>
+          <tr data-search="^\circ degree symbol temperature">
+            <td class="fn">^\circ</td>
+            <td class="desc">Degree symbol</td>
+            <td class="ex">$15^\circ C$</td>
+            <td class="out">15°C</td>
+          </tr>
+          <tr data-search="\infty infinity symbol">
+            <td class="fn">\infty</td>
+            <td class="desc">Infinity</td>
+            <td class="ex">$\infty$</td>
+            <td class="out">∞</td>
           </tr>
           <tr data-search="\sum summation notation add up sigma">
             <td class="fn">$\sum$</td>

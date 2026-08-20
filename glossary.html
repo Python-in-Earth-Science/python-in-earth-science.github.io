@@ -322,6 +322,14 @@
     <p class="term-def">A system for tracking and managing changes to files over time. It lets you see what changed, when, and why — and roll back to earlier versions if something breaks. Git is the most widely used version control system in science and software development.</p>
   </div>
 
+  <div class="term" data-term="upstream">
+    <div class="term-header">
+      <span class="term-word">upstream</span>
+      <span class="term-tag">version control</span>
+    </div>
+    <p class="term-def">Dr. Morey's original version of <strong>course-materials/</strong> on GitHub, as opposed to the copy pulled onto your ExploreHub. When nbgitpuller updates a file, it's pulling the upstream version — if you've edited a file with the same name, nbgitpuller renames your copy with a timestamp rather than overwriting it.</p>
+  </div>
+
   <!-- ── CATEGORY: Computing Environment ── -->
   <div class="category">
     <span class="category-label">Computing Environment</span>
@@ -396,6 +404,22 @@
       <span class="term-tag">files</span>
     </div>
     <p class="term-def">A file that combines written text, code, and the outputs of that code all in one document. The <strong>.ipynb</strong> extension stands for "interactive Python notebook." This is the main file format for this class.</p>
+  </div>
+
+  <div class="term" data-term="markdown cell code cell">
+    <div class="term-header">
+      <span class="term-word">Markdown cell / Code cell</span>
+      <span class="term-tag">files</span>
+    </div>
+    <p class="term-def">The two building blocks of a Jupyter notebook. A <strong>Markdown cell</strong> renders formatted text, headings, and equations; a <strong>Code cell</strong> executes Python. Both are run with <strong>Shift + Enter</strong>.</p>
+  </div>
+
+  <div class="term" data-term="pathlib path">
+    <div class="term-header">
+      <span class="term-word">pathlib / Path</span>
+      <span class="term-tag">files</span>
+    </div>
+    <p class="term-def">A Python module for working with file paths as objects instead of plain strings. A <strong>Path</strong> object (e.g. <strong>Path.home()</strong>) handles the <strong>/</strong> vs <strong>\</strong> difference between operating systems automatically and has built-in methods like <strong>.exists()</strong>, <strong>.stem</strong>, and <strong>.parent</strong>.</p>
   </div>
 
   <div class="term" data-term="file path">
@@ -540,12 +564,60 @@
     <p class="term-def">A named location in memory that stores a value. Created with an assignment statement (e.g. <strong>x = 5</strong>) and can be reused or changed later in your code.</p>
   </div>
 
+  <div class="term" data-term="snake_case">
+    <div class="term-header">
+      <span class="term-word">snake_case</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">Our course convention for naming variables: all lowercase, with words separated by underscores (e.g. <strong>age_ma</strong>, <strong>sample_count</strong>).</p>
+  </div>
+
+  <div class="term" data-term="object">
+    <div class="term-header">
+      <span class="term-word">object</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">In Python, everything is an object — an entity that holds data along with associated metadata and functionality, such as a <strong>type</strong>. A variable name is just a pointer to an object; the object carries the type information, not the name.</p>
+  </div>
+
   <div class="term" data-term="assignment operator">
     <div class="term-header">
       <span class="term-word">assignment operator</span>
       <span class="term-tag">python basics</span>
     </div>
     <p class="term-def">The single equals sign (<strong>=</strong>) used to assign a value to a variable. Not the same as the mathematical "equals" — <strong>x = 5</strong> means "store 5 in x," not "x equals 5."</p>
+  </div>
+
+  <div class="term" data-term="operator operand">
+    <div class="term-header">
+      <span class="term-word">operator / operand</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">An <strong>operator</strong> tells Python to perform an operation (e.g. <strong>+</strong>); the <strong>operands</strong> are the values it acts on. In <strong>3 + 4</strong>, <strong>+</strong> is the operator and <strong>3</strong> and <strong>4</strong> are the operands.</p>
+  </div>
+
+  <div class="term" data-term="arithmetic operators floor division modulus exponentiation">
+    <div class="term-header">
+      <span class="term-word">arithmetic operators</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">Operators that perform math: <strong>+ - * /</strong>, plus three that are easy to forget — <strong>//</strong> (floor division, true division with the fractional part truncated), <strong>%</strong> (modulus, the remainder after division), and <strong>**</strong> (exponentiation, e.g. <strong>11**2</strong>).</p>
+  </div>
+
+  <div class="term" data-term="comparison operators">
+    <div class="term-header">
+      <span class="term-word">comparison operators</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">Operators that compare two values and return <strong>True</strong> or <strong>False</strong>: <strong>== != > < >= <=</strong>.</p>
+  </div>
+
+  <div class="term" data-term="update operators compound assignment">
+    <div class="term-header">
+      <span class="term-word">update operators</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">Shorthand operators that combine an arithmetic operation with reassignment, e.g. <strong>a += 2</strong> is equivalent to <strong>a = a + 2</strong>. Also available: <strong>-= *= /= //=</strong>.</p>
   </div>
 
   <div class="term" data-term="data type">
@@ -564,12 +636,28 @@
     <p class="term-def"><strong>int</strong> is a whole number (e.g. 7); <strong>float</strong> is a number with a decimal point (e.g. 7.0). Python treats these as different data types even when the value looks the same.</p>
   </div>
 
+  <div class="term" data-term="bool boolean">
+    <div class="term-header">
+      <span class="term-word">bool</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">A data type that holds only two possible values: <strong>True</strong> or <strong>False</strong>. Usually the result of a comparison, e.g. <strong>age_check = age_ma >= 61</strong>.</p>
+  </div>
+
   <div class="term" data-term="type()">
     <div class="term-header">
       <span class="term-word">type()</span>
       <span class="term-tag">python basics</span>
     </div>
     <p class="term-def">A built-in function that returns the data type of whatever you pass it (e.g. <strong>type(3.14)</strong> returns <strong>float</strong>). Useful for checking your assumptions about a variable.</p>
+  </div>
+
+  <div class="term" data-term="type casting type conversion">
+    <div class="term-header">
+      <span class="term-word">type casting</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">Converting a value from one data type to another using a built-in function: <strong>int()</strong>, <strong>float()</strong>, or <strong>str()</strong> (e.g. <strong>int(3.14)</strong> returns <strong>3</strong>). Different from <strong>type()</strong>, which only checks a data type rather than changing it.</p>
   </div>
 
   <div class="term" data-term="reassignment">
@@ -602,6 +690,14 @@
     <p class="term-def">An error raised when Python encounters a name (usually a variable) it doesn't recognize — often a typo, or the variable's cell hasn't been run yet.</p>
   </div>
 
+  <div class="term" data-term="valueerror">
+    <div class="term-header">
+      <span class="term-word">ValueError</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">An error raised when a function receives a value of the right type but the wrong content to do what you asked — most often when converting a non-numeric string to a number, e.g. <strong>float("Mercury")</strong>.</p>
+  </div>
+
   <div class="term" data-term="traceback">
     <div class="term-header">
       <span class="term-word">traceback</span>
@@ -622,6 +718,14 @@
       <span class="term-tag">math &amp; notation</span>
     </div>
     <p class="term-def">A typesetting language used to write mathematical notation. In a Jupyter markdown cell, LaTeX written between dollar signs renders as a formatted equation — see the Cheat Sheets page for syntax.</p>
+  </div>
+
+  <div class="term" data-term="inline math display math">
+    <div class="term-header">
+      <span class="term-word">inline math / display math</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def"><strong>Inline math</strong> (single dollar signs, e.g. <strong>$v = d/t$</strong>) renders within a line of text. <strong>Display math</strong> (double dollar signs, e.g. <strong>$$v = d/t$$</strong>) renders centered on its own line, larger.</p>
   </div>
 
   <div class="term" data-term="summation notation">
