@@ -676,6 +676,92 @@
     <p class="term-def">A formatted string literal — written as <strong>f"..."</strong> — that lets you insert variable values directly inside a string using curly braces (e.g. <strong>f"The velocity is {v} cm/yr"</strong>).</p>
   </div>
 
+  <div class="term" data-term="attribute">
+    <div class="term-header">
+      <span class="term-word">attribute</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">A piece of data stored inside an object, accessed with dot notation and <strong>no parentheses</strong> (e.g. <strong>path.suffix</strong>). Contrast with a <strong>method</strong>, which does something rather than just holding a value.</p>
+  </div>
+
+  <div class="term" data-term="method">
+    <div class="term-header">
+      <span class="term-word">method</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">A function that belongs to an object, accessed with dot notation and called <strong>with parentheses</strong> (e.g. <strong>planet_list.append("Saturn")</strong>). Contrast with an <strong>attribute</strong>, which stores data rather than performing an action.</p>
+  </div>
+
+  <div class="term" data-term="parameter">
+    <div class="term-header">
+      <span class="term-word">parameter</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">A named input a function or method is built to accept, listed inside its parentheses when defined (e.g. the <strong>key</strong> in <strong>planet_data.get(key)</strong>). The actual value you pass in when calling it is the <strong>argument</strong>.</p>
+  </div>
+
+<!-- ── CATEGORY: Data Structures ── -->
+  <div class="category">
+    <span class="category-label">Data Structures</span>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="term" data-term="mutable immutable">
+    <div class="term-header">
+      <span class="term-word">mutable / immutable</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">A <strong>mutable</strong> object can be changed in place after it's created — lists and dictionaries are mutable. An <strong>immutable</strong> object cannot — ints, floats, strings, and tuples are immutable; any "change" actually creates a new object.</p>
+  </div>
+
+  <div class="term" data-term="nested list">
+    <div class="term-header">
+      <span class="term-word">nested list</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">A list whose elements are themselves lists (e.g. <strong>[[1, 2], [3, 4]]</strong>). Useful for representing table-like or grid-like data.</p>
+  </div>
+
+  <div class="term" data-term="matrix-style indexing">
+    <div class="term-header">
+      <span class="term-word">matrix-style indexing</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">Accessing an element of a nested list with two sets of square brackets — <strong>outer_list[row][col]</strong> — the first bracket picks the inner list, the second picks the element within it.</p>
+  </div>
+
+  <div class="term" data-term="tuple">
+    <div class="term-header">
+      <span class="term-word">tuple</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">An ordered, <strong>immutable</strong> collection of values, written with parentheses (e.g. <strong>(37.87, -105.32)</strong>). Once created, its contents can't be changed — commonly used for fixed pairs like coordinates.</p>
+  </div>
+
+  <div class="term" data-term="tuple unpacking">
+    <div class="term-header">
+      <span class="term-word">tuple unpacking</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">Assigning each element of a tuple to its own variable in a single line (e.g. <strong>lat, lon = site_coords</strong>). The number of variables on the left must match the number of items in the tuple.</p>
+  </div>
+
+  <div class="term" data-term="dictionary">
+    <div class="term-header">
+      <span class="term-word">dictionary</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">A <strong>mutable</strong> collection of <strong>key</strong>–<strong>value</strong> pairs, written with curly braces (e.g. <strong>{"Earth": 5.97e24}</strong>). Values are looked up by key rather than by position, so order doesn't matter for retrieval.</p>
+  </div>
+
+  <div class="term" data-term="key value">
+    <div class="term-header">
+      <span class="term-word">key / value</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">The two parts of each dictionary entry: the <strong>key</strong> is the label used to look something up (must be unique and immutable, e.g. a string); the <strong>value</strong> is the data stored under that key (can be anything, including another dictionary).</p>
+  </div>
+
 <!-- ── CATEGORY: Debugging ── -->
   <div class="category">
     <span class="category-label">Errors &amp; Debugging</span>
@@ -696,6 +782,38 @@
       <span class="term-tag">errors</span>
     </div>
     <p class="term-def">An error raised when a function receives a value of the right type but the wrong content to do what you asked — most often when converting a non-numeric string to a number, e.g. <strong>float("Mercury")</strong>.</p>
+  </div>
+
+  <div class="term" data-term="indexerror">
+    <div class="term-header">
+      <span class="term-word">IndexError</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">An error raised when you try to access a list index that doesn't exist — most often off-by-one mistakes, or forgetting that indexing starts at <strong>0</strong>, e.g. <strong>planet_list[10]</strong> on a 5-item list.</p>
+  </div>
+
+  <div class="term" data-term="typeerror">
+    <div class="term-header">
+      <span class="term-word">TypeError</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">An error raised when an operation is applied to a data type it doesn't support — e.g. trying to add a string and an int (<strong>"5" + 5</strong>), or indexing into something that isn't a list, tuple, or string.</p>
+  </div>
+
+  <div class="term" data-term="keyerror">
+    <div class="term-header">
+      <span class="term-word">KeyError</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">An error raised when you try to access a dictionary key that doesn't exist using square brackets, e.g. <strong>planet_data["Pluto"]</strong>. Using <strong>.get()</strong> instead returns <strong>None</strong> rather than raising an error.</p>
+  </div>
+
+  <div class="term" data-term="none nonetype">
+    <div class="term-header">
+      <span class="term-word">None / NoneType</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def"><strong>None</strong> is Python's special value representing "nothing here" — it has its own data type, <strong>NoneType</strong>. Commonly returned by <strong>dictionary.get()</strong> when a key isn't found, instead of raising a <strong>KeyError</strong>.</p>
   </div>
 
   <div class="term" data-term="traceback">

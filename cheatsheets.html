@@ -338,6 +338,7 @@
   </div>
   <div class="tabs" id="tabs">
     <button class="tab-btn active" onclick="switchTab('basics', this)">Python Basics</button>
+    <button class="tab-btn" onclick="switchTab('collections', this)">Lists &amp; Dicts</button>
     <button class="tab-btn" onclick="switchTab('markdown', this)">Markdown</button>
     <button class="tab-btn" onclick="switchTab('os', this)">os</button>
     <button class="tab-btn" onclick="switchTab('pathlib', this)">pathlib</button>
@@ -891,6 +892,21 @@
             <td class="desc">A function got the right type but a value it can't work with</td>
             <td class="ex">float("Mercury") — can't convert a non-numeric string</td>
           </tr>
+          <tr data-search="IndexError list index out of range off by one">
+            <td class="fn">IndexError</td>
+            <td class="desc">You asked for a list index that doesn't exist</td>
+            <td class="ex">planet_list[10] on a 5-item list</td>
+          </tr>
+          <tr data-search="TypeError wrong data type operation not supported">
+            <td class="fn">TypeError</td>
+            <td class="desc">An operation was applied to a data type that doesn't support it</td>
+            <td class="ex">"5" + 5 — can't add a string and an int</td>
+          </tr>
+          <tr data-search="KeyError dictionary key not found missing">
+            <td class="fn">KeyError</td>
+            <td class="desc">You asked for a dictionary key that doesn't exist</td>
+            <td class="ex">planet_data["Pluto"] — use .get() to avoid this</td>
+          </tr>
           <tr data-search="traceback read error bottom up">
             <td class="fn">Traceback</td>
             <td class="desc">The red error message Python prints — read from the bottom up</td>
@@ -901,6 +917,203 @@
     </div>
 
   </div><!-- /sheet-basics -->
+
+  <!-- ══════════════════════════════════════
+       SHEET: LISTS & DICTS
+  ══════════════════════════════════════ -->
+  <div class="sheet" id="sheet-collections">
+    <div class="sheet-intro">
+      <div class="sheet-title">Lists &amp; Dicts</div>
+      <p class="sheet-desc">Core syntax for lists, nested lists, tuples, and dictionaries.</p>
+    </div>
+
+    <!-- Lists -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Lists</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="[] list create square brackets">
+            <td class="fn">[item1, item2, ...]</td>
+            <td class="desc">Creates a list — an ordered, mutable collection of values</td>
+            <td class="ex">planet_list = ["Mercury", "Venus", "Earth"]</td>
+            <td class="out">—</td>
+          </tr>
+          <tr data-search="list indexing zero index square brackets position">
+            <td class="fn">my_list[i]</td>
+            <td class="desc">Accesses the item at index i — indexing starts at 0</td>
+            <td class="ex">planet_list[0]</td>
+            <td class="out">'Mercury'</td>
+          </tr>
+          <tr data-search="negative indexing last item list">
+            <td class="fn">my_list[-1]</td>
+            <td class="desc">Negative indices count backward from the end of the list</td>
+            <td class="ex">planet_list[-1]</td>
+            <td class="out">'Earth'</td>
+          </tr>
+          <tr data-search="list slicing range colon subset">
+            <td class="fn">my_list[start:stop]</td>
+            <td class="desc">Slices a sublist from start (included) up to stop (excluded)</td>
+            <td class="ex">planet_list[0:2]</td>
+            <td class="out">['Mercury', 'Venus']</td>
+          </tr>
+          <tr data-search="len length list size number of items">
+            <td class="fn">len(my_list)</td>
+            <td class="desc">Returns the number of items in a list</td>
+            <td class="ex">len(planet_list)</td>
+            <td class="out">3</td>
+          </tr>
+          <tr data-search="append add item end of list method">
+            <td class="fn">my_list.append(x)</td>
+            <td class="desc">Adds an item to the end of a list — modifies it in place</td>
+            <td class="ex">planet_list.append("Mars")</td>
+            <td class="out">['Mercury', 'Venus', 'Earth', 'Mars']</td>
+          </tr>
+          <tr data-search="sum list total add all values">
+            <td class="fn">sum(my_list)</td>
+            <td class="desc">Adds up all the numeric values in a list</td>
+            <td class="ex">sum([1.2, 3.4, 5.6])</td>
+            <td class="out">10.2</td>
+          </tr>
+          <tr data-search="min max list smallest largest value">
+            <td class="fn">min(my_list) / max(my_list)</td>
+            <td class="desc">Returns the smallest / largest value in a list</td>
+            <td class="ex">max([3, 7, 2])</td>
+            <td class="out">7</td>
+          </tr>
+          <tr data-search="in operator membership check list contains">
+            <td class="fn">x in my_list</td>
+            <td class="desc">Checks whether a value exists in a list — returns True/False</td>
+            <td class="ex">"Earth" in planet_list</td>
+            <td class="out">True</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Nested Lists -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Nested Lists</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="nested list list of lists grid table">
+            <td class="fn">[[...], [...]]</td>
+            <td class="desc">A list whose elements are themselves lists — useful for grid-like data</td>
+            <td class="ex">grid = [[1, 2, 3], [4, 5, 6]]</td>
+            <td class="out">—</td>
+          </tr>
+          <tr data-search="matrix style indexing nested list double brackets row column">
+            <td class="fn">nested[row][col]</td>
+            <td class="desc">Matrix-style indexing — first bracket picks the inner list, second picks the element</td>
+            <td class="ex">grid[1][0]</td>
+            <td class="out">4</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tuples -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Tuples</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="() tuple create parentheses immutable">
+            <td class="fn">(item1, item2, ...)</td>
+            <td class="desc">Creates a tuple — an ordered, immutable collection</td>
+            <td class="ex">site_coords = (37.87, -105.32)</td>
+            <td class="out">—</td>
+          </tr>
+          <tr data-search="tuple indexing access element position">
+            <td class="fn">my_tuple[i]</td>
+            <td class="desc">Accesses the item at index i, same as with a list</td>
+            <td class="ex">site_coords[0]</td>
+            <td class="out">37.87</td>
+          </tr>
+          <tr data-search="tuple unpacking assign multiple variables at once">
+            <td class="fn">a, b = my_tuple</td>
+            <td class="desc">Tuple unpacking — assigns each element to its own variable</td>
+            <td class="ex">lat, lon = site_coords</td>
+            <td class="out">lat = 37.87, lon = -105.32</td>
+          </tr>
+          <tr data-search="tuple immutable error cannot change item assignment">
+            <td class="fn">my_tuple[0] = x</td>
+            <td class="desc">Not allowed — tuples are immutable and can't be changed after creation</td>
+            <td class="ex">site_coords[0] = 40.0</td>
+            <td class="out">TypeError</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Dictionaries -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Dictionaries</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="{} dictionary create curly braces key value">
+            <td class="fn">{key: value, ...}</td>
+            <td class="desc">Creates a dictionary — a mutable collection of key-value pairs</td>
+            <td class="ex">planet_data = {"Earth": 5.97e24, "Mars": 6.42e23}</td>
+            <td class="out">—</td>
+          </tr>
+          <tr data-search="dictionary square bracket access value by key">
+            <td class="fn">my_dict[key]</td>
+            <td class="desc">Looks up the value stored under a key — raises KeyError if missing</td>
+            <td class="ex">planet_data["Earth"]</td>
+            <td class="out">5.97e+24</td>
+          </tr>
+          <tr data-search="dict.get() safe lookup default value none">
+            <td class="fn">my_dict.get(key)</td>
+            <td class="desc">Looks up a value like [key], but returns None instead of raising an error if the key is missing</td>
+            <td class="ex">planet_data.get("Pluto")</td>
+            <td class="out">None</td>
+          </tr>
+          <tr data-search="dict.get() default fallback value second argument">
+            <td class="fn">my_dict.get(key, default)</td>
+            <td class="desc">Same as .get(), but returns a custom fallback value instead of None</td>
+            <td class="ex">planet_data.get("Pluto", "not found")</td>
+            <td class="out">'not found'</td>
+          </tr>
+          <tr data-search="in operator membership check dictionary key exists">
+            <td class="fn">key in my_dict</td>
+            <td class="desc">Checks whether a key exists in a dictionary — returns True/False</td>
+            <td class="ex">"Earth" in planet_data</td>
+            <td class="out">True</td>
+          </tr>
+          <tr data-search="dict.items() iterate loop key value pairs">
+            <td class="fn">my_dict.items()</td>
+            <td class="desc">Returns key-value pairs for iterating with a for loop</td>
+            <td class="ex">for name, mass in planet_data.items():
+    print(name, mass)</td>
+            <td class="out">Earth 5.97e+24
+Mars 6.42e+23</td>
+          </tr>
+          <tr data-search="nested dictionary dictionary of dictionaries">
+            <td class="fn">my_dict[key1][key2]</td>
+            <td class="desc">Accesses a value inside a nested dictionary (a dictionary of dictionaries)</td>
+            <td class="ex">planet_data["Earth"]["radius_km"]</td>
+            <td class="out">6371</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /sheet-collections -->
 
   <!-- ══════════════════════════════════════
        SHEET: NUMPY
