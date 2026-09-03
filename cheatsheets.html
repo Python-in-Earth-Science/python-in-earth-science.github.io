@@ -771,6 +771,12 @@
             <td class="ex">5 == 5</td>
             <td class="out">True</td>
           </tr>
+          <tr data-search="is identity operator same object memory">
+            <td class="fn">is</td>
+            <td class="desc">Is the value on the left the exact same object as the value on the right (not just equal in value) — different from ==</td>
+            <td class="ex">list_a is list_b</td>
+            <td class="out">False (even if their values are equal)</td>
+          </tr>
           <tr data-search="!= not equal to comparison operator">
             <td class="fn">!=</td>
             <td class="desc">Is the value on the left unequal to the value on the right</td>
@@ -971,6 +977,18 @@
             <td class="desc">Adds an item to the end of a list — modifies it in place</td>
             <td class="ex">planet_list.append("Mars")</td>
             <td class="out">['Mercury', 'Venus', 'Earth', 'Mars']</td>
+          </tr>
+          <tr data-search="insert add item middle specific position list method">
+            <td class="fn">my_list.insert(i, x)</td>
+            <td class="desc">Inserts an item at a specific index, shifting later items over — modifies it in place</td>
+            <td class="ex">months.insert(6, "July")</td>
+            <td class="out">[..., 'June', 'July', 'August', ...]</td>
+          </tr>
+          <tr data-search="copy duplicate list independent new object">
+            <td class="fn">my_list.copy()</td>
+            <td class="desc">Returns a new, independent list with the same values — use instead of <span class="fn" style="font-size:inherit;">=</span> when you want a separate copy, not just another name for the same list</td>
+            <td class="ex">backup = planet_list.copy()</td>
+            <td class="out">a new list, not the same object</td>
           </tr>
           <tr data-search="sum list total add all values">
             <td class="fn">sum(my_list)</td>

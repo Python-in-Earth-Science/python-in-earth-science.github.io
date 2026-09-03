@@ -714,6 +714,22 @@
     <p class="term-def">A <strong>mutable</strong> object can be changed in place after it's created — lists and dictionaries are mutable. An <strong>immutable</strong> object cannot — ints, floats, strings, and tuples are immutable; any "change" actually creates a new object.</p>
   </div>
 
+  <div class="term" data-term="identity == vs is">
+    <div class="term-header">
+      <span class="term-word">identity (== vs. is)</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def"><strong>==</strong> checks whether two things have the <strong>same value</strong>. <strong>is</strong> checks whether two things are the <strong>exact same object</strong> in memory. Two separately-created lists can hold identical values (<strong>==</strong> is True) while still being two different objects (<strong>is</strong> is False).</p>
+  </div>
+
+  <div class="term" data-term="aliasing">
+    <div class="term-header">
+      <span class="term-word">aliasing</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">When two variable names point to the <strong>same</strong> mutable object rather than separate copies of it — e.g. <strong>list_b = list_a</strong> does not create a new list, it just gives the existing list a second name. Changing <strong>list_b</strong> will also change <strong>list_a</strong>. Use <strong>.copy()</strong> when you want an independent list instead.</p>
+  </div>
+
   <div class="term" data-term="nested list">
     <div class="term-header">
       <span class="term-word">nested list</span>
