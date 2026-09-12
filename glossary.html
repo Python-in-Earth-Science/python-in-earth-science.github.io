@@ -700,6 +700,162 @@
     <p class="term-def">A named input a function or method is built to accept, listed inside its parentheses when defined (e.g. the <strong>key</strong> in <strong>planet_data.get(key)</strong>). The actual value you pass in when calling it is the <strong>argument</strong>.</p>
   </div>
 
+<!-- ── CATEGORY: Functions ── -->
+  <div class="category">
+    <span class="category-label">Functions</span>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="term" data-term="function-fn">
+    <div class="term-header">
+      <span class="term-word">function</span>
+      <span class="term-tag">functions</span>
+    </div>
+    <p class="term-def">A reusable block of code that performs a specific task. Defined using the `def` keyword. When called, a function does something (e.g., os.listdir())</p>
+  </div>
+
+  <div class="term" data-term="module-fn">
+    <div class="term-header">
+      <span class="term-word">module</span>
+      <span class="term-tag">functions</span>
+    </div>
+    <p class="term-def">A file containing Python code that can be imported and used in other Python files. A collection of related functions and tools you import before using (e.g. os, pathlib)</p>
+  </div>
+
+  <div class="term" data-term="dot notation-fn">
+    <div class="term-header">
+      <span class="term-word">dot notation</span>
+      <span class="term-tag">functions</span>
+    </div>
+    <p class="term-def">The syntax used to access a function inside a module or the attributes and methods of an object in Python (e.g., os.getcwd())</p>
+  </div>
+
+  <div class="term" data-term="positional argument">
+    <div class="term-header">
+      <span class="term-word">positional argument</span>
+      <span class="term-tag">functions</span>
+    </div>
+    <p class="term-def">An argument matched to a function's parameter by its <strong>order</strong> in the call, not its name — e.g. in <strong>blackbody_temp(1360, 0.31)</strong>, 1360 fills the first parameter and 0.31 fills the second, whatever they're named.</p>
+  </div>
+
+  <div class="term" data-term="keyword argument">
+    <div class="term-header">
+      <span class="term-word">keyword argument</span>
+      <span class="term-tag">functions</span>
+    </div>
+    <p class="term-def">An argument matched to a function's parameter by <strong>name</strong> rather than order — e.g. <strong>blackbody_temp(a=0.31, S=1360)</strong>. Order doesn't matter once you use keyword arguments.</p>
+  </div>
+
+  <div class="term" data-term="default parameter value">
+    <div class="term-header">
+      <span class="term-word">default parameter value</span>
+      <span class="term-tag">functions</span>
+    </div>
+    <p class="term-def">A fallback value assigned to a parameter in a function's definition (e.g. <strong>stef_boltz=5.67e-8</strong>), used automatically whenever the caller doesn't supply that argument.</p>
+  </div>
+
+  <div class="term" data-term="docstring">
+    <div class="term-header">
+      <span class="term-word">docstring</span>
+      <span class="term-tag">functions</span>
+    </div>
+    <p class="term-def">A triple-quoted string placed as the first line inside a function, documenting what it does, its parameters, and what it returns. Displayed by Python's built-in <strong>help()</strong> function.</p>
+  </div>
+
+  <div class="term" data-term="help()">
+    <div class="term-header">
+      <span class="term-word">help()</span>
+      <span class="term-tag">functions</span>
+    </div>
+    <p class="term-def">A built-in function that displays another function's docstring and parameter list — works on functions you wrote yourself and on functions from any module (e.g. <strong>help(math.sqrt)</strong>).</p>
+  </div>
+
+  <div class="term" data-term="dir()">
+    <div class="term-header">
+      <span class="term-word">dir()</span>
+      <span class="term-tag">functions</span>
+    </div>
+    <p class="term-def">A built-in function that lists everything (functions, constants, etc.) available inside a module — useful for browsing an unfamiliar module, e.g. <strong>dir(stats)</strong> after <strong>import statistics as stats</strong>.</p>
+  </div>
+
+  <div class="term" data-term="local scope">
+    <div class="term-header">
+      <span class="term-word">local scope</span>
+      <span class="term-tag">functions</span>
+    </div>
+    <p class="term-def">A variable created inside a function exists only inside that function — once the function returns, the variable disappears and can't be accessed from outside.</p>
+  </div>
+
+  <div class="term" data-term="global scope">
+    <div class="term-header">
+      <span class="term-word">global scope</span>
+      <span class="term-tag">functions</span>
+    </div>
+    <p class="term-def">A variable defined outside every function exists for the rest of the notebook and can be read by any function defined afterward, without needing to be passed in as an argument.</p>
+  </div>
+
+  <div class="term" data-term="singleton">
+    <div class="term-header">
+      <span class="term-word">singleton (tuple)</span>
+      <span class="term-tag">functions</span>
+    </div>
+    <p class="term-def">A one-item tuple, written with a trailing comma: <strong>(5,)</strong>. Without the comma, <strong>(5)</strong> is just the integer 5 in parentheses, not a tuple — an easy gotcha when a function returns exactly one value wrapped this way.</p>
+  </div>
+
+<!-- ── CATEGORY: Control Flow ── -->
+  <div class="category">
+    <span class="category-label">Control Flow</span>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="term" data-term="if elif else">
+    <div class="term-header">
+      <span class="term-word">if / elif / else</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">The keywords used to branch code execution based on a condition. <strong>if</strong> runs a block when its condition is True; <strong>elif</strong> ("else if") checks another condition if the previous ones were False; <strong>else</strong> catches whatever's left.</p>
+  </div>
+
+  <div class="term" data-term="logical operator">
+    <div class="term-header">
+      <span class="term-word">logical operator (and / or / not)</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">Keywords used to combine or invert conditions. <strong>and</strong> is True only if both conditions are true; <strong>or</strong> is True if either is true; <strong>not</strong> inverts a condition (True becomes False and vice versa).</p>
+  </div>
+
+  <div class="term" data-term="membership operator">
+    <div class="term-header">
+      <span class="term-word">membership operator (in / not in)</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">Tests whether a value exists (<strong>in</strong>) or doesn't exist (<strong>not in</strong>) inside a list, string, or other collection — e.g. <strong>"severe" in burn_severity</strong>.</p>
+  </div>
+
+  <div class="term" data-term="nested if statement">
+    <div class="term-header">
+      <span class="term-word">nested if statement</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">An <strong>if</strong> statement written inside another <strong>if</strong> statement's indented block, so the inner condition is only checked once the outer condition has already been met.</p>
+  </div>
+
+  <div class="term" data-term="ternary operator">
+    <div class="term-header">
+      <span class="term-word">ternary operator</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A one-line shorthand for a simple if/else that assigns a value: <strong>x = a if condition else b</strong>. Functionally identical to the full if/else form, just more compact.</p>
+  </div>
+
+  <div class="term" data-term="pass keyword">
+    <div class="term-header">
+      <span class="term-word">pass</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A keyword that does nothing — used as a placeholder to keep a code block syntactically valid while it's still being written (e.g. an empty if-block).</p>
+  </div>
+
 <!-- ── CATEGORY: Data Structures ── -->
   <div class="category">
     <span class="category-label">Data Structures</span>
@@ -712,6 +868,22 @@
       <span class="term-tag">data structures</span>
     </div>
     <p class="term-def">A <strong>mutable</strong> object can be changed in place after it's created — lists and dictionaries are mutable. An <strong>immutable</strong> object cannot — ints, floats, strings, and tuples are immutable; any "change" actually creates a new object.</p>
+  </div>
+
+  <div class="term" data-term=".insert()">
+    <div class="term-header">
+      <span class="term-word">.insert()</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">A list method that inserts an item at a specific index, shifting later items over to make room — modifies the list in place. E.g. <strong>months.insert(6, "July")</strong>.</p>
+  </div>
+
+  <div class="term" data-term=".copy()">
+    <div class="term-header">
+      <span class="term-word">.copy()</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">A list method that returns a new, independent list with the same values — use it instead of plain <strong>=</strong> when you want a separate copy rather than another name for the same list (see <strong>aliasing</strong>).</p>
   </div>
 
   <div class="term" data-term="identity == vs is">

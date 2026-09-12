@@ -339,6 +339,8 @@
   <div class="tabs" id="tabs">
     <button class="tab-btn active" onclick="switchTab('basics', this)">Python Basics</button>
     <button class="tab-btn" onclick="switchTab('collections', this)">Lists &amp; Dicts</button>
+    <button class="tab-btn" onclick="switchTab('functions', this)">Functions</button>
+    <button class="tab-btn" onclick="switchTab('control-flow', this)">Control Flow</button>
     <button class="tab-btn" onclick="switchTab('markdown', this)">Markdown</button>
     <button class="tab-btn" onclick="switchTab('os', this)">os</button>
     <button class="tab-btn" onclick="switchTab('pathlib', this)">pathlib</button>
@@ -1132,6 +1134,296 @@ Mars 6.42e+23</td>
     </div>
 
   </div><!-- /sheet-collections -->
+
+  <!-- ══════════════════════════════════════
+       SHEET: FUNCTIONS
+  ══════════════════════════════════════ -->
+  <div class="sheet" id="sheet-functions">
+    <div class="sheet-intro">
+      <div class="sheet-title">Functions</div>
+      <p class="sheet-desc">Define reusable blocks of code with <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">def</code> — covers defining and calling functions, documenting them, handling multiple return values, and using functions from someone else's module.</p>
+    </div>
+
+    <!-- Defining & Calling -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Defining &amp; Calling</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="def define function keyword">
+            <td class="fn">def name(params):</td>
+            <td class="desc">Defines a new function — the indented block below runs each time the function is called</td>
+            <td class="ex">def blackbody_temp(S, a):<br>&nbsp;&nbsp;&nbsp;&nbsp;T = ((1-a)*S/(4*5.67e-8))**(1/4)<br>&nbsp;&nbsp;&nbsp;&nbsp;return T</td>
+            <td class="out">(no output — just defines the function)</td>
+          </tr>
+          <tr data-search="return statement send value back function">
+            <td class="fn">return value</td>
+            <td class="desc">Sends a value back to wherever the function was called, and ends the function</td>
+            <td class="ex">return T</td>
+            <td class="out">hands T back to the caller</td>
+          </tr>
+          <tr data-search="positional argument order call function">
+            <td class="fn">function(value1, value2)</td>
+            <td class="desc">Positional argument — matched to a parameter by its order, not its name</td>
+            <td class="ex">blackbody_temp(1360, 0.31)</td>
+            <td class="out">253.62</td>
+          </tr>
+          <tr data-search="keyword argument name call function param=value">
+            <td class="fn">function(param=value)</td>
+            <td class="desc">Keyword argument — matched to a parameter by name, so order doesn't matter</td>
+            <td class="ex">blackbody_temp(a=0.31, S=1360)</td>
+            <td class="out">253.62 (same result, different order)</td>
+          </tr>
+          <tr data-search="default parameter value optional argument fallback">
+            <td class="fn">def name(param=default):</td>
+            <td class="desc">Gives a parameter a fallback value, used only if the caller doesn't supply one</td>
+            <td class="ex">def blackbody_temp(S, a, stef_boltz=5.67e-8):</td>
+            <td class="out">stef_boltz only needs to be passed to override it</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Multiple Return Values -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Multiple Return Values</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="return multiple values tuple comma">
+            <td class="fn">return value1, value2</td>
+            <td class="desc">Returns more than one value at once, packaged together as a tuple</td>
+            <td class="ex">def check_debris_flow(I, D):<br>&nbsp;&nbsp;&nbsp;&nbsp;threshold = 14.82 * D**-0.39<br>&nbsp;&nbsp;&nbsp;&nbsp;debris_flow = I >= threshold<br>&nbsp;&nbsp;&nbsp;&nbsp;return threshold, debris_flow</td>
+            <td class="out">(returns a 2-item tuple)</td>
+          </tr>
+          <tr data-search="unpacking multiple return values tuple assign">
+            <td class="fn">a, b = function()</td>
+            <td class="desc">Unpacks a returned tuple directly into separate named variables</td>
+            <td class="ex">threshold, debris_flow = check_debris_flow(6, 12.5)</td>
+            <td class="out">threshold = 5.53, debris_flow = True</td>
+          </tr>
+          <tr data-search="singleton tuple one item comma gotcha">
+            <td class="fn">(x,) vs (x)</td>
+            <td class="desc">A single value in parentheses is <strong>not</strong> a tuple — the trailing comma is what makes it a one-item tuple</td>
+            <td class="ex">type((5,))<br>type((5))</td>
+            <td class="out">tuple<br>int</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Documentation & Introspection -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Documentation &amp; Introspection</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="docstring documentation triple quote function">
+            <td class="fn">"""docstring"""</td>
+            <td class="desc">A triple-quoted string as the first line inside a function, documenting what it does, its parameters, and its return value</td>
+            <td class="ex">def runoff_rate(P, ET, S):<br>&nbsp;&nbsp;&nbsp;&nbsp;"""Calculate a storm's runoff rate."""<br>&nbsp;&nbsp;&nbsp;&nbsp;return P - ET - S</td>
+            <td class="out">(shows up when you call help())</td>
+          </tr>
+          <tr data-search="help function docstring display">
+            <td class="fn">help(function)</td>
+            <td class="desc">Displays a function's docstring along with its parameter list</td>
+            <td class="ex">help(runoff_rate)</td>
+            <td class="out">Help on function runoff_rate...</td>
+          </tr>
+          <tr data-search="dir list contents module introspection">
+            <td class="fn">dir(module)</td>
+            <td class="desc">Lists everything (functions, constants, etc.) available inside a module</td>
+            <td class="ex">dir(stats)</td>
+            <td class="out">['NormalDist', 'mean', 'median', ...]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Using Other People's Modules -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Using Other People's Modules</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="import as alias shortened module name">
+            <td class="fn">import module as alias</td>
+            <td class="desc">Imports a module under a shorter name you choose</td>
+            <td class="ex">import statistics as stats</td>
+            <td class="out">(no output — stats now refers to the module)</td>
+          </tr>
+          <tr data-search="statistics mean average list">
+            <td class="fn">stats.mean(list)</td>
+            <td class="desc">Calculates the mean (average) of a list of numbers</td>
+            <td class="ex">stats.mean(postfire_rates)</td>
+            <td class="out">5.38</td>
+          </tr>
+          <tr data-search="statistics median middle value list">
+            <td class="fn">stats.median(list)</td>
+            <td class="desc">Calculates the median (middle value) of a list of numbers</td>
+            <td class="ex">stats.median(postfire_rates)</td>
+            <td class="out">3.75</td>
+          </tr>
+          <tr data-search="statistics standard deviation spread list">
+            <td class="fn">stats.stdev(list)</td>
+            <td class="desc">Calculates the sample standard deviation of a list of numbers</td>
+            <td class="ex">stats.stdev(postfire_rates)</td>
+            <td class="out">4.32</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Scope -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Scope</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Concept</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="local scope variable inside function disappears">
+            <td class="fn">local variable</td>
+            <td class="desc">A variable created inside a function only exists inside that function — it disappears once the function finishes running</td>
+            <td class="ex">def add_one(x):<br>&nbsp;&nbsp;&nbsp;&nbsp;result = x + 1<br>&nbsp;&nbsp;&nbsp;&nbsp;return result<br>print(result)</td>
+            <td class="out">NameError — result is local to add_one()</td>
+          </tr>
+          <tr data-search="global scope variable outside function">
+            <td class="fn">global variable</td>
+            <td class="desc">A variable defined outside every function — exists for the rest of the notebook and can be read by functions defined afterward</td>
+            <td class="ex">gully_names = [...] &nbsp;(defined at the top of the notebook)</td>
+            <td class="out">readable inside any function called afterward</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div><!-- /sheet-functions -->
+
+  <!-- ══════════════════════════════════════
+       SHEET: CONTROL FLOW
+  ══════════════════════════════════════ -->
+  <div class="sheet" id="sheet-control-flow">
+    <div class="sheet-intro">
+      <div class="sheet-title">Control Flow</div>
+      <p class="sheet-desc">Branch your code's execution with <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">if</code>/<code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">elif</code>/<code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">else</code>, combine conditions, and nest decisions inside decisions.</p>
+    </div>
+
+    <!-- Branching -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Branching</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="if statement condition branch">
+            <td class="fn">if condition:</td>
+            <td class="desc">Runs the indented block only when the condition is True</td>
+            <td class="ex">if debris_flow:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Debris flow predicted.")</td>
+            <td class="out">prints only when debris_flow is True</td>
+          </tr>
+          <tr data-search="if else statement two branches">
+            <td class="fn">if condition: ... else: ...</td>
+            <td class="desc">Runs one block if the condition is True, the other if it's False</td>
+            <td class="ex">if debris_flow:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Debris flow predicted.")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("No debris flow predicted.")</td>
+            <td class="out">exactly one of the two lines prints</td>
+          </tr>
+          <tr data-search="if elif else multiple branches">
+            <td class="fn">if ...: elif ...: else: ...</td>
+            <td class="desc">Checks conditions in order and runs the first one that matches; else catches everything else</td>
+            <td class="ex">if postfire_infiltration[n] < 0.2*normal_infiltration[n]:<br>&nbsp;&nbsp;&nbsp;&nbsp;category = "severe reduction"<br>elif postfire_infiltration[n] < 0.6*normal_infiltration[n]:<br>&nbsp;&nbsp;&nbsp;&nbsp;category = "moderate reduction"<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;category = "minor reduction"</td>
+            <td class="out">category is set to exactly one of the three strings</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Combining & Testing Conditions -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Combining &amp; Testing Conditions</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="and logical operator both conditions true">
+            <td class="fn">condition1 and condition2</td>
+            <td class="desc">True only if BOTH conditions are true</td>
+            <td class="ex">drainage_area[n] > 1 and postfire_infiltration[n] < 5</td>
+            <td class="out">True only for Geer Canyon (area 7.325, infiltration 3.5)</td>
+          </tr>
+          <tr data-search="or logical operator either condition true">
+            <td class="fn">condition1 or condition2</td>
+            <td class="desc">True if EITHER condition is true (or both)</td>
+            <td class="ex">drainage_area[n] > 1 or postfire_infiltration[n] < 3</td>
+            <td class="out">True for Heil Ranch Gully 1 and Geer Canyon</td>
+          </tr>
+          <tr data-search="not logical operator invert negate">
+            <td class="fn">not condition</td>
+            <td class="desc">Inverts a condition — True becomes False, False becomes True</td>
+            <td class="ex">not postfire_infiltration[n] < 5</td>
+            <td class="out">True when postfire_infiltration[n] is 5 or more</td>
+          </tr>
+          <tr data-search="in not in membership operator check contains">
+            <td class="fn">value in sequence<br>value not in sequence</td>
+            <td class="desc">Tests whether a value exists (or doesn't) inside a list, string, or other collection — also covered under Lists</td>
+            <td class="ex">"severe" in burn_severity</td>
+            <td class="out">True</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Nested & Shorthand -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Nested &amp; Shorthand</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="nested if statement inside another decision">
+            <td class="fn">if ...:<br>&nbsp;&nbsp;&nbsp;&nbsp;if ...:</td>
+            <td class="desc">An if statement inside another if statement's block — the inner check only runs once the outer condition is already True</td>
+            <td class="ex">if severity[n] == "severe":<br>&nbsp;&nbsp;&nbsp;&nbsp;if recovery == "severe reduction":<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("highest concern")</td>
+            <td class="out">only prints for gullies that are both severely burned AND severely reduced</td>
+          </tr>
+          <tr data-search="ternary operator if else shorthand one line">
+            <td class="fn">x = a if condition else b</td>
+            <td class="desc">A one-line shorthand for a simple if/else that assigns a value</td>
+            <td class="ex">priority = "high" if severity[n] == "severe" else "standard"</td>
+            <td class="out">same result as the full if/else version, in one line</td>
+          </tr>
+          <tr data-search="pass keyword placeholder empty block do nothing">
+            <td class="fn">pass</td>
+            <td class="desc">A placeholder that does nothing — keeps a block syntactically valid while you're still writing it</td>
+            <td class="ex">if severity[n] == "severe":<br>&nbsp;&nbsp;&nbsp;&nbsp;pass &nbsp;# TODO<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("moderate")</td>
+            <td class="out">no error, no output yet for the severe case</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div><!-- /sheet-control-flow -->
 
   <!-- ══════════════════════════════════════
        SHEET: NUMPY
