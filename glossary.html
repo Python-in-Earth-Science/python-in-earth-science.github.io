@@ -700,6 +700,38 @@
     <p class="term-def">A named input a function or method is built to accept, listed inside its parentheses when defined (e.g. the <strong>key</strong> in <strong>planet_data.get(key)</strong>). The actual value you pass in when calling it is the <strong>argument</strong>.</p>
   </div>
 
+  <div class="term" data-term="built-in function">
+    <div class="term-header">
+      <span class="term-word">built-in function</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">A function that is always available in Python without importing anything — e.g. <strong>print()</strong>, <strong>len()</strong>, <strong>type()</strong>, <strong>sum()</strong>, <strong>range()</strong>, <strong>zip()</strong>, and <strong>enumerate()</strong>. Functions that live inside a module (like <strong>math.sqrt()</strong>) need an <strong>import</strong> first.</p>
+  </div>
+
+  <div class="term" data-term="len() sum() min() max() abs()">
+    <div class="term-header">
+      <span class="term-word">len() / sum() / min() / max() / abs()</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">Built-in functions for summarizing numbers and collections. <strong>len(x)</strong> counts the items, <strong>sum(x)</strong> adds them up, and <strong>min(x)</strong> / <strong>max(x)</strong> find the smallest and largest. <strong>max()</strong> and <strong>min()</strong> also work on separate values — <strong>max(0, -3.2)</strong> gives 0, a compact way to keep a value from going below zero. <strong>abs(x)</strong> drops the minus sign.</p>
+  </div>
+
+  <div class="term" data-term="end argument print">
+    <div class="term-header">
+      <span class="term-word">end (print argument)</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">An optional argument to <strong>print()</strong> that sets what gets printed after the text. The default is a new line; <strong>print("*", end=" ")</strong> uses a space instead, so the next print continues on the same line. A bare <strong>print()</strong> just starts a new line, which is how a nested loop can finish a row.</p>
+  </div>
+
+  <div class="term" data-term="floating-point error rounding drift">
+    <div class="term-header">
+      <span class="term-word">floating-point error</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">Computers store decimals in binary, so numbers like 0.1 can't be represented exactly. Tiny errors add up when you repeat an operation: adding 0.1 ten times gives 0.9999999999999999, not 1.0. That's why we count with <strong>range()</strong> (exact whole numbers) and divide fresh each time, instead of building decimals by repeated addition.</p>
+  </div>
+
 <!-- ── CATEGORY: Functions ── -->
   <div class="category">
     <span class="category-label">Functions</span>
@@ -856,6 +888,142 @@
     <p class="term-def">A keyword that does nothing — used as a placeholder to keep a code block syntactically valid while it's still being written (e.g. an empty if-block).</p>
   </div>
 
+  <div class="term" data-term="loop iteration iterate">
+    <div class="term-header">
+      <span class="term-word">loop / iteration</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">Code that repeats. Each trip through a loop's indented block is one <strong>iteration</strong> (or "pass"). Python has two kinds of loops: <strong>while</strong> loops and <strong>for</strong> loops.</p>
+  </div>
+
+  <div class="term" data-term="while loop">
+    <div class="term-header">
+      <span class="term-word">while loop</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A loop that repeats <strong>as long as a condition stays True</strong>. Useful when you don't know in advance how many repeats you'll need (e.g. <strong>while rw < 1.0:</strong>). You are responsible for changing something inside the loop that will eventually make the condition False — otherwise you get an <strong>infinite loop</strong>.</p>
+  </div>
+
+  <div class="term" data-term="for loop">
+    <div class="term-header">
+      <span class="term-word">for loop</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A loop that runs <strong>once for each item</strong> in a collection — a list, a dictionary's items, a range, and so on: <strong>for rw in rw_values:</strong>. When it runs out of items, the loop is done.</p>
+  </div>
+
+  <div class="term" data-term="loop variable">
+    <div class="term-header">
+      <span class="term-word">loop variable</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">The variable a <strong>for</strong> loop creates to hold the current item on each pass, e.g. <strong>rw</strong> in <strong>for rw in rw_values:</strong>. Its name is up to you, so pick one that says what it holds. It hands you the <strong>value</strong>, not its position in the list.</p>
+  </div>
+
+  <div class="term" data-term="iterable">
+    <div class="term-header">
+      <span class="term-word">iterable</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">Anything a <strong>for</strong> loop can go through one item at a time: a list, tuple, string, range, or the result of <strong>.items()</strong>, <strong>zip()</strong>, or <strong>enumerate()</strong>.</p>
+  </div>
+
+  <div class="term" data-term="infinite loop">
+    <div class="term-header">
+      <span class="term-word">infinite loop</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A loop that never stops because its condition never becomes False — usually a forgotten update line in a <strong>while</strong> loop. It isn't an error message; the cell just keeps running. Click the ■ (interrupt kernel) button in the toolbar, then clear the cell's output.</p>
+  </div>
+
+  <div class="term" data-term="count-controlled loop">
+    <div class="term-header">
+      <span class="term-word">count-controlled loop</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A loop whose number of repeats is fixed before it starts, such as <strong>for i in range(11):</strong> (exactly 11 passes). Contrast with a <strong>while</strong> loop, which repeats until a condition changes.</p>
+  </div>
+
+  <div class="term" data-term="range()">
+    <div class="term-header">
+      <span class="term-word">range()</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A built-in function that produces a sequence of whole numbers. <strong>range(5)</strong> gives 0, 1, 2, 3, 4 — it stops before the number you give it. <strong>range(start, stop, step)</strong> lets you choose where to begin and how big each step is, e.g. <strong>range(5, 50, 5)</strong> gives 5, 10, ..., 45.</p>
+  </div>
+
+  <div class="term" data-term="zip()">
+    <div class="term-header">
+      <span class="term-word">zip()</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A built-in function that pairs up items from two (or more) lists by position, so a loop can walk through them together: <strong>for c, fs in zip(cohesion_values, fs_values):</strong>. It stops at the shortest list. Combine it with <strong>dict()</strong> to build a dictionary: <strong>dict(zip(keys, values))</strong>.</p>
+  </div>
+
+  <div class="term" data-term="enumerate()">
+    <div class="term-header">
+      <span class="term-word">enumerate()</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A built-in function that gives you each item's <strong>position and value</strong> together: <strong>for i, x in enumerate(my_list):</strong>. Positions start at 0. It replaces a manual position counter.</p>
+  </div>
+
+  <div class="term" data-term="break">
+    <div class="term-header">
+      <span class="term-word">break</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A keyword that immediately exits the loop it sits in. In a nested loop it exits only the <strong>innermost</strong> loop — the outer loop carries on with its next item.</p>
+  </div>
+
+  <div class="term" data-term="continue">
+    <div class="term-header">
+      <span class="term-word">continue</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A keyword that skips the rest of the current pass and jumps straight to the next pass of the loop. Useful for skipping items you don't want to process, such as a missing value.</p>
+  </div>
+
+  <div class="term" data-term="nested loop outer loop inner loop">
+    <div class="term-header">
+      <span class="term-word">nested loop (outer / inner loop)</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A loop inside another loop. For each pass of the <strong>outer</strong> loop, the <strong>inner</strong> loop runs all the way through and then starts over. The innermost line runs (outer passes) × (inner passes) times.</p>
+  </div>
+
+  <div class="term" data-term="counter accumulator running total">
+    <div class="term-header">
+      <span class="term-word">counter / accumulator</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A variable that starts at a value (usually 0) and is updated on each pass of a loop to keep a running count or total, e.g. <strong>total += x</strong> or <strong>count += 1</strong>. If it should start fresh for each item of an outer loop, create it inside the outer loop, before the inner loop.</p>
+  </div>
+
+  <div class="term" data-term="flag variable">
+    <div class="term-header">
+      <span class="term-word">flag variable</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A True/False variable that remembers whether something happened inside a loop — e.g. <strong>found = False</strong>, set to True when a match turns up. After the loop, <strong>if not found:</strong> lets you tell that the loop finished without finding anything.</p>
+  </div>
+
+  <div class="term" data-term="sentinel value">
+    <div class="term-header">
+      <span class="term-word">sentinel value</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A placeholder value that means "nothing yet." Setting <strong>previous = None</strong> before a loop and checking <strong>if previous is None:</strong> lets you handle the first pass, when there is no previous item to compare against.</p>
+  </div>
+
+  <div class="term" data-term="running maximum best so far">
+    <div class="term-header">
+      <span class="term-word">running maximum ("best so far")</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A pattern where a variable holds the largest (or smallest) value seen so far and is updated whenever the loop finds a better one, often along with the item that produced it. Start it at a value that is guaranteed to be beaten, like <strong>0</strong> or <strong>None</strong>.</p>
+  </div>
+
 <!-- ── CATEGORY: Data Structures ── -->
   <div class="category">
     <span class="category-label">Data Structures</span>
@@ -950,6 +1118,86 @@
     <p class="term-def">The two parts of each dictionary entry: the <strong>key</strong> is the label used to look something up (must be unique and immutable, e.g. a string); the <strong>value</strong> is the data stored under that key (can be anything, including another dictionary).</p>
   </div>
 
+  <div class="term" data-term=".append()">
+    <div class="term-header">
+      <span class="term-word">.append()</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">A list method that adds an item to the <strong>end</strong> of a list: <strong>fs_values.append(fs)</strong>. Usually paired with an empty list (<strong>fs_values = []</strong>) that a loop fills up one item at a time.</p>
+  </div>
+
+  <div class="term" data-term=".index()">
+    <div class="term-header">
+      <span class="term-word">.index()</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">A list method that returns the <strong>position</strong> of the first matching item: <strong>[10, 20, 30].index(20)</strong> gives 1. Raises a ValueError if the item isn't in the list.</p>
+  </div>
+
+  <div class="term" data-term=".sort()">
+    <div class="term-header">
+      <span class="term-word">.sort()</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">A list method that sorts the list <strong>in place</strong> — it changes the list itself and returns nothing: <strong>my_list.sort()</strong>.</p>
+  </div>
+
+  <div class="term" data-term=".pop() .remove()">
+    <div class="term-header">
+      <span class="term-word">.pop() / .remove()</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">Two ways to take an item out of a list. <strong>.pop(i)</strong> removes the item at <strong>position</strong> i and gives it back (the last item if you leave i out); <strong>.remove(x)</strong> removes the first item equal to the <strong>value</strong> x.</p>
+  </div>
+
+  <div class="term" data-term="pre-allocation">
+    <div class="term-header">
+      <span class="term-word">pre-allocation</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">Making a list with the right number of placeholder slots before filling it — e.g. <strong>[None] * 6</strong> — so you can write into a position with <strong>my_list[i] = value</strong>. You can't assign to a position that doesn't exist yet (that raises an IndexError).</p>
+  </div>
+
+  <div class="term" data-term=".keys() .values() .items()">
+    <div class="term-header">
+      <span class="term-word">.keys() / .values() / .items()</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">Dictionary methods for getting at the contents. <strong>.keys()</strong> gives all the keys, <strong>.values()</strong> all the values, and <strong>.items()</strong> the key–value pairs together. <strong>.items()</strong> is what lets a for loop unpack both at once: <strong>for name, params in scenarios.items():</strong>. Forget it and you only get the keys, so Python raises "too many values to unpack."</p>
+  </div>
+
+  <div class="term" data-term=".get()">
+    <div class="term-header">
+      <span class="term-word">.get()</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">A dictionary method that looks up a key safely: <strong>my_dict.get(key, default)</strong> returns the default value (or None if you give none) instead of raising a KeyError when the key is missing.</p>
+  </div>
+
+  <div class="term" data-term=".update()">
+    <div class="term-header">
+      <span class="term-word">.update()</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">A dictionary method that adds new key–value pairs, or overwrites the values of keys that already exist: <strong>scenario.update({"rw": 0.5})</strong>.</p>
+  </div>
+
+  <div class="term" data-term="dictionary unpacking **">
+    <div class="term-header">
+      <span class="term-word">dictionary unpacking (**)</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">Putting <strong>**</strong> before a dictionary in a function call unpacks each key–value pair into a keyword argument: <strong>factor_of_safety(**params)</strong>. It only works when the dictionary's keys exactly match the function's parameter names. You can add one more keyword argument, <strong>factor_of_safety(**params, rw=0.5)</strong>, as long as <strong>rw</strong> isn't also a key in the dictionary.</p>
+  </div>
+
+  <div class="term" data-term="nested dictionary dict of dicts dict of lists">
+    <div class="term-header">
+      <span class="term-word">nested dictionary (dict of dicts / dict of lists)</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">A dictionary whose values are themselves dictionaries or lists. Use one key per level to dig in: <strong>gully_profiles["Geer-Canyon"]["area_km2"]</strong>. Looping through one takes a nested loop — the inner loop walks through whatever the outer loop hands it. A <strong>dictionary of lists</strong> (one list of results per scenario) is a common way to store the output of a nested loop.</p>
+  </div>
+
 <!-- ── CATEGORY: Debugging ── -->
   <div class="category">
     <span class="category-label">Errors &amp; Debugging</span>
@@ -1010,6 +1258,30 @@
       <span class="term-tag">errors</span>
     </div>
     <p class="term-def">The block of red text Python prints when your code hits an error. Read it from the <strong>bottom up</strong> — the last line names the error type and gives a short message; the lines above point to where in your code it happened.</p>
+  </div>
+
+  <div class="term" data-term="shadowing">
+    <div class="term-header">
+      <span class="term-word">shadowing</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">Reusing a variable name so the new one hides the old one — for example using the same loop variable for both an outer and an inner loop. Python raises no error; the outer variable just gets overwritten. Give every loop variable its own descriptive name.</p>
+  </div>
+
+  <div class="term" data-term="logic error">
+    <div class="term-header">
+      <span class="term-word">logic error</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">A bug that produces no error message: the code runs fine but gives the wrong answer (an indented line in the wrong place, or a counter that never resets). Catch them by checking results against something you know, such as whether the pieces add up to the total.</p>
+  </div>
+
+  <div class="term" data-term="tracing print debugging">
+    <div class="term-header">
+      <span class="term-word">tracing (print debugging)</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">Adding <strong>print()</strong> statements inside a loop to watch what each variable is on every pass. Shrink the problem first (2 items instead of 200) so the output is easy to read.</p>
   </div>
 
 <!-- ── CATEGORY: Math & Notation ── -->

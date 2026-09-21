@@ -341,6 +341,7 @@
     <button class="tab-btn" onclick="switchTab('collections', this)">Lists &amp; Dicts</button>
     <button class="tab-btn" onclick="switchTab('functions', this)">Functions</button>
     <button class="tab-btn" onclick="switchTab('control-flow', this)">Control Flow</button>
+    <button class="tab-btn" onclick="switchTab('loops', this)">Loops</button>
     <button class="tab-btn" onclick="switchTab('markdown', this)">Markdown</button>
     <button class="tab-btn" onclick="switchTab('os', this)">os</button>
     <button class="tab-btn" onclick="switchTab('pathlib', this)">pathlib</button>
@@ -877,6 +878,55 @@
             <td class="ex">f"{3.14159:.2f}"</td>
             <td class="out">3.14</td>
           </tr>
+          <tr data-search="f-string align width right left pad column">
+            <td class="fn">f"{v:&gt;8}"  /  f"{v:&lt;8}"</td>
+            <td class="desc">Pads to a set width: &gt; right-aligns and &lt; left-aligns (handy for lining up columns)</td>
+            <td class="ex">print(f"{'Mars':&gt;8}|")<br>print(f"{'Mars':&lt;8}|")</td>
+            <td class="out">    Mars|<br>Mars    |</td>
+          </tr>
+          <tr data-search="f-string width precision decimal align 6.1f">
+            <td class="fn">f"{v:6.1f}"</td>
+            <td class="desc">Combines a width (6 characters) with a precision (1 decimal place) so numbers line up</td>
+            <td class="ex">print(f"[{3.14159:6.1f}]")</td>
+            <td class="out">[   3.1]</td>
+          </tr>
+          <tr data-search="f-string thousands separator comma commas .0f whole number">
+            <td class="fn">f"{v:,.0f}"</td>
+            <td class="desc">Adds thousands separators and rounds to a whole number</td>
+            <td class="ex">print(f"{1234567.891:,.0f}")</td>
+            <td class="out">1,234,568</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Built-in Functions -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Built-in Functions</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="abs absolute value built-in">
+            <td class="fn">abs(x)</td>
+            <td class="desc">Absolute value of x (drops the minus sign)</td>
+            <td class="ex">abs(-4.5)</td>
+            <td class="out">4.5</td>
+          </tr>
+          <tr data-search="print end same line space">
+            <td class="fn">print(x, end=" ")</td>
+            <td class="desc">Ends the print with a space instead of a new line, so the next print continues on the same line</td>
+            <td class="ex">print("a", end=" ")<br>print("b")</td>
+            <td class="out">a b</td>
+          </tr>
+          <tr data-search="print blank line new line end row">
+            <td class="fn">print()</td>
+            <td class="desc">With nothing inside, just starts a new line (for example, to end a row of output)</td>
+            <td class="ex">print("a", end=" ")<br>print("b", end=" ")<br>print()<br>print("c")</td>
+            <td class="out">a b <br>c</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -919,6 +969,31 @@
             <td class="fn">Traceback</td>
             <td class="desc">The red error message Python prints — read from the bottom up</td>
             <td class="ex">Last line = error type + message; lines above = where it happened</td>
+          </tr>
+          <tr data-search="ValueError too many values to unpack for loop items zip enumerate">
+            <td class="fn">ValueError: too many values to unpack</td>
+            <td class="desc">A loop (or assignment) tried to split each item into more variables than the item holds</td>
+            <td class="ex">for key, value in my_dict: — forgot .items()</td>
+          </tr>
+          <tr data-search="IndexError list assignment index out of range append empty list pre-allocate">
+            <td class="fn">IndexError: list assignment index out of range</td>
+            <td class="desc">You tried to write into a list position that doesn't exist yet</td>
+            <td class="ex">fs = [] then fs[0] = 1.2 — use .append(), or make the slots first with [None] * n</td>
+          </tr>
+          <tr data-search="TypeError NoneType unsupported operand None missing value">
+            <td class="fn">TypeError: ... 'NoneType'</td>
+            <td class="desc">You tried to do math with None (a missing value)</td>
+            <td class="ex">total += None — check for it with if value is None: and use continue</td>
+          </tr>
+          <tr data-search="infinite loop while never ends kernel busy interrupt">
+            <td class="fn">Infinite loop</td>
+            <td class="desc">Not an error message: the cell just keeps running</td>
+            <td class="ex">A while loop with no update line — click ■ to interrupt the kernel, then clear the output</td>
+          </tr>
+          <tr data-search="logic error wrong answer no error message bug indentation">
+            <td class="fn">Logic error (no message)</td>
+            <td class="desc">The code runs without complaint but gives the wrong answer</td>
+            <td class="ex">A running total that never resets, or a line indented at the wrong level — shrink the problem and print the loop variables</td>
           </tr>
         </tbody>
       </table>
@@ -992,6 +1067,30 @@
             <td class="ex">backup = planet_list.copy()</td>
             <td class="out">a new list, not the same object</td>
           </tr>
+          <tr data-search="sort order ascending list in place method">
+            <td class="fn">my_list.sort()</td>
+            <td class="desc">Sorts the list in place (it changes the list and returns nothing)</td>
+            <td class="ex">angles = [30, 10, 20]<br>angles.sort()<br>print(angles)</td>
+            <td class="out">[10, 20, 30]</td>
+          </tr>
+          <tr data-search="index find position of value list method">
+            <td class="fn">my_list.index(x)</td>
+            <td class="desc">Returns the position of the first item equal to x (raises a ValueError if it isn't in the list)</td>
+            <td class="ex">[10, 20, 30].index(20)</td>
+            <td class="out">1</td>
+          </tr>
+          <tr data-search="pop remove item by position return list method">
+            <td class="fn">my_list.pop(i)</td>
+            <td class="desc">Removes the item at position i and gives it back (the last item if you leave i out)</td>
+            <td class="ex">angles = [10, 20, 30]<br>x = angles.pop(0)<br>print(x, angles)</td>
+            <td class="out">10 [20, 30]</td>
+          </tr>
+          <tr data-search="remove delete item by value list method">
+            <td class="fn">my_list.remove(x)</td>
+            <td class="desc">Removes the first item equal to the value x</td>
+            <td class="ex">angles = [10, 20, 30]<br>angles.remove(20)<br>print(angles)</td>
+            <td class="out">[10, 30]</td>
+          </tr>
           <tr data-search="sum list total add all values">
             <td class="fn">sum(my_list)</td>
             <td class="desc">Adds up all the numeric values in a list</td>
@@ -1003,6 +1102,12 @@
             <td class="desc">Returns the smallest / largest value in a list</td>
             <td class="ex">max([3, 7, 2])</td>
             <td class="out">7</td>
+          </tr>
+          <tr data-search="max min two values clamp floor zero never negative">
+            <td class="fn">max(a, b) / min(a, b)</td>
+            <td class="desc">Also works on separate values. max(0, x) is a compact way to keep a value from going below zero</td>
+            <td class="ex">print(max(0, -3.2), max(0, 4.7))</td>
+            <td class="out">0 4.7</td>
           </tr>
           <tr data-search="in operator membership check list contains">
             <td class="fn">x in my_list</td>
@@ -1123,11 +1228,47 @@
             <td class="out">Earth 5.97e+24
 Mars 6.42e+23</td>
           </tr>
+          <tr data-search="dict.keys dict.values keys values list of">
+            <td class="fn">my_dict.keys() / my_dict.values()</td>
+            <td class="desc">All the keys / all the values (wrap in list() to get a list)</td>
+            <td class="ex">angles = {"low": 5, "high": 45}<br>print(list(angles.keys()), list(angles.values()))</td>
+            <td class="out">['low', 'high'] [5, 45]</td>
+          </tr>
           <tr data-search="nested dictionary dictionary of dictionaries">
             <td class="fn">my_dict[key1][key2]</td>
             <td class="desc">Accesses a value inside a nested dictionary (a dictionary of dictionaries)</td>
             <td class="ex">planet_data["Earth"]["radius_km"]</td>
             <td class="out">6371</td>
+          </tr>
+          <tr data-search="dictionary add new key update value assign set">
+            <td class="fn">my_dict[key] = value</td>
+            <td class="desc">Adds a new key–value pair, or overwrites the value if the key already exists</td>
+            <td class="ex">angles = {"low": 5}<br>angles["high"] = 45<br>print(angles)</td>
+            <td class="out">{'low': 5, 'high': 45}</td>
+          </tr>
+          <tr data-search="dict.update add multiple pairs overwrite merge">
+            <td class="fn">my_dict.update({...})</td>
+            <td class="desc">Adds several key–value pairs at once (or overwrites existing keys)</td>
+            <td class="ex">angles = {"low": 5}<br>angles.update({"high": 45, "low": 10})<br>print(angles)</td>
+            <td class="out">{'low': 10, 'high': 45}</td>
+          </tr>
+          <tr data-search="dictionary of lists index inside list value">
+            <td class="fn">my_dict[key][i]</td>
+            <td class="desc">A dictionary whose values are lists: one key to pick the list, then an index</td>
+            <td class="ex">fs_by_scenario = {"low": [5.33, 4.0, 2.67], "high": [1.33, 1.12, 0.91]}<br>fs_by_scenario["high"][2]</td>
+            <td class="out">0.91</td>
+          </tr>
+          <tr data-search="dict zip build dictionary two parallel lists">
+            <td class="fn">dict(zip(keys, values))</td>
+            <td class="desc">Builds a dictionary from two parallel lists (see the Loops tab for zip())</td>
+            <td class="ex">dict(zip(["low", "high"], [5, 45]))</td>
+            <td class="out">{'low': 5, 'high': 45}</td>
+          </tr>
+          <tr data-search="dictionary unpacking ** keyword arguments function call">
+            <td class="fn">function(**my_dict)</td>
+            <td class="desc">Unpacks a dictionary into keyword arguments. Its keys must exactly match the function's parameter names (also on the Functions tab)</td>
+            <td class="ex">def add(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;return a + b<br>params = {"a": 1, "b": 2}<br>print(add(**params))</td>
+            <td class="out">3</td>
           </tr>
         </tbody>
       </table>
@@ -1182,6 +1323,18 @@ Mars 6.42e+23</td>
             <td class="desc">Gives a parameter a fallback value, used only if the caller doesn't supply one</td>
             <td class="ex">def blackbody_temp(S, a, stef_boltz=5.67e-8):</td>
             <td class="out">stef_boltz only needs to be passed to override it</td>
+          </tr>
+          <tr data-search="dictionary unpacking ** keyword arguments function call dict">
+            <td class="fn">function(**my_dict)</td>
+            <td class="desc">Unpacks a dictionary into keyword arguments. Its keys must exactly match the function's parameter names</td>
+            <td class="ex">def add(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;return a + b<br>params = {"a": 1, "b": 2}<br>print(add(**params))</td>
+            <td class="out">3</td>
+          </tr>
+          <tr data-search="dictionary unpacking plus keyword argument mix ** multiple values error">
+            <td class="fn">function(**my_dict, param=value)</td>
+            <td class="desc">You can mix ** with an ordinary keyword argument, as long as that keyword is not also a key in the dictionary (otherwise: TypeError, multiple values for keyword argument)</td>
+            <td class="ex">def add(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;return a + b<br>print(add(**{"a": 1}, b=5))</td>
+            <td class="out">6</td>
           </tr>
         </tbody>
       </table>
@@ -1424,6 +1577,264 @@ Mars 6.42e+23</td>
 
 
   </div><!-- /sheet-control-flow -->
+
+  <!-- ══════════════════════════════════════
+       SHEET: LOOPS
+  ══════════════════════════════════════ -->
+  <div class="sheet" id="sheet-loops">
+    <div class="sheet-intro">
+      <div class="sheet-title">Loops</div>
+      <p class="sheet-desc">Repeat code with <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">while</code> and <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">for</code> — covers looping over lists and dictionaries, <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">range()</code>, <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">zip()</code>, and <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">enumerate()</code>, building results, nested loops, and controlling a loop with <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">break</code> and <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">continue</code>.</p>
+    </div>
+
+    <!-- while Loops -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">while Loops</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="while loop repeat condition true">
+            <td class="fn">while condition:</td>
+            <td class="desc">Repeats the indented block for as long as the condition stays True. You must change something inside the loop that will eventually make it False</td>
+            <td class="ex">rw = 0.0<br>while rw &lt; 0.5:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(rw)<br>&nbsp;&nbsp;&nbsp;&nbsp;rw += 0.25</td>
+            <td class="out">0.0<br>0.25</td>
+          </tr>
+          <tr data-search="infinite loop never ends forgot update interrupt kernel stop">
+            <td class="fn">infinite loop</td>
+            <td class="desc">A while loop whose condition never becomes False just keeps running. Click the ■ (interrupt kernel) button, then clear the cell's output</td>
+            <td class="ex">rw = 0.0<br>while rw &lt; 1.0:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(rw)   # forgot to update rw!</td>
+            <td class="out">0.0<br>0.0<br>0.0<br>... (never stops)</td>
+          </tr>
+          <tr data-search="floating point drift 0.1 float accumulation error while loop count">
+            <td class="fn">while x &lt; 1.0: x += 0.1</td>
+            <td class="desc">Adding 0.1 over and over drifts (0.1 can't be stored exactly), so this loop runs 11 times, not 10. Use range() to count in whole numbers instead</td>
+            <td class="ex">rw = 0.0<br>count = 0<br>while rw &lt; 1.0:<br>&nbsp;&nbsp;&nbsp;&nbsp;rw += 0.1<br>&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>print(count)</td>
+            <td class="out">11</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- for Loops -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">for Loops</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="for loop iterate each item list">
+            <td class="fn">for item in my_list:</td>
+            <td class="desc">Runs the indented block once for each item in a list. The loop variable holds the current item (the value, not its position)</td>
+            <td class="ex">slope_angles = [10, 20, 30]<br>for s in slope_angles:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"slope = {s} deg")</td>
+            <td class="out">slope = 10 deg<br>slope = 20 deg<br>slope = 30 deg</td>
+          </tr>
+          <tr data-search="for loop dictionary items key value pairs iterate">
+            <td class="fn">for key, value in my_dict.items():</td>
+            <td class="desc">Goes through a dictionary's key–value pairs, unpacking both into loop variables. Without .items() you get only the keys</td>
+            <td class="ex">angles = {"low": 5, "medium": 25, "high": 45}<br>for name, angle in angles.items():<br>&nbsp;&nbsp;&nbsp;&nbsp;print(name, angle)</td>
+            <td class="out">low 5<br>medium 25<br>high 45</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- range, zip & enumerate -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">range(), zip() &amp; enumerate()</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="range whole numbers count 0 stop">
+            <td class="fn">range(stop)</td>
+            <td class="desc">Whole numbers from 0 up to, but not including, stop</td>
+            <td class="ex">for i in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</td>
+            <td class="out">0<br>1<br>2</td>
+          </tr>
+          <tr data-search="range start stop step count by">
+            <td class="fn">range(start, stop, step)</td>
+            <td class="desc">Choose where to start and how big each step is (stop is still left out)</td>
+            <td class="ex">for slope in range(5, 20, 5):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(slope)</td>
+            <td class="out">5<br>10<br>15</td>
+          </tr>
+          <tr data-search="exact decimals range integer divide no drift">
+            <td class="fn">i / 10 inside range()</td>
+            <td class="desc">To get decimals without drift, count in whole numbers with range() and divide fresh each time</td>
+            <td class="ex">rw_values = []<br>for i in range(4):<br>&nbsp;&nbsp;&nbsp;&nbsp;rw_values.append(i / 10)<br>print(rw_values)</td>
+            <td class="out">[0.0, 0.1, 0.2, 0.3]</td>
+          </tr>
+          <tr data-search="range len position index loop">
+            <td class="fn">range(len(my_list))</td>
+            <td class="desc">Loops over positions 0, 1, 2, ... so you can use my_list[i]</td>
+            <td class="ex">names = ["low", "medium", "high"]<br>for i in range(len(names)):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i, names[i])</td>
+            <td class="out">0 low<br>1 medium<br>2 high</td>
+          </tr>
+          <tr data-search="zip pair two lists together parallel">
+            <td class="fn">zip(list1, list2)</td>
+            <td class="desc">Pairs up items from two lists by position so a loop can walk through both at once. Stops at the shorter list</td>
+            <td class="ex">names = ["low", "high"]<br>angles = [5, 45]<br>for name, angle in zip(names, angles):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(name, angle)</td>
+            <td class="out">low 5<br>high 45</td>
+          </tr>
+          <tr data-search="dict zip build dictionary from two lists">
+            <td class="fn">dict(zip(keys, values))</td>
+            <td class="desc">Builds a dictionary from two parallel lists</td>
+            <td class="ex">dict(zip(["low", "high"], [5, 45]))</td>
+            <td class="out">{'low': 5, 'high': 45}</td>
+          </tr>
+          <tr data-search="enumerate index position and value counter loop">
+            <td class="fn">enumerate(my_list)</td>
+            <td class="desc">Gives you each item's position and value together, with no manual counter. Positions start at 0</td>
+            <td class="ex">for i, s in enumerate([10, 20, 30]):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i, s)</td>
+            <td class="out">0 10<br>1 20<br>2 30</td>
+          </tr>
+          <tr data-search="enumerate zip position two lists">
+            <td class="fn">enumerate(zip(a, b))</td>
+            <td class="desc">Position plus a pair of values. Note the parentheses around the pair</td>
+            <td class="ex">names = ["low", "high"]<br>angles = [5, 45]<br>for i, (name, angle) in enumerate(zip(names, angles)):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i, name, angle)</td>
+            <td class="out">0 low 5<br>1 high 45</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Building Results -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Building Results</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="build list append loop empty list accumulate">
+            <td class="fn">results = [] + .append()</td>
+            <td class="desc">Start with an empty list and add one result per pass</td>
+            <td class="ex">doubled = []<br>for s in [10, 20, 30]:<br>&nbsp;&nbsp;&nbsp;&nbsp;doubled.append(s * 2)<br>print(doubled)</td>
+            <td class="out">[20, 40, 60]</td>
+          </tr>
+          <tr data-search="pre-allocate list None placeholder slots index assign">
+            <td class="fn">[None] * n</td>
+            <td class="desc">Makes a list with n placeholder slots so you can fill positions with my_list[i] = value. Assigning to a position that doesn't exist raises an IndexError</td>
+            <td class="ex">values = [None] * 3<br>for i in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;values[i] = i * 10<br>print(values)</td>
+            <td class="out">[0, 10, 20]</td>
+          </tr>
+          <tr data-search="counter accumulator running total sum count loop">
+            <td class="fn">total += x</td>
+            <td class="desc">A running total or count that starts before the loop and is updated on every pass</td>
+            <td class="ex">total = 0<br>for s in [10, 20, 30]:<br>&nbsp;&nbsp;&nbsp;&nbsp;total += s<br>print(total)</td>
+            <td class="out">60</td>
+          </tr>
+          <tr data-search="running maximum best so far largest loop track">
+            <td class="fn">if x &gt; best: best = x</td>
+            <td class="desc">Keeps the largest value seen so far (and, if you like, where it came from). Start with a value that will be beaten</td>
+            <td class="ex">best = 0<br>best_name = ""<br>for name, s in zip(["a", "b", "c"], [10, 40, 25]):<br>&nbsp;&nbsp;&nbsp;&nbsp;if s &gt; best:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;best = s<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;best_name = name<br>print(best_name, best)</td>
+            <td class="out">b 40</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Nested Loops -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Nested Loops</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="nested loop inner outer loop">
+            <td class="fn">for a in A:<br>    for b in B:</td>
+            <td class="desc">For each pass of the outer loop, the inner loop runs all the way through and then starts over. The innermost line runs (outer passes) × (inner passes) times</td>
+            <td class="ex">for i in range(2):<br>&nbsp;&nbsp;&nbsp;&nbsp;for j in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(i, j)</td>
+            <td class="out">0 0<br>0 1<br>0 2<br>1 0<br>1 1<br>1 2</td>
+          </tr>
+          <tr data-search="nested dictionary loop dict of dicts inner outer items">
+            <td class="fn">for k, inner in outer.items():<br>    for k2, v in inner.items():</td>
+            <td class="desc">Looping through a dictionary of dictionaries: the inner loop's collection comes from the outer loop's variable</td>
+            <td class="ex">soils = {"low": {"depth": 0.2, "slope": 5}, "high": {"depth": 2.5, "slope": 45}}<br>for name, props in soils.items():<br>&nbsp;&nbsp;&nbsp;&nbsp;for key, value in props.items():<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(name, key, value)</td>
+            <td class="out">low depth 0.2<br>low slope 5<br>high depth 2.5<br>high slope 45</td>
+          </tr>
+          <tr data-search="dictionary of lists nested loop build fresh list outer">
+            <td class="fn">results[key] = row</td>
+            <td class="desc">Building a dictionary of lists: create the empty list inside the outer loop, before the inner loop, so each key gets its own list</td>
+            <td class="ex">results = {}<br>for name, angle in {"a": 10, "b": 20}.items():<br>&nbsp;&nbsp;&nbsp;&nbsp;row = []<br>&nbsp;&nbsp;&nbsp;&nbsp;for k in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;row.append(angle * k)<br>&nbsp;&nbsp;&nbsp;&nbsp;results[name] = row<br>print(results)</td>
+            <td class="out">{'a': [0, 10, 20], 'b': [0, 20, 40]}</td>
+          </tr>
+          <tr data-search="fresh total reset accumulator nested loop counter">
+            <td class="fn">total = 0  (inside the outer loop)</td>
+            <td class="desc">Anything that should start fresh for each outer item (a total, a counter, a list) must be created inside the outer loop, before the inner loop. If it's created outside, it keeps piling up</td>
+            <td class="ex">for row in [[1, 2], [3, 4]]:<br>&nbsp;&nbsp;&nbsp;&nbsp;total = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;for x in row:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total += x<br>&nbsp;&nbsp;&nbsp;&nbsp;print(total)</td>
+            <td class="out">3<br>7</td>
+          </tr>
+          <tr data-search="nested list range len row col loop index double brackets">
+            <td class="fn">grid[row][col]</td>
+            <td class="desc">Walks through every cell of a list of lists by position</td>
+            <td class="ex">grid = [[1, 2], [3, 4]]<br>for r in range(len(grid)):<br>&nbsp;&nbsp;&nbsp;&nbsp;for c in range(len(grid[r])):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(r, c, grid[r][c])</td>
+            <td class="out">0 0 1<br>0 1 2<br>1 0 3<br>1 1 4</td>
+          </tr>
+          <tr data-search="print end same line grid row column nested loop">
+            <td class="fn">print(x, end=" ")</td>
+            <td class="desc">Stays on the same line, so a nested loop can draw a row. A bare print() ends the row</td>
+            <td class="ex">for row in range(2):<br>&nbsp;&nbsp;&nbsp;&nbsp;for col in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("*", end=" ")<br>&nbsp;&nbsp;&nbsp;&nbsp;print()</td>
+            <td class="out">* * * <br>* * * </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- break, continue & flags -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">break, continue &amp; Flags</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Syntax</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="break exit loop stop early">
+            <td class="fn">break</td>
+            <td class="desc">Exits the loop immediately. Once you've found what you're looking for, stop</td>
+            <td class="ex">for s in [10, 20, 30, 40]:<br>&nbsp;&nbsp;&nbsp;&nbsp;if s &gt; 25:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(s)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</td>
+            <td class="out">30</td>
+          </tr>
+          <tr data-search="continue skip pass next iteration">
+            <td class="fn">continue</td>
+            <td class="desc">Skips the rest of this pass and jumps to the next one</td>
+            <td class="ex">for s in [10, 20, 30]:<br>&nbsp;&nbsp;&nbsp;&nbsp;if s == 20:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>&nbsp;&nbsp;&nbsp;&nbsp;print(s)</td>
+            <td class="out">10<br>30</td>
+          </tr>
+          <tr data-search="break nested loop only inner exits outer continues">
+            <td class="fn">break (in a nested loop)</td>
+            <td class="desc">Exits only the innermost loop; the outer loop carries on</td>
+            <td class="ex">for name in ["a", "b"]:<br>&nbsp;&nbsp;&nbsp;&nbsp;for k in range(5):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if k == 2:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(name, k)</td>
+            <td class="out">a 0<br>a 1<br>b 0<br>b 1</td>
+          </tr>
+          <tr data-search="flag variable found boolean loop finished without finding nothing">
+            <td class="fn">found = False</td>
+            <td class="desc">Set it to True inside the loop when you find something. After the loop, if not found: tells you it finished without finding anything. Give each outer item a fresh flag</td>
+            <td class="ex">for limit in [25, 100]:<br>&nbsp;&nbsp;&nbsp;&nbsp;found = False<br>&nbsp;&nbsp;&nbsp;&nbsp;for s in [10, 20, 30]:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if s &gt; limit:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;found = True<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;if not found:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(limit, "never exceeded")</td>
+            <td class="out">100 never exceeded</td>
+          </tr>
+          <tr data-search="previous value None sentinel first pass compare">
+            <td class="fn">previous = None</td>
+            <td class="desc">None means "nothing yet." Use it to handle the first pass, when there is no previous value to compare with</td>
+            <td class="ex">previous = None<br>for x in [5, 9, 4]:<br>&nbsp;&nbsp;&nbsp;&nbsp;if previous is None:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;previous = x<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>&nbsp;&nbsp;&nbsp;&nbsp;print(x - previous)<br>&nbsp;&nbsp;&nbsp;&nbsp;previous = x</td>
+            <td class="out">4<br>-5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div><!-- /sheet-loops -->
 
   <!-- ══════════════════════════════════════
        SHEET: NUMPY
