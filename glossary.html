@@ -279,7 +279,7 @@
       <span class="term-word">GitHub</span>
       <span class="term-tag">version control</span>
     </div>
-    <p class="term-def">A website that hosts Git repositories in the cloud. Think of it as the online storage location for code and files. Our class repository lives at <strong>github.com/Python-in-Earth-Science/course-materials</strong>.</p>
+    <p class="term-def">A website that hosts Git repositories in the cloud. The course materials live at <strong>github.com/Python-in-Earth-Science/course-materials</strong>, and each of your assignments gets its own private repo there through Classroom50.</p>
   </div>
 
   <div class="term" data-term="repository repo">
@@ -287,7 +287,7 @@
       <span class="term-word">Repository (repo)</span>
       <span class="term-tag">version control</span>
     </div>
-    <p class="term-def">An organized collection of files and folders that Git is tracking. You can think of it as the class "filing cabinet" — Dr. Morey adds notebooks and datasets to it, and you pull copies to your own ExploreHub.</p>
+    <p class="term-def">An organized collection of files and folders that Git is tracking, along with its full history. In this class you work with two kinds: Dr. Morey's <strong>course-materials</strong> repo, which you only pull from, and your own private <strong>assignment repos</strong>, which you commit and push to.</p>
   </div>
 
   <div class="term" data-term="pull">
@@ -295,7 +295,7 @@
       <span class="term-word">Pull</span>
       <span class="term-tag">version control</span>
     </div>
-    <p class="term-def">Downloading the latest version of files from a remote repository to your local machine or JupyterHub. When you click "Week N materials" on the course website, nbgitpuller is doing a pull behind the scenes.</p>
+    <p class="term-def">Bringing the latest commits from GitHub down to your copy of a repo, with <strong>git pull</strong>. Run it inside the repo, e.g. <strong>cd ~/course-materials</strong> then <strong>git pull</strong> to get each new week's materials. (The old Week N buttons on the course website did this for you.)</p>
   </div>
 
   <div class="term" data-term="push">
@@ -303,7 +303,7 @@
       <span class="term-word">Push</span>
       <span class="term-tag">version control</span>
     </div>
-    <p class="term-def">Uploading your local changes to a remote repository. This is what Dr. Morey does when adding new course files — you won't need to push anything until later in the semester.</p>
+    <p class="term-def">Sending your commits from ExploreHub up to GitHub, with <strong>git push</strong>. Until you push, your commits exist only on ExploreHub. For Classroom50 assignments, every push is a submission.</p>
   </div>
 
   <div class="term" data-term="commit">
@@ -327,7 +327,197 @@
       <span class="term-word">upstream</span>
       <span class="term-tag">version control</span>
     </div>
-    <p class="term-def">Dr. Morey's original version of <strong>course-materials/</strong> on GitHub, as opposed to the copy pulled onto your ExploreHub. When nbgitpuller updates a file, it's pulling the upstream version — if you've edited a file with the same name, nbgitpuller renames your copy with a timestamp rather than overwriting it.</p>
+    <p class="term-def">The branch on GitHub that your local branch is linked to, so a plain <strong>git push</strong> or <strong>git pull</strong> knows where to go. Cloning sets it up for you; if it's missing, git says <strong>has no upstream branch</strong> and prints the command to fix it. (In fork-based workflows, "upstream" also names the original repo you forked from.)</p>
+  </div>
+
+  <!-- ── CATEGORY: Git & Terminal ── -->
+  <div class="category">
+    <span class="category-label">Git &amp; Terminal</span>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="term" data-term="terminal command line shell">
+    <div class="term-header">
+      <span class="term-word">terminal / command line</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">A text window where you type commands instead of clicking. Open one in JupyterLab with <strong>File → New → Terminal</strong>. The commands for moving around and managing files are on the Terminal tab of the Cheat Sheets page.</p>
+  </div>
+
+  <div class="term" data-term="clone git clone download copy repo">
+    <div class="term-header">
+      <span class="term-word">clone</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">Downloading a full copy of a GitHub repo, history included, with <strong>git clone</strong> plus the repo's URL. You clone a repo once; after that you <strong>pull</strong> to get updates.</p>
+  </div>
+
+  <div class="term" data-term="remote origin github url">
+    <div class="term-header">
+      <span class="term-word">remote / origin</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">A <strong>remote</strong> is a copy of the repo that lives somewhere else, usually GitHub. <strong>origin</strong> is git's nickname for the remote you cloned from. See yours with <strong>git remote -v</strong>.</p>
+  </div>
+
+  <div class="term" data-term="working directory working tree files">
+    <div class="term-header">
+      <span class="term-word">working directory (in git)</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">The files you can see and edit in a repo's folder right now. Git compares them to the last commit to work out what's changed. (Not quite the same as the <em>current working directory</em>, which is just whichever folder you're in.)</p>
+  </div>
+
+  <div class="term" data-term="tracked untracked file new">
+    <div class="term-header">
+      <span class="term-word">tracked / untracked file</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">A <strong>tracked</strong> file is one git has committed at least once, so it watches it for changes. An <strong>untracked</strong> file is one git has never been told to keep: git ignores it, and it isn't backed up until you add and commit it.</p>
+  </div>
+
+  <div class="term" data-term="staging area stage git add index">
+    <div class="term-header">
+      <span class="term-word">staging area</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">The list of changes that will go into your next commit. <strong>git add filename</strong> puts a file on it; <strong>git status</strong> shows it under "Changes to be committed."</p>
+  </div>
+
+  <div class="term" data-term="git status check changes">
+    <div class="term-header">
+      <span class="term-word">git status</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">The command that shows which branch you're on, which files have changed, which are staged, and whether you're ahead of or behind GitHub. Run it before and after every other git command.</p>
+  </div>
+
+  <div class="term" data-term="commit id hash sha">
+    <div class="term-header">
+      <span class="term-word">commit ID (hash)</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">The short code that identifies one commit, e.g. <strong>3f2a1c9</strong>, shown by <strong>git log --oneline</strong> and on GitHub's Commits page. You use it to refer to an older version, e.g. with <strong>git restore --source</strong>.</p>
+  </div>
+
+  <div class="term" data-term="commit message -m">
+    <div class="term-header">
+      <span class="term-word">commit message</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">The short description you attach to a commit with <strong>-m</strong>, e.g. <strong>git commit -m "Finish Exercise 2"</strong>. Write what you did, so the history makes sense later.</p>
+  </div>
+
+  <div class="term" data-term="git log history commits">
+    <div class="term-header">
+      <span class="term-word">git log</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">The command that lists a repo's commits, newest first. <strong>git log --oneline</strong> shows one line per commit, with its ID and message (press <strong>q</strong> to quit).</p>
+  </div>
+
+  <div class="term" data-term="diff git diff changes compare">
+    <div class="term-header">
+      <span class="term-word">diff</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">The exact lines that changed between two versions of a file: added lines in green, removed lines in red. <strong>git diff</strong> shows changes you haven't staged yet; GitHub shows a diff for every commit.</p>
+  </div>
+
+  <div class="term" data-term="git restore undo go back older version">
+    <div class="term-header">
+      <span class="term-word">git restore</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def"><strong>git restore filename</strong> throws away uncommitted changes, putting a file back to its last commit. <strong>git restore --source &lt;commit ID&gt; filename</strong> brings back the version from an older commit, which you then add, commit, and push.</p>
+  </div>
+
+  <div class="term" data-term="branch main master">
+    <div class="term-header">
+      <span class="term-word">branch / main</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">A <strong>branch</strong> is a line of history in a repo. Every repo starts with one, named <strong>main</strong>, which is the branch Classroom50 checks. <strong>git status</strong> tells you which branch you're on.</p>
+  </div>
+
+  <div class="term" data-term="merge conflict combine">
+    <div class="term-header">
+      <span class="term-word">merge / merge conflict</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">A <strong>merge</strong> combines two lines of work, for example when a pull brings in commits while you have new ones too. A <strong>merge conflict</strong> happens when the same lines were changed in both places, so git can't combine them on its own and asks you to choose.</p>
+  </div>
+
+  <div class="term" data-term="pull request pr feedback">
+    <div class="term-header">
+      <span class="term-word">pull request (PR)</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">A request to merge changes from one branch or fork into another, so they can be reviewed first. It's a later lesson, but you'll already see one in each assignment repo: the <strong>Feedback</strong> pull request that Classroom50 opens for your instructor.</p>
+  </div>
+
+  <div class="term" data-term="ssh key public private keygen authentication">
+    <div class="term-header">
+      <span class="term-word">SSH key (public / private)</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">A matched pair of files that lets ExploreHub prove to GitHub that it's you, without a password. You give GitHub the <strong>public</strong> key (the file ending in <strong>.pub</strong>) and never share the <strong>private</strong> one. Made with <strong>ssh-keygen</strong>; tested with <strong>ssh -T git@github.com</strong>.</p>
+  </div>
+
+  <div class="term" data-term="git config settings name email global">
+    <div class="term-header">
+      <span class="term-word">git config</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">The command for git settings, such as your name and email: <strong>git config --global user.name "Your Name"</strong>. <strong>--global</strong> applies the setting to every repo on ExploreHub; <strong>git config --global --list</strong> shows them all.</p>
+  </div>
+
+  <div class="term" data-term="nano editor text">
+    <div class="term-header">
+      <span class="term-word">nano</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">A simple text editor that runs in the terminal: <strong>nano filename</strong>. Ctrl+O then Enter saves; Ctrl+X exits. Git opens it when it needs you to type a message, once you've set it as your editor.</p>
+  </div>
+
+  <div class="term" data-term="tilde dot home current parent path shortcut">
+    <div class="term-header">
+      <span class="term-word">~  .  ..</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">Shortcuts in file paths: <strong>~</strong> is your home folder, <strong>.</strong> is the folder you're in right now, and <strong>..</strong> is the folder one level up. E.g. <strong>cp ~/course-materials/week06/lab05_instructions.md .</strong> copies a file to here.</p>
+  </div>
+
+  <div class="term" data-term="ipynb_checkpoints checkpoints hidden folder">
+    <div class="term-header">
+      <span class="term-word">.ipynb_checkpoints</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">A hidden folder JupyterLab creates automatically when you save a notebook. It shows up as untracked in <strong>git status</strong>. Leave it alone, and add your files by name instead of with <strong>git add .</strong> so it doesn't get committed.</p>
+  </div>
+
+  <div class="term" data-term="classroom50 assignments submit">
+    <div class="term-header">
+      <span class="term-word">Classroom50</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">The system this class uses for assignments. Accepting an assignment creates a private repo for you on GitHub; each push to it is a submission, and Dr. Morey can see your commits and leave feedback.</p>
+  </div>
+
+  <div class="term" data-term="onboarding accept link invitation classroom50">
+    <div class="term-header">
+      <span class="term-word">onboarding link / accept link</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">Two different Classroom50 links. The <strong>onboarding link</strong> adds you to the class's GitHub organization, once for the whole course. Each assignment has its own <strong>accept link</strong>, which creates your private repo for that assignment.</p>
+  </div>
+
+  <div class="term" data-term="autograder release grade results">
+    <div class="term-header">
+      <span class="term-word">autograder / Release</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">An <strong>autograder</strong> is a script that checks your submission automatically when you push. For autograded assignments, Classroom50 posts each result as a <strong>Release</strong>, listed in the right sidebar of your repo's GitHub page.</p>
   </div>
 
   <!-- ── CATEGORY: Computing Environment ── -->
@@ -435,7 +625,7 @@
       <span class="term-word">nbgitpuller</span>
       <span class="term-tag">files</span>
     </div>
-    <p class="term-def">A tool that connects JupyterHub to a GitHub repository. When you click a "Week N materials" button on the course website, nbgitpuller automatically pulls the latest files from GitHub and places them in your ExploreHub account — no manual steps needed.</p>
+    <p class="term-def">The tool behind the "Week N materials" buttons the course website used early in the semester. Each click ran a git clone the first time, then a pull, and made automatic commits to protect your edits. You now do the same thing yourself with <strong>git pull</strong>.</p>
   </div>
 
   <div class="term" data-term="absolute path">
@@ -1024,6 +1214,46 @@
     <p class="term-def">A pattern where a variable holds the largest (or smallest) value seen so far and is updated whenever the loop finds a better one, often along with the item that produced it. Start it at a value that is guaranteed to be beaten, like <strong>0</strong> or <strong>None</strong>.</p>
   </div>
 
+  <div class="term" data-term="trace table tracing by hand">
+    <div class="term-header">
+      <span class="term-word">trace table</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A table you fill in by hand, one row per pass of a loop, writing down each variable's value as you go. It's the fastest way to see what a loop actually does, especially a nested one.</p>
+  </div>
+
+  <div class="term" data-term="parallel lists zip same position">
+    <div class="term-header">
+      <span class="term-word">parallel lists</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">Two or more lists where items at the same position belong together, e.g. <strong>months[i]</strong> and <strong>mean_precip_in[i]</strong>. Loop through them together with <strong>zip()</strong> or by position with <strong>range(len(...))</strong>.</p>
+  </div>
+
+  <div class="term" data-term="planning comments pseudocode plan">
+    <div class="term-header">
+      <span class="term-word">planning in comments</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">Writing the steps of your solution as comments first, e.g. <strong># for each season, reset the total</strong>, then writing code under each one. It turns "where do I start?" into a list of small, checkable steps.</p>
+  </div>
+
+  <div class="term" data-term="range step backward negative count down">
+    <div class="term-header">
+      <span class="term-word">step (in range)</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">The optional third argument to <strong>range()</strong>, which sets how far to jump each time. <strong>range(0, 10, 2)</strong> gives 0, 2, 4, 6, 8, and a negative step counts backward: <strong>range(6, -1, -1)</strong> gives 6, 5, …, 0. The stop value is never included.</p>
+  </div>
+
+  <div class="term" data-term="float inf infinity best so far start">
+    <div class="term-header">
+      <span class="term-word">float("inf")</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">Infinity as a Python number. Useful as a starting value for the best-so-far pattern: start a running minimum at <strong>float("inf")</strong> and a running maximum at <strong>-float("inf")</strong>, so the first real value always replaces it.</p>
+  </div>
+
 <!-- ── CATEGORY: Data Structures ── -->
   <div class="category">
     <span class="category-label">Data Structures</span>
@@ -1322,6 +1552,60 @@
     <p class="term-def">The ± symbol used to express a measurement's margin of error, e.g. 4.2 ± 0.3 cm/yr. Written in LaTeX as <strong>\pm</strong>.</p>
   </div>
 
+
+  <!-- ── CATEGORY: Earth Science ── -->
+  <div class="category">
+    <span class="category-label">Earth Science</span>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="term" data-term="climate normals noaa 30 year average">
+    <div class="term-header">
+      <span class="term-word">climate normals</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">Thirty-year averages of weather measurements such as temperature and precipitation, published by NOAA for thousands of stations. The current normals cover 1991–2020. Day counts in normals are averages, which is why they can be fractions.</p>
+  </div>
+
+  <div class="term" data-term="daily temperature range diurnal high low">
+    <div class="term-header">
+      <span class="term-word">daily temperature range</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The difference between the average daily high and the average daily low temperature for a place and time of year. Also called the <em>diurnal</em> temperature range.</p>
+  </div>
+
+  <div class="term" data-term="bond albedo reflect reflectivity">
+    <div class="term-header">
+      <span class="term-word">Bond albedo</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The fraction of all incoming sunlight that a planet reflects back to space, across all wavelengths and angles. Earth's is about 0.3, meaning it reflects about 30% of the sunlight that reaches it.</p>
+  </div>
+
+  <div class="term" data-term="black body blackbody temperature equilibrium effective">
+    <div class="term-header">
+      <span class="term-word">black-body temperature</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The temperature a planet would have if it absorbed sunlight and radiated heat as a perfect emitter, with no atmosphere. Earth's is about 255 K (−18 °C), well below its actual average surface temperature of about 288 K (15 °C). The difference is the greenhouse effect.</p>
+  </div>
+
+  <div class="term" data-term="inverse square law distance intensity">
+    <div class="term-header">
+      <span class="term-word">inverse-square law</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The rule that the intensity of light (or other radiation) from a source falls off with the square of the distance. A planet twice as far from the Sun receives one quarter as much sunlight.</p>
+  </div>
+
+  <div class="term" data-term="greenhouse effect atmosphere warming">
+    <div class="term-header">
+      <span class="term-word">greenhouse effect</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">Warming of a planet's surface because gases in its atmosphere absorb heat radiated by the surface and send part of it back down. It's why Earth is about 33 K warmer than its black-body temperature.</p>
+  </div>
 
 </main>
 
