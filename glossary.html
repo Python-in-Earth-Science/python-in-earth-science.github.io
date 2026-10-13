@@ -360,6 +360,14 @@
     <p class="term-def">A <strong>remote</strong> is a copy of the repo that lives somewhere else, usually GitHub. <strong>origin</strong> is git's nickname for the remote you cloned from. See yours with <strong>git remote -v</strong>.</p>
   </div>
 
+  <div class="term" data-term="origin/main remote-tracking branch namespace ahead behind">
+    <div class="term-header">
+      <span class="term-word">origin/main</span>
+      <span class="term-tag">git</span>
+    </div>
+    <p class="term-def">Git's record of what the <strong>main</strong> branch looked like on <strong>origin</strong> (GitHub) the last time you pulled or pushed. That's why <strong>git status</strong> says things like "ahead of 'origin/main' by 1 commit": you've committed something GitHub doesn't have yet.</p>
+  </div>
+
   <div class="term" data-term="working directory working tree files">
     <div class="term-header">
       <span class="term-word">working directory (in git)</span>
@@ -644,6 +652,14 @@
     <p class="term-def"> a file address relative to the current working directory (e.g. ./data/input.csv)</p>
   </div>
 
+  <div class="term" data-term="! exclamation bang shell terminal command notebook">
+    <div class="term-header">
+      <span class="term-word">! (terminal command in a notebook)</span>
+      <span class="term-tag">notebooks</span>
+    </div>
+    <p class="term-def">Starting a code-cell line with <strong>!</strong> runs it as a terminal command instead of Python, e.g. <strong>!head -8 nashville_daily_2025.csv</strong> to peek at the first 8 lines of a data file.</p>
+  </div>
+
   <div class="term" data-term="directory">
     <div class="term-header">
       <span class="term-word">directory</span>
@@ -864,6 +880,14 @@
       <span class="term-tag">python basics</span>
     </div>
     <p class="term-def">A formatted string literal — written as <strong>f"..."</strong> — that lets you insert variable values directly inside a string using curly braces (e.g. <strong>f"The velocity is {v} cm/yr"</strong>).</p>
+  </div>
+
+  <div class="term" data-term="format specifier format spec f-string colon .2f width">
+    <div class="term-header">
+      <span class="term-word">format specifier</span>
+      <span class="term-tag">python basics</span>
+    </div>
+    <p class="term-def">The part after the colon in an f-string's curly braces, which controls how a value prints without changing it. <strong>.2f</strong> = 2 decimals; <strong>6.1f</strong> = at least 6 characters wide; <strong>,</strong> = thousands separators; <strong>+</strong> = always show the sign; <strong>.3e</strong> = scientific notation; <strong>.1%</strong> = percent; <strong>12s</strong> = a string padded to 12 characters; <strong>3d</strong> = a whole number padded to 3.</p>
   </div>
 
   <div class="term" data-term="attribute">
@@ -1246,6 +1270,14 @@
     <p class="term-def">The optional third argument to <strong>range()</strong>, which sets how far to jump each time. <strong>range(0, 10, 2)</strong> gives 0, 2, 4, 6, 8, and a negative step counts backward: <strong>range(6, -1, -1)</strong> gives 6, 5, …, 0. The stop value is never included.</p>
   </div>
 
+  <div class="term" data-term="unique pairs range(i + 1, n) empty range each pair once">
+    <div class="term-header">
+      <span class="term-word">unique pairs: range(i + 1, n)</span>
+      <span class="term-tag">control flow</span>
+    </div>
+    <p class="term-def">A nested-loop pattern where the inner loop starts one past the outer index, so every pair is visited once and nothing is paired with itself. On the last pass the inner range is <strong>empty</strong> (for example <strong>range(3, 3)</strong>), so the inner loop simply doesn't run.</p>
+  </div>
+
   <div class="term" data-term="float inf infinity best so far start">
     <div class="term-header">
       <span class="term-word">float("inf")</span>
@@ -1428,6 +1460,173 @@
     <p class="term-def">A dictionary whose values are themselves dictionaries or lists. Use one key per level to dig in: <strong>gully_profiles["Geer-Canyon"]["area_km2"]</strong>. Looping through one takes a nested loop — the inner loop walks through whatever the outer loop hands it. A <strong>dictionary of lists</strong> (one list of results per scenario) is a common way to store the output of a nested loop.</p>
   </div>
 
+
+<!-- ── CATEGORY: NumPy ── -->
+  <div class="category">
+    <span class="category-label">NumPy</span>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="term" data-term="numpy np import numpy as np">
+    <div class="term-header">
+      <span class="term-word">NumPy</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">The core Python package for numerical computing, imported with <strong>import numpy as np</strong>. Almost every science package (pandas, matplotlib, ObsPy, Landlab) is built on it and hands you NumPy arrays.</p>
+  </div>
+
+  <div class="term" data-term="array ndarray numpy.ndarray">
+    <div class="term-header">
+      <span class="term-word">array (ndarray)</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">NumPy's container for numbers. Like a list, but <strong>every element has the same type</strong> and math happens to every element at once. Its type is <strong>numpy.ndarray</strong>, for "n-dimensional array."</p>
+  </div>
+
+  <div class="term" data-term="dtype data type int64 float64">
+    <div class="term-header">
+      <span class="term-word">dtype</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">The one data type every element of an array shares, such as <strong>int64</strong> or <strong>float64</strong>. Mixing an int and a float makes everything float; adding a string makes everything a string.</p>
+  </div>
+
+  <div class="term" data-term="shape ndim size attributes dimensions">
+    <div class="term-header">
+      <span class="term-word">.shape / .ndim / .size</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">Attributes (no parentheses) that describe an array. <strong>.shape</strong> is the size along each dimension, rows first: <strong>(6, 12)</strong> means 6 rows and 12 columns. <strong>.ndim</strong> is the number of dimensions; <strong>.size</strong> is the total number of elements.</p>
+  </div>
+
+  <div class="term" data-term="2d array two-dimensional table rows columns">
+    <div class="term-header">
+      <span class="term-word">2D array</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">An array with rows and columns, like a table. Index one value with <strong>a[row, col]</strong>, a whole row with <strong>a[row]</strong>, and a whole column with <strong>a[:, col]</strong>.</p>
+  </div>
+
+  <div class="term" data-term="element-wise vectorized vectorised math">
+    <div class="term-header">
+      <span class="term-word">element-wise (vectorized)</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">Math that NumPy applies to every element of an array, in order, returning a new array: <strong>(temps - 32) * 5 / 9</strong> converts all the temperatures at once. It's the same loop you'd write yourself, run inside NumPy, so it's shorter and much faster.</p>
+  </div>
+
+  <div class="term" data-term="np.arange np.linspace evenly spaced">
+    <div class="term-header">
+      <span class="term-word">np.arange() vs. np.linspace()</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">Two ways to make evenly spaced values. <strong>np.arange(start, stop, step)</strong> works like range() and leaves out the stop; use it for whole-number steps. <strong>np.linspace(start, stop, num)</strong> gives <strong>num</strong> values with both ends included; use it for decimal spacing, since it avoids floating-point drift.</p>
+  </div>
+
+  <div class="term" data-term="np.loadtxt delimiter load read file csv">
+    <div class="term-header">
+      <span class="term-word">np.loadtxt()</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">Reads a text file of numbers into an array, skipping lines that start with <strong>#</strong>. <strong>delimiter=","</strong> says the values are separated by commas. A table comes back as a 2D array; pull out a column with <strong>data[:, 2]</strong>.</p>
+  </div>
+
+  <div class="term" data-term="axis axis=0 axis=1 rows columns summarize">
+    <div class="term-header">
+      <span class="term-word">axis</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">Tells a summary method which direction to use up. Axis numbers match <strong>.shape</strong> positions: 0 is rows, 1 is columns. <strong>a.mean(axis=0)</strong> uses all the rows and gives one value per column; <strong>a.mean(axis=1)</strong> gives one value per row.</p>
+  </div>
+
+  <div class="term" data-term="boolean array true false comparison">
+    <div class="term-header">
+      <span class="term-word">boolean array</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">An array of True and False values, made by a comparison on an array: <strong>tmin &lt;= 32</strong> gives one True/False per day. <strong>np.sum()</strong> counts its Trues, because True counts as 1 and False as 0.</p>
+  </div>
+
+  <div class="term" data-term="mask boolean indexing select filter">
+    <div class="term-header">
+      <span class="term-word">mask (boolean indexing)</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">A boolean array placed inside square brackets to keep only the elements where it's True: <strong>prcp[prcp &gt;= 0.01]</strong>, read as "prcp, where prcp is at least 0.01." On the left of <strong>=</strong>, a mask chooses where to <strong>write</strong>: <strong>a[a == -9999] = np.nan</strong>.</p>
+  </div>
+
+  <div class="term" data-term="&amp; | ~ element-wise and or not bitwise">
+    <div class="term-header">
+      <span class="term-word">&amp; / | / ~</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">The element-wise versions of <strong>and</strong>, <strong>or</strong>, and <strong>not</strong> for arrays. Put each condition in its own parentheses: <strong>(tmax &gt;= 90) &amp; (prcp == 0)</strong>. Using <strong>and</strong>/<strong>or</strong> on arrays raises "truth value ... is ambiguous."</p>
+  </div>
+
+  <div class="term" data-term="argmax argmin index of max min where">
+    <div class="term-header">
+      <span class="term-word">.argmax() / .argmin()</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">Return the <strong>index</strong> of the biggest or smallest value ("argument of the max"), rather than the value itself. That index unlocks every other measurement on the same row. Ties return the first one.</p>
+  </div>
+
+  <div class="term" data-term="any all yes no flag">
+    <div class="term-header">
+      <span class="term-word">.any() / .all()</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">Yes/no questions about a boolean array. <strong>.any()</strong>: is at least one element True? <strong>.all()</strong>: is every element True? They replace the flag-variable loop pattern.</p>
+  </div>
+
+  <div class="term" data-term="np.where indices true positions">
+    <div class="term-header">
+      <span class="term-word">np.where()</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def"><strong>np.where(mask)[0]</strong> returns the indices where a mask is True. The result comes wrapped in a tuple, hence the <strong>[0]</strong>.</p>
+  </div>
+
+  <div class="term" data-term="fill value -9999 missing placeholder sentinel">
+    <div class="term-header">
+      <span class="term-word">fill value</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">A placeholder that an instrument or data file uses to mean "no reading," such as <strong>-9999</strong>. If you don't replace it, one fill value wrecks every average. A cousin of the <strong>sentinel value</strong> from the loops unit.</p>
+  </div>
+
+  <div class="term" data-term="nan np.nan not a number missing nanmean">
+    <div class="term-header">
+      <span class="term-word">NaN (np.nan)</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">"Not a number": NumPy's marker for a missing value. It's contagious: any math that touches a nan gives nan, so <strong>a.mean()</strong> returns nan. Functions like <strong>np.nanmean()</strong> skip the missing values.</p>
+  </div>
+
+  <div class="term" data-term="view copy slice .copy() changes original">
+    <div class="term-header">
+      <span class="term-word">view vs. copy</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">A slice of an array is a <strong>view</strong>: a window into the same numbers, so changing the slice changes the original. Lists don't do this. Use <strong>.copy()</strong> before changing values, so your raw data stays raw. Selecting with a mask always makes a copy.</p>
+  </div>
+
+  <div class="term" data-term="broadcasting broadcast shapes stretch">
+    <div class="term-header">
+      <span class="term-word">broadcasting</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">NumPy's rules for math between arrays of different shapes. Line the shapes up from the right; each pair of sizes must be equal, or one must be 1, which gets stretched. <strong>(6, 12)</strong> works with <strong>(12,)</strong> but not with <strong>(6,)</strong>.</p>
+  </div>
+
+  <div class="term" data-term="np.newaxis column add dimension">
+    <div class="term-header">
+      <span class="term-word">np.newaxis</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">Adds a dimension of size 1 where you put it. <strong>b[:, np.newaxis]</strong> turns shape <strong>(6,)</strong> into a column of shape <strong>(6, 1)</strong>, the usual fix for a broadcasting error.</p>
+  </div>
+
 <!-- ── CATEGORY: Debugging ── -->
   <div class="category">
     <span class="category-label">Errors &amp; Debugging</span>
@@ -1607,6 +1806,35 @@
     <p class="term-def">Warming of a planet's surface because gases in its atmosphere absorb heat radiated by the surface and send part of it back down. It's why Earth is about 33 K warmer than its black-body temperature.</p>
   </div>
 
+  <div class="term" data-term="saturation vapor pressure water vapor humidity bolton">
+    <div class="term-header">
+      <span class="term-word">saturation vapor pressure</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The most water vapor air can hold at a given temperature before it starts to condense. It roughly doubles for every 10 °C of warming, which is why hot air can hold so much more moisture than cold air.</p>
+  </div>
+
+  <div class="term" data-term="degree days cooling heating 65 F energy">
+    <div class="term-header">
+      <span class="term-word">degree days</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A measure of heating and cooling demand. Each day's <strong>cooling degree days</strong> are how far its average temperature is above 65 °F (zero if it's not); <strong>heating degree days</strong> are how far it is below.</p>
+  </div>
+
+  <div class="term" data-term="growing season frost-free last spring freeze first fall freeze">
+    <div class="term-header">
+      <span class="term-word">growing season (frost-free period)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The days between the last spring freeze and the first fall freeze, when frost-sensitive plants can grow.</p>
+  </div>
+
+<div id="no-results">
+  <p>🔍</p>
+  <p>No terms match that search.</p>
+</div>
+
 </main>
 
 <footer>
@@ -1644,10 +1872,6 @@
   filterTerms();
 </script>
 
-<div id="no-results">
-  <p>🔍</p>
-  <p>No terms match that search.</p>
-</div>
 
 </body>
 </html>

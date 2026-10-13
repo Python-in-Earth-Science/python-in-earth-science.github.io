@@ -921,6 +921,14 @@ git status</td>
             <td class="desc">Your branch isn&#x27;t linked to GitHub yet</td>
             <td class="out">git push --set-upstream origin main</td>
           </tr>
+          <tr data-search="git src refspec main does not match any push no commits">
+            <td class="fn">error: src refspec main does not match any</td>
+            <td class="desc">Make a commit first (or check the branch name), then push</td>
+            <td class="desc">There's nothing on a branch called main yet: no commits, or the branch is named master</td>
+            <td class="out">git status
+git commit -m "first commit"
+git push</td>
+          </tr>
           <tr data-search="git rejected fetch first push">
             <td class="fn">! [rejected] ... (fetch first)</td>
             <td class="desc">Pull first, then push</td>
@@ -1506,6 +1514,16 @@ Mars 6.42e+23</td>
             <td class="ex">best = 0<br>best_name = ""<br>for name, s in zip(["a", "b", "c"], [10, 40, 25]):<br>&nbsp;&nbsp;&nbsp;&nbsp;if s &gt; best:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;best = s<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;best_name = name<br>print(best_name, best)</td>
             <td class="out">b 40</td>
           </tr>
+          <tr data-search="float inf infinity running minimum best so far start">
+            <td class="fn">best = float(&quot;inf&quot;)</td>
+            <td class="desc">A starting value any real number beats. Use float("inf") for a running <strong>minimum</strong> and -float("inf") for a running maximum</td>
+            <td class="ex">best = float(&quot;inf&quot;)
+for s in [10, 40, 25]:
+    if s &lt; best:
+        best = s
+print(best)</td>
+            <td class="out">10</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -1524,6 +1542,17 @@ Mars 6.42e+23</td>
             <td class="desc">For each pass of the outer loop, the inner loop runs all the way through and then starts over. The innermost line runs (outer passes) × (inner passes) times</td>
             <td class="ex">for i in range(2):<br>&nbsp;&nbsp;&nbsp;&nbsp;for j in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(i, j)</td>
             <td class="out">0 0<br>0 1<br>0 2<br>1 0<br>1 1<br>1 2</td>
+          </tr>
+          <tr data-search="unique pairs range(i + 1, n) each pair once nested">
+            <td class="fn">range(i + 1, n)</td>
+            <td class="desc">In a nested loop, start the inner loop one past the outer index so each pair appears once (and never pairs with itself)</td>
+            <td class="ex">names = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]
+for i in range(len(names)):
+    for j in range(i + 1, len(names)):
+        print(names[i], names[j])</td>
+            <td class="out">A B
+A C
+B C</td>
           </tr>
           <tr data-search="nested dictionary loop dict of dicts inner outer items">
             <td class="fn">for k, inner in outer.items():<br>    for k2, v in inner.items():</td>
@@ -2191,198 +2220,402 @@ Your text here
   <div class="sheet" id="sheet-numpy">
     <div class="sheet-intro">
       <div class="sheet-title">NumPy</div>
-      <p class="sheet-desc">Import with <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">import numpy as np</code> — NumPy is the foundation for numerical computing in Python. Arrays are faster and more powerful than lists for scientific data.</p>
+      <p class="sheet-desc">Import with <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">import numpy as np</code>. An array is like a list, with two big differences: every element has the <strong>same type</strong>, and math happens to <strong>every element at once</strong>. The Output column shows what <strong>print()</strong> displays.</p>
     </div>
 
-    <!-- Array Creation -->
+    <!-- Making Arrays -->
     <div class="section">
       <div class="section-header">
-        <span class="section-label">Array Creation</span>
+        <span class="section-label">Making Arrays</span>
         <div class="section-rule"></div>
       </div>
       <table class="cheat-table">
         <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
         <tbody>
-          <tr data-search="np.array create array list">
-            <td class="fn">np.array()</td>
-            <td class="desc">Convert a list (or list of lists) to a NumPy array</td>
-            <td class="ex">np.array([1, 2, 3])</td>
-            <td class="out">array([1, 2, 3])</td>
+          <tr data-search="np.array create array list convert">
+            <td class="fn">np.array(a_list)</td>
+            <td class="desc">Turn a list into an array. Every element ends up the same type</td>
+            <td class="ex">np.array([44, 49, 44, 43])</td>
+            <td class="out">[44 49 44 43]</td>
+          </tr>
+          <tr data-search="np.array 2d table list of lists rows">
+            <td class="fn">np.array(list_of_rows)</td>
+            <td class="desc">A list of rows makes a <strong>2D</strong> array (a table)</td>
+            <td class="ex">small = np.array([[39.6, 43.4, 51.5],
+                  [31.7, 32.7, 41.6]])
+small</td>
+            <td class="out">[[39.6 43.4 51.5]
+ [31.7 32.7 41.6]]</td>
           </tr>
           <tr data-search="np.zeros create zeros array">
-            <td class="fn">np.zeros(x)</td>
-            <td class="desc">Create array of zeros with shape x</td>
+            <td class="fn">np.zeros(n)</td>
+            <td class="desc">n zeros</td>
             <td class="ex">np.zeros(3)</td>
-            <td class="out">array([0., 0., 0.])</td>
+            <td class="out">[0. 0. 0.]</td>
           </tr>
           <tr data-search="np.ones create ones array">
-            <td class="fn">np.ones(x)</td>
-            <td class="desc">Create array of ones with shape x</td>
-            <td class="ex">np.ones((2, 3))</td>
-            <td class="out">array([[1., 1., 1.],
-       [1., 1., 1.]])</td>
+            <td class="fn">np.ones(n)</td>
+            <td class="desc">n ones</td>
+            <td class="ex">np.ones(3)</td>
+            <td class="out">[1. 1. 1.]</td>
           </tr>
-          <tr data-search="np.arange range evenly spaced step">
-            <td class="fn">np.arange(x, y, z)</td>
-            <td class="desc">Array from x to y, stepping by z</td>
-            <td class="ex">np.arange(0, 10, 2)</td>
-            <td class="out">array([0, 2, 4, 6, 8])</td>
+          <tr data-search="np.arange range evenly spaced step whole number">
+            <td class="fn">np.arange(start, stop, step)</td>
+            <td class="desc">Like <strong>range()</strong>, but an array. The stop is <strong>not</strong> included. Best for whole-number steps</td>
+            <td class="ex">np.arange(1, 8)</td>
+            <td class="out">[1 2 3 4 5 6 7]</td>
           </tr>
-          <tr data-search="np.linspace evenly spaced samples">
-            <td class="fn">np.linspace(x, y, z)</td>
-            <td class="desc">Array of z evenly spaced values from x to y (inclusive)</td>
-            <td class="ex">np.linspace(0, 1, 5)</td>
-            <td class="out">array([0.  , 0.25, 0.5 ,
-       0.75, 1.  ])</td>
+          <tr data-search="np.linspace evenly spaced how many decimal">
+            <td class="fn">np.linspace(start, stop, num)</td>
+            <td class="desc"><strong>num</strong> evenly spaced values, <strong>both ends included</strong>. Use it for decimal spacing (no float drift)</td>
+            <td class="ex">np.linspace(0, 1, 6)</td>
+            <td class="out">[0.  0.2 0.4 0.6 0.8 1. ]</td>
+          </tr>
+          <tr data-search="np.loadtxt load read csv file data delimiter">
+            <td class="fn">np.loadtxt(path, delimiter=&quot;,&quot;)</td>
+            <td class="desc">Read a file of numbers into an array. Skips lines starting with <strong>#</strong>. A table comes back as a 2D array</td>
+            <td class="ex">data = np.loadtxt(&quot;nashville_daily_2025.csv&quot;, delimiter=&quot;,&quot;)
+data.shape</td>
+            <td class="out">(365, 6)</td>
+          </tr>
+          <tr data-search="column pull out extract data[:, 2] loadtxt">
+            <td class="fn">data[:, col]</td>
+            <td class="desc">Pull one column out of a loaded table as its own 1D array</td>
+            <td class="ex">tmax = data[:, 2]
+tmax.shape</td>
+            <td class="out">(365,)</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- Array Info -->
+    <!-- Describing Arrays -->
     <div class="section">
       <div class="section-header">
-        <span class="section-label">Array Information</span>
+        <span class="section-label">Describing Arrays</span>
         <div class="section-rule"></div>
       </div>
       <table class="cheat-table">
-        <thead><tr><th>Attribute / Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
         <tbody>
-          <tr data-search="array.shape dimensions shape rows columns">
-            <td class="fn">array.shape</td>
-            <td class="desc">Dimensions of the array (rows, columns)</td>
-            <td class="ex">a = np.array([[1,2],[3,4]])
+          <tr data-search="shape size each dimension rows columns">
+            <td class="fn">a.shape</td>
+            <td class="desc">Size along each dimension, as a tuple: <strong>rows first, then columns</strong>. No parentheses (it's an attribute)</td>
+            <td class="ex">a = np.array([[1, 2, 3], [4, 5, 6]])
 a.shape</td>
-            <td class="out">(2, 2)</td>
+            <td class="out">(2, 3)</td>
           </tr>
-          <tr data-search="array.ndim dimensions number">
-            <td class="fn">array.ndim</td>
-            <td class="desc">Number of dimensions</td>
-            <td class="ex">a.ndim</td>
+          <tr data-search="ndim number of dimensions">
+            <td class="fn">a.ndim</td>
+            <td class="desc">How many dimensions (how many numbers are in .shape)</td>
+            <td class="ex">a = np.array([[1, 2, 3], [4, 5, 6]])
+a.ndim</td>
             <td class="out">2</td>
           </tr>
-          <tr data-search="array.size total elements count">
-            <td class="fn">array.size</td>
+          <tr data-search="size total number elements">
+            <td class="fn">a.size</td>
             <td class="desc">Total number of elements</td>
-            <td class="ex">a.size</td>
-            <td class="out">4</td>
+            <td class="ex">a = np.array([[1, 2, 3], [4, 5, 6]])
+a.size</td>
+            <td class="out">6</td>
           </tr>
-          <tr data-search="len length first dimension">
-            <td class="fn">len(array)</td>
-            <td class="desc">Length of first dimension</td>
-            <td class="ex">len(a)</td>
+          <tr data-search="len length rows">
+            <td class="fn">len(a)</td>
+            <td class="desc">Length of the first dimension (the number of rows in 2D)</td>
+            <td class="ex">a = np.array([[1, 2, 3], [4, 5, 6]])
+len(a)</td>
             <td class="out">2</td>
           </tr>
-          <tr data-search="array.dtype data type float int">
-            <td class="fn">array.dtype</td>
-            <td class="desc">Data type of array elements</td>
-            <td class="ex">a.dtype</td>
-            <td class="out">dtype('int64')</td>
+          <tr data-search="dtype data type int64 float64">
+            <td class="fn">a.dtype</td>
+            <td class="desc">The <strong>one</strong> type every element shares</td>
+            <td class="ex">np.array([44, 49.5]).dtype</td>
+            <td class="out">float64</td>
           </tr>
-          <tr data-search="array.astype convert type cast">
-            <td class="fn">array.astype(type)</td>
-            <td class="desc">Convert array to a different data type</td>
-            <td class="ex">a.astype(float)</td>
-            <td class="out">array([[1., 2.],
-       [3., 4.]])</td>
+          <tr data-search="astype convert type">
+            <td class="fn">a.astype(type)</td>
+            <td class="desc">A new array converted to another type</td>
+            <td class="ex">np.array([1.7, 2.2]).astype(int)</td>
+            <td class="out">[1 2]</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- Math Operations -->
+    <!-- Indexing & Slicing -->
     <div class="section">
       <div class="section-header">
-        <span class="section-label">Mathematical Operations</span>
+        <span class="section-label">Indexing &amp; Slicing</span>
         <div class="section-rule"></div>
       </div>
       <table class="cheat-table">
         <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
         <tbody>
-          <tr data-search="np.sqrt square root element">
-            <td class="fn">np.sqrt(array)</td>
-            <td class="desc">Square root of each element</td>
+          <tr data-search="index position first">
+            <td class="fn">a[i]</td>
+            <td class="desc">One element (same rules as lists)</td>
+            <td class="ex">a = np.array([44, 49, 44, 43, 56, 56, 32])
+a[0]</td>
+            <td class="out">44</td>
+          </tr>
+          <tr data-search="negative index last">
+            <td class="fn">a[-1]</td>
+            <td class="desc">Count from the end</td>
+            <td class="ex">a = np.array([44, 49, 44, 43, 56, 56, 32])
+a[-1]</td>
+            <td class="out">32</td>
+          </tr>
+          <tr data-search="slice start stop">
+            <td class="fn">a[start:stop]</td>
+            <td class="desc">A slice; the stop is not included</td>
+            <td class="ex">a = np.array([44, 49, 44, 43, 56, 56, 32])
+a[3:5]</td>
+            <td class="out">[43 56]</td>
+          </tr>
+          <tr data-search="negative slice last few">
+            <td class="fn">a[-n:]</td>
+            <td class="desc">The last n elements</td>
+            <td class="ex">a = np.array([44, 49, 44, 43, 56, 56, 32])
+a[-3:]</td>
+            <td class="out">[56 56 32]</td>
+          </tr>
+          <tr data-search="2d index row col one value comma">
+            <td class="fn">a[row, col]</td>
+            <td class="desc">One value from a 2D array: row first, then column</td>
+            <td class="ex">a = np.array([[39.6, 43.4, 51.5],
+              [31.7, 32.7, 41.6]])
+a[1, 2]</td>
+            <td class="out">41.6</td>
+          </tr>
+          <tr data-search="2d whole row">
+            <td class="fn">a[row]</td>
+            <td class="desc">One index on a 2D array gives a whole <strong>row</strong></td>
+            <td class="ex">a = np.array([[39.6, 43.4, 51.5],
+              [31.7, 32.7, 41.6]])
+a[1]</td>
+            <td class="out">[31.7 32.7 41.6]</td>
+          </tr>
+          <tr data-search="2d whole column every row colon">
+            <td class="fn">a[:, col]</td>
+            <td class="desc"><strong>:</strong> means "every row", so this is a whole <strong>column</strong></td>
+            <td class="ex">a = np.array([[39.6, 43.4, 51.5],
+              [31.7, 32.7, 41.6]])
+a[:, 0]</td>
+            <td class="out">[39.6 31.7]</td>
+          </tr>
+          <tr data-search="2d slice part of a row">
+            <td class="fn">a[row, start:stop]</td>
+            <td class="desc">Part of one row</td>
+            <td class="ex">a = np.array([[39.6, 43.4, 51.5],
+              [31.7, 32.7, 41.6]])
+a[0, 1:3]</td>
+            <td class="out">[43.4 51.5]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Element-wise Math -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Element-wise Math</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="element-wise vectorized math number every element">
+            <td class="fn">a - 32,  a * 2, ...</td>
+            <td class="desc">Math between an array and a number happens to <strong>every element</strong> and returns a new array</td>
+            <td class="ex">a = np.array([50, 68, 86])
+(a - 32) * 5 / 9</td>
+            <td class="out">[10. 20. 30.]</td>
+          </tr>
+          <tr data-search="two arrays same length pair position">
+            <td class="fn">a + b</td>
+            <td class="desc">Two arrays of the same shape pair up <strong>by position</strong> (like zip)</td>
+            <td class="ex">highs = np.array([44, 49, 44])
+lows = np.array([28, 25, 30])
+(highs + lows) / 2</td>
+            <td class="out">[36. 37. 37.]</td>
+          </tr>
+          <tr data-search="list vs array multiply repeat">
+            <td class="fn">my_list * 2  vs  a * 2</td>
+            <td class="desc">Careful: on a <strong>list</strong>, * repeats and + joins. On an <strong>array</strong>, they do math</td>
+            <td class="ex">print([1, 2] * 2)
+np.array([1, 2]) * 2</td>
+            <td class="out">[1, 2, 1, 2]
+[2 4]</td>
+          </tr>
+          <tr data-search="np.sqrt np.exp np.log np.log10 np.abs np.sin np.cos math functions">
+            <td class="fn">np.sqrt(a), np.exp(a), np.log(a), np.log10(a), np.abs(a), np.sin(a), np.cos(a)</td>
+            <td class="desc">NumPy's math functions work on a whole array. The <strong>math</strong> module's versions only take one number</td>
             <td class="ex">np.sqrt(np.array([4, 9, 16]))</td>
-            <td class="out">array([2., 3., 4.])</td>
+            <td class="out">[2. 3. 4.]</td>
           </tr>
-          <tr data-search="np.exp exponential element">
-            <td class="fn">np.exp(array)</td>
-            <td class="desc">e^x for each element</td>
-            <td class="ex">np.exp(np.array([0, 1]))</td>
-            <td class="out">array([1.   , 2.718])</td>
+          <tr data-search="np.pi pi constant">
+            <td class="fn">np.pi</td>
+            <td class="desc">Pi, same as math.pi</td>
+            <td class="ex">round(np.pi, 5)</td>
+            <td class="out">3.14159</td>
           </tr>
-          <tr data-search="np.log natural logarithm element">
-            <td class="fn">np.log(array)</td>
-            <td class="desc">Natural logarithm of each element</td>
-            <td class="ex">np.log(np.array([1, np.e]))</td>
-            <td class="out">array([0., 1.])</td>
+          <tr data-search="np.maximum replace negatives zero element-wise max">
+            <td class="fn">np.maximum(a, b)</td>
+            <td class="desc">Element-wise maximum: with 0, it turns negatives into 0</td>
+            <td class="ex">np.maximum(np.array([-3, 2, -1, 5]), 0)</td>
+            <td class="out">[0 2 0 5]</td>
           </tr>
-          <tr data-search="np.abs absolute value element">
-            <td class="fn">np.abs(array)</td>
-            <td class="desc">Absolute value of each element</td>
-            <td class="ex">np.abs(np.array([-3, 4, -1]))</td>
-            <td class="out">array([3, 4, 1])</td>
-          </tr>
-          <tr data-search="np.sin sine trig element">
-            <td class="fn">np.sin(array)</td>
-            <td class="desc">Sine of each element (in radians)</td>
-            <td class="ex">np.sin(np.array([0, np.pi/2]))</td>
-            <td class="out">array([0., 1.])</td>
-          </tr>
-          <tr data-search="np.cos cosine trig element">
-            <td class="fn">np.cos(array)</td>
-            <td class="desc">Cosine of each element (in radians)</td>
-            <td class="ex">np.cos(np.array([0, np.pi]))</td>
-            <td class="out">array([ 1., -1.])</td>
+          <tr data-search="round decimals array">
+            <td class="fn">a.round(n)</td>
+            <td class="desc">Round every element to n decimals</td>
+            <td class="ex">np.array([6.6667, 9.4444]).round(1)</td>
+            <td class="out">[6.7 9.4]</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- Statistical Functions -->
+    <!-- Summaries & axis -->
     <div class="section">
       <div class="section-header">
-        <span class="section-label">Statistical Functions</span>
+        <span class="section-label">Summaries &amp; axis</span>
         <div class="section-rule"></div>
       </div>
       <table class="cheat-table">
         <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
         <tbody>
-          <tr data-search="np.sum sum add total all elements">
-            <td class="fn">np.sum(array)</td>
-            <td class="desc">Sum of all elements</td>
-            <td class="ex">np.sum(np.array([1, 2, 3, 4]))</td>
-            <td class="out">10</td>
+          <tr data-search="sum total accumulator">
+            <td class="fn">a.sum()  /  np.sum(a)</td>
+            <td class="desc">Total of every element</td>
+            <td class="ex">np.array([0.5, 0.0, 1.25]).sum()</td>
+            <td class="out">1.75</td>
           </tr>
-          <tr data-search="np.mean average mean">
-            <td class="fn">np.mean(array)</td>
-            <td class="desc">Mean (average) of all elements</td>
-            <td class="ex">np.mean(np.array([1, 2, 3, 4]))</td>
-            <td class="out">2.5</td>
+          <tr data-search="mean average">
+            <td class="fn">a.mean()  /  np.mean(a)</td>
+            <td class="desc">Average</td>
+            <td class="ex">np.array([44, 49, 44, 43]).mean()</td>
+            <td class="out">45.0</td>
           </tr>
-          <tr data-search="np.median median middle">
-            <td class="fn">np.median(array)</td>
-            <td class="desc">Median value</td>
-            <td class="ex">np.median(np.array([1, 2, 3, 4]))</td>
-            <td class="out">2.5</td>
+          <tr data-search="max min biggest smallest">
+            <td class="fn">a.max(),  a.min()</td>
+            <td class="desc">Biggest / smallest value</td>
+            <td class="ex">a = np.array([44, 49, 44, 43])
+print(a.max())
+a.min()</td>
+            <td class="out">49
+43</td>
           </tr>
-          <tr data-search="np.std standard deviation spread">
-            <td class="fn">np.std(array)</td>
-            <td class="desc">Standard deviation</td>
-            <td class="ex">np.std(np.array([1, 2, 3, 4]))</td>
-            <td class="out">1.118...</td>
+          <tr data-search="median middle value">
+            <td class="fn">np.median(a)</td>
+            <td class="desc">Middle value</td>
+            <td class="ex">np.median(np.array([3, 1, 5, 2, 4]))</td>
+            <td class="out">3.0</td>
           </tr>
-          <tr data-search="np.max maximum largest biggest">
-            <td class="fn">np.max(array)</td>
-            <td class="desc">Maximum value</td>
-            <td class="ex">np.max(np.array([3, 1, 4, 1, 5]))</td>
-            <td class="out">5</td>
+          <tr data-search="std standard deviation spread">
+            <td class="fn">np.std(a)</td>
+            <td class="desc">Standard deviation (spread around the mean)</td>
+            <td class="ex">np.std(np.array([2, 4, 4, 4, 5, 5, 7, 9]))</td>
+            <td class="out">2.0</td>
           </tr>
-          <tr data-search="np.min minimum smallest">
-            <td class="fn">np.min(array)</td>
-            <td class="desc">Minimum value</td>
-            <td class="ex">np.min(np.array([3, 1, 4, 1, 5]))</td>
-            <td class="out">1</td>
+          <tr data-search="axis 0 rows one per column down columns">
+            <td class="fn">a.mean(axis=0)</td>
+            <td class="desc">Uses all the <strong>rows</strong> → one value per <strong>column</strong>. Shape (6, 12) becomes (12,)</td>
+            <td class="ex">a = np.array([[1, 2, 3],
+              [5, 6, 7]])
+a.mean(axis=0)</td>
+            <td class="out">[3. 4. 5.]</td>
+          </tr>
+          <tr data-search="axis 1 columns one per row across rows">
+            <td class="fn">a.mean(axis=1)</td>
+            <td class="desc">Uses all the <strong>columns</strong> → one value per <strong>row</strong>. Shape (6, 12) becomes (6,)</td>
+            <td class="ex">a = np.array([[1, 2, 3],
+              [5, 6, 7]])
+a.mean(axis=1)</td>
+            <td class="out">[2. 6.]</td>
+          </tr>
+          <tr data-search="axis sum max min argmax any all every method">
+            <td class="fn">a.max(axis=1), a.argmax(axis=1), ...</td>
+            <td class="desc"><strong>axis</strong> works on every summary method: sum, max, min, argmax, argmin, any, all</td>
+            <td class="ex">a = np.array([[1, 9, 3],
+              [8, 6, 7]])
+a.argmax(axis=1)</td>
+            <td class="out">[1 0]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Masks (Boolean Arrays) -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Masks (Boolean Arrays)</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="comparison boolean array true false element-wise">
+            <td class="fn">a &lt;= 32</td>
+            <td class="desc">A comparison checks every element and returns a <strong>boolean array</strong></td>
+            <td class="ex">lows = np.array([28, 25, 34, 27])
+lows &lt;= 32</td>
+            <td class="out">[ True  True False  True]</td>
+          </tr>
+          <tr data-search="count trues np.sum mask how many">
+            <td class="fn">np.sum(mask)</td>
+            <td class="desc">Counts the Trues (True = 1, False = 0)</td>
+            <td class="ex">lows = np.array([28, 25, 34, 27])
+np.sum(lows &lt;= 32)</td>
+            <td class="out">3</td>
+          </tr>
+          <tr data-search="mask select keep where boolean indexing">
+            <td class="fn">a[mask]</td>
+            <td class="desc">Keeps only the elements where the mask is True. Read it as "a, where ..."</td>
+            <td class="ex">lows = np.array([28, 25, 34, 27])
+lows[lows &lt;= 32]</td>
+            <td class="out">[28 25 27]</td>
+          </tr>
+          <tr data-search="mask from another array month line up">
+            <td class="fn">b[a == value]</td>
+            <td class="desc">The mask can come from a different array, as long as they line up</td>
+            <td class="ex">month = np.array([12, 12, 1, 1])
+tmax = np.array([52, 70, 41, 38])
+tmax[month == 12]</td>
+            <td class="out">[52 70]</td>
+          </tr>
+          <tr data-search="and &amp; both element-wise parentheses">
+            <td class="fn">(cond1) &amp; (cond2)</td>
+            <td class="desc">Both true, element by element. Use <strong>&amp;</strong>, not and, and put each condition in parentheses</td>
+            <td class="ex">tmax = np.array([95, 91, 85])
+prcp = np.array([0.0, 0.3, 0.0])
+(tmax &gt;= 90) &amp; (prcp == 0)</td>
+            <td class="out">[ True False False]</td>
+          </tr>
+          <tr data-search="or | either element-wise">
+            <td class="fn">(cond1) | (cond2)</td>
+            <td class="desc">Either true, element by element (not or)</td>
+            <td class="ex">tmax = np.array([95, 83, 85])
+tmin = np.array([72, 76, 60])
+(tmax &gt;= 90) | (tmin &gt;= 75)</td>
+            <td class="out">[ True  True False]</td>
+          </tr>
+          <tr data-search="not ~ flip invert mask">
+            <td class="fn">~mask</td>
+            <td class="desc">Flips every True and False (not not)</td>
+            <td class="ex">~np.array([True, False, True])</td>
+            <td class="out">[False  True False]</td>
+          </tr>
+          <tr data-search="any at least one true flag">
+            <td class="fn">mask.any()</td>
+            <td class="desc">Is <strong>at least one</strong> element True?</td>
+            <td class="ex">(np.array([69, 72, 75]) &lt; 60).any()</td>
+            <td class="out">False</td>
+          </tr>
+          <tr data-search="all every element true">
+            <td class="fn">mask.all()</td>
+            <td class="desc">Is <strong>every</strong> element True?</td>
+            <td class="ex">(np.array([88, 91, 95]) &gt;= 90).all()</td>
+            <td class="out">False</td>
           </tr>
         </tbody>
       </table>
@@ -2397,24 +2630,182 @@ a.shape</td>
       <table class="cheat-table">
         <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
         <tbody>
-          <tr data-search="np.argmax index maximum location position">
-            <td class="fn">np.argmax(array)</td>
-            <td class="desc">Index of the maximum value</td>
-            <td class="ex">np.argmax(np.array([3, 1, 5, 2]))</td>
+          <tr data-search="argmax index maximum location position which day">
+            <td class="fn">a.argmax()</td>
+            <td class="desc"><strong>Index</strong> of the biggest value (the first one, if there's a tie)</td>
+            <td class="ex">np.array([3, 1, 5, 2]).argmax()</td>
             <td class="out">2</td>
           </tr>
-          <tr data-search="np.argmin index minimum location position">
-            <td class="fn">np.argmin(array)</td>
-            <td class="desc">Index of the minimum value</td>
-            <td class="ex">np.argmin(np.array([3, 1, 5, 2]))</td>
+          <tr data-search="argmin index minimum location position">
+            <td class="fn">a.argmin()</td>
+            <td class="desc">Index of the smallest value</td>
+            <td class="ex">np.array([3, 1, 5, 2]).argmin()</td>
             <td class="out">1</td>
           </tr>
-          <tr data-search="np.where find indices condition boolean">
-            <td class="fn">np.where(condition)</td>
-            <td class="desc">Indices where a condition is True</td>
+          <tr data-search="np.where indices condition true positions">
+            <td class="fn">np.where(mask)[0]</td>
+            <td class="desc">The indices where a mask is True. It comes wrapped in a tuple, so add [0]</td>
             <td class="ex">a = np.array([1, 5, 2, 8, 3])
-np.where(a > 3)</td>
-            <td class="out">(array([1, 3]),)</td>
+np.where(a &gt; 3)[0]</td>
+            <td class="out">[1 3]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Missing Data & Fill Values -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Missing Data &amp; Fill Values</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="np.nan not a number missing value">
+            <td class="fn">np.nan</td>
+            <td class="desc">NumPy's "not a number": a placeholder for a missing value</td>
+            <td class="ex">np.array([44.0, np.nan, 56.0])</td>
+            <td class="out">[44. nan 56.]</td>
+          </tr>
+          <tr data-search="fill value -9999 replace mask assignment clean">
+            <td class="fn">a[a == -9999] = np.nan</td>
+            <td class="desc">Mask on the <strong>left</strong> of = : write a value everywhere the mask is True. Do it on a <strong>.copy()</strong></td>
+            <td class="ex">raw = np.array([44., 49, -9999, 56])
+clean = raw.copy()
+clean[clean == -9999] = np.nan
+clean</td>
+            <td class="out">[44. 49. nan 56.]</td>
+          </tr>
+          <tr data-search="nan contagious mean nanmean skip missing">
+            <td class="fn">np.nanmean(a)</td>
+            <td class="desc">Any math with a nan gives nan. <strong>np.nanmean()</strong> skips the missing values</td>
+            <td class="ex">a = np.array([44.0, np.nan, 56.0])
+print(a.mean())
+np.nanmean(a)</td>
+            <td class="out">nan
+50.0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Views & Copies -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Views &amp; Copies</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="view slice changes original">
+            <td class="fn">b = a[0:3]</td>
+            <td class="desc">A slice of an array is a <strong>view</strong>: changing b changes a too (lists don't do this)</td>
+            <td class="ex">a = np.array([1, 2, 3, 4])
+b = a[0:3]
+b[0] = 99
+a</td>
+            <td class="out">[99  2  3  4]</td>
+          </tr>
+          <tr data-search="copy independent array raw data">
+            <td class="fn">b = a[0:3].copy()</td>
+            <td class="desc">An independent copy; changing b leaves a alone. Keep your raw data raw</td>
+            <td class="ex">a = np.array([1, 2, 3, 4])
+b = a[0:3].copy()
+b[0] = 99
+a</td>
+            <td class="out">[1 2 3 4]</td>
+          </tr>
+          <tr data-search="mask selection copy">
+            <td class="fn">b = a[mask]</td>
+            <td class="desc">Selecting with a mask always makes a copy</td>
+            <td class="ex">a = np.array([1, 2, 3, 4])
+b = a[a &gt; 2]
+b[0] = 99
+a</td>
+            <td class="out">[1 2 3 4]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Broadcasting -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Broadcasting</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="broadcasting rule shapes line up from the right stretch 1">
+            <td class="fn">line shapes up from the right</td>
+            <td class="desc">Each pair of sizes must be <strong>equal</strong>, or one must be <strong>1</strong> (it gets stretched). A missing size counts as 1</td>
+            <td class="ex">table = np.ones((6, 12))
+per_month = np.ones(12)
+(table - per_month).shape</td>
+            <td class="out">(6, 12)</td>
+          </tr>
+          <tr data-search="np.newaxis column (6,1) make a column">
+            <td class="fn">b[:, np.newaxis]</td>
+            <td class="desc">Turn a 1D row of shape (n,) into a column of shape (n, 1)</td>
+            <td class="ex">annual = np.array([60.8, 50.7, 75.9])
+annual[:, np.newaxis].shape</td>
+            <td class="out">(3, 1)</td>
+          </tr>
+          <tr data-search="subtract per-row value broadcasting newaxis departure">
+            <td class="fn">table - per_row[:, np.newaxis]</td>
+            <td class="desc">Subtract one value per <strong>row</strong> (e.g. each station's annual mean)</td>
+            <td class="ex">table = np.array([[1, 2, 3],
+                  [10, 20, 30]])
+row_mean = table.mean(axis=1)
+table - row_mean[:, np.newaxis]</td>
+            <td class="out">[[ -1.   0.   1.]
+ [-10.   0.  10.]]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Common NumPy Errors -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Common NumPy Errors</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Error</th><th>Description</th><th>Common cause</th></tr></thead>
+        <tbody>
+          <tr data-search="truth value ambiguous and or if array ValueError">
+            <td class="fn">ValueError: The truth value of an array with more than one element is ambiguous</td>
+            <td class="desc"><strong>and</strong>, <strong>or</strong>, or <strong>if</strong> got a whole array</td>
+            <td class="ex">(tmax &gt;= 90) and (prcp == 0) — use &amp; instead</td>
+          </tr>
+          <tr data-search="bitwise_and parentheses ufunc TypeError">
+            <td class="fn">TypeError: ufunc &#x27;bitwise_and&#x27; not supported ...</td>
+            <td class="desc">Missing parentheses around each condition</td>
+            <td class="ex">tmax &gt;= 90 &amp; prcp == 0 — write (tmax &gt;= 90) &amp; (prcp == 0)</td>
+          </tr>
+          <tr data-search="operands could not be broadcast together shapes ValueError">
+            <td class="fn">ValueError: operands could not be broadcast together with shapes (6,12) (6,)</td>
+            <td class="desc">The shapes don't line up from the right</td>
+            <td class="ex">Print both .shape values; usually a row that should be a column: [:, np.newaxis]</td>
+          </tr>
+          <tr data-search="only 0-dimensional arrays converted python scalars math module TypeError">
+            <td class="fn">TypeError: only 0-dimensional arrays can be converted to Python scalars</td>
+            <td class="desc">A <strong>math</strong> module function got an array</td>
+            <td class="ex">math.exp(a) — use np.exp(a)</td>
+          </tr>
+          <tr data-search="unsupported operand list int TypeError">
+            <td class="fn">TypeError: unsupported operand type(s) for -: &#x27;list&#x27; and &#x27;int&#x27;</td>
+            <td class="desc">Math on a list when you meant an array</td>
+            <td class="ex">highs_list - 32 — wrap it: np.array(highs_list) - 32</td>
+          </tr>
+          <tr data-search="column row [:][0] logic error 2d">
+            <td class="fn">a[:][0] gives a row, not a column</td>
+            <td class="desc">Logic error (no message)</td>
+            <td class="ex">Use a[:, 0] for column 0</td>
           </tr>
         </tbody>
       </table>
@@ -3115,6 +3506,36 @@ raw</td>
             <td class="ex">print(f"{1234567.891:,.0f}")</td>
             <td class="out">1,234,568</td>
           </tr>
+          <tr data-search="f-string plus sign + show sign difference">
+            <td class="fn">f&quot;{v:+.2f}&quot;</td>
+            <td class="desc">Always shows the sign, + or −. Handy for differences from normal</td>
+            <td class="ex">f&quot;{4.4:+.2f} in&quot;</td>
+            <td class="out">+4.40 in</td>
+          </tr>
+          <tr data-search="f-string scientific notation e exponent">
+            <td class="fn">f&quot;{v:.3e}&quot;</td>
+            <td class="desc">Scientific notation with 3 decimals</td>
+            <td class="ex">f&quot;{1234567.0:.3e}&quot;</td>
+            <td class="out">1.235e+06</td>
+          </tr>
+          <tr data-search="f-string percent % fraction">
+            <td class="fn">f&quot;{v:.1%}&quot;</td>
+            <td class="desc">Multiplies by 100 and adds a % sign</td>
+            <td class="ex">f&quot;{0.4489:.1%}&quot;</td>
+            <td class="out">44.9%</td>
+          </tr>
+          <tr data-search="f-string string width s pad column name">
+            <td class="fn">f&quot;{name:12s}&quot;</td>
+            <td class="desc">Pads a <strong>s</strong>tring to 12 characters so names line up</td>
+            <td class="ex">f&quot;{&#x27;Seattle&#x27;:12s}|&quot;</td>
+            <td class="out">Seattle     |</td>
+          </tr>
+          <tr data-search="f-string integer width d">
+            <td class="fn">f&quot;{n:3d}&quot;</td>
+            <td class="desc">Pads a whole number (<strong>d</strong>) to 3 characters</td>
+            <td class="ex">f&quot;[{7:3d}]&quot;</td>
+            <td class="out">[  7]</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -3455,6 +3876,13 @@ a second line</td>
             <td class="desc">The folder one level up</td>
             <td class="ex">cd ..</td>
             <td class="out">(no output)</td>
+          </tr>
+          <tr data-search="! exclamation bang terminal command notebook cell head">
+            <td class="fn">!command</td>
+            <td class="desc">In a <strong>notebook cell</strong>, ! runs the rest of the line as a terminal command</td>
+            <td class="ex">!head -3 nashville_daily_2025.csv</td>
+            <td class="out"># NOAA NCEI GHCN-Daily ...
+(first 3 lines of the file)</td>
           </tr>
           <tr data-search="dash option flag">
             <td class="fn">-</td>
