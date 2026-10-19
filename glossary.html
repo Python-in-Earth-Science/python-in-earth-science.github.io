@@ -1603,6 +1603,14 @@
     <p class="term-def">"Not a number": NumPy's marker for a missing value. It's contagious: any math that touches a nan gives nan, so <strong>a.mean()</strong> returns nan. Functions like <strong>np.nanmean()</strong> skip the missing values.</p>
   </div>
 
+  <div class="term" data-term="np.isnan nan == nan nansum nanmax nanargmax">
+    <div class="term-header">
+      <span class="term-word">np.isnan() and the nan-functions</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def"><strong>np.nan == np.nan</strong> is always False, because NaN isn't equal to anything, so find missing values with <strong>np.isnan(a)</strong>, which gives a mask. <strong>np.nansum()</strong>, <strong>np.nanmax()</strong>, <strong>np.nanmin()</strong>, and <strong>np.nanargmax()</strong> skip NaN, like <strong>np.nanmean()</strong>.</p>
+  </div>
+
   <div class="term" data-term="view copy slice .copy() changes original">
     <div class="term-header">
       <span class="term-word">view vs. copy</span>
@@ -1625,6 +1633,141 @@
       <span class="term-tag">numpy</span>
     </div>
     <p class="term-def">Adds a dimension of size 1 where you put it. <strong>b[:, np.newaxis]</strong> turns shape <strong>(6,)</strong> into a column of shape <strong>(6, 1)</strong>, the usual fix for a broadcasting error.</p>
+  </div>
+
+
+<!-- ── CATEGORY: pandas ── -->
+  <div class="category">
+    <span class="category-label">pandas</span>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="term" data-term="pandas pd import pandas as pd">
+    <div class="term-header">
+      <span class="term-word">pandas</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Python's library for <strong>tables</strong>, imported as <strong>import pandas as pd</strong>. Built on NumPy: every column is an array underneath, with a name, and rows have labels.</p>
+  </div>
+
+  <div class="term" data-term="dataframe table df">
+    <div class="term-header">
+      <span class="term-word">DataFrame</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">pandas' table: <strong>columns</strong> with names, an <strong>index</strong> of row labels, and values stored column by column, so each column can have its own type (text in one, numbers in the next).</p>
+  </div>
+
+  <div class="term" data-term="series column one column labels">
+    <div class="term-header">
+      <span class="term-word">Series</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">One column of a DataFrame: a 1D array with <strong>labels</strong> (the index) attached. <strong>df["TMAX"]</strong> is a Series; <strong>df[["TMAX"]]</strong> (a list) is a one-column DataFrame.</p>
+  </div>
+
+  <div class="term" data-term="index row labels datetimeindex">
+    <div class="term-header">
+      <span class="term-word">index (row labels)</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">The labels down the left side of a DataFrame. By default they're 0, 1, 2, ...; for time series we make them <strong>dates</strong> with <strong>parse_dates</strong> and <strong>index_col</strong>, so a row can be found by its date.</p>
+  </div>
+
+  <div class="term" data-term="read_csv parse_dates index_col na_values load">
+    <div class="term-header">
+      <span class="term-word">pd.read_csv()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Reads a text table into a DataFrame, header and text included. <strong>parse_dates=["DATE"]</strong> reads dates as dates, <strong>index_col="DATE"</strong> makes them the row labels, and <strong>na_values=-999</strong> turns a fill value into NaN.</p>
+  </div>
+
+  <div class="term" data-term="info describe dtypes head tail first look">
+    <div class="term-header">
+      <span class="term-word">.info() / .describe()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">The first commands to run on any new DataFrame. <strong>.info()</strong> lists every column's type and how many values aren't missing; <strong>.describe()</strong> gives count, mean, standard deviation, min, percentiles, and max for every number column.</p>
+  </div>
+
+  <div class="term" data-term="iloc loc position label rows">
+    <div class="term-header">
+      <span class="term-word">.iloc[] vs. .loc[]</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def"><strong>.iloc</strong> picks rows (and columns) by <strong>position</strong>, like array indexing, and leaves out a slice's stop. <strong>.loc</strong> picks by <strong>label</strong> (a date, a column name) and <strong>includes</strong> a slice's stop. Plain brackets, <strong>df["TMAX"]</strong>, pick columns.</p>
+  </div>
+
+  <div class="term" data-term="idxmax idxmin label date which">
+    <div class="term-header">
+      <span class="term-word">.idxmax() / .idxmin()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">The <strong>label</strong> of the largest or smallest value, pandas' version of <strong>.argmax()</strong>. With dates as the index, it tells you <em>which day</em> directly.</p>
+  </div>
+
+  <div class="term" data-term="count len missing non-null">
+    <div class="term-header">
+      <span class="term-word">.count() vs. len()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def"><strong>.count()</strong> counts values that are <strong>not</strong> missing; <strong>len()</strong> counts every row. When a column has NaNs, divide by <strong>.count()</strong> to get a fraction of the measurements.</p>
+  </div>
+
+  <div class="term" data-term="value_counts how often each value">
+    <div class="term-header">
+      <span class="term-word">.value_counts()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Lists each different value in a column and how many times it appears, most common first. Useful for quality-flag columns. Skips NaN.</p>
+  </div>
+
+  <div class="term" data-term="rename drop columns">
+    <div class="term-header">
+      <span class="term-word">.rename() / .drop()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def"><strong>df.rename(columns={"old": "new"})</strong> renames columns with a dictionary; <strong>df.drop(columns=[...])</strong> removes them. Both return a <strong>new</strong> DataFrame, so save it: <strong>df = df.rename(...)</strong>.</p>
+  </div>
+
+  <div class="term" data-term="mask assignment loc write replace">
+    <div class="term-header">
+      <span class="term-word">mask assignment (.loc[mask, col] = value)</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Writes a value into only the rows where a mask is True, e.g. <strong>df.loc[df["pH_QF"] != 2, "pH"] = np.nan</strong> to throw out flagged data. The pandas version of <strong>a[a == -9999] = np.nan</strong>.</p>
+  </div>
+
+  <div class="term" data-term="to_datetime format codes %m %d %y">
+    <div class="term-header">
+      <span class="term-word">pd.to_datetime() and format codes</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Turns text into real dates and times. The <strong>format</strong> string spells out how the text is written: <strong>%Y</strong> 4-digit year, <strong>%y</strong> 2-digit year, <strong>%m</strong> month, <strong>%d</strong> day, <strong>%H</strong> hour, <strong>%M</strong> minute.</p>
+  </div>
+
+  <div class="term" data-term="utc timedelta time zone shift local">
+    <div class="term-header">
+      <span class="term-word">UTC / pd.Timedelta</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def"><strong>UTC</strong> (Coordinated Universal Time) is the single clock scientific instruments usually record in. <strong>pd.Timedelta(hours=10)</strong> is a length of time that can be added to or subtracted from dates, e.g. to convert UTC to local time.</p>
+  </div>
+
+  <div class="term" data-term="groupby split apply combine group">
+    <div class="term-header">
+      <span class="term-word">groupby</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Sorts rows into groups by a label (a month, an hour, a column's values), summarizes each group, and returns one answer per group: <strong>split, apply, combine</strong>. <strong>df.groupby(df.index.month)["TMAX"].mean()</strong> reads "for each month, the mean of TMAX."</p>
+  </div>
+
+  <div class="term" data-term="to_csv write save na_rep">
+    <div class="term-header">
+      <span class="term-word">.to_csv()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Writes a DataFrame to a CSV file. <strong>na_rep=-999</strong> writes missing values as -999.</p>
   </div>
 
 <!-- ── CATEGORY: Debugging ── -->
@@ -1834,6 +1977,94 @@
   <p>🔍</p>
   <p>No terms match that search.</p>
 </div>
+
+  <div class="term" data-term="hypocenter epicenter focus earthquake depth">
+    <div class="term-header">
+      <span class="term-word">hypocenter / epicenter</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The <strong>hypocenter</strong> is the point underground where an earthquake starts; the <strong>epicenter</strong> is the spot on the surface directly above it.</p>
+  </div>
+
+  <div class="term" data-term="earthquake magnitude logarithmic energy 32">
+    <div class="term-header">
+      <span class="term-word">earthquake magnitude</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A logarithmic measure of an earthquake's size at its source. Each step of 1 in magnitude releases about 32 times more energy. It doesn't measure the shaking where people are, which also depends on depth, distance, and ground.</p>
+  </div>
+
+  <div class="term" data-term="aftershock sequence">
+    <div class="term-header">
+      <span class="term-word">aftershock</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A smaller earthquake that follows a large one, near the same place. Aftershocks are most frequent right after the mainshock and become less common over time.</p>
+  </div>
+
+  <div class="term" data-term="amplitude frequency period hertz hz wave sine">
+    <div class="term-header">
+      <span class="term-word">amplitude / frequency / period</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">Properties of a wave. <strong>Amplitude</strong> is how big it is; <strong>frequency</strong> is cycles per second, in hertz (Hz); the <strong>period</strong> is seconds per cycle, <strong>1 / frequency</strong>.</p>
+  </div>
+
+  <div class="term" data-term="sampling rate samples per second aliasing signal">
+    <div class="term-header">
+      <span class="term-word">sampling rate / aliasing (signals)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The <strong>sampling rate</strong> is how many measurements an instrument records per second. Sample too slowly and a fast wave can look like a slow one; in signal processing this is called <strong>aliasing</strong> (different from Python aliasing).</p>
+  </div>
+
+  <div class="term" data-term="pH scale acidic basic neutral hydrogen ions">
+    <div class="term-header">
+      <span class="term-word">pH</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A logarithmic measure of acidity: <strong>pH = −log₁₀[H⁺]</strong>. 7 is neutral, lower is acidic, higher is basic. Surface seawater is slightly basic, about 8.1. A drop of 0.1 means about 26% more hydrogen ions.</p>
+  </div>
+
+  <div class="term" data-term="ocean acidification co2 carbonic acid carbonate">
+    <div class="term-header">
+      <span class="term-word">ocean acidification</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The decrease in seawater pH as the ocean absorbs CO₂ from the atmosphere. CO₂ forms carbonic acid, which releases hydrogen ions and uses up the <strong>carbonate ions</strong> that corals, shellfish, and plankton need to build calcium carbonate shells and skeletons.</p>
+  </div>
+
+  <div class="term" data-term="quality flag qf woce good bad questionable">
+    <div class="term-header">
+      <span class="term-word">quality flag</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A code stored next to a measurement that says how much to trust it. The ocean buoys in Lab 08 use 2 = good, 3 = questionable, 4 = bad, 5 = not reported.</p>
+  </div>
+
+  <div class="term" data-term="dpco2 delta pco2 source sink air sea">
+    <div class="term-header">
+      <span class="term-word">ΔpCO₂ (source vs. sink)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The CO₂ in seawater minus the CO₂ in the air above it. <strong>Negative</strong>: CO₂ flows into the ocean, a <strong>sink</strong>. <strong>Positive</strong>: CO₂ flows out to the air, a <strong>source</strong>.</p>
+  </div>
+
+  <div class="term" data-term="coastal upwelling deep water low ph">
+    <div class="term-header">
+      <span class="term-word">coastal upwelling</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">When winds push surface water offshore and deep water rises to replace it. Off Oregon, upwelling in spring and summer brings cold, CO₂-rich, low-pH water onto the continental shelf.</p>
+  </div>
+
+  <div class="term" data-term="photosynthesis respiration daily cycle diurnal ph oxygen">
+    <div class="term-header">
+      <span class="term-word">photosynthesis and respiration (daily cycle)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">During the day, photosynthesis removes CO₂ from water, raising pH and oxygen; at night, respiration adds CO₂ back, lowering both. On a coral reef this makes pH peak in the afternoon and bottom out just after sunrise.</p>
+  </div>
 
 </main>
 

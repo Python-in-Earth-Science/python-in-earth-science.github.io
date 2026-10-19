@@ -380,6 +380,7 @@
     <button class="tab-btn" onclick="switchTab('math', this)">Math</button>
     <button class="tab-btn" onclick="switchTab('numpy', this)">NumPy</button>
     <button class="tab-btn" onclick="switchTab('os', this)">os</button>
+    <button class="tab-btn" onclick="switchTab('pandas', this)">pandas</button>
     <button class="tab-btn" onclick="switchTab('pathlib', this)">pathlib</button>
     <button class="tab-btn active" onclick="switchTab('basics', this)">Python Basics</button>
     <button class="tab-btn" onclick="switchTab('terminal', this)">Terminal</button>
@@ -2686,6 +2687,27 @@ np.nanmean(a)</td>
             <td class="out">nan
 50.0</td>
           </tr>
+          <tr data-search="np.isnan find missing nan mask">
+            <td class="fn">np.isnan(a)</td>
+            <td class="desc">A mask that is True where a value is <code>nan</code></td>
+            <td class="ex">np.isnan(np.array([8.1, np.nan, 7.9]))</td>
+            <td class="out">[False  True False]</td>
+          </tr>
+          <tr data-search="nan == nan false compare missing">
+            <td class="fn">np.nan == np.nan</td>
+            <td class="desc">Always False: <code>nan</code> isn't equal to anything, even itself. Use <code>np.isnan()</code> to find it</td>
+            <td class="ex">np.nan == np.nan</td>
+            <td class="out">False</td>
+          </tr>
+          <tr data-search="nansum nanmax nanmin nanargmax skip missing">
+            <td class="fn">np.nansum(a), np.nanmax(a), np.nanargmax(a)</td>
+            <td class="desc">Versions of sum, max, and argmax that skip <code>nan</code></td>
+            <td class="ex">a = np.array([6.7, np.nan, 5.9])
+print(a.max())
+np.nanmax(a)</td>
+            <td class="out">nan
+6.7</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -2991,6 +3013,564 @@ table - row_mean[:, np.newaxis]</td>
     </div>
 
   </div><!-- /sheet-os -->
+
+
+  <!-- ══════════════════════════════════════
+       SHEET: PANDAS
+  ══════════════════════════════════════ -->
+  <div class="sheet" id="sheet-pandas">
+    <div class="sheet-intro">
+      <div class="sheet-title">pandas</div>
+      <p class="sheet-desc">Import with <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">import pandas as pd</code>. pandas is for <b>tables</b>: columns have names, rows have labels, and each column can hold a different type. Every column is a NumPy array underneath. Unless an example builds its own data, examples use <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">df</code>: five days of Nashville airport weather, January 30 to February 3, 2025, with dates as the index and columns <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">TMAX</code>, <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">TMIN</code>, <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">PRCP</code>.</p>
+    </div>
+
+    <!-- Loading & First Look -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Loading &amp; First Look</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="read_csv load file csv dataframe">
+            <td class="fn">pd.read_csv(path)</td>
+            <td class="desc">Read a file into a DataFrame. Handles a header row, text, dates, and empty cells</td>
+            <td class="ex">df = pd.read_csv(path)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a DataFrame)</td>
+          </tr>
+          <tr data-search="parse_dates index_col dates as index load">
+            <td class="fn">pd.read_csv(path, parse_dates=[&quot;DATE&quot;], index_col=&quot;DATE&quot;)</td>
+            <td class="desc">Read the <code>DATE</code> column as real dates and make it the row labels (the usual way to load daily data)</td>
+            <td class="ex">df = pd.read_csv(&quot;nashville_ghcnd_2025.csv&quot;,
+                 parse_dates=[&quot;DATE&quot;], index_col=&quot;DATE&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(dates are now the index)</td>
+          </tr>
+          <tr data-search="na_values fill value -999 missing read">
+            <td class="fn">pd.read_csv(path, na_values=-999)</td>
+            <td class="desc">Turn a fill value into <code>NaN</code> while reading</td>
+            <td class="ex">buoy = pd.read_csv(&quot;buoy.csv&quot;, na_values=-999)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(every -999 is now NaN)</td>
+          </tr>
+          <tr data-search="head first rows look">
+            <td class="fn">df.head(n)</td>
+            <td class="desc">The first n rows (5 if you leave n out)</td>
+            <td class="ex">df.head(2)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">            TMAX  TMIN  PRCP
+DATE                        
+2025-01-30    61    40  0.79
+2025-01-31    65    50  0.37</td>
+          </tr>
+          <tr data-search="tail last rows end">
+            <td class="fn">df.tail(n)</td>
+            <td class="desc">The last n rows: check that the data covers the dates you expect</td>
+            <td class="ex">df.tail(1)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">            TMAX  TMIN  PRCP
+DATE                        
+2025-02-03    74    47   0.0</td>
+          </tr>
+          <tr data-search="shape rows columns">
+            <td class="fn">df.shape</td>
+            <td class="desc">(rows, columns). No parentheses: it's an attribute</td>
+            <td class="ex">df.shape</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(5, 3)</td>
+          </tr>
+          <tr data-search="len number of rows">
+            <td class="fn">len(df)</td>
+            <td class="desc">Number of rows</td>
+            <td class="ex">len(df)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">5</td>
+          </tr>
+          <tr data-search="columns names">
+            <td class="fn">df.columns</td>
+            <td class="desc">The column names</td>
+            <td class="ex">df.columns</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">Index([&#x27;TMAX&#x27;, &#x27;TMIN&#x27;, &#x27;PRCP&#x27;], dtype=&#x27;object&#x27;)</td>
+          </tr>
+          <tr data-search="dtypes types int64 float64 object">
+            <td class="fn">df.dtypes</td>
+            <td class="desc">The type of every column. <code>object</code> means text</td>
+            <td class="ex">df.dtypes</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">TMAX      int64
+TMIN      int64
+PRCP    float64
+dtype: object</td>
+          </tr>
+          <tr data-search="info non-null missing dtypes summary">
+            <td class="fn">df.info()</td>
+            <td class="desc">Column names, non-missing counts, and dtypes in one view</td>
+            <td class="ex">df.info()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">DatetimeIndex: 5 entries, 2025-01-30 to 2025-02-03
+#  Column  Non-Null Count  Dtype
+0  TMAX    5 non-null      int64
+1  TMIN    5 non-null      int64
+2  PRCP    5 non-null      float64</td>
+          </tr>
+          <tr data-search="describe summary statistics count mean std percentiles">
+            <td class="fn">df.describe()</td>
+            <td class="desc">count, mean, std, min, 25%, 50% (median), 75%, max for every number column</td>
+            <td class="ex">df[&quot;TMAX&quot;].describe()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">count     5.00000
+mean     63.80000
+std       8.58487
+min      51.00000
+25%      61.00000
+50%      65.00000
+75%      68.00000
+max      74.00000
+Name: TMAX, dtype: float64</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Columns -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Columns</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="select one column series">
+            <td class="fn">df[&quot;COL&quot;]</td>
+            <td class="desc">One column, as a <b>Series</b> (by name, like a dictionary key)</td>
+            <td class="ex">df[&quot;TMAX&quot;]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">DATE
+2025-01-30    61
+2025-01-31    65
+2025-02-01    51
+2025-02-02    68
+2025-02-03    74
+Name: TMAX, dtype: int64</td>
+          </tr>
+          <tr data-search="select several columns list double brackets">
+            <td class="fn">df[[&quot;A&quot;, &quot;B&quot;]]</td>
+            <td class="desc">Several columns, as a DataFrame. The inner brackets make a <b>list</b></td>
+            <td class="ex">df[[&quot;TMAX&quot;, &quot;TMIN&quot;]]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">            TMAX  TMIN
+DATE                  
+2025-01-30    61    40
+2025-01-31    65    50
+2025-02-01    51    40
+2025-02-02    68    37
+2025-02-03    74    47</td>
+          </tr>
+          <tr data-search="to_numpy array underneath">
+            <td class="fn">df[&quot;COL&quot;].to_numpy()</td>
+            <td class="desc">The NumPy array inside a column</td>
+            <td class="ex">df[&quot;TMAX&quot;].to_numpy()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[61 65 51 68 74]</td>
+          </tr>
+          <tr data-search="new column math add column">
+            <td class="fn">df[&quot;NEW&quot;] = ...</td>
+            <td class="desc">Add a column calculated from others (element-wise, row by row)</td>
+            <td class="ex">df[&quot;TAVG&quot;] = (df[&quot;TMAX&quot;] + df[&quot;TMIN&quot;]) / 2
+df[&quot;TAVG&quot;]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">DATE
+2025-01-30    50.5
+2025-01-31    57.5
+2025-02-01    45.5
+2025-02-02    52.5
+2025-02-03    60.5
+Name: TAVG, dtype: float64</td>
+          </tr>
+          <tr data-search="rename columns dictionary">
+            <td class="fn">df = df.rename(columns={&quot;old&quot;: &quot;new&quot;})</td>
+            <td class="desc">Rename columns with a dictionary. Save the result with <code>df =</code></td>
+            <td class="ex">df = df.rename(columns={&quot;PRCP&quot;: &quot;PRCP_IN&quot;})
+df.columns</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">Index([&#x27;TMAX&#x27;, &#x27;TMIN&#x27;, &#x27;PRCP_IN&#x27;], dtype=&#x27;object&#x27;)</td>
+          </tr>
+          <tr data-search="drop remove columns">
+            <td class="fn">df = df.drop(columns=[&quot;COL&quot;])</td>
+            <td class="desc">Remove columns. Save the result with <code>df =</code></td>
+            <td class="ex">df = df.drop(columns=[&quot;TMIN&quot;])
+df.columns</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">Index([&#x27;TMAX&#x27;, &#x27;PRCP&#x27;], dtype=&#x27;object&#x27;)</td>
+          </tr>
+          <tr data-search="copy independent views">
+            <td class="fn">df.copy()</td>
+            <td class="desc">An independent copy: changing it never changes the original</td>
+            <td class="ex">small = df.loc[&quot;2025-02-01&quot;:&quot;2025-02-02&quot;].copy()
+small.shape</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(2, 3)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Rows: .iloc (positions) and .loc (labels) -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Rows: .iloc (positions) and .loc (labels)</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="iloc position row number">
+            <td class="fn">df.iloc[i]</td>
+            <td class="desc">One row by <b>position</b>, like array indexing</td>
+            <td class="ex">df.iloc[0]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">TMAX    61.00
+TMIN    40.00
+PRCP     0.79
+Name: 2025-01-30 00:00:00, dtype: float64</td>
+          </tr>
+          <tr data-search="iloc row column position value">
+            <td class="fn">df.iloc[i, j]</td>
+            <td class="desc">One value by row position and column position</td>
+            <td class="ex">df.iloc[3, 0]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">68</td>
+          </tr>
+          <tr data-search="iloc slice last rows stop left out">
+            <td class="fn">df.iloc[start:stop]</td>
+            <td class="desc">Rows by position. The stop is <b>left out</b></td>
+            <td class="ex">len(df.iloc[1:3])</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">2</td>
+          </tr>
+          <tr data-search="loc label date row">
+            <td class="fn">df.loc[&quot;2025-02-02&quot;]</td>
+            <td class="desc">One row by <b>label</b> (here, a date)</td>
+            <td class="ex">df.loc[&quot;2025-02-02&quot;]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">TMAX    68.0
+TMIN    37.0
+PRCP     0.0
+Name: 2025-02-02 00:00:00, dtype: float64</td>
+          </tr>
+          <tr data-search="loc label column one value">
+            <td class="fn">df.loc[&quot;2025-02-02&quot;, &quot;TMAX&quot;]</td>
+            <td class="desc">One value by row label and column name</td>
+            <td class="ex">df.loc[&quot;2025-02-02&quot;, &quot;TMAX&quot;]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">68.0</td>
+          </tr>
+          <tr data-search="loc month partial date">
+            <td class="fn">df.loc[&quot;2025-02&quot;]</td>
+            <td class="desc">Every row in a month (works when dates are the index)</td>
+            <td class="ex">len(df.loc[&quot;2025-02&quot;])</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">3</td>
+          </tr>
+          <tr data-search="loc slice dates stop included">
+            <td class="fn">df.loc[&quot;start&quot;:&quot;stop&quot;]</td>
+            <td class="desc">A range of labels. The stop is <b>included</b></td>
+            <td class="ex">len(df.loc[&quot;2025-01-31&quot;:&quot;2025-02-02&quot;])</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">3</td>
+          </tr>
+          <tr data-search="loc row list columns">
+            <td class="fn">df.loc[&quot;date&quot;, [&quot;A&quot;, &quot;B&quot;]]</td>
+            <td class="desc">One row, several columns</td>
+            <td class="ex">df.loc[&quot;2025-02-02&quot;, [&quot;TMAX&quot;, &quot;PRCP&quot;]]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">TMAX    68.0
+PRCP     0.0
+Name: 2025-02-02 00:00:00, dtype: float64</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Summaries -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Summaries</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="sum mean median min max std">
+            <td class="fn">.sum(), .mean(), .median(), .min(), .max(), .std()</td>
+            <td class="desc">One number from a column. <b>NaN is skipped automatically</b></td>
+            <td class="ex">df[&quot;TMAX&quot;].mean()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">63.8</td>
+          </tr>
+          <tr data-search="idxmax idxmin which day label date">
+            <td class="fn">.idxmax(), .idxmin()</td>
+            <td class="desc">The <b>label</b> of the biggest / smallest value (pandas' <code>argmax</code>): here, a date</td>
+            <td class="ex">df[&quot;TMAX&quot;].idxmax()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">2025-02-03 00:00:00</td>
+          </tr>
+          <tr data-search="count non-missing len">
+            <td class="fn">.count()</td>
+            <td class="desc">How many values are <b>not</b> missing (<code>len()</code> counts every row)</td>
+            <td class="ex">s = pd.Series([1.0, np.nan, 3.0])
+print(len(s))
+s.count()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">3
+2</td>
+          </tr>
+          <tr data-search="isna missing count nan">
+            <td class="fn">.isna().sum()</td>
+            <td class="desc">How many values <b>are</b> missing</td>
+            <td class="ex">pd.Series([1.0, np.nan, 3.0]).isna().sum()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">1</td>
+          </tr>
+          <tr data-search="value_counts how often each value">
+            <td class="fn">.value_counts()</td>
+            <td class="desc">Each different value and how often it appears. Skips NaN</td>
+            <td class="ex">(df[&quot;PRCP&quot;] &gt; 0).value_counts()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">PRCP
+False    3
+True     2
+Name: count, dtype: int64</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Masks -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Masks</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="mask boolean series comparison">
+            <td class="fn">df[&quot;COL&quot;] &gt;= value</td>
+            <td class="desc">A True/False for every row</td>
+            <td class="ex">df[&quot;TMAX&quot;] &gt;= 60</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">DATE
+2025-01-30     True
+2025-01-31     True
+2025-02-01    False
+2025-02-02     True
+2025-02-03     True
+Name: TMAX, dtype: bool</td>
+          </tr>
+          <tr data-search="count trues sum mask">
+            <td class="fn">mask.sum()</td>
+            <td class="desc">How many rows are True</td>
+            <td class="ex">(df[&quot;TMAX&quot;] &gt;= 60).sum()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">4</td>
+          </tr>
+          <tr data-search="filter rows mask keep whole rows">
+            <td class="fn">df[mask]</td>
+            <td class="desc">Keep the rows where the mask is True, <b>all columns</b></td>
+            <td class="ex">df[df[&quot;TMAX&quot;] &gt;= 65]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">            TMAX  TMIN  PRCP
+DATE                        
+2025-01-31    65    50  0.37
+2025-02-02    68    37  0.00
+2025-02-03    74    47  0.00</td>
+          </tr>
+          <tr data-search="and or not &amp; | ~ parentheses">
+            <td class="fn">(cond1) &amp; (cond2),  |,  ~</td>
+            <td class="desc">Combine masks: both, either, not. Each condition in its own parentheses</td>
+            <td class="ex">((df[&quot;TMAX&quot;] &gt;= 60) &amp; (df[&quot;PRCP&quot;] == 0)).sum()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">2</td>
+          </tr>
+          <tr data-search="loc mask column read">
+            <td class="fn">df.loc[mask, &quot;COL&quot;]</td>
+            <td class="desc">Rows by mask, one column by name</td>
+            <td class="ex">df.loc[df[&quot;PRCP&quot;] &gt; 0, &quot;TMAX&quot;]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">DATE
+2025-01-30    61
+2025-01-31    65
+Name: TMAX, dtype: int64</td>
+          </tr>
+          <tr data-search="loc mask assignment write replace">
+            <td class="fn">df.loc[mask, &quot;COL&quot;] = value</td>
+            <td class="desc"><b>Write</b> a value into just the masked rows (e.g. replace bad data with <code>np.nan</code>)</td>
+            <td class="ex">df.loc[df[&quot;TMAX&quot;] &lt; 60, &quot;TMAX&quot;] = np.nan
+df[&quot;TMAX&quot;].to_numpy()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[61. 65. nan 68. 74.]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Dates & Times -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Dates &amp; Times</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="index month hour date dayofweek year parts">
+            <td class="fn">df.index.month  (.year, .day, .hour, .date, .dayofweek)</td>
+            <td class="desc">One part of every date in the index, one value per row</td>
+            <td class="ex">df.index.month</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">Index([1, 1, 2, 2, 2], dtype=&#x27;int32&#x27;, name=&#x27;DATE&#x27;)</td>
+          </tr>
+          <tr data-search="to_datetime format text to date">
+            <td class="fn">pd.to_datetime(text, format=&quot;...&quot;)</td>
+            <td class="desc">Turn text into a real date/time</td>
+            <td class="ex">pd.to_datetime(&quot;11/3/15 0:17&quot;, format=&quot;%m/%d/%y %H:%M&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">2015-11-03 00:17:00</td>
+          </tr>
+          <tr data-search="format codes %Y %y %m %d %H %M">
+            <td class="fn">%Y  %y  %m  %d  %H  %M</td>
+            <td class="desc">4-digit year, 2-digit year, month, day, hour (24-h), minute. Punctuation in the format must match the text</td>
+            <td class="ex">&quot;2025-12-25&quot;  -&gt;  format=&quot;%Y-%m-%d&quot;</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(no output)</td>
+          </tr>
+          <tr data-search="combine date time text columns plus">
+            <td class="fn">df[&quot;Date&quot;] + &quot; &quot; + df[&quot;Time&quot;]</td>
+            <td class="desc">Glue two text columns together, row by row</td>
+            <td class="ex">&quot;11/3/15&quot; + &quot; &quot; + &quot;0:17&quot;</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">11/3/15 0:17</td>
+          </tr>
+          <tr data-search="set_index make column the index">
+            <td class="fn">df = df.set_index(&quot;COL&quot;)</td>
+            <td class="desc">Make a column the row labels. Save with <code>df =</code></td>
+            <td class="ex">buoy = buoy.set_index(&quot;DATETIME&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(DATETIME is now the index)</td>
+          </tr>
+          <tr data-search="timedelta shift time zone utc local">
+            <td class="fn">pd.Timedelta(hours=n)</td>
+            <td class="desc">A length of time; add or subtract it to shift times (e.g. UTC to local)</td>
+            <td class="ex">pd.Timestamp(&quot;2025-12-25 18:00&quot;) - pd.Timedelta(hours=6)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">2025-12-25 12:00:00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- groupby -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">groupby</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="groupby month split apply combine">
+            <td class="fn">df.groupby(df.index.month)[&quot;COL&quot;].mean()</td>
+            <td class="desc">For each month, the mean of COL. Result: one value per group, labeled by group</td>
+            <td class="ex">df.groupby(df.index.month)[&quot;TMAX&quot;].mean()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">DATE
+1    63.000000
+2    64.333333
+Name: TMAX, dtype: float64</td>
+          </tr>
+          <tr data-search="groupby column name">
+            <td class="fn">df.groupby(&quot;COL&quot;)[&quot;OTHER&quot;].mean()</td>
+            <td class="desc">Group by the values in a column</td>
+            <td class="ex">df[&quot;WET&quot;] = df[&quot;PRCP&quot;] &gt; 0
+df.groupby(&quot;WET&quot;)[&quot;TMAX&quot;].mean()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">WET
+False    64.333333
+True     63.000000
+Name: TMAX, dtype: float64</td>
+          </tr>
+          <tr data-search="groupby idxmax which group">
+            <td class="fn">result.idxmax()</td>
+            <td class="desc">Which group had the biggest answer</td>
+            <td class="ex">df.groupby(df.index.month)[&quot;TMAX&quot;].mean().idxmax()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">2</td>
+          </tr>
+          <tr data-search="groupby max min range spread">
+            <td class="fn">grouped max − grouped min</td>
+            <td class="desc">The spread within each group (Lab 08's daily range)</td>
+            <td class="ex">g = df.groupby(df.index.month)[&quot;TMAX&quot;]
+g.max() - g.min()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">DATE
+1     4
+2    23
+Name: TMAX, dtype: int64</td>
+          </tr>
+          <tr data-search="dropna remove nan groups">
+            <td class="fn">result.dropna()</td>
+            <td class="desc">Drop groups whose answer is NaN (groups with no data)</td>
+            <td class="ex">pd.Series([7.99, np.nan, 8.01], index=[2, 3, 5]).dropna()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">2    7.99
+5    8.01
+dtype: float64</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Writing & Plotting -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Writing &amp; Plotting</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="to_csv write save file na_rep">
+            <td class="fn">df.to_csv(&quot;file.csv&quot;)</td>
+            <td class="desc">Write a DataFrame to a file. <code>na_rep=-999</code> writes NaN as -999</td>
+            <td class="ex">df.to_csv(&quot;wind_logger.csv&quot;, na_rep=-999)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a new file)</td>
+          </tr>
+          <tr data-search="plot series quick figure">
+            <td class="fn">series.plot()</td>
+            <td class="desc">A quick line plot of a Series (index on the x-axis). Next week: real figures</td>
+            <td class="ex">monthly.plot(marker=&quot;o&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a figure)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Common pandas Errors -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Common pandas Errors</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Error</th><th>Common cause</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr data-search="KeyError tuple missing inner brackets several columns">
+            <td class="fn">KeyError: (&#x27;TMAX&#x27;, &#x27;TMIN&#x27;)</td>
+            <td class="desc">Selecting several columns without the inner list brackets</td>
+            <td class="ex">df[["TMAX", "TMIN"]]</td>
+          </tr>
+          <tr data-search="KeyError column name typo case">
+            <td class="fn">KeyError: &#x27;Tmax&#x27;</td>
+            <td class="desc">Typo or wrong capitalization in a column name</td>
+            <td class="ex">Copy the name from <code>df.columns</code></td>
+          </tr>
+          <tr data-search="KeyError number loc position date index">
+            <td class="fn">KeyError: 358</td>
+            <td class="desc"><code>.loc</code> with a position once dates are the index</td>
+            <td class="ex"><code>df.iloc[358]</code></td>
+          </tr>
+          <tr data-search="ValueError location based indexing iloc name">
+            <td class="fn">ValueError: Location based indexing can only have [integer, ...] types</td>
+            <td class="desc">Giving <code>.iloc</code> a column <b>name</b></td>
+            <td class="ex">Use a column number, or <code>.loc</code></td>
+          </tr>
+          <tr data-search="truth value of a Series is ambiguous and or">
+            <td class="fn">ValueError: The truth value of a Series is ambiguous</td>
+            <td class="desc"><code>and</code> / <code>or</code> between masks</td>
+            <td class="ex"><code>&amp;</code> / <code>|</code></td>
+          </tr>
+          <tr data-search="rand_ TypeError parentheses mask">
+            <td class="fn">TypeError: Cannot perform &#x27;rand_&#x27; ...</td>
+            <td class="desc">Missing parentheses around each condition</td>
+            <td class="ex"><code>(df["A"] &gt;= 90) &amp; (df["B"] == 0)</code></td>
+          </tr>
+          <tr data-search="RangeIndex no attribute month index not dates">
+            <td class="fn">AttributeError: &#x27;RangeIndex&#x27; object has no attribute &#x27;month&#x27;</td>
+            <td class="desc">The dates aren't the index</td>
+            <td class="ex">Load with <code>parse_dates</code> and <code>index_col</code></td>
+          </tr>
+          <tr data-search="SettingWithCopyWarning slice copy">
+            <td class="fn">SettingWithCopyWarning</td>
+            <td class="desc">Adding a column to a slice of another DataFrame</td>
+            <td class="ex"><code>.copy()</code> the slice when you make it</td>
+          </tr>
+          <tr data-search="rename set_index didn&#x27;t stick no error">
+            <td class="fn">(no error) a rename or set_index &quot;didn&#x27;t stick&quot;</td>
+            <td class="desc">Forgot to save the result</td>
+            <td class="ex"><code>df = df.rename(...)</code>, <code>df = df.set_index(...)</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /sheet-pandas -->
 
   <!-- ══════════════════════════════════════
        SHEET: PATHLIB
