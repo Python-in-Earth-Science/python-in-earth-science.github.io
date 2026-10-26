@@ -82,7 +82,8 @@
 
   <section>
     <h2>Course calendar</h2>
-    <p>Lectures meet Monday, Wednesday, and Friday at 9:05am. The Monday afternoon lab meets 1:25–4:15pm. Labs are due the following Sunday at 11:59pm, except the Lab 4 worksheet, which is due Tuesday, Sep 29, at 11:59pm. Our course weeks run Wednesday through Monday — new topics start on Wednesday and the lab applies everything on the following Monday afternoon.</p>
+    <p>Lectures meet Monday, Wednesday, and Friday at 9:05am. The Monday afternoon lab meets 1:25–4:15pm. Labs are due the following Sunday at 11:59pm, except the Lab 4 worksheet, which was due Tuesday, Sep 29, at 11:59pm. Our course weeks run Wednesday through Monday — new topics start on Wednesday and the lab applies everything on the following Monday afternoon.</p>
+    <p><strong>Lab numbers match the course week</strong> starting with Lab 08 (Week 8), so there is no Lab 07. In Week 9, <strong>Assignment 2</strong> takes the place of a lab: it starts in lab on Monday, Oct 26, and is due Sunday, Nov 8, at 11:59pm. Aim to finish Stops 1–4 by Sunday, Nov 1.</p>
 
     <div class="cal-nav">
       <button class="cal-nav-btn" onclick="prevMonth()">← prev</button>
@@ -102,7 +103,7 @@
       <div class="leg-item"><div class="leg-dot" style="background:rgba(26,95,168,.2)"></div>Lecture</div>
       <div class="leg-item"><div class="leg-dot" style="background:rgba(74,124,89,.3)"></div>Lab</div>
       <div class="leg-item"><div class="leg-dot" style="background:rgba(184,92,56,.2)"></div>Lab Due</div>
-      <div class="leg-item"><div class="leg-dot" style="background:rgba(100,80,160,.2)"></div>Assignment due</div>
+      <div class="leg-item"><div class="leg-dot" style="background:rgba(100,80,160,.2)"></div>Assignment</div>
       <div class="leg-item"><div class="leg-dot" style="background:rgba(140,123,107,.25)"></div>No Class</div>
       <div class="leg-item"><div class="leg-dot" style="background:rgba(30,140,140,.25)"></div>Weekly Demo Notebooks Due</div>
     </div>
@@ -156,8 +157,7 @@ const events = {
   "2026-09-29":[{t:"due",l:"Lab 4 worksheet due"}],
   "2026-09-30":[{t:"lecture",l:"Lecture"}],
   "2026-10-02":[{t:"lecture",l:"Lecture"}],
-  "2026-10-05":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 5"}, {t:"notebook",l:"Notebooks due"}],
-  "2026-10-05":[{t:"assign",l:"Assignment 1 due"}],
+  "2026-10-05":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 5 (Git)"},{t:"notebook",l:"Notebooks due"},{t:"assign",l:"Assignment 1 due"}],
   "2026-10-07":[{t:"lecture",l:"Lecture"}],
   "2026-10-09":[{t:"lecture",l:"Lecture"}],
   "2026-10-11":[{t:"due",l:"Lab 5 due"}],
@@ -165,24 +165,24 @@ const events = {
   "2026-10-14":[{t:"lecture",l:"Lecture"}],
   "2026-10-16":[{t:"lecture",l:"Lecture"}],
   "2026-10-18":[{t:"due",l:"Lab 6 due"}],
-  "2026-10-19":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 7"}, {t:"notebook",l:"Notebooks due"}],
+  "2026-10-19":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 08"}, {t:"notebook",l:"Notebooks due"}],
   "2026-10-21":[{t:"lecture",l:"Lecture"}],
   "2026-10-22":[{t:"off",l:"Fall Break"}],
   "2026-10-23":[{t:"off",l:"Fall Break"}],
-  "2026-10-25":[{t:"due",l:"Lab 7 due"}],
-  "2026-10-26":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 8"}, {t:"notebook",l:"Notebooks due"}],
+  "2026-10-25":[{t:"due",l:"Lab 08 due"}],
+  "2026-10-26":[{t:"lecture",l:"Lecture"},{t:"assign",l:"Assignment 2 starts in lab"}, {t:"notebook",l:"Notebooks due"}],
   "2026-10-28":[{t:"lecture",l:"Lecture"}],
   "2026-10-30":[{t:"lecture",l:"Lecture"}],
-  "2026-11-01":[{t:"due",l:"Lab 8 due"}],
-  "2026-11-02":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 9"}, {t:"notebook",l:"Notebooks due"}],
+  "2026-11-01":[{t:"assign",l:"Assignment 2: Stops 1–4 checkpoint"}],
+  "2026-11-02":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 10"}, {t:"notebook",l:"Notebooks due"}],
   "2026-11-04":[{t:"lecture",l:"Lecture"}],
   "2026-11-06":[{t:"lecture",l:"Lecture"}],
-  "2026-11-08":[{t:"due",l:"Lab 9 due"}],
-  "2026-11-09":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 10"}, {t:"notebook",l:"Notebooks due"}],
+  "2026-11-08":[{t:"due",l:"Lab 10 due"},{t:"assign",l:"Assignment 2 due"}],
+  "2026-11-09":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 11"}, {t:"notebook",l:"Notebooks due"}],
   "2026-11-11":[{t:"lecture",l:"Lecture"}],
   "2026-11-13":[{t:"lecture",l:"Lecture"}],
-  "2026-11-15":[{t:"due",l:"Lab 10 due"},{t:"assign",l:"Assignment 2 due"}],
-  "2026-11-16":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 11"}, {t:"notebook",l:"Notebooks due"}],
+  "2026-11-15":[{t:"due",l:"Lab 11 due"}],
+  "2026-11-16":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 12"}, {t:"notebook",l:"Notebooks due"}],
   "2026-11-18":[{t:"lecture",l:"Lecture"}],
   "2026-11-20":[{t:"lecture",l:"Lecture"}],
   "2026-11-22":[{t:"off",l:"Thanksgiving break"}],
@@ -192,14 +192,14 @@ const events = {
   "2026-11-26":[{t:"off",l:"Thanksgiving break"}],
   "2026-11-27":[{t:"off",l:"Thanksgiving break"}],
   "2026-11-28":[{t:"off",l:"Thanksgiving break"}],
-  "2026-11-29":[{t:"due",l:"Lab 11 due"},{t:"off",l:"Thanksgiving break"}],
-  "2026-11-30":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 12"}, {t:"notebook",l:"Notebooks due"}],
+  "2026-11-29":[{t:"due",l:"Lab 12 due"},{t:"off",l:"Thanksgiving break"}],
+  "2026-11-30":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 13"}, {t:"notebook",l:"Notebooks due"}],
   "2026-12-02":[{t:"lecture",l:"Lecture"}],
   "2026-12-04":[{t:"lecture",l:"Lecture"}],
-  "2026-12-06":[{t:"due",l:"Lab 12 due"}],
-  "2026-12-07":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 13"}, {t:"notebook",l:"Notebooks due"}],
+  "2026-12-06":[{t:"due",l:"Lab 13 due"}],
+  "2026-12-07":[{t:"lecture",l:"Lecture"},{t:"lab",l:"Lab 14"}, {t:"notebook",l:"Notebooks due"}],
   "2026-12-09":[{t:"lecture",l:"Lecture"}],
-  "2026-12-13":[{t:"due",l:"Lab 13 due"},{t:"assign",l:"Assignment 3 due"}],
+  "2026-12-13":[{t:"due",l:"Lab 14 due"},{t:"assign",l:"Assignment 3 due"}],
 }
 
 const months=["January","February","March","April","May","June","July","August","September","October","November","December"];
