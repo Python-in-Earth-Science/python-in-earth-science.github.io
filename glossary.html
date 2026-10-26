@@ -1682,6 +1682,14 @@
     <p class="term-def">Reads a text table into a DataFrame, header and text included. <strong>parse_dates=["DATE"]</strong> reads dates as dates, <strong>index_col="DATE"</strong> makes them the row labels, and <strong>na_values=-999</strong> turns a fill value into NaN.</p>
   </div>
 
+  <div class="term" data-term="timestamp pd.Timestamp single date comment #">
+    <div class="term-header">
+      <span class="term-word">pd.Timestamp / comment=&quot;#&quot;</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def"><strong>pd.Timestamp("2025-07-01")</strong> is one date, the same kind of thing as each entry of a DatetimeIndex; use it to set plot limits on a date axis. <strong>pd.read_csv(..., comment="#")</strong> skips note lines that start with #.</p>
+  </div>
+
   <div class="term" data-term="info describe dtypes head tail first look">
     <div class="term-header">
       <span class="term-word">.info() / .describe()</span>
@@ -1768,6 +1776,149 @@
       <span class="term-tag">pandas</span>
     </div>
     <p class="term-def">Writes a DataFrame to a CSV file. <strong>na_rep=-999</strong> writes missing values as -999.</p>
+  </div>
+
+
+<!-- ── CATEGORY: matplotlib ── -->
+  <div class="category">
+    <span class="category-label">matplotlib</span>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="term" data-term="matplotlib pyplot plt import">
+    <div class="term-header">
+      <span class="term-word">matplotlib / pyplot</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">Python's main plotting library. We use its <strong>pyplot</strong> part, imported as <strong>import matplotlib.pyplot as plt</strong>.</p>
+  </div>
+
+  <div class="term" data-term="figure fig page">
+    <div class="term-header">
+      <span class="term-word">figure (fig)</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">The whole image, like a page. It holds one or more axes. You size it (<strong>figsize=</strong>), title it (<strong>fig.suptitle()</strong>), and save it (<strong>fig.savefig()</strong>).</p>
+  </div>
+
+  <div class="term" data-term="axes ax graph plotting area">
+    <div class="term-header">
+      <span class="term-word">axes (ax)</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">One graph on the figure: an x-axis, a y-axis, and the data. Almost everything you draw or label goes through it: <strong>ax.plot()</strong>, <strong>ax.set_xlabel()</strong>. (Not the same as an <em>axis</em>, the single number line along one side.)</p>
+  </div>
+
+  <div class="term" data-term="subplots fig ax axes array plt.subplots">
+    <div class="term-header">
+      <span class="term-word">plt.subplots()</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">Makes a figure and its axes in one line. <strong>fig, ax = plt.subplots()</strong> for one graph; <strong>fig, axes = plt.subplots(2, 1)</strong> for several, where <strong>axes</strong> is a NumPy array you index like any other: <strong>axes[0]</strong>, or <strong>axes[0, 1]</strong> in a grid.</p>
+  </div>
+
+  <div class="term" data-term="plt style ax style object-oriented two ways">
+    <div class="term-header">
+      <span class="term-word">plt style vs. ax style</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">Two ways to write the same figure. <strong>plt.plot()</strong>, <strong>plt.xlabel()</strong> draw on the "current" figure; <strong>ax.plot()</strong>, <strong>ax.set_xlabel()</strong> name the graph to draw on, which you need once a figure has more than one. Drawing keeps its name; setting gets <strong>set_</strong>.</p>
+  </div>
+
+  <div class="term" data-term="line plot scatter histogram bar which plot type">
+    <div class="term-header">
+      <span class="term-word">choosing a plot type</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">Match the plot to the question. <strong>Line</strong>: how something changes in order (time, distance). <strong>Scatter</strong>: how two things are related. <strong>Histogram</strong>: which values are common. <strong>Bar</strong>: amounts in categories.</p>
+  </div>
+
+  <div class="term" data-term="histogram bins distribution">
+    <div class="term-header">
+      <span class="term-word">histogram / bins</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">A plot that splits a range of values into <strong>bins</strong> and draws a bar for how many values fall in each. It shows <em>how often</em>, not <em>when</em>.</p>
+  </div>
+
+  <div class="term" data-term="legend label key">
+    <div class="term-header">
+      <span class="term-word">legend</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">The key that says which line or set of points is which. Give each one a <strong>label=</strong>, then call <strong>ax.legend()</strong>.</p>
+  </div>
+
+  <div class="term" data-term="axis limits zoom xlim ylim">
+    <div class="term-header">
+      <span class="term-word">axis limits (zooming)</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">The range each axis shows, set with <strong>ax.set_xlim()</strong> and <strong>ax.set_ylim()</strong>. Zooming with limits keeps all the data and changes the window; slicing the data first changes what's plotted, and matplotlib refits the axes to it.</p>
+  </div>
+
+  <div class="term" data-term="log scale logarithmic axis powers of ten">
+    <div class="term-header">
+      <span class="term-word">log scale</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">An axis where each tick is 10 times the one before, so equal <em>ratios</em> get equal spacing. Use it when values span several powers of ten. Zero and negative values can't be shown. <strong>ax.set_yscale("log")</strong>, or <strong>ax.loglog()</strong> for both axes.</p>
+  </div>
+
+  <div class="term" data-term="shared axes sharex sharey">
+    <div class="term-header">
+      <span class="term-word">shared axes</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">Panels that use the same x- or y-axis (<strong>sharex=True</strong>, <strong>sharey=True</strong>), so they line up and compare fairly. Setting the limits on one sets them on all.</p>
+  </div>
+
+  <div class="term" data-term="twinx second y-axis two units">
+    <div class="term-header">
+      <span class="term-word">second y-axis (twinx)</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">A second y-axis on the right that shares the x-axis, for two quantities with different units. Color each axis label to match its data. The two scales are independent, so where the lines cross means nothing.</p>
+  </div>
+
+  <div class="term" data-term="colormap cmap colorbar viridis rainbow">
+    <div class="term-header">
+      <span class="term-word">colormap / colorbar</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">A <strong>colormap</strong> turns numbers into colors (<strong>cmap="viridis"</strong>); the <strong>colorbar</strong> is the key that shows which color means which value. Avoid rainbow maps like <strong>"jet"</strong>: they're hard to read for color-blind viewers and make smooth data look like it has sharp edges.</p>
+  </div>
+
+  <div class="term" data-term="error bars yerr standard deviation uncertainty">
+    <div class="term-header">
+      <span class="term-word">error bars</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">Bars above and below a point. They can mean the <strong>spread</strong> of the data (e.g. ±1 standard deviation) or the <strong>uncertainty</strong> of a value, which are different things, so always say which.</p>
+  </div>
+
+  <div class="term" data-term="annotate text arrow label point">
+    <div class="term-header">
+      <span class="term-word">annotation</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">Text on a figure, often with an arrow, pointing out a feature: <strong>ax.annotate("text", xy=..., xytext=..., arrowprops=...)</strong>, or <strong>ax.text(x, y, "text")</strong> without an arrow.</p>
+  </div>
+
+  <div class="term" data-term="savefig dpi bbox_inches save figure file">
+    <div class="term-header">
+      <span class="term-word">fig.savefig() / dpi</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">Saves a figure to a file; the extension sets the format (.png, .pdf). <strong>dpi</strong> (dots per inch) sets the resolution: 300 for print. <strong>bbox_inches="tight"</strong> trims extra white space.</p>
+  </div>
+
+  <div class="term" data-term="good figure checklist">
+    <div class="term-header">
+      <span class="term-word">good-figure checklist</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">A figure is <em>good</em> when someone else can read it without you: labels with units, a title, a legend, one unit per axis, colors anyone can tell apart, readable text, and fair comparisons (shared axes, bars starting at zero).</p>
   </div>
 
 <!-- ── CATEGORY: Debugging ── -->
@@ -2064,6 +2215,54 @@
       <span class="term-tag">earth science</span>
     </div>
     <p class="term-def">During the day, photosynthesis removes CO₂ from water, raising pH and oxygen; at night, respiration adds CO₂ back, lowering both. On a coral reef this makes pH peak in the afternoon and bottom out just after sunrise.</p>
+  </div>
+
+  <div class="term" data-term="debris flow caine threshold intensity duration rainfall">
+    <div class="term-header">
+      <span class="term-word">debris flow / rainfall threshold</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A <strong>debris flow</strong> is a fast, water-soaked flow of mud, sand, and rock down a slope or channel. A <strong>rainfall threshold</strong> like Caine (1980), <strong>I = 14.82 D<sup>−0.39</sup></strong>, gives the intensity above which debris flows become likely for a storm of a given duration: short storms need higher intensity.</p>
+  </div>
+
+  <div class="term" data-term="infiltration rate wildfire runoff water repellent">
+    <div class="term-header">
+      <span class="term-word">infiltration rate</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">How fast water soaks into the ground (mm/hr). Fire can cut it sharply by making soil water-repellent, so more rain becomes runoff (Lab 02).</p>
+  </div>
+
+  <div class="term" data-term="factor of safety fs infinite slope stable unstable">
+    <div class="term-header">
+      <span class="term-word">factor of safety (FS)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">Resisting forces divided by driving forces on a hillslope (Lab 03). <strong>FS &gt; 1</strong>: stable. <strong>FS &lt; 1</strong>: likely to fail. Wetter soil lowers FS, which is why storms trigger landslides.</p>
+  </div>
+
+  <div class="term" data-term="cold front wind temperature drop rain">
+    <div class="term-header">
+      <span class="term-word">cold front</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The leading edge of a cooler air mass. As it passes, there's often wind and rain along the front, then a drop in temperature behind it.</p>
+  </div>
+
+  <div class="term" data-term="gutenberg richter frequency magnitude b-value">
+    <div class="term-header">
+      <span class="term-word">Gutenberg–Richter relation</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">Small earthquakes are far more common than large ones, by about the same factor for each step in magnitude, so magnitude counts make a nearly straight line on a log axis (Gutenberg &amp; Richter, 1944).</p>
+  </div>
+
+  <div class="term" data-term="catalog completeness magnitude detection small earthquakes missed">
+    <div class="term-header">
+      <span class="term-word">catalog completeness</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The smallest magnitude above which a seismic catalog records nearly every earthquake. Below it, events are missed because the instruments can't detect them all, so counts drop off for instrument reasons, not because those earthquakes are rare.</p>
   </div>
 
 </main>
