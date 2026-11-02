@@ -2816,6 +2816,60 @@ fig.savefig(&quot;highs.pdf&quot;)</td>
       </table>
     </div>
 
+    <!-- Schematic Style -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Schematic Style</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="spines hide box top right lines">
+            <td class="fn">ax.spines[&quot;top&quot;].set_visible(False)</td>
+            <td class="desc">Hide one of the four lines around the plot (<code>"top"</code>, <code>"right"</code>, <code>"bottom"</code>, <code>"left"</code>)</td>
+            <td class="ex">ax.spines[&quot;top&quot;].set_visible(False)
+ax.spines[&quot;right&quot;].set_visible(False)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a figure)</td>
+          </tr>
+          <tr data-search="set_xticks empty remove tick numbers schematic">
+            <td class="fn">ax.set_xticks([])  /  ax.set_yticks([])</td>
+            <td class="desc">Remove the tick marks and numbers (for a schematic, where the numbers are made up)</td>
+            <td class="ex">ax.set_xticks([])
+ax.set_yticks([])</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a figure)</td>
+          </tr>
+          <tr data-search="axis arrowheads transAxes clip_on arrows">
+            <td class="fn">ax.plot(1, 0, &quot;&gt;&quot;, transform=ax.transAxes, clip_on=False)</td>
+            <td class="desc">Arrowheads at the ends of the axes. <code>transform=ax.transAxes</code> = coordinates are fractions of the axes box; <code>clip_on=False</code> lets the marker hang over the edge</td>
+            <td class="ex">ax.plot(1, 0, &quot;&gt;&quot;, color=&quot;black&quot;, transform=ax.transAxes, clip_on=False)
+ax.plot(0, 1, &quot;^&quot;, color=&quot;black&quot;, transform=ax.transAxes, clip_on=False)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a figure)</td>
+          </tr>
+          <tr data-search="annotate textcoords offset points label follows point">
+            <td class="fn">ax.annotate(&quot;text&quot;, xy=(x, y), xytext=(8, -12), textcoords=&quot;offset points&quot;)</td>
+            <td class="desc">Place a label a fixed distance (in points) from the spot, so it moves with the curve</td>
+            <td class="ex">ax.annotate(&quot;tributary&quot;, xy=(0.35, 0.4), xytext=(8, -12),
+            textcoords=&quot;offset points&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a figure)</td>
+          </tr>
+          <tr data-search="ha va horizontal vertical alignment text">
+            <td class="fn">ax.text(x, y, &quot;words&quot;, ha=&quot;right&quot;, va=&quot;top&quot;)</td>
+            <td class="desc">Which part of the text sits on (x, y). <code>ha</code>: left/center/right; <code>va</code>: bottom/center/top</td>
+            <td class="ex">ax.text(0.98, 0.1, &quot;background flow&quot;, ha=&quot;right&quot;, va=&quot;top&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a figure)</td>
+          </tr>
+          <tr data-search="new line \n string label two lines">
+            <td class="fn">&quot;first line\nsecond line&quot;</td>
+            <td class="desc"><code>\n</code> starts a new line inside a string (in titles, labels, and text)</td>
+            <td class="ex">print(&quot;dam\nbreach&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">dam
+breach</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <!-- Common matplotlib Errors and Surprises -->
     <div class="section">
       <div class="section-header">
@@ -3451,6 +3505,80 @@ table - row_mean[:, np.newaxis]</td>
       </table>
     </div>
 
+    <!-- Combining, Fitting &amp; Building Shapes -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Combining, Fitting &amp; Building Shapes</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="np.concatenate stack arrays axis rows">
+            <td class="fn">np.concatenate([a, b], axis=0)</td>
+            <td class="desc">Glue arrays together along an axis. <code>axis=0</code> stacks rows (the other dimension must match). Matches columns by <strong>position</strong> only</td>
+            <td class="ex">a = np.ones((2, 3))
+b = np.zeros((4, 3))
+np.concatenate([a, b], axis=0).shape</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(6, 3)</td>
+          </tr>
+          <tr data-search="np.polyfit straight line fit slope intercept rate least squares">
+            <td class="fn">np.polyfit(x, y, 1)</td>
+            <td class="desc">Fit the best straight line (least squares). Returns <code>[slope, intercept]</code>; the slope is the <strong>rate</strong> (units of y per unit of x). Here: mm/yr</td>
+            <td class="ex">slope, intercept = np.polyfit(year, msl, 1)
+round(slope, 2)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">1.86</td>
+          </tr>
+          <tr data-search="np.polyval fitted values draw line">
+            <td class="fn">np.polyval(coeffs, x)</td>
+            <td class="desc">Plug x into the fitted line (or curve) to get the fitted y values</td>
+            <td class="ex">coeffs = np.polyfit(year, msl, 1)
+np.polyval(coeffs, year).round(1)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([7046.1, 7064.7, 7083.3, 7101.9])</td>
+          </tr>
+          <tr data-search="residuals data minus fit leftovers">
+            <td class="fn">y - np.polyval(coeffs, x)</td>
+            <td class="desc"><strong>Residuals</strong>: what's left after the fit. A pattern in them (a U, a hump) means the model is missing something</td>
+            <td class="ex">coeffs = np.polyfit(year, msl, 1)
+(msl - np.polyval(coeffs, year)).round(1)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([  3.9,   0.3, -12.3,   8.1])</td>
+          </tr>
+          <tr data-search="polyfit degree 2 parabola curve">
+            <td class="fn">np.polyfit(x, y, 2)</td>
+            <td class="desc">Degree 2: a parabola, ax² + bx + c. Returns three numbers, highest power first</td>
+            <td class="ex">len(np.polyfit(year, msl, 2))</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">3</td>
+          </tr>
+          <tr data-search="np.exp exponential decay curve shape">
+            <td class="fn">np.exp(-x / length)</td>
+            <td class="desc">A curve that starts at 1 and decays: fast at first, then slower. Smaller <code>length</code> = faster decay</td>
+            <td class="ex">x = np.array([0, 0.2, 0.4, 0.8])
+np.exp(-x / 0.2).round(3)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([1.   , 0.368, 0.135, 0.018])</td>
+          </tr>
+          <tr data-search="masked add step jump += every point past">
+            <td class="fn">y[x &gt;= where] += amount</td>
+            <td class="desc">Add to only the points a mask picks (e.g. a jump at every point downstream of a tributary)</td>
+            <td class="ex">x = np.linspace(0, 1, 5)
+y = np.zeros(5)
+y[x &gt;= 0.5] += 0.2
+y</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([0. , 0. , 0.2, 0.2, 0.2])</td>
+          </tr>
+          <tr data-search="masked replace two pieces join limb">
+            <td class="fn">q[mask] = values[mask]</td>
+            <td class="desc">Replace only the masked points with values computed for every point (the <code>[mask]</code> on the right keeps the lengths equal)</td>
+            <td class="ex">t = np.arange(5)
+q = t * 1.0
+late = t &gt;= 3
+q[late] = (10 - t)[late]
+q</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([0., 1., 2., 7., 6.])</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <!-- Common NumPy Errors -->
     <div class="section">
       <div class="section-header">
@@ -3786,6 +3914,105 @@ min      51.00000
 75%      68.00000
 max      74.00000
 Name: TMAX, dtype: float64</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Reading Messy Files -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Reading Messy Files</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="look first head raw file before reading">
+            <td class="fn">!head -3 file</td>
+            <td class="desc">Look at the raw file <strong>before</strong> reading it: separator? header rows? decimal commas? odd characters?</td>
+            <td class="ex">!head -3 tide.rlrdata</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px"> 1908;  6744;N;000
+ 1909;-99999;N;000
+ 1910;  6905;Y;000</td>
+          </tr>
+          <tr data-search="sep separator semicolon delimiter">
+            <td class="fn">pd.read_csv(path, sep=&quot;;&quot;)</td>
+            <td class="desc">Columns are separated by something other than a comma</td>
+            <td class="ex">pd.read_csv(&quot;nve.csv&quot;, sep=&quot;;&quot;, encoding=&quot;latin-1&quot;).columns</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">Index([&#x27;Year&#x27;, &#x27;Bw&#x27;, &#x27;Bs&#x27;, &#x27;Ba&#x27;, &#x27;Source&#x27;], dtype=&#x27;object&#x27;)</td>
+          </tr>
+          <tr data-search="sep whitespace spaces runs of spaces \s+ regular expression">
+            <td class="fn">pd.read_csv(path, sep=r&quot;\s+&quot;)</td>
+            <td class="desc">Columns separated by <strong>runs of spaces</strong> (one or more). <code>\s</code> = any space, <code>+</code> = one or more</td>
+            <td class="ex">pd.read_csv(&quot;oni.txt&quot;, sep=r&quot;\s+&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">  SEAS    YR  TOTAL  ANOM
+0  DJF  1950  25.01 -1.32
+1  JFM  1950  25.36 -1.20</td>
+          </tr>
+          <tr data-search="header=None names no header row column names">
+            <td class="fn">pd.read_csv(path, header=None, names=[...])</td>
+            <td class="desc">The file has <strong>no header row</strong>: give the column names yourself, in order. Without <code>header=None</code>, the first row of data becomes the header and is lost</td>
+            <td class="ex">pd.read_csv(&quot;tide.rlrdata&quot;, sep=&quot;;&quot;, header=None,
+            names=[&quot;year&quot;, &quot;msl&quot;, &quot;missing_days&quot;, &quot;flag&quot;])</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">   year    msl missing_days  flag
+0  1908   6744            N     0
+1  1909 -99999            N     0
+2  1910   6905            Y     0</td>
+          </tr>
+          <tr data-search="encoding latin-1 utf-8 UnicodeDecodeError special characters">
+            <td class="fn">pd.read_csv(path, encoding=&quot;latin-1&quot;)</td>
+            <td class="desc">Read a file saved in an older encoding. Use it when you get a <code>UnicodeDecodeError</code>; then check that letters like ø look right</td>
+            <td class="ex">pd.read_csv(&quot;nve.csv&quot;, sep=&quot;;&quot;, encoding=&quot;latin-1&quot;)[&quot;Source&quot;][0]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">&#x27;Liestøl&#x27;</td>
+          </tr>
+          <tr data-search="decimal comma european numbers 1,16 text object">
+            <td class="fn">pd.read_csv(path, decimal=&quot;,&quot;)</td>
+            <td class="desc">Numbers written with a comma as the decimal point (<code>1,16</code>). Without it, those columns are read as <strong>text</strong></td>
+            <td class="ex">df = pd.read_csv(&quot;nve.csv&quot;, sep=&quot;;&quot;, encoding=&quot;latin-1&quot;, decimal=&quot;,&quot;)
+df[&quot;Bw&quot;] + df[&quot;Bs&quot;]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">0   -1.42
+1    0.45
+dtype: float64</td>
+          </tr>
+          <tr data-search="skiprows skip units row second header line">
+            <td class="fn">pd.read_csv(path, skiprows=[1])</td>
+            <td class="desc">Skip specific lines, counting from 0 (here: a units row under the header)</td>
+            <td class="ex">pd.read_csv(&quot;bands.csv&quot;, skiprows=[1])</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">   Altitude min  Specific summer 
+0          1850             -1.45
+1          1800             -1.50</td>
+          </tr>
+          <tr data-search="nrows read only first rows table below data">
+            <td class="fn">pd.read_csv(path, nrows=N)</td>
+            <td class="desc">Read only the first N rows of data (e.g. when a second table sits below the data)</td>
+            <td class="ex">pd.read_csv(&quot;front.csv&quot;, sep=&quot;;&quot;, nrows=3, na_values=&quot;Start&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">   Year  Cumulative (m)
+0  1917             NaN
+1  1918           -30.0
+2  1919           -52.0</td>
+          </tr>
+          <tr data-search="na_values word text missing list several">
+            <td class="fn">na_values=&quot;Start&quot;  /  na_values=[&quot;Start&quot;, -999]</td>
+            <td class="desc">Treat a word (or several values) as missing while reading. The rest of the column can then be numbers</td>
+            <td class="ex">pd.read_csv(&quot;front.csv&quot;, sep=&quot;;&quot;, nrows=3, na_values=&quot;Start&quot;).dtypes</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">Year                int64
+Cumulative (m)    float64
+dtype: object</td>
+          </tr>
+          <tr data-search="columns hidden spaces trailing space KeyError list">
+            <td class="fn">list(df.columns)</td>
+            <td class="desc">Print the exact column names, so hidden spaces show up</td>
+            <td class="ex">list(pd.read_csv(&quot;bands.csv&quot;, skiprows=[1]).columns)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[&#x27;Altitude min&#x27;, &#x27;Specific summer &#x27;]</td>
+          </tr>
+          <tr data-search="str.strip remove spaces column names">
+            <td class="fn">df.columns = df.columns.str.strip()</td>
+            <td class="desc">Remove spaces from the start and end of every column name</td>
+            <td class="ex">df = pd.read_csv(&quot;bands.csv&quot;, skiprows=[1])
+df.columns = df.columns.str.strip()
+list(df.columns)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[&#x27;Altitude min&#x27;, &#x27;Specific summer&#x27;]</td>
           </tr>
         </tbody>
       </table>
@@ -4156,6 +4383,171 @@ Name: TMAX, dtype: int64</td>
 5    8.01
 dtype: float64</td>
           </tr>
+          <tr data-search="groupby steps split object nothing calculated">
+            <td class="fn">by = df.groupby(&quot;COL&quot;)</td>
+            <td class="desc">Step 1, <strong>split</strong>: sorts rows into groups. Nothing is calculated yet, so printing it shows only a description</td>
+            <td class="ex">by_glacier = glaciers.groupby(&quot;glacier&quot;)
+print(by_glacier.ngroups, &quot;groups&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">2 groups</td>
+          </tr>
+          <tr data-search="groupby steps pick column select">
+            <td class="fn">col = by[&quot;COL&quot;]</td>
+            <td class="desc">Step 2: pick the column(s) to summarize. Still nothing calculated</td>
+            <td class="ex">by_glacier = glaciers.groupby(&quot;glacier&quot;)
+ba = by_glacier[&quot;Ba&quot;]
+type(ba).__name__</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">&#x27;SeriesGroupBy&#x27;</td>
+          </tr>
+          <tr data-search="groupby steps summarize sum mean result">
+            <td class="fn">col.sum()  /  col.mean()  /  ...</td>
+            <td class="desc">Step 3, <strong>summarize</strong>: this is the step that does the work. One answer per group</td>
+            <td class="ex">by_glacier = glaciers.groupby(&quot;glacier&quot;)
+ba = by_glacier[&quot;Ba&quot;]
+ba.sum()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">glacier
+Engabreen   -0.84
+Storbreen   -3.49
+Name: Ba, dtype: float64</td>
+          </tr>
+          <tr data-search="groupby two columns double brackets dataframe result">
+            <td class="fn">by[[&quot;A&quot;, &quot;B&quot;]].mean()</td>
+            <td class="desc">Summarize two columns at once (a list, so double brackets). The result is a DataFrame</td>
+            <td class="ex">by_glacier = glaciers.groupby(&quot;glacier&quot;)
+by_glacier[[&quot;Bw&quot;, &quot;Bs&quot;]].mean()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">              Bw    Bs
+glacier               
+Engabreen  2.600 -3.02
+Storbreen  1.145 -2.89</td>
+          </tr>
+          <tr data-search="groupby cumsum running total within each group restarts">
+            <td class="fn">df[&quot;NEW&quot;] = by[&quot;COL&quot;].cumsum()</td>
+            <td class="desc">A running total that <strong>restarts</strong> for each group (a plain <code>.cumsum()</code> would run straight from one group into the next)</td>
+            <td class="ex">by_glacier = glaciers.groupby(&quot;glacier&quot;)
+glaciers[&quot;cum_Ba&quot;] = by_glacier[&quot;Ba&quot;].cumsum()
+glaciers[[&quot;glacier&quot;, &quot;Ba&quot;, &quot;cum_Ba&quot;]]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">     glacier    Ba  cum_Ba
+0  Storbreen -1.97   -1.97
+1  Storbreen -1.52   -3.49
+2  Engabreen -1.63   -1.63
+3  Engabreen  0.79   -0.84</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Combining &amp; Building Tables -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Combining &amp; Building Tables</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="pd.concat stack combine tables list rows">
+            <td class="fn">pd.concat([df1, df2])</td>
+            <td class="desc">Stack DataFrames on top of each other. Columns are matched by <strong>name</strong>, even if they're in a different order</td>
+            <td class="ex">pd.concat([early, late])</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">   Year    Bw    Bs
+0  1998  2.22 -1.97
+1  1999  1.82 -2.20
+0  1999  1.82 -2.20
+1  2000  2.64 -1.82</td>
+          </tr>
+          <tr data-search="ignore_index fresh index 0 1 2 concat">
+            <td class="fn">pd.concat(list_of_dfs, ignore_index=True)</td>
+            <td class="desc">Number the combined rows 0, 1, 2, ... from scratch (otherwise each piece keeps its own index, and labels repeat)</td>
+            <td class="ex">pd.concat([early, late], ignore_index=True)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">   Year    Bw    Bs
+0  1998  2.22 -1.97
+1  1999  1.82 -2.20
+2  1999  1.82 -2.20
+3  2000  2.64 -1.82</td>
+          </tr>
+          <tr data-search="duplicated count repeated rows check">
+            <td class="fn">df[&quot;COL&quot;].duplicated().sum()</td>
+            <td class="desc">How many values have already appeared earlier in the column</td>
+            <td class="ex">both = pd.concat([early, late], ignore_index=True)
+both[&quot;Year&quot;].duplicated().sum()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">1</td>
+          </tr>
+          <tr data-search="drop_duplicates remove repeated rows">
+            <td class="fn">df.drop_duplicates()</td>
+            <td class="desc">Remove rows that are exact copies of an earlier row (<strong>every</strong> column must match)</td>
+            <td class="ex">pd.concat([early, late], ignore_index=True).drop_duplicates()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">   Year    Bw    Bs
+0  1998  2.22 -1.97
+1  1999  1.82 -2.20
+3  2000  2.64 -1.82</td>
+          </tr>
+          <tr data-search="sort_values sort by column order">
+            <td class="fn">df.sort_values(&quot;COL&quot;, ignore_index=True)</td>
+            <td class="desc">Put the rows in order of a column. <code>ascending=False</code> for largest first</td>
+            <td class="ex">df = pd.DataFrame({&quot;Year&quot;: [2000, 1998, 1999]})
+df.sort_values(&quot;Year&quot;, ignore_index=True)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">   Year
+0  1998
+1  1999
+2  2000</td>
+          </tr>
+          <tr data-search="DataFrame from dictionary dict of lists build table summary">
+            <td class="fn">pd.DataFrame({&quot;col&quot;: [value], ...})</td>
+            <td class="desc">Build a table yourself: each key is a column name, each list is that column (lists must be the same length)</td>
+            <td class="ex">pd.DataFrame({&quot;glacier&quot;: [&quot;Storbreen&quot;, &quot;Engabreen&quot;],
+              &quot;cum_Ba&quot;: [-25.74, -4.15]})</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">     glacier  cum_Ba
+0  Storbreen  -25.74
+1  Engabreen   -4.15</td>
+          </tr>
+          <tr data-search="to_csv index=False save without index results">
+            <td class="fn">df.to_csv(&quot;file.csv&quot;, index=False)</td>
+            <td class="desc">Save without the 0, 1, 2, ... index (which would otherwise become an extra unnamed column)</td>
+            <td class="ex">pd.DataFrame({&quot;station&quot;: [&quot;155_honolulu&quot;], &quot;rate&quot;: [1.57]}).to_csv(&quot;one.csv&quot;, index=False)
+!cat one.csv</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">station,rate
+155_honolulu,1.57</td>
+          </tr>
+          <tr data-search="unique each different value once">
+            <td class="fn">df[&quot;COL&quot;].unique()</td>
+            <td class="desc">Each different value in a column, once</td>
+            <td class="ex">pd.Series([&quot;Storbreen&quot;, &quot;Engabreen&quot;, &quot;Storbreen&quot;]).unique()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([&#x27;Storbreen&#x27;, &#x27;Engabreen&#x27;], dtype=object)</td>
+          </tr>
+          <tr data-search="sample random rows peek random_state">
+            <td class="fn">df.sample(5, random_state=1)</td>
+            <td class="desc">A random peek at rows. <code>random_state</code> makes it pick the same rows every time</td>
+            <td class="ex">pd.DataFrame({&quot;x&quot;: range(10)}).sample(3, random_state=1)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">   x
+2  2
+9  9
+6  6</td>
+          </tr>
+          <tr data-search="cumsum running total cumulative sum">
+            <td class="fn">df[&quot;COL&quot;].cumsum()</td>
+            <td class="desc">Running total: each value becomes the sum of everything up to and including it</td>
+            <td class="ex">pd.Series([1, -2, 3, -4]).cumsum()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">0    1
+1   -1
+2    2
+3   -2
+dtype: int64</td>
+          </tr>
+          <tr data-search="notna not missing mask keep rows">
+            <td class="fn">df[&quot;COL&quot;].notna()</td>
+            <td class="desc"><code>True</code> where a value is <strong>not</strong> missing (the opposite of <code>.isna()</code>)</td>
+            <td class="ex">pd.Series([6744.0, np.nan, 6905.0]).notna()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">0     True
+1    False
+2     True
+dtype: bool</td>
+          </tr>
+          <tr data-search="corr correlation coefficient r two columns">
+            <td class="fn">df[&quot;A&quot;].corr(df[&quot;B&quot;])</td>
+            <td class="desc">Correlation of two columns, from −1 (opposite) through 0 (no straight-line relationship) to +1 (together)</td>
+            <td class="ex">df = pd.DataFrame({&quot;A&quot;: [1, 2, 3, 4], &quot;B&quot;: [2, 4, 5, 9]})
+round(df[&quot;A&quot;].corr(df[&quot;B&quot;]), 2)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">0.96</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -4238,6 +4630,46 @@ dtype: float64</td>
             <td class="fn">(no error) a rename or set_index &quot;didn&#x27;t stick&quot;</td>
             <td class="desc">Forgot to save the result</td>
             <td class="ex"><code>df = df.rename(...)</code>, <code>df = df.set_index(...)</code></td>
+          </tr>
+          <tr data-search="UnicodeDecodeError utf-8 codec encoding">
+            <td class="fn">UnicodeDecodeError: &#x27;utf-8&#x27; codec can&#x27;t decode byte 0xf8</td>
+            <td class="desc">The file isn't saved as UTF-8 (often a European file with letters like ø)</td>
+            <td class="ex">pd.read_csv(path, encoding=&quot;latin-1&quot;)</td>
+          </tr>
+          <tr data-search="ParserError tokenizing expected fields saw">
+            <td class="fn">ParserError: Error tokenizing data. Expected 7 fields in line 3, saw 12</td>
+            <td class="desc">Splitting at the wrong separator (e.g. commas that are really decimal points)</td>
+            <td class="ex">pd.read_csv(path, sep=&quot;;&quot;)</td>
+          </tr>
+          <tr data-search="numbers read as text object glued strings 1,16-2,58 concatenated">
+            <td class="fn">df[&quot;A&quot;] + df[&quot;B&quot;] gives &quot;1,16-2,58&quot;</td>
+            <td class="desc">The columns are <strong>text</strong>, so <code>+</code> glues them together. No error is raised! Check <code>df.dtypes</code></td>
+            <td class="ex">pd.read_csv(path, decimal=&quot;,&quot;)</td>
+          </tr>
+          <tr data-search="TypeError reduction mean string dtype text column">
+            <td class="fn">TypeError: Cannot perform reduction &#x27;mean&#x27; with string dtype</td>
+            <td class="desc">Taking the mean of a column that was read as text</td>
+            <td class="ex">check df.dtypes, then fix the read (decimal=, na_values=, skiprows=, nrows=)</td>
+          </tr>
+          <tr data-search="KeyError hidden trailing space column name">
+            <td class="fn">KeyError: &#x27;Specific summer&#x27;</td>
+            <td class="desc">The real column name has a hidden space: <code>'Specific summer '</code></td>
+            <td class="ex">print(list(df.columns)), then df.columns = df.columns.str.strip()</td>
+          </tr>
+          <tr data-search="rows lost header=None first row became header">
+            <td class="fn">one row missing; column names are numbers</td>
+            <td class="desc">The file has no header row, so its first line of data became the header</td>
+            <td class="ex">pd.read_csv(path, header=None, names=[...])</td>
+          </tr>
+          <tr data-search="concat NaN columns doubled mismatched names">
+            <td class="fn">pd.concat gives extra columns full of NaN</td>
+            <td class="desc">The pieces' column names don't match (spelling, spaces, or a file with no header)</td>
+            <td class="ex">make the column names identical before concatenating</td>
+          </tr>
+          <tr data-search="SettingWithCopyWarning copy new column filtered">
+            <td class="fn">SettingWithCopyWarning</td>
+            <td class="desc">Adding a column to a table that was made by filtering another one</td>
+            <td class="ex">df = df[mask].copy()  then add the column</td>
           </tr>
         </tbody>
       </table>
@@ -4427,6 +4859,31 @@ p.name</td>
             <td class="out">precip.csv
 temp.csv
 raw</td>
+          </tr>
+          <tr data-search="sorted glob order alphabetical predictable">
+            <td class="fn">sorted(path.glob(&#x27;pattern&#x27;))</td>
+            <td class="desc"><code>.glob()</code> returns matches in no particular order; <code>sorted()</code> makes the order alphabetical and the same every time</td>
+            <td class="ex">sorted(Path(&#x27;results&#x27;).glob(&#x27;*.csv&#x27;))</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[PosixPath(&#x27;results/garcia.csv&#x27;), PosixPath(&#x27;results/smith.csv&#x27;)]</td>
+          </tr>
+          <tr data-search="read many files loop glob concat label stem">
+            <td class="fn">for path in sorted(folder.glob(...)): ...</td>
+            <td class="desc">The many-files pattern: list the files → read each one the same way and label it → <code>pd.concat</code> the list</td>
+            <td class="ex">pieces = []
+for path in sorted(Path(&quot;results&quot;).glob(&quot;*.csv&quot;)):
+    df = pd.read_csv(path)
+    df[&quot;who&quot;] = path.stem
+    pieces.append(df)
+pd.concat(pieces, ignore_index=True)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">        station  rate     who
+0  155_honolulu  1.57  garcia
+1  155_honolulu  1.57   smith</td>
+          </tr>
+          <tr data-search="stem split name pieces underscore">
+            <td class="fn">path.stem.split(&quot;_&quot;)</td>
+            <td class="desc">Break a file name into a list of pieces at each <code>_</code> (useful when names carry information)</td>
+            <td class="ex">Path(&quot;massbalanceData_2636_Storbreen.csv&quot;).stem.split(&quot;_&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[&#x27;massbalanceData&#x27;, &#x27;2636&#x27;, &#x27;Storbreen&#x27;]</td>
           </tr>
         </tbody>
       </table>
@@ -5057,6 +5514,33 @@ a second line</td>
             <td class="desc">Edit a file in the terminal; creates it if it doesn&#x27;t exist. Ctrl+O then Enter saves; Ctrl+X exits.</td>
             <td class="ex">nano practice.md</td>
             <td class="out">(opens the editor)</td>
+          </tr>
+          <tr data-search="cat -n line numbers count rows">
+            <td class="fn">cat -n file</td>
+            <td class="desc">Print a file with line numbers (handy for counting header and data rows)</td>
+            <td class="ex">cat -n front.csv</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">     1	Year;Cumulative (m)
+     2	1917;Start
+     3	1918;-30</td>
+          </tr>
+          <tr data-search="file -i encoding charset what kind">
+            <td class="fn">file -i file</td>
+            <td class="desc">What kind of file is this, and what encoding? Look for <code>charset=...</code></td>
+            <td class="ex">file -i nve.csv</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">nve.csv: text/plain; charset=iso-8859-1</td>
+          </tr>
+          <tr data-search="grep search find lines containing text">
+            <td class="fn">grep &quot;text&quot; file</td>
+            <td class="desc">Print every line that contains the text. Use <code>grep -- -99999 file</code> when the text starts with a dash</td>
+            <td class="ex">grep -- -99999 tide.rlrdata</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px"> 1909;-99999;N;000</td>
+          </tr>
+          <tr data-search="notebook ! command python variable braces {data}">
+            <td class="fn">!command {variable}</td>
+            <td class="desc">In a notebook, <code>{name}</code> drops a Python variable's value into a terminal command</td>
+            <td class="ex">data = &quot;../../course-materials/week10/&quot;
+!head -3 {data}nve.csv</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(the first 3 lines of that file)</td>
           </tr>
         </tbody>
       </table>

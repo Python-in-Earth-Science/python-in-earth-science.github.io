@@ -528,7 +528,23 @@
     <p class="term-def">An <strong>autograder</strong> is a script that checks your submission automatically when you push. For autograded assignments, Classroom50 posts each result as a <strong>Release</strong>, listed in the right sidebar of your repo's GitHub page.</p>
   </div>
 
-  <!-- ── CATEGORY: Computing Environment ── -->
+    <div class="term" data-term="gitkeep empty folder placeholder hidden">
+    <div class="term-header">
+      <span class="term-word">.gitkeep</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">An empty placeholder file. Git only tracks files, not folders, so an empty folder disappears from a repository; one empty file inside keeps it. The name is just a convention.</p>
+  </div>
+
+  <div class="term" data-term="cat -n file -i grep line numbers encoding search">
+    <div class="term-header">
+      <span class="term-word">cat -n / file -i / grep</span>
+      <span class="term-tag">git &amp; terminal</span>
+    </div>
+    <p class="term-def">Terminal tools for looking at a file before reading it: <strong>cat -n</strong> prints it with line numbers, <strong>file -i</strong> reports its encoding, and <strong>grep "text" file</strong> prints only the lines containing some text.</p>
+  </div>
+
+<!-- ── CATEGORY: Computing Environment ── -->
   <div class="category">
     <span class="category-label">Computing Environment</span>
     <div class="category-rule"></div>
@@ -693,7 +709,55 @@
   </div>
 
 
-  <!-- ── CATEGORY: Course Tools ── -->
+    <div class="term" data-term="encoding utf-8 latin-1 cp1252 iso-8859-1 characters bytes">
+    <div class="term-header">
+      <span class="term-word">encoding</span>
+      <span class="term-tag">files</span>
+    </div>
+    <p class="term-def">The rule for turning a file's bytes into characters. Most files today use <strong>UTF-8</strong> (pandas' default); older European files often use <strong>Latin-1</strong> (also called iso-8859-1) or <strong>cp1252</strong>. The wrong encoding gives a <strong>UnicodeDecodeError</strong> or garbled letters (ø showing up as � or Ã¸). <strong>!file -i path</strong> reports a file's encoding.</p>
+  </div>
+
+  <div class="term" data-term="separator delimiter sep semicolon comma tab">
+    <div class="term-header">
+      <span class="term-word">separator (delimiter)</span>
+      <span class="term-tag">files</span>
+    </div>
+    <p class="term-def">The character between columns in a text file: a comma in a CSV, but sometimes a semicolon, a tab, or runs of spaces. Tell pandas with <strong>sep=</strong>.</p>
+  </div>
+
+  <div class="term" data-term="header row column names first line">
+    <div class="term-header">
+      <span class="term-word">header row</span>
+      <span class="term-tag">files</span>
+    </div>
+    <p class="term-def">The first line of a file that names the columns. Some files have none (<strong>header=None, names=[...]</strong>), and some have extra lines, like a units row, under it (<strong>skiprows=</strong>).</p>
+  </div>
+
+  <div class="term" data-term="decimal comma european 1,16">
+    <div class="term-header">
+      <span class="term-word">decimal comma</span>
+      <span class="term-tag">files</span>
+    </div>
+    <p class="term-def">Writing 1.16 as <strong>1,16</strong>, as most of Europe does. Such files usually separate columns with semicolons. Read them with <strong>decimal=","</strong>, or the numbers come in as text.</p>
+  </div>
+
+  <div class="term" data-term="wildcard glob pattern * asterisk match">
+    <div class="term-header">
+      <span class="term-word">wildcard (glob pattern)</span>
+      <span class="term-tag">files</span>
+    </div>
+    <p class="term-def">A pattern for matching file names. <strong>*</strong> matches any run of characters, so <strong>"massbalanceData_*.csv"</strong> matches every file that starts with <strong>massbalanceData_</strong> and ends in <strong>.csv</strong>. Used with <strong>Path.glob()</strong>.</p>
+  </div>
+
+  <div class="term" data-term="readme read me first documentation repository">
+    <div class="term-header">
+      <span class="term-word">README</span>
+      <span class="term-tag">files</span>
+    </div>
+    <p class="term-def">A short plain-text note that travels with data or code, written so a stranger can use it without asking you: what it is, how it's organized, what's tricky about it, and how to cite it. GitHub shows a repository's <strong>README.md</strong> on its front page.</p>
+  </div>
+
+<!-- ── CATEGORY: Course Tools ── -->
   <div class="category">
     <span class="category-label">Course Tools</span>
     <div class="category-rule"></div>
@@ -1636,6 +1700,46 @@
   </div>
 
 
+  <div class="term" data-term="np.concatenate stack arrays glue axis">
+    <div class="term-header">
+      <span class="term-word">np.concatenate()</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">Glues arrays together along an axis: <strong>np.concatenate([a, b], axis=0)</strong> stacks rows. It only checks that the shapes fit, so it will silently mix up columns that are in a different order. (pandas' <strong>pd.concat</strong> matches columns by name.)</p>
+  </div>
+
+  <div class="term" data-term="np.polyfit fit line slope intercept rate least squares">
+    <div class="term-header">
+      <span class="term-word">np.polyfit()</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">Fits the best polynomial to x and y by <strong>least squares</strong>. <strong>np.polyfit(x, y, 1)</strong> fits a straight line and returns <strong>[slope, intercept]</strong>; the slope is the rate of change. It will fit a line to anything, so always look at the residuals.</p>
+  </div>
+
+  <div class="term" data-term="np.polyval fitted values evaluate line">
+    <div class="term-header">
+      <span class="term-word">np.polyval()</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">Plugs x values into a fitted line or curve: <strong>np.polyval(coeffs, x)</strong> gives the fitted y values, for drawing the fit or computing residuals.</p>
+  </div>
+
+  <div class="term" data-term="degree polynomial line parabola">
+    <div class="term-header">
+      <span class="term-word">degree (of a polynomial)</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">The highest power of x: degree 1 is a straight line (y = mx + b), degree 2 a parabola (y = ax² + bx + c).</p>
+  </div>
+
+  <div class="term" data-term="exponential decay np.exp shape">
+    <div class="term-header">
+      <span class="term-word">exponential decay</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">A curve that drops fast at first and then levels off: <strong>np.exp(-x / length)</strong>. A smaller <strong>length</strong> makes it decay faster.</p>
+  </div>
+
 <!-- ── CATEGORY: pandas ── -->
   <div class="category">
     <span class="category-label">pandas</span>
@@ -1779,6 +1883,70 @@
   </div>
 
 
+  <div class="term" data-term="read_csv messy options sep header names encoding decimal skiprows nrows">
+    <div class="term-header">
+      <span class="term-word">reading a messy file</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">The <strong>read → check → fix → repeat</strong> habit: look at the raw file, read it, check <strong>.head()</strong> and <strong>.dtypes</strong>, fix one thing (<strong>sep=</strong>, <strong>encoding=</strong>, <strong>decimal=</strong>, <strong>header=None</strong>, <strong>skiprows=</strong>, <strong>nrows=</strong>, <strong>na_values=</strong>), and read again. A file that loads with the wrong types is more dangerous than one that throws an error.</p>
+  </div>
+
+  <div class="term" data-term="pd.concat concatenate stack combine tables">
+    <div class="term-header">
+      <span class="term-word">pd.concat() / concatenate</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Stacks a <strong>list</strong> of DataFrames into one, matching columns by name. <strong>ignore_index=True</strong> renumbers the rows 0, 1, 2, ... .</p>
+  </div>
+
+  <div class="term" data-term="drop_duplicates duplicated repeated rows">
+    <div class="term-header">
+      <span class="term-word">.drop_duplicates()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Removes rows that are exact copies of an earlier row. <strong>df["COL"].duplicated().sum()</strong> counts repeats in one column.</p>
+  </div>
+
+  <div class="term" data-term="sort_values sort order rows">
+    <div class="term-header">
+      <span class="term-word">.sort_values()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Puts the rows in order of a column: <strong>df.sort_values("Year")</strong>. <strong>ascending=False</strong> for largest first.</p>
+  </div>
+
+  <div class="term" data-term="cumsum cumulative running total">
+    <div class="term-header">
+      <span class="term-word">.cumsum() (running total)</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Replaces each value with the sum of everything up to and including it. <strong>by_group["COL"].cumsum()</strong> restarts the total for each group.</p>
+  </div>
+
+  <div class="term" data-term="dataframe from dictionary dict of lists build">
+    <div class="term-header">
+      <span class="term-word">DataFrame from a dictionary</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def"><strong>pd.DataFrame({"col1": [...], "col2": [...]})</strong> builds a table yourself: each key becomes a column name, and each list (all the same length) becomes that column. Handy for a small results table.</p>
+  </div>
+
+  <div class="term" data-term="unique sample notna">
+    <div class="term-header">
+      <span class="term-word">.unique() / .sample() / .notna()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def"><strong>.unique()</strong> lists each different value once; <strong>.sample(5)</strong> shows 5 random rows; <strong>.notna()</strong> is <strong>True</strong> where a value is not missing.</p>
+  </div>
+
+  <div class="term" data-term="corr correlation">
+    <div class="term-header">
+      <span class="term-word">.corr()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def"><strong>df["A"].corr(df["B"])</strong> gives the correlation coefficient of two columns (see <em>correlation</em>).</p>
+  </div>
+
 <!-- ── CATEGORY: matplotlib ── -->
   <div class="category">
     <span class="category-label">matplotlib</span>
@@ -1921,6 +2089,38 @@
     <p class="term-def">A figure is <em>good</em> when someone else can read it without you: labels with units, a title, a legend, one unit per axis, colors anyone can tell apart, readable text, and fair comparisons (shared axes, bars starting at zero).</p>
   </div>
 
+  <div class="term" data-term="schematic figure diagram idea no data">
+    <div class="term-header">
+      <span class="term-word">schematic figure</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">A figure of an <strong>idea</strong> rather than data, so the shape is what matters. Styled differently from a data figure: no tick numbers or units, only two spines, and labels that point at features instead of a legend. Build it from a paper sketch, one piece (line, step, decay) at a time.</p>
+  </div>
+
+  <div class="term" data-term="spines box lines around plot">
+    <div class="term-header">
+      <span class="term-word">spines</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">The four lines around a plot (top, right, bottom, left). Hide one with <strong>ax.spines["top"].set_visible(False)</strong>.</p>
+  </div>
+
+  <div class="term" data-term="ha va alignment horizontal vertical text">
+    <div class="term-header">
+      <span class="term-word">ha / va (text alignment)</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">Which part of a piece of text sits on the (x, y) you give: <strong>ha=</strong> left, center, or right; <strong>va=</strong> bottom, center, or top. <strong>ha="right"</strong> makes the text end at x.</p>
+  </div>
+
+  <div class="term" data-term="transAxes axes coordinates offset points textcoords">
+    <div class="term-header">
+      <span class="term-word">axes coordinates / offset points</span>
+      <span class="term-tag">matplotlib</span>
+    </div>
+    <p class="term-def">Other ways to say where something goes. <strong>transform=ax.transAxes</strong>: (0, 0) is the bottom-left of the axes and (1, 1) the top-right, whatever the data. <strong>textcoords="offset points"</strong> in <strong>annotate</strong>: a fixed distance (in points) from the spot being labeled.</p>
+  </div>
+
 <!-- ── CATEGORY: Debugging ── -->
   <div class="category">
     <span class="category-label">Errors &amp; Debugging</span>
@@ -2007,6 +2207,38 @@
     <p class="term-def">Adding <strong>print()</strong> statements inside a loop to watch what each variable is on every pass. Shrink the problem first (2 items instead of 200) so the output is easy to read.</p>
   </div>
 
+  <div class="term" data-term="UnicodeDecodeError utf-8 codec decode byte">
+    <div class="term-header">
+      <span class="term-word">UnicodeDecodeError</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">Python tried to read a file as UTF-8 and found bytes that aren't valid UTF-8. Usually the file uses another encoding; try <strong>encoding="latin-1"</strong> and check that the letters look right.</p>
+  </div>
+
+  <div class="term" data-term="ParserError tokenizing data expected fields">
+    <div class="term-header">
+      <span class="term-word">ParserError</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def"><strong>Error tokenizing data. Expected 7 fields in line 3, saw 12</strong>: rows split into different numbers of columns, usually because pandas is splitting at the wrong separator.</p>
+  </div>
+
+  <div class="term" data-term="silent error no error wrong answer dtypes">
+    <div class="term-header">
+      <span class="term-word">silent error</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">Code that runs without complaint but gives a wrong answer, like text columns being glued together with <strong>+</strong> (<strong>"1,16-2,58"</strong>), or <strong>np.concatenate</strong> stacking columns in the wrong order. The fix is checking: <strong>.dtypes</strong>, plots, and comparing against something you trust.</p>
+  </div>
+
+  <div class="term" data-term="SettingWithCopyWarning copy filtered">
+    <div class="term-header">
+      <span class="term-word">SettingWithCopyWarning</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">A pandas warning when you add a column to a table that was made by filtering another table. Make an independent copy first: <strong>df = df[mask].copy()</strong>.</p>
+  </div>
+
 <!-- ── CATEGORY: Math & Notation ── -->
   <div class="category">
     <span class="category-label">Math &amp; Notation</span>
@@ -2046,7 +2278,63 @@
   </div>
 
 
-  <!-- ── CATEGORY: Earth Science ── -->
+    <div class="term" data-term="least squares fit best line">
+    <div class="term-header">
+      <span class="term-word">least squares</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">How <strong>np.polyfit</strong> picks the "best" line: the one that makes the sum of the squared vertical distances from the points to the line as small as possible.</p>
+  </div>
+
+  <div class="term" data-term="residual leftover data minus fit">
+    <div class="term-header">
+      <span class="term-word">residual</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">What's left over after a fit: <strong>data − fitted value</strong>. If the model is good, residuals bounce randomly around zero; a pattern (a U, a hump) means the model is missing something.</p>
+  </div>
+
+  <div class="term" data-term="rate slope units per year">
+    <div class="term-header">
+      <span class="term-word">rate (slope)</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">How fast something changes: the slope of a fitted line, in units of y per unit of x (e.g. mm/yr). Always say which years a rate is for, since it can depend on them.</p>
+  </div>
+
+  <div class="term" data-term="overfitting high degree polynomial">
+    <div class="term-header">
+      <span class="term-word">overfitting</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">Making a model so flexible (e.g. a high-degree polynomial) that it bends to follow the noise. Residuals shrink, but the model isn't learning anything real, and it behaves wildly outside the data.</p>
+  </div>
+
+  <div class="term" data-term="correlation coefficient r">
+    <div class="term-header">
+      <span class="term-word">correlation (r)</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">How closely two quantities rise and fall together along a straight line, from −1 (one goes up when the other goes down) through 0 (no straight-line relationship) to +1 (they go up together). With about 70 values, an |r| below about 0.25 could easily happen by chance. Correlation doesn't show cause.</p>
+  </div>
+
+  <div class="term" data-term="detrend remove trend residual wiggles">
+    <div class="term-header">
+      <span class="term-word">detrend</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">Subtract a fitted trend line from a record, leaving only the year-to-year wiggles (the residuals), so you can ask what causes them.</p>
+  </div>
+
+  <div class="term" data-term="censored data lower limit at least">
+    <div class="term-header">
+      <span class="term-word">censored data</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">A value you only know is above (or below) some limit, like an equilibrium line "above the top of the glacier." Treating it as an exact number distorts the analysis.</p>
+  </div>
+
+<!-- ── CATEGORY: Earth Science ── -->
   <div class="category">
     <span class="category-label">Earth Science</span>
     <div class="category-rule"></div>
@@ -2263,6 +2551,166 @@
       <span class="term-tag">earth science</span>
     </div>
     <p class="term-def">The smallest magnitude above which a seismic catalog records nearly every earthquake. Below it, events are missed because the instruments can't detect them all, so counts drop off for instrument reasons, not because those earthquakes are rare.</p>
+  </div>
+
+  <div class="term" data-term="discharge flow m3/s cubic meters per second">
+    <div class="term-header">
+      <span class="term-word">discharge</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">How much water flows past a point each second, usually in cubic meters per second (m³/s).</p>
+  </div>
+
+  <div class="term" data-term="tributary branch junction">
+    <div class="term-header">
+      <span class="term-word">tributary</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A stream that joins a larger one. Below the junction, the main river carries the tributary's water too, so discharge jumps.</p>
+  </div>
+
+  <div class="term" data-term="drainage area watershed basin">
+    <div class="term-header">
+      <span class="term-word">drainage area (watershed)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">All the land that drains to a point on a river. It grows downstream, and so does discharge.</p>
+  </div>
+
+  <div class="term" data-term="longitudinal profile concave-up channel bed elevation">
+    <div class="term-header">
+      <span class="term-word">longitudinal profile</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The elevation of a river's channel bed from headwaters to mouth. Most are <strong>concave-up</strong>: steep near the headwaters and gentle near the mouth.</p>
+  </div>
+
+  <div class="term" data-term="meteoric flood rainfall flood">
+    <div class="term-header">
+      <span class="term-word">meteoric (rainfall) flood</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A flood from rain falling over a whole watershed. Peak discharge grows downstream as more of the watershed drains in, with jumps at tributaries.</p>
+  </div>
+
+  <div class="term" data-term="outburst flood dam break breach glacial lake">
+    <div class="term-header">
+      <span class="term-word">outburst flood</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A flood released all at once when a natural or human-made dam fails. Peak discharge is largest at the breach and shrinks downstream as the flood wave spreads out.</p>
+  </div>
+
+  <div class="term" data-term="hydrograph rising limb falling limb peak">
+    <div class="term-header">
+      <span class="term-word">hydrograph</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A stream's discharge plotted against time, during and after a storm. Discharge climbs on the <strong>rising limb</strong> to a peak, then drops on the <strong>falling limb</strong>. After a wildfire, the peak comes sooner, is higher, and falls faster.</p>
+  </div>
+
+  <div class="term" data-term="glacier mass balance winter summer annual Bw Bs Ba">
+    <div class="term-header">
+      <span class="term-word">glacier mass balance</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">How much mass a glacier gains or loses. The <strong>winter balance</strong> (snow added, positive) plus the <strong>summer balance</strong> (snow and ice melted, negative) gives the <strong>annual balance</strong>; a positive annual balance means the glacier gained mass.</p>
+  </div>
+
+  <div class="term" data-term="meters water equivalent m w.e.">
+    <div class="term-header">
+      <span class="term-word">meters water equivalent (m w.e.)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The unit of glacier mass balance: if the snow or ice gained (or lost) were melted and spread evenly over the whole glacier, how deep the water would be.</p>
+  </div>
+
+  <div class="term" data-term="cumulative mass balance running total glacier">
+    <div class="term-header">
+      <span class="term-word">cumulative mass balance</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The running total of a glacier's annual balances: how much mass it has gained or lost since measurements began. It shows long-term change that single years hide.</p>
+  </div>
+
+  <div class="term" data-term="equilibrium line altitude ELA">
+    <div class="term-header">
+      <span class="term-word">equilibrium line (ELA)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The elevation on a glacier where the year's net balance is zero: above it the glacier gains mass, below it, it loses more than it gains. A higher equilibrium line means a more negative year.</p>
+  </div>
+
+  <div class="term" data-term="maritime continental glacier climate turnover">
+    <div class="term-header">
+      <span class="term-word">maritime vs. continental glacier</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">Maritime glaciers, near the coast, get lots of snow and melt a lot each year (high turnover). Continental glaciers, inland in a drier climate, get little snow, so even moderate melting leaves them losing mass.</p>
+  </div>
+
+  <div class="term" data-term="keeling curve co2 ppm mauna loa">
+    <div class="term-header">
+      <span class="term-word">Keeling curve</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The record of atmospheric CO₂ at Mauna Loa, Hawaiʻi, measured since 1958, in parts per million (ppm). Its rise is speeding up: about 1 ppm/yr in the 1960s and about 2.3 ppm/yr recently.</p>
+  </div>
+
+  <div class="term" data-term="tide gauge sea level instrument">
+    <div class="term-header">
+      <span class="term-word">tide gauge</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">An instrument fixed to the coast that measures sea-surface height many times a day; averaging a year removes the tides and leaves annual mean sea level. The PSMSL collects records from around the world.</p>
+  </div>
+
+  <div class="term" data-term="relative sea level land motion">
+    <div class="term-header">
+      <span class="term-word">relative sea level</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">Sea level measured relative to the land a tide gauge sits on. It changes if the sea rises <strong>or</strong> the land moves, so land motion is part of every tide-gauge rate.</p>
+  </div>
+
+  <div class="term" data-term="anomaly departure from normal reference">
+    <div class="term-header">
+      <span class="term-word">anomaly</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A value minus a reference value (often an average over a fixed period) for the same place, e.g. "16 cm above Honolulu's 1960–1990 average." Anomalies let you compare records whose raw numbers have different zero points.</p>
+  </div>
+
+  <div class="term" data-term="glacial isostatic adjustment rebound uplift">
+    <div class="term-header">
+      <span class="term-word">glacial isostatic adjustment (rebound)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The slow rise of land that was pushed down by an ice sheet, continuing for thousands of years after the ice melts. It makes relative sea level fall at places like Stockholm and the Gulf of Bothnia.</p>
+  </div>
+
+  <div class="term" data-term="subsidence sinking land groundwater compaction">
+    <div class="term-header">
+      <span class="term-word">subsidence</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">Sinking of the land surface, e.g. from groundwater, oil, or gas extraction or compaction of soft sediment. It makes relative sea level rise faster than the ocean itself, as at Galveston and Manila.</p>
+  </div>
+
+  <div class="term" data-term="enso el nino la nina oni southern oscillation">
+    <div class="term-header">
+      <span class="term-word">ENSO (El Niño–Southern Oscillation)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A natural see-saw in the tropical Pacific. In <strong>El Niño</strong>, the trade winds weaken and warm water moves east; in <strong>La Niña</strong>, they strengthen and pile warm water in the west. The <strong>Oceanic Niño Index (ONI)</strong> tracks it: above +0.5 °C is El Niño, below −0.5 °C is La Niña.</p>
+  </div>
+
+  <div class="term" data-term="nao north atlantic oscillation">
+    <div class="term-header">
+      <span class="term-word">NAO (North Atlantic Oscillation)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A see-saw in air pressure between Iceland and the Azores. When it's positive, strong westerly winds carry storms into northern Europe, especially in winter, and push water into the Baltic Sea.</p>
   </div>
 
 </main>
