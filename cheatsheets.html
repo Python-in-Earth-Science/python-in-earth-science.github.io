@@ -373,6 +373,7 @@
   <div class="tabs" id="tabs">
     <button class="tab-btn" onclick="switchTab('control-flow', this)">Control Flow</button>
     <button class="tab-btn" onclick="switchTab('functions', this)">Functions</button>
+    <button class="tab-btn" onclick="switchTab('geopandas', this)">GeoPandas</button>
     <button class="tab-btn" onclick="switchTab('git', this)">Git</button>
     <button class="tab-btn" onclick="switchTab('collections', this)">Lists &amp; Dicts</button>
     <button class="tab-btn" onclick="switchTab('loops', this)">Loops</button>
@@ -384,6 +385,7 @@
     <button class="tab-btn" onclick="switchTab('pandas', this)">pandas</button>
     <button class="tab-btn" onclick="switchTab('pathlib', this)">pathlib</button>
     <button class="tab-btn active" onclick="switchTab('basics', this)">Python Basics</button>
+    <button class="tab-btn" onclick="switchTab('scipy', this)">SciPy</button>
     <button class="tab-btn" onclick="switchTab('terminal', this)">Terminal</button>
   </div>
 </div>
@@ -691,6 +693,403 @@
 
 
   </div><!-- /sheet-functions -->
+
+    <!-- ══════════════════════════════════════
+       SHEET: GEOPANDAS
+  ══════════════════════════════════════ -->
+  <div class="sheet" id="sheet-geopandas">
+    <div class="sheet-intro">
+      <div class="sheet-title">GeoPandas</div>
+      <p class="sheet-desc">Import with <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">import geopandas as gpd</code> (and <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">import contextily as cx</code> for basemaps). A <b>GeoDataFrame</b> is a DataFrame with a <b>geometry</b> column of shapes: points, lines, or polygons. Everything from pandas still works. Examples use <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">gauges</code> (three Nashville stream gauges, EPSG:4326), <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">floodplain</code> (FEMA flood zones, Davidson County), and <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">quakes</code> (Puget Sound earthquakes, M2+, 2000–2025).</p>
+    </div>
+
+    <!-- Reading &amp; Making -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Reading &amp; Making</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="read_file shapefile geojson zip load">
+            <td class="fn">gpd.read_file(path)</td>
+            <td class="desc">Read a map file: GeoJSON, a <code>.shp</code>, or a zipped shapefile. The CRS comes along</td>
+            <td class="ex">gauges = gpd.read_file(maps + &quot;gauges.geojson&quot;)
+gauges[[&quot;short_name&quot;, &quot;geometry&quot;]]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">   short_name                    geometry
+0  Cumberland   POINT (-86.77268 36.1615)
+1     Harpeth    POINT (-87.09889 36.122)
+2  Mill Creek  POINT (-86.71905 36.11757)</td>
+          </tr>
+          <tr data-search="geodataframe from table points_from_xy longitude latitude csv">
+            <td class="fn">gpd.points_from_xy(df[&quot;lon&quot;], df[&quot;lat&quot;])</td>
+            <td class="desc">Turn longitude/latitude columns into points. <strong>Longitude first.</strong> A CSV has no CRS, so you give it one</td>
+            <td class="ex">df = pd.DataFrame({&quot;lon&quot;: [-122.73], &quot;lat&quot;: [47.15]})
+points = gpd.points_from_xy(df[&quot;lon&quot;], df[&quot;lat&quot;])
+gpd.GeoDataFrame(df, geometry=points, crs=&quot;EPSG:4326&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">      lon    lat               geometry
+0 -122.73  47.15  POINT (-122.73 47.15)</td>
+          </tr>
+          <tr data-search="shapefile parts shp shx dbf prj cpg folder">
+            <td class="fn">a shapefile is a folder of files</td>
+            <td class="desc"><code>.shp</code> shapes, <code>.shx</code> index, <code>.dbf</code> attribute table, <code>.prj</code> CRS. Keep them together; read the <code>.shp</code></td>
+            <td class="ex">gpd.read_file(maps + &quot;wa_faults/wa_faults.shp&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a GeoDataFrame of fault lines)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Looking Inside -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Looking Inside</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="crs coordinate reference system epsg">
+            <td class="fn">gdf.crs</td>
+            <td class="desc">What the coordinates mean. No parentheses: it's an attribute</td>
+            <td class="ex">gauges.crs.to_string()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">&#x27;EPSG:4326&#x27;</td>
+          </tr>
+          <tr data-search="geom_type point line polygon">
+            <td class="fn">gdf.geom_type</td>
+            <td class="desc">What kind of shape each row is</td>
+            <td class="ex">gauges.geom_type.unique().tolist()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[&#x27;Point&#x27;]</td>
+          </tr>
+          <tr data-search="geometry x y coordinates point">
+            <td class="fn">gdf.geometry.x, gdf.geometry.y</td>
+            <td class="desc">Each point's x (longitude) and y (latitude)</td>
+            <td class="ex">gauges.geometry.x.round(3).tolist()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[-86.773, -87.099, -86.719]</td>
+          </tr>
+          <tr data-search="total_bounds bounding box extent">
+            <td class="fn">gdf.total_bounds</td>
+            <td class="desc">The box around everything: [west, south, east, north]</td>
+            <td class="ex">quakes.total_bounds.round(2)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([-123.3,   46.8, -121.7,   48.3])</td>
+          </tr>
+          <tr data-search="one shape iloc geometry draw">
+            <td class="fn">gdf.geometry.iloc[0]</td>
+            <td class="desc">Pull out one shape. As the last line of a cell, Jupyter draws it</td>
+            <td class="ex">print(gauges.geometry.iloc[0])</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">POINT (-86.7726764 36.1614984)</td>
+          </tr>
+          <tr data-search="polygon corners exterior coords">
+            <td class="fn">list(polygon.exterior.coords)</td>
+            <td class="desc">A polygon is a list of (x, y) corners that closes on itself</td>
+            <td class="ex">from shapely.geometry import box
+square = box(0, 0, 1, 1)
+list(square.exterior.coords)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[(1.0, 0.0), (1.0, 1.0), (0.0, 1.0), (0.0, 0.0), (1.0, 0.0)]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Coordinate Reference Systems -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Coordinate Reference Systems</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function / Code</th><th>Description</th><th>Example</th><th>Units</th></tr></thead>
+        <tbody>
+          <tr data-search="to_crs convert reproject epsg utm">
+            <td class="fn">gdf.to_crs(epsg=code)</td>
+            <td class="desc">Convert to another CRS. Do this before measuring, joining, or adding a basemap</td>
+            <td class="ex">gauges_utm = gauges.to_crs(epsg=32616)
+gauges_utm.geometry.x.round(0).tolist()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[520446.0, 491101.0, 525284.0]</td>
+          </tr>
+          <tr data-search="epsg 4326 wgs84 degrees gps">
+            <td class="fn">EPSG:4326</td>
+            <td class="desc">WGS 84: latitude/longitude in degrees (GPS). Most web data</td>
+            <td class="ex"></td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">degrees</td>
+          </tr>
+          <tr data-search="epsg 4269 nad83 census">
+            <td class="fn">EPSG:4269</td>
+            <td class="desc">NAD83: degrees, used by Census and FEMA files</td>
+            <td class="ex"></td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">degrees</td>
+          </tr>
+          <tr data-search="epsg 32616 utm 16n tennessee meters">
+            <td class="fn">EPSG:32616</td>
+            <td class="desc">UTM zone 16N: Tennessee, in meters. Measure here</td>
+            <td class="ex"></td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">meters</td>
+          </tr>
+          <tr data-search="epsg 32610 utm 10n washington meters">
+            <td class="fn">EPSG:32610</td>
+            <td class="desc">UTM zone 10N: western Washington, in meters</td>
+            <td class="ex"></td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">meters</td>
+          </tr>
+          <tr data-search="epsg 3857 web mercator basemap">
+            <td class="fn">EPSG:3857</td>
+            <td class="desc">Web Mercator: what basemap tiles use. Fine for drawing, distorted for measuring</td>
+            <td class="ex"></td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">meters (distorted)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Static Maps -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Static Maps</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="plot column legend color by">
+            <td class="fn">gdf.plot(column=&quot;col&quot;, legend=True)</td>
+            <td class="desc">Color each shape by a column (numbers get a color bar, text gets a legend)</td>
+            <td class="ex">fig, ax = plt.subplots()
+floodplain.plot(ax=ax, column=&quot;zone&quot;, legend=True)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a map colored by zone)</td>
+          </tr>
+          <tr data-search="layers ax=ax plot on top order">
+            <td class="fn">layer.plot(ax=ax)</td>
+            <td class="desc">Draw several layers on one map. The last one drawn is on top</td>
+            <td class="ex">floodplain.plot(ax=ax, color=&quot;lightblue&quot;)
+gauges.to_crs(floodplain.crs).plot(ax=ax, color=&quot;red&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(gauges on top of the flood zones)</td>
+          </tr>
+          <tr data-search="boundary outline only edge polygon">
+            <td class="fn">gdf.boundary.plot(ax=ax)</td>
+            <td class="desc">Only the outline of a polygon, so the layers underneath still show</td>
+            <td class="ex">county.boundary.plot(ax=ax, color=&quot;black&quot;, linestyle=&quot;--&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a dashed outline)</td>
+          </tr>
+          <tr data-search="markersize size by column magnitude">
+            <td class="fn">gdf.plot(markersize=gdf[&quot;mag&quot;] ** 3)</td>
+            <td class="desc">A different size for every point</td>
+            <td class="ex">quakes.plot(column=&quot;depth&quot;, markersize=quakes[&quot;mag&quot;] ** 3)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(bigger dots for bigger earthquakes)</td>
+          </tr>
+          <tr data-search="basemap contextily add_basemap esri 3857">
+            <td class="fn">cx.add_basemap(ax, source=cx.providers.Esri.WorldGrayCanvas)</td>
+            <td class="desc">A background map. Convert layers to EPSG:3857 first. Esri tiles need no API key</td>
+            <td class="ex">gauges.to_crs(epsg=3857).plot(ax=ax)
+cx.add_basemap(ax, source=cx.providers.Esri.WorldGrayCanvas)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(streets and labels underneath)</td>
+          </tr>
+          <tr data-search="basemap tiles options imagery topo shaded relief">
+            <td class="fn">cx.providers.Esri.___</td>
+            <td class="desc">Other key-free basemaps: <code>WorldTopoMap</code>, <code>WorldImagery</code> (satellite), <code>WorldShadedRelief</code></td>
+            <td class="ex">cx.providers.Esri.WorldImagery</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(satellite photos)</td>
+          </tr>
+          <tr data-search="set_axis_off no axes map clean">
+            <td class="fn">ax.set_axis_off()</td>
+            <td class="desc">Hide the axes, ticks, and frame for a cleaner map</td>
+            <td class="ex">ax.set_axis_off()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(no frame)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Interactive Maps -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Interactive Maps</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="explore interactive map folium zoom click tooltip">
+            <td class="fn">gdf.explore(column=&quot;col&quot;, tooltip=[...])</td>
+            <td class="desc">An interactive map: zoom, drag, hover, and click a feature to see its row. Needs <code>folium</code> (<code>%pip install folium mapclassify</code>)</td>
+            <td class="ex">quakes.explore(column=&quot;depth&quot;, tooltip=[&quot;time&quot;, &quot;mag&quot;, &quot;depth&quot;])</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a zoomable web map)</td>
+          </tr>
+          <tr data-search="explore tiles basemap height width size">
+            <td class="fn">gdf.explore(tiles=..., height=500)</td>
+            <td class="desc">Pick the basemap and the size in pixels. Set only <code>height</code> if the legend gets stuck in a corner</td>
+            <td class="ex">gauges.explore(tiles=cx.providers.Esri.WorldTopoMap, height=500)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a 500-pixel-tall map)</td>
+          </tr>
+          <tr data-search="explore layers m= add second layer">
+            <td class="fn">layer.explore(m=m)</td>
+            <td class="desc">Add another layer to the same map, like <code>ax=ax</code>. Show the map by ending with <code>m</code></td>
+            <td class="ex">m = floodplain.explore(column=&quot;zone&quot;)
+gauges.explore(m=m, color=&quot;red&quot;)
+m</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(both layers on one map)</td>
+          </tr>
+          <tr data-search="explore marker_type marker icon pin folium.Icon">
+            <td class="fn">gdf.explore(marker_type=&quot;marker&quot;, ...)</td>
+            <td class="desc">Pins with icons: <code>marker_kwds={"icon": folium.Icon(icon="star", color="red")}</code>. The default <code>"circle_marker"</code> takes <code>marker_kwds={"radius": 8}</code></td>
+            <td class="ex">gauges.explore(m=m, marker_type=&quot;marker&quot;,
+    marker_kwds={&quot;icon&quot;: folium.Icon(icon=&quot;star&quot;, color=&quot;red&quot;)})</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(red star pins)</td>
+          </tr>
+          <tr data-search="layercontrol layer on off checkbox name">
+            <td class="fn">folium.LayerControl().add_to(m)</td>
+            <td class="desc">Checkboxes to turn layers on and off. Give each layer a <code>name=</code></td>
+            <td class="ex">folium.LayerControl().add_to(m)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(a layer switch in the corner)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Measuring -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Measuring</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="area square meters km2 polygon projected">
+            <td class="fn">gdf.area</td>
+            <td class="desc">Each polygon's area, in the CRS's units squared. Use a projected CRS (meters)</td>
+            <td class="ex">fp_utm = floodplain.to_crs(epsg=32616)
+(fp_utm.area / 1e6).round(1).tolist()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[174.7, 23.2]</td>
+          </tr>
+          <tr data-search="buffer circle distance radius around">
+            <td class="fn">gdf.buffer(distance)</td>
+            <td class="desc">Every place within a distance of each shape. Meters, if the CRS is projected</td>
+            <td class="ex">circle = gauges_utm.iloc[[0]].buffer(5000)
+round(circle.area.iloc[0] / 1e6, 1)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">78.4</td>
+          </tr>
+          <tr data-search="within inside mask true false count">
+            <td class="fn">gdf.within(shape)</td>
+            <td class="desc">A boolean mask: True for each shape inside <code>shape</code></td>
+            <td class="ex">gauges_utm.within(circle.iloc[0]).tolist()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[True, False, False]</td>
+          </tr>
+          <tr data-search="distance meters between shapes">
+            <td class="fn">gdf.distance(shape)</td>
+            <td class="desc">Distance from each shape to another, in the CRS's units</td>
+            <td class="ex">(gauges_utm.distance(gauges_utm.geometry.iloc[0]) / 1000).round(1).tolist()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[0.0, 29.7, 6.9]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Combining Layers -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Combining Layers</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="clip cut trim area bounds mask shapes">
+            <td class="fn">gpd.clip(gdf, mask)</td>
+            <td class="desc">Cut a layer down to an area (a box like <code>other.total_bounds</code>, or a polygon). A mask for shapes</td>
+            <td class="ex">geology = gpd.read_file(maps + &quot;wa_geology.zip&quot;)
+print(len(geology), &quot;-&gt;&quot;, len(gpd.clip(geology, quakes.total_bounds)))</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">4945 -&gt; 767</td>
+          </tr>
+          <tr data-search="sjoin spatial join within which polygon predicate how left">
+            <td class="fn">gpd.sjoin(points, polygons, predicate=&quot;within&quot;, how=&quot;left&quot;)</td>
+            <td class="desc">A merge where the key is <strong>location</strong>: each point gets the columns of the polygon it's in. Same CRS first!</td>
+            <td class="ex">fp = floodplain.to_crs(gauges.crs)
+joined = gpd.sjoin(gauges, fp, predicate=&quot;within&quot;, how=&quot;left&quot;)
+joined[[&quot;short_name&quot;, &quot;zone&quot;]]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">   short_name      zone
+0  Cumberland  100-year
+1     Harpeth       NaN
+2  Mill Creek  100-year</td>
+          </tr>
+          <tr data-search="sjoin groupby count per polygon">
+            <td class="fn">joined.groupby(&quot;col&quot;).size()</td>
+            <td class="desc">Count how many points landed in each polygon type</td>
+            <td class="ex">joined.groupby(&quot;zone&quot;).size()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">zone
+100-year    2</td>
+          </tr>
+          <tr data-search="overlay difference intersection union set math shapes">
+            <td class="fn">gpd.overlay(a, b, how=&quot;difference&quot;)</td>
+            <td class="desc">Cut two polygon layers where they cross. <code>"difference"</code> = a minus b, <code>"intersection"</code> = only the overlap, <code>"union"</code> = everything</td>
+            <td class="ex">land = gpd.overlay(fp_utm, water_utm, how=&quot;difference&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(the flood zones with the lakes cut out)</td>
+          </tr>
+          <tr data-search="merge table onto geodataframe attributes key">
+            <td class="fn">gdf.merge(table, on=&quot;id&quot;)</td>
+            <td class="desc">Attach an ordinary table's columns by a shared key (a plain <code>merge</code>, no location involved)</td>
+            <td class="ex">gauges.merge(site_info, on=&quot;id&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(gauges with the extra columns)</td>
+          </tr>
+          <tr data-search="savefig dpi bbox_inches export map">
+            <td class="fn">fig.savefig(&quot;map.png&quot;, dpi=300, bbox_inches=&quot;tight&quot;)</td>
+            <td class="desc">Save the map for a paper or poster</td>
+            <td class="ex">fig.savefig(&quot;map.png&quot;, dpi=300, bbox_inches=&quot;tight&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(map.png)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Common GeoPandas Errors -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Common GeoPandas Errors</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Error</th><th>Common cause</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr data-search="crs mismatch warning different crs">
+            <td class="fn">UserWarning: CRS mismatch between the CRS of left geometries and the CRS of right geometries</td>
+            <td class="desc">The two layers use different CRSs, so the result is wrong</td>
+            <td class="ex"><code>b = b.to_crs(a.crs)</code> before joining</td>
+          </tr>
+          <tr data-search="lat lon swapped antarctica wrong place points_from_xy">
+            <td class="fn">(no error) points appear in the wrong place</td>
+            <td class="desc">Latitude and longitude swapped in <code>points_from_xy</code></td>
+            <td class="ex"><code>points_from_xy(lon, lat)</code>: x first</td>
+          </tr>
+          <tr data-search="area degrees tiny number warning geographic crs">
+            <td class="fn">UserWarning: Geometry is in a geographic CRS. Results from &#x27;area&#x27; are likely incorrect</td>
+            <td class="desc">Measuring in degrees</td>
+            <td class="ex"><code>.to_crs(epsg=32616)</code> (or your UTM zone) first</td>
+          </tr>
+          <tr data-search="DataSourceError no such file read_file path">
+            <td class="fn">DataSourceError: ...: No such file or directory</td>
+            <td class="desc">The path is wrong for where the <strong>notebook</strong> is</td>
+            <td class="ex">Check with <code>!pwd</code> and <code>!ls</code>, then fix the path</td>
+          </tr>
+          <tr data-search="set object has no attribute get marker_kwds dictionary typo">
+            <td class="fn">AttributeError: &#x27;set&#x27; object has no attribute &#x27;get&#x27;</td>
+            <td class="desc">A set instead of a dictionary: <code>{"radius: 8"}</code></td>
+            <td class="ex"><code>{"radius": 8}</code>: the colon goes outside the quotes</td>
+          </tr>
+          <tr data-search="cartodb api key basemap tiles warning">
+            <td class="fn">API key required (CartoDB tiles)</td>
+            <td class="desc">CartoDB basemaps now need a key</td>
+            <td class="ex">Use <code>cx.providers.Esri.WorldGrayCanvas</code> instead</td>
+          </tr>
+          <tr data-search="explore folium import error mapclassify">
+            <td class="fn">ImportError: The &#x27;folium&#x27;, &#x27;matplotlib&#x27; and &#x27;mapclassify&#x27; packages are required for &#x27;explore()&#x27;</td>
+            <td class="desc"><code>.explore()</code> needs extra packages</td>
+            <td class="ex"><code>%pip install folium mapclassify</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /sheet-geopandas -->
 
   <!-- ══════════════════════════════════════
        SHEET: GIT
@@ -3575,6 +3974,20 @@ q[late] = (10 - t)[late]
 q</td>
             <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([0., 1., 2., 7., 6.])</td>
           </tr>
+                  <tr data-search="np.gradient rate of change derivative slope centered spacing">
+            <td class="fn">np.gradient(y, x)</td>
+            <td class="desc">Rate of change at <strong>every</strong> point (centered differences), in y units per x unit. Same length as <code>y</code>, unlike <code>np.diff</code></td>
+            <td class="ex">x = np.array([0, 100, 200, 300])     # distance (m)
+z = np.array([50, 48, 45, 44])        # elevation (m)
+np.gradient(z, x)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([-0.02 , -0.025, -0.02 , -0.01 ])</td>
+          </tr>
+          <tr data-search="np.diff difference neighbors one fewer">
+            <td class="fn">np.diff(y)</td>
+            <td class="desc">Differences between neighbors: one fewer value than you started with</td>
+            <td class="ex">np.diff(np.array([50, 48, 45, 44]))</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([-2, -3, -1])</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -4552,6 +4965,98 @@ round(df[&quot;A&quot;].corr(df[&quot;B&quot;]), 2)</td>
       </table>
     </div>
 
+        <!-- Joining, Windows &amp; Bins -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Joining, Windows &amp; Bins</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="merge join combine two tables key on inner">
+            <td class="fn">pd.merge(a, b, on=&quot;date&quot;)</td>
+            <td class="desc">Put two tables side by side, matching rows on a shared <strong>key</strong> column. The default keeps only keys found in <strong>both</strong></td>
+            <td class="ex">pd.merge(a, b, on=&quot;date&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">    date  q_x  q_y
+0  03-28   80   20
+1  03-29   60    9</td>
+          </tr>
+          <tr data-search="suffixes merge same column name _x _y">
+            <td class="fn">pd.merge(..., suffixes=(&quot;_a&quot;, &quot;_b&quot;))</td>
+            <td class="desc">Name the columns both tables share (otherwise you get <code>_x</code> and <code>_y</code>)</td>
+            <td class="ex">pd.merge(a, b, on=&quot;date&quot;, suffixes=(&quot;_a&quot;, &quot;_b&quot;))</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">    date  q_a  q_b
+0  03-28   80   20
+1  03-29   60    9</td>
+          </tr>
+          <tr data-search="how left right inner outer merge keep rows NaN">
+            <td class="fn">pd.merge(a, b, on=&quot;date&quot;, how=&quot;left&quot;)</td>
+            <td class="desc">Which rows to keep: <code>"inner"</code> (both), <code>"left"</code> (every row of <code>a</code>), <code>"right"</code>, or <code>"outer"</code> (everything). Rows with no partner get <code>NaN</code></td>
+            <td class="ex">pd.merge(a, b, on=&quot;date&quot;, how=&quot;left&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">    date  q_x   q_y
+0  03-27   10   NaN
+1  03-28   80  20.0
+2  03-29   60   9.0</td>
+          </tr>
+          <tr data-search="indicator _merge both left_only right_only check">
+            <td class="fn">pd.merge(..., how=&quot;outer&quot;, indicator=True)</td>
+            <td class="desc">Add a <code>_merge</code> column saying where each row came from: a quick check for keys that didn't match</td>
+            <td class="ex">both = pd.merge(a, b, on=&quot;date&quot;, how=&quot;outer&quot;, indicator=True)
+both[[&quot;date&quot;, &quot;_merge&quot;]]</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">    date      _merge
+0  03-27   left_only
+1  03-28        both
+2  03-29        both
+3  03-30  right_only</td>
+          </tr>
+          <tr data-search="rolling moving window mean smooth center">
+            <td class="fn">s.rolling(n, center=True).mean()</td>
+            <td class="desc">A moving average over <code>n</code> values; <code>center=True</code> puts each result in the middle of its window. The ends get <code>NaN</code></td>
+            <td class="ex">s = pd.Series([2, 4, 9, 4, 2, 1])
+s.rolling(3, center=True).mean()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">0         NaN
+1    5.000000
+2    5.666667
+3    5.000000
+4    2.333333
+5         NaN</td>
+          </tr>
+          <tr data-search="pd.cut bins binning intervals categories">
+            <td class="fn">pd.cut(values, bins=[...])</td>
+            <td class="desc">Sort numbers into intervals. Each bin includes its right edge, like <code>(1000, 2000]</code></td>
+            <td class="ex">elev = pd.Series([350, 1240, 1810, 2400])
+pd.cut(elev, bins=[0, 1000, 2000, 3000])</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">0       (0, 1000]
+1    (1000, 2000]
+2    (1000, 2000]
+3    (2000, 3000]
+Categories (3, interval[int64, right]): [(0, 1000] &lt; (1000, 2000] &lt;
+                                         (2000, 3000]]</td>
+          </tr>
+          <tr data-search="pd.cut groupby bin then summarize labels">
+            <td class="fn">df.groupby(pd.cut(df[&quot;col&quot;], bins)).mean()</td>
+            <td class="desc">Bin, then summarize: one row per bin. <code>observed=True</code> skips empty bins</td>
+            <td class="ex">df = pd.DataFrame({&quot;elev&quot;: [350, 1240, 1810, 2400], &quot;melt&quot;: [4.1, 2.8, 1.6, 0.4]})
+bands = pd.cut(df[&quot;elev&quot;], bins=[0, 1500, 3000])
+df.groupby(bands, observed=True)[&quot;melt&quot;].mean()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">elev
+(0, 1500]       3.45
+(1500, 3000]    1.00</td>
+          </tr>
+          <tr data-search="diff difference previous row change NaN">
+            <td class="fn">s.diff()</td>
+            <td class="desc">Each value minus the one before it. The first is <code>NaN</code>, because nothing comes before it</td>
+            <td class="ex">s = pd.Series([10, 80, 60])
+s.diff()</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">0     NaN
+1    70.0
+2   -20.0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <!-- Writing & Plotting -->
     <div class="section">
       <div class="section-header">
@@ -5350,6 +5855,209 @@ pd.concat(pieces, ignore_index=True)</td>
     </div>
 
   </div><!-- /sheet-basics -->
+
+    <!-- ══════════════════════════════════════
+       SHEET: SCIPY
+  ══════════════════════════════════════ -->
+  <div class="sheet" id="sheet-scipy">
+    <div class="sheet-intro">
+      <div class="sheet-title">SciPy</div>
+      <p class="sheet-desc">Python's scientific toolbox, built on NumPy. Import the <b>submodule</b> you need (<code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">from scipy import stats</code>), call a function on your arrays, then read what it gives back. Examples use small made-up arrays so the outputs are easy to check: <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">x</code> and <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">y</code> for fitting, and <code style="font-family:monospace;background:var(--code-bg);padding:1px 5px;border-radius:3px;">q</code>, a pretend ten-day hydrograph with two storms.</p>
+    </div>
+
+    <!-- The Pattern -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">The Pattern</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="import scipy submodule pattern stats signal">
+            <td class="fn">from scipy import stats</td>
+            <td class="desc">Import just the <strong>submodule</strong> you need, then call its functions on NumPy arrays</td>
+            <td class="ex">from scipy import stats, signal, optimize, interpolate, integrate</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">(nothing printed)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Fitting -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Fitting</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="linregress slope intercept rvalue stderr uncertainty">
+            <td class="fn">stats.linregress(x, y)</td>
+            <td class="desc">Fit a straight line. The result holds <code>.slope</code>, <code>.intercept</code>, <code>.rvalue</code>, <code>.pvalue</code>, and <code>.stderr</code> (the slope's uncertainty)</td>
+            <td class="ex">fit = stats.linregress(x, y)
+print(f&quot;{fit.slope:.2f} ± {fit.stderr:.2f}&quot;)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">2.01 ± 0.03</td>
+          </tr>
+          <tr data-search="rvalue r squared correlation linregress">
+            <td class="fn">fit.rvalue ** 2</td>
+            <td class="desc">R²: the fraction of the variation the line explains</td>
+            <td class="ex">round(fit.rvalue ** 2, 4)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">0.9995</td>
+          </tr>
+          <tr data-search="curve_fit any function model p0 parameters covariance uncertainty">
+            <td class="fn">optimize.curve_fit(f, x, y, p0=[...])</td>
+            <td class="desc">Fit <strong>any</strong> function you write. Returns the best parameters and their covariance; <code>p0</code> is your starting guess</td>
+            <td class="ex">def recession(t, q0, k):
+    return q0 * np.exp(-k * t)
+
+t = np.arange(6)
+q_obs = np.array([42, 25, 15, 9, 5.6, 3.3])
+params, cov = optimize.curve_fit(recession, t, q_obs, p0=[40, 0.5])
+params.round(3)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([41.932,  0.512])</td>
+          </tr>
+          <tr data-search="curve_fit uncertainty sqrt diag covariance errors">
+            <td class="fn">np.sqrt(np.diag(cov))</td>
+            <td class="desc">One standard error per parameter, from the covariance matrix</td>
+            <td class="ex">np.sqrt(np.diag(cov)).round(3)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([0.12 , 0.003])</td>
+          </tr>
+          <tr data-search="unpack params star curve_fit model">
+            <td class="fn">f(x, *params)</td>
+            <td class="desc"><code>*</code> unpacks the fitted parameters back into your function to draw the curve</td>
+            <td class="ex">recession(np.array([6, 7]), *params).round(1)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([1.9, 1.2])</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Peaks &amp; Smoothing -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Peaks &amp; Smoothing</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="find_peaks peaks positions prominence signal events">
+            <td class="fn">signal.find_peaks(y, prominence=p)</td>
+            <td class="desc">Positions of the peaks. <code>prominence</code> skips small wiggles. Use the positions as an index to get the values</td>
+            <td class="ex">peaks, props = signal.find_peaks(q, prominence=10)
+print(peaks)
+print(q[peaks])</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">[2 6]
+[31 42]</td>
+          </tr>
+          <tr data-search="savgol_filter smooth noisy savitzky golay window odd">
+            <td class="fn">signal.savgol_filter(y, window, order)</td>
+            <td class="desc">Smooth noisy data with a small polynomial in a sliding window. <code>window</code> must be odd; data should be evenly spaced</td>
+            <td class="ex">noisy = np.array([1.0, 2.2, 2.8, 4.3, 4.9, 6.2, 6.8])
+signal.savgol_filter(noisy, 5, 2).round(2)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([1.02, 2.07, 3.08, 4.01, 5.16, 6.07, 6.82])</td>
+          </tr>
+          <tr data-search="savgol_filter deriv delta smoothed rate of change derivative">
+            <td class="fn">signal.savgol_filter(y, w, o, deriv=1, delta=dx)</td>
+            <td class="desc">A <strong>smoothed rate of change</strong>: <code>delta</code> is the spacing between points</td>
+            <td class="ex">signal.savgol_filter(noisy, 5, 2, deriv=1, delta=1.0).round(2)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([1.08, 1.03, 0.99, 1.01, 0.99, 0.83, 0.68])</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Interpolating -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Interpolating</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="CubicSpline interpolate smooth curve between points">
+            <td class="fn">interpolate.CubicSpline(x, y)</td>
+            <td class="desc">A smooth curve through your points. Call it like a function to estimate values in between</td>
+            <td class="ex">x = np.array([0, 1, 2, 3])
+y = np.array([0, 1, 8, 27])
+spline = interpolate.CubicSpline(x, y)
+round(float(spline(1.5)), 3)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">3.375</td>
+          </tr>
+          <tr data-search="np.interp straight line interpolation compare spline">
+            <td class="fn">np.interp(new_x, x, y)</td>
+            <td class="desc">The straight-line version, for comparison</td>
+            <td class="ex">float(np.interp(1.5, x, y))</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">4.5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Integrating -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Integrating</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Function</th><th>Description</th><th>Example</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr data-search="trapezoid integrate area under curve volume dx">
+            <td class="fn">integrate.trapezoid(y, dx=step)</td>
+            <td class="desc">Area under a curve. For daily discharge (ft³/s), <code>dx=86400</code> seconds per day gives a volume in ft³</td>
+            <td class="ex">daily_q = np.array([10, 30, 20])   # ft³/s
+integrate.trapezoid(daily_q, dx=86400)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">3888000.0</td>
+          </tr>
+          <tr data-search="trapezoid x spacing uneven">
+            <td class="fn">integrate.trapezoid(y, x)</td>
+            <td class="desc">Give the x values instead of <code>dx</code> when the spacing isn't constant</td>
+            <td class="ex">integrate.trapezoid(np.array([0, 2, 2]), np.array([0, 1, 3]))</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">5.0</td>
+          </tr>
+          <tr data-search="cumulative_trapezoid running total initial=0">
+            <td class="fn">integrate.cumulative_trapezoid(y, dx=step, initial=0)</td>
+            <td class="desc">The running total of the area. <code>initial=0</code> keeps it the same length as <code>y</code></td>
+            <td class="ex">integrate.cumulative_trapezoid(np.array([1, 3, 2]), dx=1, initial=0)</td>
+            <td class="out" style="white-space:pre;overflow-x:auto;font-size:11px;max-width:300px">array([0. , 2. , 4.5])</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Common SciPy Errors -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">Common SciPy Errors</span>
+        <div class="section-rule"></div>
+      </div>
+      <table class="cheat-table">
+        <thead><tr><th>Error</th><th>Common cause</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr data-search="ImportError cannot import name scipy submodule">
+            <td class="fn">AttributeError: module &#x27;scipy&#x27; has no attribute &#x27;signal&#x27;</td>
+            <td class="desc"><code>import scipy</code> alone doesn't always load the submodules</td>
+            <td class="ex"><code>from scipy import signal</code></td>
+          </tr>
+          <tr data-search="curve_fit OptimizeWarning covariance could not be estimated RuntimeError">
+            <td class="fn">RuntimeError: Optimal parameters not found</td>
+            <td class="desc"><code>curve_fit</code> started too far from a good answer</td>
+            <td class="ex">Give a better starting guess with <code>p0=[...]</code></td>
+          </tr>
+          <tr data-search="savgol window length must be odd">
+            <td class="fn">ValueError: window_length must be odd</td>
+            <td class="desc"><code>savgol_filter</code> needs an odd window</td>
+            <td class="ex">Use 5, 7, 51... not 6 or 50</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /sheet-scipy -->
 
   <!-- ══════════════════════════════════════
        SHEET: TERMINAL

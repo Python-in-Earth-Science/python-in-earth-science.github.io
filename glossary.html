@@ -606,7 +606,16 @@
     <p class="term-def">A program that translates an entire program into machine-readable instructions before it runs, all at once. Python is not compiled this way — it's interpreted — but languages like C++ use compilers.</p>
   </div>
 
-  <!-- ── CATEGORY: Notebooks & Files ── -->
+  
+  <div class="term" data-term="pip install package %pip notebook kernel">
+    <div class="term-header">
+      <span class="term-word">%pip install</span>
+      <span class="term-tag">environment</span>
+    </div>
+    <p class="term-def">Installs a package into the environment your notebook is using, from a notebook cell: <strong>%pip install geopandas rasterio</strong>. The <strong>%</strong> makes sure it goes to the same Python your notebook runs. If you'd already imported an older version, restart the kernel afterward.</p>
+  </div>
+
+<!-- ── CATEGORY: Notebooks & Files ── -->
   <div class="category">
     <span class="category-label">Notebooks &amp; Files</span>
     <div class="category-rule"></div>
@@ -1525,6 +1534,23 @@
   </div>
 
 
+
+  <div class="term" data-term="set curly braces no colon unordered unique">
+    <div class="term-header">
+      <span class="term-word">set</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">A collection of <strong>unique</strong> values with no order, written with curly braces and no colons: <strong>{"a", "b"}</strong>. Easy to make by accident when you meant a dictionary: <strong>{"radius: 8"}</strong> (the colon is inside the quotes) is a set holding one string, while <strong>{"radius": 8}</strong> is a dictionary.</p>
+  </div>
+
+  <div class="term" data-term="attribute method parentheses dot what goes after the dot tab completion">
+    <div class="term-header">
+      <span class="term-word">attribute vs. method (no parentheses vs. parentheses)</span>
+      <span class="term-tag">data structures</span>
+    </div>
+    <p class="term-def">After the dot, an <strong>attribute</strong> is information an object already knows about itself, with no parentheses (<strong>df.shape</strong>, <strong>gdf.crs</strong>, <strong>gdf.area</strong>). A <strong>method</strong> is an action, with parentheses and sometimes arguments (<strong>df.head()</strong>, <strong>gdf.to_crs(32610)</strong>). Press <strong>Tab</strong> after the dot to see the whole list, or add <strong>?</strong> to read about one.</p>
+  </div>
+
 <!-- ── CATEGORY: NumPy ── -->
   <div class="category">
     <span class="category-label">NumPy</span>
@@ -1740,6 +1766,15 @@
     <p class="term-def">A curve that drops fast at first and then levels off: <strong>np.exp(-x / length)</strong>. A smaller <strong>length</strong> makes it decay faster.</p>
   </div>
 
+
+  <div class="term" data-term="np.gradient rate of change derivative slope centered spacing">
+    <div class="term-header">
+      <span class="term-word">np.gradient()</span>
+      <span class="term-tag">numpy</span>
+    </div>
+    <p class="term-def">The rate of change at <strong>every</strong> point, using centered differences, so the result is the same length as the input. Give the spacing as the second argument: <strong>np.gradient(elevation, distance)</strong> is the slope in meters of elevation per meter of distance. Compare <strong>.diff()</strong>, which gives one fewer value.</p>
+  </div>
+
 <!-- ── CATEGORY: pandas ── -->
   <div class="category">
     <span class="category-label">pandas</span>
@@ -1947,6 +1982,71 @@
     <p class="term-def"><strong>df["A"].corr(df["B"])</strong> gives the correlation coefficient of two columns (see <em>correlation</em>).</p>
   </div>
 
+
+  <div class="term" data-term="merge join combine two tables key on">
+    <div class="term-header">
+      <span class="term-word">pd.merge()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Combines two tables by matching rows on a shared <strong>key</strong> column: <strong>pd.merge(cumberland, harpeth, on="date")</strong> lines up the two gauges day by day. Unlike <strong>pd.concat</strong>, which stacks tables, merge puts matching rows side by side.</p>
+  </div>
+
+  <div class="term" data-term="key join key shared column match merge on">
+    <div class="term-header">
+      <span class="term-word">key (join key)</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">The column two tables have in common, used to match their rows in a merge: a date, a station ID, a sample number. The values must match <strong>exactly</strong> (same type, same spelling) to pair up.</p>
+  </div>
+
+  <div class="term" data-term="how left right inner outer join type merge">
+    <div class="term-header">
+      <span class="term-word">how= (left, right, inner, outer)</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Which rows a merge keeps. <strong>"inner"</strong> (the default) keeps only keys found in both tables, <strong>"left"</strong> keeps every row of the first table, <strong>"right"</strong> every row of the second, and <strong>"outer"</strong> keeps everything. Rows without a partner get <strong>NaN</strong>.</p>
+  </div>
+
+  <div class="term" data-term="indicator _merge both left_only right_only merge check">
+    <div class="term-header">
+      <span class="term-word">indicator=True / _merge</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def"><strong>pd.merge(..., how="outer", indicator=True)</strong> adds a <strong>_merge</strong> column saying where each row came from: <strong>both</strong>, <strong>left_only</strong>, or <strong>right_only</strong>. A quick way to see which dates or stations didn't match.</p>
+  </div>
+
+  <div class="term" data-term="suffixes _x _y same column name merge">
+    <div class="term-header">
+      <span class="term-word">suffixes</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">When both tables have a column with the same name (other than the key), merge renames them <strong>value_x</strong> and <strong>value_y</strong>. <strong>suffixes=("_cumb", "_harp")</strong> gives them clearer names.</p>
+  </div>
+
+  <div class="term" data-term="rolling moving window average mean smooth center">
+    <div class="term-header">
+      <span class="term-word">.rolling()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">A <strong>moving window</strong>: <strong>s.rolling(7, center=True).mean()</strong> replaces each value with the average of the 7 values around it, smoothing out day-to-day noise. The window can slide along time, depth, or distance.</p>
+  </div>
+
+  <div class="term" data-term="pd.cut bins binning intervals categories groupby">
+    <div class="term-header">
+      <span class="term-word">pd.cut()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Sorts numbers into <strong>bins</strong> (intervals): <strong>pd.cut(df["elevation"], bins=[0, 500, 1000, 1500])</strong> labels each row with its elevation band. Then <strong>groupby</strong> on the bins to summarize each one: bin, then summarize.</p>
+  </div>
+
+  <div class="term" data-term="diff difference previous row change shift">
+    <div class="term-header">
+      <span class="term-word">.diff()</span>
+      <span class="term-tag">pandas</span>
+    </div>
+    <p class="term-def">Each value minus the one before it: the change from row to row. The first row has nothing before it, so it's <strong>NaN</strong>. Divide by the spacing to get a rate (see <em>np.gradient()</em>).</p>
+  </div>
+
 <!-- ── CATEGORY: matplotlib ── -->
   <div class="category">
     <span class="category-label">matplotlib</span>
@@ -2121,6 +2221,299 @@
     <p class="term-def">Other ways to say where something goes. <strong>transform=ax.transAxes</strong>: (0, 0) is the bottom-left of the axes and (1, 1) the top-right, whatever the data. <strong>textcoords="offset points"</strong> in <strong>annotate</strong>: a fixed distance (in points) from the spot being labeled.</p>
   </div>
 
+
+<!-- ── CATEGORY: SciPy ── -->
+  <div class="category">
+    <span class="category-label">SciPy</span>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="term" data-term="scipy scientific python library submodules">
+    <div class="term-header">
+      <span class="term-word">SciPy</span>
+      <span class="term-tag">scipy</span>
+    </div>
+    <p class="term-def">Python's library of scientific tools, built on NumPy and organized into <strong>submodules</strong>: <strong>stats</strong>, <strong>signal</strong>, <strong>optimize</strong>, <strong>interpolate</strong>, <strong>integrate</strong>, and more. The usual pattern: import the submodule, call a function on your arrays, then read what it gives back.</p>
+  </div>
+
+  <div class="term" data-term="submodule from scipy import stats signal part of a package">
+    <div class="term-header">
+      <span class="term-word">submodule</span>
+      <span class="term-tag">scipy</span>
+    </div>
+    <p class="term-def">A package inside a package. SciPy is too big to load all at once, so you import just the part you need: <strong>from scipy import stats</strong>, then <strong>stats.linregress(x, y)</strong>.</p>
+  </div>
+
+  <div class="term" data-term="linregress linear regression slope intercept rvalue stderr uncertainty">
+    <div class="term-header">
+      <span class="term-word">stats.linregress()</span>
+      <span class="term-tag">scipy</span>
+    </div>
+    <p class="term-def">Fits a straight line and returns more than <strong>np.polyfit</strong>: <strong>.slope</strong>, <strong>.intercept</strong>, <strong>.rvalue</strong> (correlation), <strong>.pvalue</strong>, and <strong>.stderr</strong>, the uncertainty of the slope.</p>
+  </div>
+
+  <div class="term" data-term="standard error stderr uncertainty slope plus minus">
+    <div class="term-header">
+      <span class="term-word">standard error (stderr)</span>
+      <span class="term-tag">scipy</span>
+    </div>
+    <p class="term-def">How uncertain a fitted value is. A slope of 1.9 ± 0.2 mm/yr means the data are consistent with slopes from about 1.7 to 2.1. <strong>linregress</strong> gives it as <strong>.stderr</strong>; <strong>curve_fit</strong> gives it through the covariance matrix.</p>
+  </div>
+
+  <div class="term" data-term="find_peaks peaks maxima prominence signal flood events">
+    <div class="term-header">
+      <span class="term-word">signal.find_peaks()</span>
+      <span class="term-tag">scipy</span>
+    </div>
+    <p class="term-def">Finds the <strong>positions</strong> of the peaks in a 1D array: <strong>peaks, props = signal.find_peaks(q, prominence=500)</strong>. Use the positions as an index (<strong>q[peaks]</strong>) to get the peak values.</p>
+  </div>
+
+  <div class="term" data-term="prominence how much a peak stands out find_peaks">
+    <div class="term-header">
+      <span class="term-word">prominence</span>
+      <span class="term-tag">scipy</span>
+    </div>
+    <p class="term-def">How far a peak stands above the lower ground around it. Setting <strong>prominence=</strong> in <strong>find_peaks</strong> skips small wiggles and keeps the real events.</p>
+  </div>
+
+  <div class="term" data-term="curve_fit fit any function exponential p0 parameters covariance">
+    <div class="term-header">
+      <span class="term-word">optimize.curve_fit()</span>
+      <span class="term-tag">scipy</span>
+    </div>
+    <p class="term-def">Fits <strong>any</strong> function you write to data: <strong>params, cov = optimize.curve_fit(model, x, y, p0=[...])</strong>. <strong>p0</strong> is your starting guess; the uncertainties are <strong>np.sqrt(np.diag(cov))</strong>. <strong>*params</strong> unpacks the results back into the function.</p>
+  </div>
+
+  <div class="term" data-term="cubicspline spline interpolate smooth curve between points np.interp">
+    <div class="term-header">
+      <span class="term-word">interpolate.CubicSpline()</span>
+      <span class="term-tag">scipy</span>
+    </div>
+    <p class="term-def">Draws a smooth curve through your points so you can estimate values in between: <strong>spline = interpolate.CubicSpline(x, y)</strong>, then <strong>spline(new_x)</strong>. <strong>np.interp</strong> does the same job with straight lines.</p>
+  </div>
+
+  <div class="term" data-term="savgol savitzky golay smooth filter derivative window">
+    <div class="term-header">
+      <span class="term-word">signal.savgol_filter()</span>
+      <span class="term-tag">scipy</span>
+    </div>
+    <p class="term-def">Smooths noisy data by fitting a small polynomial in a sliding window: <strong>signal.savgol_filter(z, 51, 2)</strong> (window length must be odd). With <strong>deriv=1, delta=dx</strong>, it gives a smoothed rate of change. Assumes evenly spaced data.</p>
+  </div>
+
+  <div class="term" data-term="trapezoid integrate area under curve volume dx">
+    <div class="term-header">
+      <span class="term-word">integrate.trapezoid()</span>
+      <span class="term-tag">scipy</span>
+    </div>
+    <p class="term-def">The area under a curve, by adding up trapezoids. For daily discharge in ft³/s, <strong>integrate.trapezoid(q, dx=86400)</strong> (seconds per day) gives the total volume of water in ft³.</p>
+  </div>
+
+  <div class="term" data-term="cumulative_trapezoid running total integral initial=0">
+    <div class="term-header">
+      <span class="term-word">integrate.cumulative_trapezoid()</span>
+      <span class="term-tag">scipy</span>
+    </div>
+    <p class="term-def">The running total of the area: how much has piled up by each point. <strong>initial=0</strong> starts it at zero so the result is the same length as the input.</p>
+  </div>
+
+<!-- ── CATEGORY: GeoPandas &amp; Maps ── -->
+  <div class="category">
+    <span class="category-label">GeoPandas &amp; Maps</span>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="term" data-term="geopandas gpd import geopandas as gpd maps">
+    <div class="term-header">
+      <span class="term-word">GeoPandas</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">pandas for maps, imported as <strong>import geopandas as gpd</strong>. Everything you know about DataFrames still works, plus a column of shapes and tools that understand where things are.</p>
+  </div>
+
+  <div class="term" data-term="geodataframe gdf table with shapes">
+    <div class="term-header">
+      <span class="term-word">GeoDataFrame</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">A DataFrame with a <strong>geometry</strong> column. Each row is one feature (a gauge, a basin, an earthquake), with its attributes in ordinary columns and its shape in the geometry column.</p>
+  </div>
+
+  <div class="term" data-term="geometry column shapes geom_type gdf.geometry">
+    <div class="term-header">
+      <span class="term-word">geometry column</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">The column that holds each row's shape. <strong>gdf.geometry.iloc[0]</strong> pulls out one shape (Jupyter draws it); <strong>gdf.geom_type</strong> says what kind each one is.</p>
+  </div>
+
+  <div class="term" data-term="vector data point line linestring polygon shapes">
+    <div class="term-header">
+      <span class="term-word">vector data (points, lines, polygons)</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">Data stored as shapes built from coordinates: <strong>points</strong> (gauges, earthquakes), <strong>lines</strong> (rivers, faults), and <strong>polygons</strong> (basins, counties, flood zones). A polygon is just a list of (x, y) corners that closes on itself.</p>
+  </div>
+
+  <div class="term" data-term="shapefile shp shx dbf prj cpg zip">
+    <div class="term-header">
+      <span class="term-word">shapefile</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">A common map file format that's really <strong>several files</strong> with the same name: <strong>.shp</strong> (shapes), <strong>.shx</strong> (index), <strong>.dbf</strong> (the attribute table), <strong>.prj</strong> (the CRS), and often <strong>.cpg</strong>. Keep them together in one folder; GeoPandas can also read a zipped shapefile directly.</p>
+  </div>
+
+  <div class="term" data-term="geojson json map file format">
+    <div class="term-header">
+      <span class="term-word">GeoJSON</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">A one-file, plain-text map format (<strong>.geojson</strong>) that stores shapes and attributes together. Common from web services like the USGS NLDI.</p>
+  </div>
+
+  <div class="term" data-term="read_file load shapefile geojson zip">
+    <div class="term-header">
+      <span class="term-word">gpd.read_file()</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">Reads any map file into a GeoDataFrame: a GeoJSON, a <strong>.shp</strong> (or the folder it's in), or a zipped shapefile. It reads the CRS from the file too.</p>
+  </div>
+
+  <div class="term" data-term="crs coordinate reference system projection gdf.crs">
+    <div class="term-header">
+      <span class="term-word">CRS (coordinate reference system)</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">The rules that say what a layer's numbers <strong>mean</strong>: degrees of latitude and longitude, or meters east and north of some origin. <strong>gdf.crs</strong> shows it. Two layers must share a CRS before you plot, join, or measure them together.</p>
+  </div>
+
+  <div class="term" data-term="epsg code 4326 4269 32610 32616 3857">
+    <div class="term-header">
+      <span class="term-word">EPSG code</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">A number that names a CRS. <strong>4326</strong> = WGS 84 (GPS latitude/longitude), <strong>4269</strong> = NAD83 (Census files), <strong>32610</strong> and <strong>32616</strong> = UTM zones 10N (western Washington) and 16N (Tennessee), <strong>3857</strong> = Web Mercator (basemaps).</p>
+  </div>
+
+  <div class="term" data-term="geographic projected degrees meters area distance">
+    <div class="term-header">
+      <span class="term-word">geographic vs. projected CRS</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">A <strong>geographic</strong> CRS uses degrees (EPSG:4326); a <strong>projected</strong> CRS flattens the Earth onto a grid in meters (UTM). Measure area, length, and distance in a projected CRS: a "square degree" isn't a fixed size.</p>
+  </div>
+
+  <div class="term" data-term="utm zone meters projected 32616 32610">
+    <div class="term-header">
+      <span class="term-word">UTM (Universal Transverse Mercator)</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">A family of projected CRSs that splits the world into 60 north–south zones, each in <strong>meters</strong> with little distortion inside it. Nashville is in zone 16N (EPSG:32616); Seattle is in 10N (EPSG:32610).</p>
+  </div>
+
+  <div class="term" data-term="to_crs convert reproject change crs">
+    <div class="term-header">
+      <span class="term-word">.to_crs()</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">Converts a layer to another CRS, recalculating every coordinate: <strong>gdf.to_crs(epsg=32616)</strong>. It doesn't move anything on the Earth, only how the positions are written down.</p>
+  </div>
+
+  <div class="term" data-term="basemap contextily cx add_basemap tiles esri web mercator 3857">
+    <div class="term-header">
+      <span class="term-word">basemap (contextily, tiles)</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">A background map (streets, terrain, satellite) drawn from web <strong>tiles</strong>. With <strong>contextily</strong>, convert your layers to EPSG:3857 and call <strong>cx.add_basemap(ax, source=cx.providers.Esri.WorldGrayCanvas)</strong>. Esri tiles need no API key; CartoDB tiles now do.</p>
+  </div>
+
+  <div class="term" data-term="total_bounds bounding box extent west south east north">
+    <div class="term-header">
+      <span class="term-word">.total_bounds</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">The box around everything in a layer: <strong>[west, south, east, north]</strong>. Useful for zooming an axis or clipping another layer to the same area.</p>
+  </div>
+
+  <div class="term" data-term="boundary outline edge polygon to line">
+    <div class="term-header">
+      <span class="term-word">.boundary</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">A polygon's outline, as a line. <strong>county.boundary.plot()</strong> draws only the edge, so layers underneath still show; <strong>county.plot()</strong> fills it in.</p>
+  </div>
+
+  <div class="term" data-term="area polygon square meters km2 projected">
+    <div class="term-header">
+      <span class="term-word">.area</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">Each polygon's area, in the CRS's units squared. In UTM that's m²; divide by 1e6 for km². In degrees it's meaningless, so convert first.</p>
+  </div>
+
+  <div class="term" data-term="points_from_xy longitude latitude table to points csv">
+    <div class="term-header">
+      <span class="term-word">gpd.points_from_xy()</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">Turns longitude and latitude columns into points: <strong>gpd.points_from_xy(df["longitude"], df["latitude"])</strong>, then <strong>gpd.GeoDataFrame(df, geometry=points, crs="EPSG:4326")</strong>. <strong>Longitude first</strong>: maps are x, y.</p>
+  </div>
+
+  <div class="term" data-term="explore interactive map folium zoom click tooltip tiles">
+    <div class="term-header">
+      <span class="term-word">.explore()</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">An interactive web map you can zoom, drag, and click: <strong>gdf.explore(column="depth", tooltip=["mag", "depth"])</strong>. Clicking a feature shows its row. Add more layers with <strong>m=</strong>, the way <strong>ax=</strong> works for <strong>.plot()</strong>. Needs the <strong>folium</strong> package.</p>
+  </div>
+
+  <div class="term" data-term="clip cut trim mask area bounds">
+    <div class="term-header">
+      <span class="term-word">gpd.clip()</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">Cuts a layer down to an area, keeping only the parts inside: <strong>gpd.clip(geology, quakes.total_bounds)</strong>. A mask for shapes.</p>
+  </div>
+
+  <div class="term" data-term="sjoin spatial join within intersects predicate which polygon">
+    <div class="term-header">
+      <span class="term-word">spatial join (gpd.sjoin())</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">A merge where the key is <strong>location</strong>: <strong>gpd.sjoin(gauges, zones, predicate="within", how="left")</strong> gives each gauge the columns of the flood zone it's inside. Both layers must share a CRS.</p>
+  </div>
+
+  <div class="term" data-term="predicate within intersects contains spatial test">
+    <div class="term-header">
+      <span class="term-word">predicate</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">The test a spatial join uses to match shapes: <strong>"within"</strong> (inside), <strong>"intersects"</strong> (touches or overlaps at all), <strong>"contains"</strong> (completely surrounds).</p>
+  </div>
+
+  <div class="term" data-term="buffer circle distance radius around within km">
+    <div class="term-header">
+      <span class="term-word">buffer</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">Every place within a distance of a shape: <strong>gdf.buffer(50_000)</strong> turns a point into a 50 km circle. Distance is in the CRS's units, so use a projected CRS (meters).</p>
+  </div>
+
+  <div class="term" data-term="within inside mask true false shape">
+    <div class="term-header">
+      <span class="term-word">.within()</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">A boolean mask: <strong>True</strong> for each shape inside another shape. <strong>quakes.within(circle)</strong> works just like a NumPy mask, so <strong>.sum()</strong> counts them.</p>
+  </div>
+
+  <div class="term" data-term="overlay difference intersection union cut shapes set math">
+    <div class="term-header">
+      <span class="term-word">gpd.overlay()</span>
+      <span class="term-tag">geopandas</span>
+    </div>
+    <p class="term-def">Cuts two polygon layers along every line where they cross, then keeps the pieces you ask for: <strong>"difference"</strong> (A minus B), <strong>"intersection"</strong> (only the overlap), or <strong>"union"</strong> (everything). Set math for shapes.</p>
+  </div>
+
 <!-- ── CATEGORY: Debugging ── -->
   <div class="category">
     <span class="category-label">Errors &amp; Debugging</span>
@@ -2239,6 +2632,39 @@
     <p class="term-def">A pandas warning when you add a column to a table that was made by filtering another table. Make an independent copy first: <strong>df = df[mask].copy()</strong>.</p>
   </div>
 
+
+  <div class="term" data-term="crs mismatch warning different crs join plot wrong">
+    <div class="term-header">
+      <span class="term-word">CRS mismatch</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">A warning that two layers use different CRSs. Easy to miss, and the result is wrong: degrees get compared with meters, or layers plot in different places. Fix: <strong>.to_crs()</strong> one layer to match the other first.</p>
+  </div>
+
+  <div class="term" data-term="lat lon swapped points_from_xy antarctica wrong place">
+    <div class="term-header">
+      <span class="term-word">latitude/longitude swapped</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">A silent error: <strong>points_from_xy(lat, lon)</strong> puts Washington earthquakes near Antarctica (latitude −122°?). It's <strong>longitude first</strong>, because maps are plotted x, y.</p>
+  </div>
+
+  <div class="term" data-term="set object has no attribute get dictionary typo quote marker_kwds">
+    <div class="term-header">
+      <span class="term-word">AttributeError: 'set' object has no attribute 'get'</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def">You meant a dictionary but made a set, usually from a misplaced quote: <strong>{"radius: 8"}</strong> instead of <strong>{"radius": 8}</strong>. The code tried a dictionary method on it.</p>
+  </div>
+
+  <div class="term" data-term="datasourceerror no such file read_file path relative">
+    <div class="term-header">
+      <span class="term-word">DataSourceError: No such file or directory</span>
+      <span class="term-tag">errors</span>
+    </div>
+    <p class="term-def"><strong>gpd.read_file()</strong> couldn't find the file. Paths are relative to the folder the <strong>notebook</strong> is in; check with <strong>!pwd</strong> and <strong>!ls</strong>, and build the path from there.</p>
+  </div>
+
 <!-- ── CATEGORY: Math & Notation ── -->
   <div class="category">
     <span class="category-label">Math &amp; Notation</span>
@@ -2332,6 +2758,39 @@
       <span class="term-tag">math &amp; notation</span>
     </div>
     <p class="term-def">A value you only know is above (or below) some limit, like an equilibrium line "above the top of the glacier." Treating it as an exact number distorts the analysis.</p>
+  </div>
+
+
+  <div class="term" data-term="rate of change derivative slope dy/dx per">
+    <div class="term-header">
+      <span class="term-word">rate of change (derivative)</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">How fast one thing changes as another changes: meters of drop per meter downstream, or cubic feet per second gained per hour. Its units are always <strong>y units per x unit</strong>. With data, we estimate it from differences between neighboring points.</p>
+  </div>
+
+  <div class="term" data-term="forward difference centered difference diff gradient">
+    <div class="term-header">
+      <span class="term-word">forward vs. centered difference</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">Two ways to estimate a rate from data. A <strong>forward</strong> difference uses a point and the next one (<strong>.diff()</strong>); a <strong>centered</strong> difference uses the points on either side (<strong>np.gradient</strong>), which is usually more accurate and keeps every point.</p>
+  </div>
+
+  <div class="term" data-term="integral area under curve accumulate total">
+    <div class="term-header">
+      <span class="term-word">integral (area under a curve)</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">The total that builds up under a curve: the area between it and zero. Integrating a rate (ft³/s) over time (s) gives an amount (ft³). It's the reverse of a rate of change.</p>
+  </div>
+
+  <div class="term" data-term="trapezoid rule rectangles area approximation">
+    <div class="term-header">
+      <span class="term-word">trapezoid rule</span>
+      <span class="term-tag">math &amp; notation</span>
+    </div>
+    <p class="term-def">Estimates an integral by joining neighboring points with straight lines and adding up the trapezoids underneath. More accurate than rectangles when the curve changes between measurements.</p>
   </div>
 
 <!-- ── CATEGORY: Earth Science ── -->
@@ -2711,6 +3170,95 @@
       <span class="term-tag">earth science</span>
     </div>
     <p class="term-def">A see-saw in air pressure between Iceland and the Azores. When it's positive, strong westerly winds carry storms into northern Europe, especially in winter, and push water into the Baltic Sea.</p>
+  </div>
+
+
+  <div class="term" data-term="channel slope river gradient drop per distance m/km">
+    <div class="term-header">
+      <span class="term-word">channel slope (river gradient)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">How steeply a river drops, as elevation lost per distance downstream (m/km, or a unitless m/m). Rivers are usually steepest near their headwaters, giving the <em>longitudinal profile</em> its concave-up shape.</p>
+  </div>
+
+  <div class="term" data-term="stream gauge usgs site number station discharge stage">
+    <div class="term-header">
+      <span class="term-word">stream gauge (USGS site number)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A station that records a river's <strong>stage</strong> (water height) and converts it to <strong>discharge</strong>. Each USGS gauge has a site number, like 03431500 for the Cumberland River at Nashville.</p>
+  </div>
+
+  <div class="term" data-term="stage crest water height peak flood feet">
+    <div class="term-header">
+      <span class="term-word">stage and crest</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def"><strong>Stage</strong> is the height of the water surface at a gauge, in feet; the <strong>crest</strong> is the highest stage during a flood. The Cumberland crested at Nashville on May 3, 2010.</p>
+  </div>
+
+  <div class="term" data-term="flood volume runoff depth integrate hydrograph basin">
+    <div class="term-header">
+      <span class="term-word">flood volume / runoff depth</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The total water a flood carried: the area under the hydrograph (discharge integrated over time). Dividing by the basin's drainage area gives <strong>runoff depth</strong>, how thick a layer of water that would be spread over the whole basin.</p>
+  </div>
+
+  <div class="term" data-term="baseflow groundwater between storms low flow">
+    <div class="term-header">
+      <span class="term-word">baseflow</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">The steady flow a river carries between storms, fed mostly by groundwater. Flood volume is often measured above baseflow, so it counts only the storm's water.</p>
+  </div>
+
+  <div class="term" data-term="fema flood zone 100-year 500-year nfhl sfha zone ae x">
+    <div class="term-header">
+      <span class="term-word">FEMA flood zones (100-year, 500-year)</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">FEMA's maps of flood hazard. The <strong>100-year</strong> zone has a 1% chance of flooding in any year; the <strong>500-year</strong> zone, 0.2%. The <strong>floodway</strong> is the channel and nearby land that must stay open to carry the flood.</p>
+  </div>
+
+  <div class="term" data-term="recurrence interval return period 100-year flood 1 percent chance">
+    <div class="term-header">
+      <span class="term-word">recurrence interval ("100-year flood")</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A way of describing how likely a flood is, not a schedule: a 100-year flood has a <strong>1% chance each year</strong>. Two can happen in back-to-back years, and over a 30-year mortgage the chance of at least one is about 26%.</p>
+  </div>
+
+  <div class="term" data-term="intraslab deep earthquake juan de fuca plate subducting nisqually">
+    <div class="term-header">
+      <span class="term-word">intraslab earthquake</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">An earthquake inside a subducting plate, well below the crust. Nisqually (2001, 52 km deep) broke inside the Juan de Fuca plate under Puget Sound; deep earthquakes shake a wide area, but less violently than a shallow one of the same size.</p>
+  </div>
+
+  <div class="term" data-term="swarm burst earthquakes no mainshock rainier">
+    <div class="term-header">
+      <span class="term-word">earthquake swarm</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A burst of earthquakes in one place over days to months with no single big mainshock. Common under volcanoes like Mt. Rainier, often linked to moving fluids.</p>
+  </div>
+
+  <div class="term" data-term="active fault quaternary fault seattle fault database">
+    <div class="term-header">
+      <span class="term-word">active fault / Quaternary fault</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A fault that has moved in the last 2.6 million years (the Quaternary) and could move again. The Seattle Fault was recognized as active in 1992; the USGS Quaternary Fault and Fold Database is the national map.</p>
+  </div>
+
+  <div class="term" data-term="geologic map rock units surface geology unit">
+    <div class="term-header">
+      <span class="term-word">geologic map</span>
+      <span class="term-tag">earth science</span>
+    </div>
+    <p class="term-def">A map of the rock and sediment <strong>at the surface</strong>, divided into units by type and age. It says little about what's kilometers down, where most earthquakes happen.</p>
   </div>
 
 </main>
